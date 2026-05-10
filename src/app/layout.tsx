@@ -4,7 +4,7 @@ import LangSetter from './LangSetter'
 
 export const metadata: Metadata = {
   title: 'Komplyint Oy',
-  description: 'KOMPLYINT OY - Compliance readiness support for organizations',
+  description: 'KOMPLYINT OY - Compliance readiness, software production, and Floently language-learning product.',
   icons: {
     icon: '/favicon.svg',
   },

@@ -4,25 +4,40 @@ import { useState, useEffect } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
 import { translations, type Language } from '@/lib/translations'
 
+type PageType = 'home' | 'software' | 'privacy'
+type SiteTranslations = (typeof translations)[Language]
+
+function getLanguageFromPath(pathname: string): Language {
+  return pathname.startsWith('/en') ? 'en' : 'fi'
+}
+
+function getPageType(pathname: string): PageType {
+  if (pathname.endsWith('/software') || pathname.includes('/software/')) return 'software'
+  if (pathname.endsWith('/privacy') || pathname.includes('/privacy/')) return 'privacy'
+  return 'home'
+}
+
+function localizedPath(page: PageType, lang: Language) {
+  const prefix = lang === 'en' ? '/en' : ''
+  if (page === 'home') return prefix || '/'
+  return `${prefix}/${page}`
+}
+
 export default function Home() {
   const pathname = usePathname()
   const router = useRouter()
-  // Default to Finnish for root route, English for /en
-  const [lang, setLang] = useState<Language>(pathname === '/en' ? 'en' : 'fi')
+  const [lang, setLang] = useState<Language>(getLanguageFromPath(pathname))
   const [theme, setTheme] = useState<'light' | 'dark'>('light')
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
     setMounted(true)
-    // Determine language from pathname
-    const pathLang: Language = pathname === '/en' ? 'en' : 'fi'
-    setLang(pathLang)
-    
+    setLang(getLanguageFromPath(pathname))
+
     const savedTheme = localStorage.getItem('theme') as 'light' | 'dark' | null
     if (savedTheme === 'dark' || savedTheme === 'light') {
       setTheme(savedTheme)
     } else {
-      // Check system preference
       const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
       setTheme(prefersDark ? 'dark' : 'light')
     }
@@ -52,32 +67,26 @@ export default function Home() {
 
     elements.forEach((element) => observer.observe(element))
     return () => observer.disconnect()
-  }, [])
+  }, [pathname])
 
-  // Ensure video plays (handle browser autoplay restrictions)
   useEffect(() => {
-    if (mounted) {
+    if (mounted && getPageType(pathname) === 'home') {
       const video = document.querySelector('.hero-video') as HTMLVideoElement
       if (video) {
         video.play().catch((err) => {
-          // Autoplay was prevented, but video will show once user interacts
           console.log('Video autoplay prevented:', err)
         })
       }
     }
-  }, [mounted])
+  }, [mounted, pathname])
 
-  // Always use a valid language (default to 'fi' during SSR for root, 'en' for /en)
-  const currentLang: Language = mounted ? lang : (pathname === '/en' ? 'en' : 'fi')
+  const currentLang: Language = mounted ? lang : getLanguageFromPath(pathname)
+  const pageType = getPageType(pathname)
   const t = translations[currentLang]
 
   const handleLangToggle = () => {
-    // Navigate to the other language route
-    if (pathname === '/en') {
-      router.push('/')
-    } else {
-      router.push('/en')
-    }
+    const nextLang: Language = currentLang === 'fi' ? 'en' : 'fi'
+    router.push(localizedPath(pageType, nextLang))
   }
 
   const handleThemeToggle = () => {
@@ -90,37 +99,79 @@ export default function Home() {
 
   return (
     <div style={{ width: '100%', overflowX: 'hidden' }}>
-      {/* Header */}
-      <header className="header">
-        <div className="container">
-          <div className="header-content">
-            <a href="/" className="logo">
-              <img src="/logo.svg" alt="KOMPLYINT OY" className="logo-img" />
+      <SiteHeader
+        t={t}
+        currentLang={currentLang}
+        pageType={pageType}
+        onLangToggle={handleLangToggle}
+        onThemeToggle={handleThemeToggle}
+      />
+
+      {pageType === 'home' && <HomePage t={t} currentLang={currentLang} />}
+      {pageType === 'software' && <SoftwarePage t={t} />}
+      {pageType === 'privacy' && <PrivacyPage t={t} />}
+
+      <SiteFooter t={t} />
+    </div>
+  )
+}
+
+function SiteHeader({
+  t,
+  currentLang,
+  pageType,
+  onLangToggle,
+  onThemeToggle,
+}: {
+  t: SiteTranslations
+  currentLang: Language
+  pageType: PageType
+  onLangToggle: () => void
+  onThemeToggle: () => void
+}) {
+  return (
+    <header className="header">
+      <div className="container">
+        <div className="header-content">
+          <a href={localizedPath('home', currentLang)} className="logo" aria-label="Komplyint Oy home">
+            <img src="/logo.svg" alt="KOMPLYINT OY" className="logo-img" />
+          </a>
+          <nav className="main-nav" aria-label={t.nav.ariaLabel}>
+            <a className={pageType === 'home' ? 'active' : ''} href={localizedPath('home', currentLang)}>
+              {t.nav.home}
             </a>
-            <div className="header-controls">
-              <button
-                onClick={handleLangToggle}
-                className={`lang-toggle ${currentLang === 'fi' ? 'active' : ''}`}
-                aria-label="Switch language"
-              >
-                <span>{currentLang === 'fi' ? 'FI' : 'EN'}</span>
-              </button>
-              <button
-                onClick={handleThemeToggle}
-                className="theme-toggle"
-                aria-label="Toggle theme"
-              >
-                <span className="theme-icon theme-icon-moon">🌙</span>
-                <span className="theme-icon theme-icon-sun">☀️</span>
-              </button>
-            </div>
+            <a className={pageType === 'software' ? 'active' : ''} href={localizedPath('software', currentLang)}>
+              {t.nav.software}
+            </a>
+            <a href="#contact">{t.nav.contact}</a>
+          </nav>
+          <div className="header-controls">
+            <button
+              onClick={onLangToggle}
+              className={`lang-toggle ${currentLang === 'fi' ? 'active' : ''}`}
+              aria-label={t.nav.switchLanguage}
+            >
+              <span>{currentLang === 'fi' ? 'FI' : 'EN'}</span>
+            </button>
+            <button
+              onClick={onThemeToggle}
+              className="theme-toggle"
+              aria-label={t.nav.toggleTheme}
+            >
+              <span className="theme-icon theme-icon-moon">🌙</span>
+              <span className="theme-icon theme-icon-sun">☀️</span>
+            </button>
           </div>
         </div>
-      </header>
+      </div>
+    </header>
+  )
+}
 
-      {/* Hero Section */}
+function HomePage({ t, currentLang }: { t: SiteTranslations; currentLang: Language }) {
+  return (
+    <>
       <section className="hero">
-        {/* Video background - hidden on mobile and when prefers-reduced-motion */}
         <video
           className="hero-video"
           autoPlay
@@ -133,11 +184,9 @@ export default function Home() {
           <source src="/media/hero.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
-        {/* Fallback image for reduced motion and mobile */}
         <div className="hero-image">
           <img src="/media/hero.webp" alt="" aria-hidden="true" />
         </div>
-        {/* Dark overlay for text contrast */}
         <div className="hero-overlay" aria-hidden="true"></div>
         <div className="container">
           <div className="hero-content hero-reveal">
@@ -150,19 +199,18 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="process-flow-section" aria-label="Internal clarity → Structure → External readiness">
+      <section className="process-flow-section" aria-label={t.process.ariaLabel}>
         <div className="container">
           <div className="process-flow reveal-on-scroll">
-            <span className="process-item">Internal clarity</span>
+            <span className="process-item">{t.process.step1}</span>
             <span className="process-arrow"> → </span>
-            <span className="process-item">Structure</span>
+            <span className="process-item">{t.process.step2}</span>
             <span className="process-arrow"> → </span>
-            <span className="process-item">External readiness</span>
+            <span className="process-item">{t.process.step3}</span>
           </div>
         </div>
       </section>
 
-      {/* Mid-page Image Section */}
       <section className="mid-page-image-section">
         <div className="container">
           <div className="mid-page-image-wrapper">
@@ -171,7 +219,6 @@ export default function Home() {
               alt="" 
               className="mid-page-image"
               onError={(e) => {
-                // Hide image and wrapper if it doesn't exist
                 const target = e.target as HTMLImageElement
                 target.style.display = 'none'
                 const wrapper = target.closest('.mid-page-image-wrapper')
@@ -184,27 +231,14 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Services Section */}
       <section className="services bg-blue">
         <div className="container">
           <h2 className="section-title">{t.services.title}</h2>
           <div className="cards">
-            <div className="card bg-green-card reveal-on-scroll">
-              <h3 className="card-title">{t.services.card1.title}</h3>
-              <p className="card-text">{t.services.card1.text}</p>
-            </div>
-            <div className="card bg-blue-card reveal-on-scroll">
-              <h3 className="card-title">{t.services.card2.title}</h3>
-              <p className="card-text">{t.services.card2.text}</p>
-            </div>
-            <div className="card bg-green-card reveal-on-scroll">
-              <h3 className="card-title">{t.services.card3.title}</h3>
-              <p className="card-text">{t.services.card3.text}</p>
-            </div>
-            <div className="card bg-blue-card reveal-on-scroll">
-              <h3 className="card-title">{t.services.card4.title}</h3>
-              <p className="card-text">{t.services.card4.text}</p>
-            </div>
+            <InfoCard variant="green" title={t.services.card1.title} text={t.services.card1.text} />
+            <InfoCard variant="blue" title={t.services.card2.title} text={t.services.card2.text} />
+            <InfoCard variant="green" title={t.services.card3.title} text={t.services.card3.text} />
+            <InfoCard variant="blue" title={t.services.card4.title} text={t.services.card4.text} />
           </div>
           <blockquote
             className="services-disclaimer"
@@ -213,7 +247,19 @@ export default function Home() {
         </div>
       </section>
 
-      {/* How We Typically Work */}
+      <section className="software-teaser bg-green">
+        <div className="container">
+          <div className="feature-panel reveal-on-scroll">
+            <p className="eyebrow">{t.softwareTeaser.eyebrow}</p>
+            <h2>{t.softwareTeaser.title}</h2>
+            <p>{t.softwareTeaser.text}</p>
+            <a href={localizedPath('software', currentLang)} className="btn-secondary">
+              {t.softwareTeaser.link}
+            </a>
+          </div>
+        </div>
+      </section>
+
       <section className="howwework bg-green">
         <div className="container">
           <h2 className="section-title">{t.howwework.title}</h2>
@@ -225,7 +271,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Our Approach */}
       <section className="approach bg-green">
         <div className="container">
           <h2 className="section-title">{t.approach.title}</h2>
@@ -238,7 +283,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* About */}
       <section className="about bg-blue">
         <div className="container">
           <h2 className="section-title">{t.about.title}</h2>
@@ -252,21 +296,140 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Contact */}
-      <section id="contact" className="contact bg-green">
+      <ContactSection t={t} />
+    </>
+  )
+}
+
+function SoftwarePage({ t }: { t: SiteTranslations }) {
+  return (
+    <>
+      <section className="page-hero bg-blue">
+        <div className="container narrow">
+          <p className="eyebrow">{t.softwarePage.eyebrow}</p>
+          <h1>{t.softwarePage.title}</h1>
+          <p className="lead">{t.softwarePage.lead}</p>
+        </div>
+      </section>
+
+      <section className="bg-primary-soft">
         <div className="container">
-          <h2 className="section-title">{t.contact.title}</h2>
-          <div className="contact-content">
-            <ContactForm t={t.contact} lang={lang} />
-            <blockquote className="contact-disclaimer">{t.contact.disclaimer}</blockquote>
+          <h2 className="section-title">{t.softwarePage.whatWeBuild.title}</h2>
+          <div className="cards software-cards">
+            {t.softwarePage.whatWeBuild.items.map((item, index) => (
+              <InfoCard
+                key={item.title}
+                variant={index % 2 === 0 ? 'green' : 'blue'}
+                title={item.title}
+                text={item.text}
+              />
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Footer */}
+      <section className="product-section bg-green">
+        <div className="container">
+          <div className="product-panel reveal-on-scroll">
+            <p className="eyebrow">{t.softwarePage.floently.eyebrow}</p>
+            <h2>{t.softwarePage.floently.title}</h2>
+            <p>{t.softwarePage.floently.text1}</p>
+            <p>{t.softwarePage.floently.text2}</p>
+            <div className="product-grid">
+              {t.softwarePage.floently.points.map((point) => (
+                <div className="product-point" key={point.title}>
+                  <h3>{point.title}</h3>
+                  <p>{point.text}</p>
+                </div>
+              ))}
+            </div>
+            <blockquote className="services-disclaimer product-disclaimer">
+              {t.softwarePage.floently.disclaimer}
+            </blockquote>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-blue">
+        <div className="container narrow">
+          <h2 className="section-title">{t.softwarePage.working.title}</h2>
+          <ul className="approach-list strong-list">
+            {t.softwarePage.working.items.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      <section className="bg-green">
+        <div className="container narrow">
+          <h2 className="section-title">{t.softwarePage.company.title}</h2>
+          <div className="company-box">
+            {t.softwarePage.company.items.map((item) => (
+              <p key={item.label}>
+                <strong>{item.label}</strong> {item.value}
+              </p>
+            ))}
+          </div>
+          <p className="legal-note">{t.softwarePage.company.note}</p>
+        </div>
+      </section>
+
+      <ContactSection t={t} />
+    </>
+  )
+}
+
+function PrivacyPage({ t }: { t: SiteTranslations }) {
+  return (
+    <>
+      <section className="page-hero bg-blue">
+        <div className="container narrow">
+          <p className="eyebrow">{t.privacyPage.eyebrow}</p>
+          <h1>{t.privacyPage.title}</h1>
+          <p className="lead">{t.privacyPage.lead}</p>
+        </div>
+      </section>
+      <section className="bg-primary-soft">
+        <div className="container narrow legal-content">
+          {t.privacyPage.sections.map((section) => (
+            <div className="legal-section" key={section.title}>
+              <h2>{section.title}</h2>
+              {section.paragraphs.map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
+            </div>
+          ))}
+        </div>
+      </section>
+    </>
+  )
+}
+
+function ContactSection({ t }: { t: SiteTranslations }) {
+  return (
+    <section id="contact" className="contact bg-green">
+      <div className="container">
+        <h2 className="section-title">{t.contact.title}</h2>
+        <div className="contact-content">
+          <ContactForm t={t.contact} />
+          <blockquote className="contact-disclaimer">{t.contact.disclaimer}</blockquote>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+function SiteFooter({ t }: { t: SiteTranslations }) {
+  return (
+    <>
       <div className="footer-divider" aria-hidden="true" />
       <footer className="footer">
         <div className="container">
+          <div className="footer-links">
+            <a href={localizedPath('software', t.lang)}>{t.nav.software}</a>
+            <a href={localizedPath('privacy', t.lang)}>{t.nav.privacy}</a>
+          </div>
           <p
             className="footer-text"
             dangerouslySetInnerHTML={{ __html: t.footer.text1 }}
@@ -277,11 +440,20 @@ export default function Home() {
           />
         </div>
       </footer>
+    </>
+  )
+}
+
+function InfoCard({ variant, title, text }: { variant: 'green' | 'blue'; title: string; text: string }) {
+  return (
+    <div className={`card ${variant === 'green' ? 'bg-green-card' : 'bg-blue-card'} reveal-on-scroll`}>
+      <h3 className="card-title">{title}</h3>
+      <p className="card-text">{text}</p>
     </div>
   )
 }
 
-function ContactForm({ t, lang }: { t: typeof translations.en.contact; lang: Language }) {
+function ContactForm({ t }: { t: SiteTranslations['contact'] }) {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [message, setMessage] = useState('')
@@ -326,6 +498,7 @@ function ContactForm({ t, lang }: { t: typeof translations.en.contact; lang: Lan
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder={t.form.namePlaceholder}
+            maxLength={120}
           />
         </div>
         <div className="form-group">
@@ -340,6 +513,7 @@ function ContactForm({ t, lang }: { t: typeof translations.en.contact; lang: Lan
             onChange={(e) => setEmail(e.target.value)}
             placeholder={t.form.emailPlaceholder}
             required
+            maxLength={200}
           />
         </div>
         <div className="form-group">
@@ -354,8 +528,10 @@ function ContactForm({ t, lang }: { t: typeof translations.en.contact; lang: Lan
             placeholder={t.form.messagePlaceholder}
             required
             rows={6}
+            maxLength={5000}
           />
         </div>
+        <p className="privacy-note" dangerouslySetInnerHTML={{ __html: t.form.privacyNote }} />
         {status === 'success' && (
           <div className="form-message success">{t.form.success}</div>
         )}
