@@ -97,6 +97,8 @@ export const translations = {
         title: 'Floently — a product of Komplyint Oy',
         text1: 'Floently is a language-learning software product developed by Komplyint Oy. It is designed to support structured Finnish learning for real-life, work-related, and exam-oriented language practice.',
         text2: 'Floently is planned as a digital product available through web and mobile channels. It focuses on clear learning paths, practical exercises, professional vocabulary, speaking practice, and Finnish language support for learners who need usable language skills in everyday and working life.',
+        url: 'https://floently.com/learn',
+        cta: 'Visit Floently',
         points: [
           {
             title: 'Finnish learning support',
@@ -128,6 +130,8 @@ export const translations = {
         items: [
           { label: 'Legal entity:', value: 'Komplyint Oy' },
           { label: 'Business ID:', value: '3588595-3' },
+          { label: 'D-U-N-S Number:', value: '369283279' },
+          { label: 'Contact:', value: 'gliavex@gliavex.fi' },
           { label: 'Website:', value: 'komplyint.fi' },
           { label: 'Product ownership:', value: 'Floently is presented as a software product of Komplyint Oy.' }
         ],
@@ -137,8 +141,8 @@ export const translations = {
     contact: {
       title: 'Get in touch',
       email: 'Email:',
-      emailLink: 'komplyint@komplyint.com',
-      disclaimer: 'We respond to inquiries related to compliance readiness, software production, product development, and internal process clarity.',
+      emailLink: 'gliavex@gliavex.fi',
+      disclaimer: 'We respond to inquiries related to compliance readiness, software production, product development, Floently, and internal process clarity.',
       form: {
         name: 'Name (optional)',
         namePlaceholder: 'Your name',
@@ -153,6 +157,20 @@ export const translations = {
         privacyNote: 'By sending this form, you agree that we process your contact details and message so we can respond to your inquiry. See our <a href="/privacy">privacy notice</a>.'
       }
     },
+    contactPage: {
+      eyebrow: 'Contact and company details',
+      title: 'Contact Komplyint Oy',
+      lead: 'For business, software production, Floently, and compliance-readiness inquiries, please contact Komplyint Oy using the details below or the contact form.',
+      details: [
+        { label: 'Company:', value: 'Komplyint Oy' },
+        { label: 'Business ID:', value: '3588595-3' },
+        { label: 'D-U-N-S Number:', value: '369283279' },
+        { label: 'Contact email:', value: 'gliavex@gliavex.fi', href: 'mailto:gliavex@gliavex.fi' },
+        { label: 'Website:', value: 'www.komplyint.fi', href: 'https://www.komplyint.fi' },
+        { label: 'Floently:', value: 'floently.com/learn', href: 'https://floently.com/learn' }
+      ],
+      note: 'This contact page is provided for company verification, business communication, app-store review, and general inquiries. Product-specific terms and privacy notices should be provided separately where required.'
+    },
     privacyPage: {
       eyebrow: 'Privacy',
       title: 'Privacy notice',
@@ -160,7 +178,7 @@ export const translations = {
       sections: [
         {
           title: 'Controller',
-          paragraphs: ['The controller is Komplyint Oy, Business ID 3588595-3. You can contact us through the contact form on this website.']
+          paragraphs: ['The controller is Komplyint Oy, Business ID 3588595-3, D-U-N-S Number 369283279. You can contact us at gliavex@gliavex.fi or through the contact form on this website.']
         },
         {
           title: 'Data we process',
@@ -189,6 +207,13 @@ export const translations = {
       ]
     },
     footer: {
+      companyAriaLabel: 'Company details',
+      companyInfo: [
+        { label: 'Company:', value: 'Komplyint Oy' },
+        { label: 'Business ID:', value: '3588595-3' },
+        { label: 'D-U-N-S Number:', value: '369283279' },
+        { label: 'Contact:', value: 'gliavex@gliavex.fi', href: 'mailto:gliavex@gliavex.fi' }
+      ],
       text1: 'KOMPLYINT OY provides informational, preparatory, and software-production support only.<br>We do not offer legal advice, certification, regulatory approval, or official compliance decisions.',
       text2: 'Floently is a product of <strong>Komplyint Oy</strong>. This website and its services are independent from regulators, authorities, examination bodies, and any unrelated third-party platforms.'
     }
@@ -291,6 +316,8 @@ export const translations = {
         title: 'Floently — Komplyint Oy:n tuote',
         text1: 'Floently on Komplyint Oy:n kehittämä kielenoppimisen ohjelmistotuote. Se on suunniteltu tukemaan rakenteellista suomen kielen oppimista arjen, työn ja koemaisen harjoittelun tarpeisiin.',
         text2: 'Floently on tarkoitettu digitaaliseksi tuotteeksi verkko- ja mobiilikäyttöön. Tuotteessa painottuvat selkeät oppimispolut, käytännön harjoitukset, ammatillinen sanasto, puheharjoittelu ja suomen kielen tuki oppijoille, jotka tarvitsevat toimivaa kielitaitoa arjessa ja työelämässä.',
+        url: 'https://floently.com/learn',
+        cta: 'Siirry Floentlyyn',
         points: [
           {
             title: 'Suomen kielen oppimisen tuki',
@@ -322,6 +349,8 @@ export const translations = {
         items: [
           { label: 'Oikeudellinen yksikkö:', value: 'Komplyint Oy' },
           { label: 'Y-tunnus:', value: '3588595-3' },
+          { label: 'DUNS-numero:', value: '369283279' },
+          { label: 'Yhteystieto:', value: 'gliavex@gliavex.fi' },
           { label: 'Verkkosivusto:', value: 'komplyint.fi' },
           { label: 'Tuotteen omistajuus:', value: 'Floently esitetään Komplyint Oy:n ohjelmistotuotteena.' }
         ],
@@ -331,8 +360,8 @@ export const translations = {
     contact: {
       title: 'Ota yhteyttä',
       email: 'Sähköposti:',
-      emailLink: 'komplyint@komplyint.com',
-      disclaimer: 'Vastaamme yhteydenottoihin, jotka liittyvät vaatimustenmukaisuusvalmiuteen, ohjelmistotuotantoon, tuotekehitykseen ja sisäisten prosessien selkeyttämiseen.',
+      emailLink: 'gliavex@gliavex.fi',
+      disclaimer: 'Vastaamme yhteydenottoihin, jotka liittyvät vaatimustenmukaisuusvalmiuteen, ohjelmistotuotantoon, tuotekehitykseen, Floentlyyn ja sisäisten prosessien selkeyttämiseen.',
       form: {
         name: 'Nimi (valinnainen)',
         namePlaceholder: 'Nimesi',
@@ -347,6 +376,20 @@ export const translations = {
         privacyNote: 'Lähettämällä lomakkeen hyväksyt, että käsittelemme yhteystietojasi ja viestiäsi vastataksemme yhteydenottoosi. Katso <a href="/privacy">tietosuojaseloste</a>.'
       }
     },
+    contactPage: {
+      eyebrow: 'Yhteystiedot ja yritystiedot',
+      title: 'Ota yhteyttä Komplyint Oy:hyn',
+      lead: 'Yritysasioissa, ohjelmistotuotantoon liittyvissä asioissa, Floentlyyn liittyvissä kysymyksissä ja vaatimustenmukaisuusvalmiuden yhteydenotoissa voit ottaa yhteyttä alla olevilla tiedoilla tai yhteydenottolomakkeella.',
+      details: [
+        { label: 'Yritys:', value: 'Komplyint Oy' },
+        { label: 'Y-tunnus:', value: '3588595-3' },
+        { label: 'DUNS-numero:', value: '369283279' },
+        { label: 'Yhteystieto:', value: 'gliavex@gliavex.fi', href: 'mailto:gliavex@gliavex.fi' },
+        { label: 'Verkkosivusto:', value: 'www.komplyint.fi', href: 'https://www.komplyint.fi' },
+        { label: 'Floently:', value: 'floently.com/learn', href: 'https://floently.com/learn' }
+      ],
+      note: 'Tämä yhteystietosivu on tarkoitettu yrityksen tunnistamista, yritysviestintää, sovelluskauppojen tarkistusta ja yleisiä yhteydenottoja varten. Tuotekohtaiset käyttöehdot ja tietosuojaselosteet tarjotaan erikseen tarvittaessa.'
+    },
     privacyPage: {
       eyebrow: 'Tietosuoja',
       title: 'Tietosuojaseloste',
@@ -354,7 +397,7 @@ export const translations = {
       sections: [
         {
           title: 'Rekisterinpitäjä',
-          paragraphs: ['Rekisterinpitäjä on Komplyint Oy, Y-tunnus 3588595-3. Voit ottaa meihin yhteyttä tämän verkkosivuston yhteydenottolomakkeella.']
+          paragraphs: ['Rekisterinpitäjä on Komplyint Oy, Y-tunnus 3588595-3, DUNS-numero 369283279. Voit ottaa meihin yhteyttä osoitteessa gliavex@gliavex.fi tai tämän verkkosivuston yhteydenottolomakkeella.']
         },
         {
           title: 'Käsiteltävät tiedot',
@@ -383,6 +426,13 @@ export const translations = {
       ]
     },
     footer: {
+      companyAriaLabel: 'Yritystiedot',
+      companyInfo: [
+        { label: 'Yritys:', value: 'Komplyint Oy' },
+        { label: 'Y-tunnus:', value: '3588595-3' },
+        { label: 'DUNS-numero:', value: '369283279' },
+        { label: 'Yhteystieto:', value: 'gliavex@gliavex.fi', href: 'mailto:gliavex@gliavex.fi' }
+      ],
       text1: 'KOMPLYINT OY tarjoaa vain informatiivista, valmistavaa ja ohjelmistotuotantoon liittyvää tukea.<br>Emme tarjoa oikeudellista neuvontaa, sertifiointia, sääntelyhyväksyntää tai virallisia vaatimustenmukaisuuspäätöksiä.',
       text2: 'Floently on <strong>Komplyint Oy:n</strong> tuote. Tämä verkkosivusto ja sen palvelut ovat riippumattomia viranomaisista, sääntelijöistä, tutkintojärjestäjistä ja muista ulkopuolisista alustoista.'
     }

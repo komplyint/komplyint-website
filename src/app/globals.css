@@ -977,3 +977,48 @@ section {
     gap: 14px;
   }
 }
+
+
+.footer-company {
+  max-width: 520px;
+  margin: 0 auto 28px;
+  padding: 18px 20px;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  background: var(--bg-primary);
+  text-align: left;
+}
+
+.footer-company p,
+.contact-details-box p {
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+  line-height: 1.6;
+}
+
+.footer-company p:last-child,
+.contact-details-box p:last-child {
+  margin-bottom: 0;
+}
+
+.footer-company strong,
+.contact-details-box strong {
+  color: var(--text-primary);
+}
+
+.footer-company a,
+.contact-details-box a,
+.company-box a {
+  color: var(--blue-600);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.contact-details-box {
+  margin-bottom: 24px;
+}
+
+.external-link::after {
+  content: ' ↗';
+  font-size: 0.9em;
+}

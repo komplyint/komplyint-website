@@ -47,7 +47,7 @@ export async function POST(request: NextRequest) {
       },
     })
 
-    const recipient = process.env.CONTACT_TO_EMAIL || 'komplyint@komplyint.com'
+    const recipient = process.env.CONTACT_TO_EMAIL || 'gliavex@gliavex.fi'
     const safeName = escapeHtml(cleanName || 'Not provided')
     const safeEmail = escapeHtml(cleanEmail)
     const safeMessage = escapeHtml(cleanMessage).replace(/\n/g, '<br>')

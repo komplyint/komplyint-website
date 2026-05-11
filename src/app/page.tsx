@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
 import { translations, type Language } from '@/lib/translations'
 
-type PageType = 'home' | 'software' | 'privacy'
+type PageType = 'home' | 'software' | 'privacy' | 'contact'
 type SiteTranslations = (typeof translations)[Language]
 
 function getLanguageFromPath(pathname: string): Language {
@@ -14,6 +14,7 @@ function getLanguageFromPath(pathname: string): Language {
 function getPageType(pathname: string): PageType {
   if (pathname.endsWith('/software') || pathname.includes('/software/')) return 'software'
   if (pathname.endsWith('/privacy') || pathname.includes('/privacy/')) return 'privacy'
+  if (pathname.endsWith('/contact') || pathname.includes('/contact/')) return 'contact'
   return 'home'
 }
 
@@ -110,6 +111,7 @@ export default function Home() {
       {pageType === 'home' && <HomePage t={t} currentLang={currentLang} />}
       {pageType === 'software' && <SoftwarePage t={t} />}
       {pageType === 'privacy' && <PrivacyPage t={t} />}
+      {pageType === 'contact' && <ContactPage t={t} />}
 
       <SiteFooter t={t} />
     </div>
@@ -143,7 +145,9 @@ function SiteHeader({
             <a className={pageType === 'software' ? 'active' : ''} href={localizedPath('software', currentLang)}>
               {t.nav.software}
             </a>
-            <a href="#contact">{t.nav.contact}</a>
+            <a className={pageType === 'contact' ? 'active' : ''} href={localizedPath('contact', currentLang)}>
+              {t.nav.contact}
+            </a>
           </nav>
           <div className="header-controls">
             <button
@@ -335,6 +339,14 @@ function SoftwarePage({ t }: { t: SiteTranslations }) {
             <h2>{t.softwarePage.floently.title}</h2>
             <p>{t.softwarePage.floently.text1}</p>
             <p>{t.softwarePage.floently.text2}</p>
+            <a
+              href={t.softwarePage.floently.url}
+              className="btn-secondary external-link"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {t.softwarePage.floently.cta}
+            </a>
             <div className="product-grid">
               {t.softwarePage.floently.points.map((point) => (
                 <div className="product-point" key={point.title}>
@@ -406,6 +418,40 @@ function PrivacyPage({ t }: { t: SiteTranslations }) {
   )
 }
 
+function ContactPage({ t }: { t: SiteTranslations }) {
+  return (
+    <>
+      <section className="page-hero bg-blue">
+        <div className="container narrow">
+          <p className="eyebrow">{t.contactPage.eyebrow}</p>
+          <h1>{t.contactPage.title}</h1>
+          <p className="lead">{t.contactPage.lead}</p>
+        </div>
+      </section>
+
+      <section className="bg-primary-soft">
+        <div className="container narrow">
+          <div className="company-box contact-details-box">
+            {t.contactPage.details.map((item) => (
+              <p key={item.label}>
+                <strong>{item.label}</strong>{' '}
+                {item.href ? (
+                  <a href={item.href}>{item.value}</a>
+                ) : (
+                  item.value
+                )}
+              </p>
+            ))}
+          </div>
+          <p className="legal-note">{t.contactPage.note}</p>
+        </div>
+      </section>
+
+      <ContactSection t={t} />
+    </>
+  )
+}
+
 function ContactSection({ t }: { t: SiteTranslations }) {
   return (
     <section id="contact" className="contact bg-green">
@@ -428,7 +474,17 @@ function SiteFooter({ t }: { t: SiteTranslations }) {
         <div className="container">
           <div className="footer-links">
             <a href={localizedPath('software', t.lang)}>{t.nav.software}</a>
+            <a href={localizedPath('contact', t.lang)}>{t.nav.contact}</a>
             <a href={localizedPath('privacy', t.lang)}>{t.nav.privacy}</a>
+            <a href="https://floently.com/learn" target="_blank" rel="noopener noreferrer">Floently</a>
+          </div>
+          <div className="footer-company" aria-label={t.footer.companyAriaLabel}>
+            {t.footer.companyInfo.map((item) => (
+              <p key={item.label}>
+                <strong>{item.label}</strong>{' '}
+                {item.href ? <a href={item.href}>{item.value}</a> : item.value}
+              </p>
+            ))}
           </div>
           <p
             className="footer-text"

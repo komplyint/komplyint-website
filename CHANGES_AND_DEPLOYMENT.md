@@ -104,3 +104,19 @@ CONTACT_TO_EMAIL=your-company-email@example.com
 ```
 
 For Apple and Google company profiles, a domain-based company email such as `hello@komplyint.fi`, `support@komplyint.fi`, or `admin@komplyint.fi` is better than a Gmail address.
+
+
+## Additional update: company contact details, contact page, Floently link, and Google verification
+
+Added after initial deployment:
+
+- `/contact` and `/en/contact` pages with Komplyint Oy company details.
+- Footer company details:
+  - Komplyint Oy
+  - Business ID / Y-tunnus: 3588595-3
+  - D-U-N-S Number / DUNS-numero: 369283279
+  - Contact / Yhteystieto: gliavex@gliavex.fi
+- Footer and software page links to Floently: https://floently.com/learn
+- Google site verification meta tag through Next.js metadata:
+  - `UsxKulfzvhtTwPhshasRf4MO3qJAbGTP1nlN07iyLWs`
+- Contact form fallback recipient changed to `gliavex@gliavex.fi` if `CONTACT_TO_EMAIL` is not set.
