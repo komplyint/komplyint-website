@@ -4,8 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
-    "start": "next start"
+    "build": "npm run test:public-access && next build",
+    "start": "next start",
+    "test:public-access": "node --test tests/public-access-boundary.test.mjs"
   },
   "dependencies": {
     "next": "^14.0.0",
@@ -26,4 +27,3 @@
     "autoprefixer": "^10.4.0"
   }
 }
-
