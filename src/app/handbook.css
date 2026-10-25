@@ -368,3 +368,8 @@ html:not(.dark) .kc-root :focus-visible{outline-color:#294DB5}
 @media(max-width:767px){
  .kc-hero>.qh-video-controls{right:17px;bottom:18px}
 }
+
+/* Keep the desktop video control visible before scrolling, including short browser windows. */
+@media(min-width:768px){
+  .kc-hero>.qh-video-controls{top:clamp(400px,57vh,580px);bottom:auto}
+}
