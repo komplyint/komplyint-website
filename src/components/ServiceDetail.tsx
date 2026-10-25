@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { services, serviceSlugs, type Lang } from '@/lib/commercial'
+import { services, serviceSlugs, canonicalHost, contactEmail, type Lang } from '@/lib/commercial'
 
 const artTitles: Record<Lang,string[]> = {
   fi:['Tietoa, johon voi luottaa','Työvaihe, joka etenee','Sivusto, jota on helppo käyttää','Työkalu juuri oikeaan tarpeeseen','Selkeä testihavainto','Viimeistelty ja käytettävä asiakirja'],
@@ -25,6 +25,9 @@ export default function ServiceDetail({lang,index}:{lang:Lang,index:number}) {
   const method=lang==='fi'?'Näin etenemme':'Our process'
   const touch=lang==='fi'?'Kerro tarpeestasi':'Discuss this service'
   const next=lang==='fi'?'Tutustu muihin palveluihin':'Explore all services'
+  const canonical=canonicalHost+prefix+'/services/'+slug
+  const schema={ '@context':'https://schema.org','@type':'Service',name:s.title,description:s.intro,serviceType:s.title,areaServed:{'@type':'Country',name:'Finland'},provider:{'@type':'Organization',name:'Komplyint Oy',url:canonicalHost,email:contactEmail,identifier:'3588595-3'},url:canonical }
+  const breadcrumbs={ '@context':'https://schema.org','@type':'BreadcrumbList',itemListElement:[{'@type':'ListItem',position:1,name:lang==='fi'?'Etusivu':'Home',item:canonicalHost+(lang==='en'?'/en':'/')},{'@type':'ListItem',position:2,name:lang==='fi'?'Palvelut':'Services',item:canonicalHost+prefix+'/services'},{'@type':'ListItem',position:3,name:s.title,item:canonical}] }
   const phases=lang==='fi'?[
     {t:'Kuvaile tehtävä',d:'Selvitämme nykytilan, käytössä olevat työkalut ja toivotun lopputuloksen.'},
     {t:'Rajataan työ',d:'Sovimme tarkasti sisällön, hinnan, vastuut ja tarkistettavan lopputuloksen.'},
@@ -36,7 +39,7 @@ export default function ServiceDetail({lang,index}:{lang:Lang,index:number}) {
     {t:'Build and verify',d:'We reuse suitable existing solutions and test the agreed work.'},
     {t:'Handover',d:'You receive deliverables with practical usage and maintenance notes.'}
   ]
-  return <article className="qh-service-page">
+  return <article className="qh-service-page"><script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify([schema,breadcrumbs]).replace(/</g,'\\u003c')}}/>
     <div className="qh-inner-hero">
       <div className="kc-shell qh-inner-grid">
         <div><nav className="qh-breadcrumb" aria-label={lang==='fi'?'Murupolku':'Breadcrumb'}><Link href={prefix||'/'}>{lang==='fi'?'Etusivu':'Home'}</Link><span aria-hidden="true">/</span><Link href={prefix+'/services'}>{label}</Link><span aria-hidden="true">/</span><span aria-current="page">{s.title}</span></nav>
