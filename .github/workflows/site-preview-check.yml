@@ -4,6 +4,7 @@ on:
     branches:
       - feature/digital-services-redesign-20261025
       - feature/handbook-quiet-precision-20261025
+      - feature/handbook-media-parity-release-20261025
   pull_request:
     branches:
       - main
@@ -45,6 +46,7 @@ jobs:
           HOSTNAME=127.0.0.1 PORT=3000 node .next/standalone/server.js > /tmp/komplyint-website.log 2>&1 &
           for i in $(seq 1 40); do if curl -fsS http://127.0.0.1:3000/ > /dev/null; then break; fi; sleep 2; done
           node tests/visual.smoke.mjs
+          node tests/hero-media.contract.mjs
           node tests/award-audit.mjs
       - name: Attach review screenshots
         if: always()
