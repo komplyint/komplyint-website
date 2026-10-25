@@ -5,20 +5,16 @@ import { usePathname, useRouter } from 'next/navigation'
 
 import { navPages, services, content, serviceSlugs, contactEmail, duns, type Page, type Lang } from '@/lib/commercial'
 import ServiceDetail from '@/components/ServiceDetail'
-import ServiceIcon from '@/components/ServiceIcon'
-
-function pathFor(lang: Lang, page: Page): string {
-  const prefix = lang === 'en' ? '/en' : ''
-  return page === 'home' ? (prefix || '/') : prefix + '/' + page
-}
+import Arrow from '@/components/Arrow'
+import FeaturedWork from '@/components/FeaturedWork'
+import PublicBrochures from '@/components/PublicBrochures'
+import ServiceCard from '@/components/ServiceCard'
+import VideoHero from '@/components/VideoHero'
+import { pathFor } from '@/lib/site-route'
 
 function pageFromPath(path: string): Page {
   const part = path.replace(/^\/en(?=\/|$)/, '').split('/').filter(Boolean)[0]
   return part === 'services' || part === 'software' || part === 'work' || part === 'about' || part === 'contact' || part === 'privacy' || part === 'accessibility' ? part : 'home'
-}
-
-function Arrow({ light = false }: { light?: boolean }) {
-  return <span className={light ? 'kc-arrow light' : 'kc-arrow'} aria-hidden="true">↗</span>
 }
 
 export default function KomplyintWebsite() {
@@ -179,7 +175,7 @@ function Home({lang}:{lang:Lang}) {
 
     <section className="kc-section kc-section-intro"><div className="kc-shell">
       <SectionIntro {...t.intro} />
-      <div className="kc-service-grid">{services[lang].map((s,i)=><a className="kc-service-tile" key={s.title} href={pathFor(lang,'services') + '/' + serviceSlugs[i]}><div className="kc-tile-top"><span>{String(i+1).padStart(2,'0')}</span><Arrow /></div><ServiceIcon index={i}/><h3>{s.title}</h3><p>{s.intro}</p></a>)}</div>
+      <div className="kc-service-grid">{services[lang].map((service,i)=><ServiceCard key={service.title} lang={lang} service={service} index={i}/>)}</div>
       <div className="kc-moreline"><span>{lang === 'fi' ? 'Lisäksi: ohjelmistotestaus, laadunvarmistus ja digitaalinen toimistotuki.' : 'Also available: software testing, quality assurance and digital office support.'}</span><a href={pathFor(lang,'services')}>{t.explore} <Arrow /></a></div>
     </div></section>
 
@@ -273,148 +269,6 @@ function PrivacyPage({lang}:{lang:Lang}) {
 }
 
 
-function VideoHero({lang}:{lang:Lang}){
-  type FilmState='poster'|'loading'|'playing'|'paused'|'blocked'|'error'
-  const frame=useRef<HTMLDivElement>(null)
-  const video=useRef<HTMLVideoElement>(null)
-  const [state,setState]=useState<FilmState>('poster')
-  const [sourceReady,setSourceReady]=useState(false)
-  const [reducedMotion,setReducedMotion]=useState(false)
-  const [saveData,setSaveData]=useState(false)
-  const [visible,setVisible]=useState(false)
-  const [inViewport,setInViewport]=useState(false)
-  const [hidden,setHidden]=useState(false)
-  const [userPaused,setUserPaused]=useState(false)
-  const [manualPlay,setManualPlay]=useState(false)
-  const [mobileViewport,setMobileViewport]=useState(false)
-
-  useEffect(()=>{
-    const media=window.matchMedia('(prefers-reduced-motion: reduce)')
-    const compact=window.matchMedia('(max-width: 767px)')
-    setMobileViewport(compact.matches)
-    const connection=(navigator as Navigator&{connection?:{saveData?:boolean}}).connection
-    setReducedMotion(media.matches)
-    setSaveData(Boolean(connection?.saveData))
-    try{setUserPaused(window.sessionStorage.getItem('komplyint-video-paused')==='1')}catch{}
-    const onMotion=()=>{setReducedMotion(media.matches);if(media.matches)setManualPlay(false)}
-    const onWidth=()=>setMobileViewport(compact.matches)
-    const onVisibility=()=>setHidden(document.hidden)
-    media.addEventListener('change',onMotion)
-    compact.addEventListener('change',onWidth)
-    document.addEventListener('visibilitychange',onVisibility)
-    onVisibility()
-    const observer=new IntersectionObserver(entries=>{
-      setInViewport(entries.some(x=>x.isIntersecting))
-      setVisible(entries.some(x=>x.isIntersecting&&x.intersectionRatio>=(compact.matches?0.7:0.05)))
-    },{threshold:[0.05,0.7]})
-    if(frame.current)observer.observe(frame.current)
-    return()=>{
-      media.removeEventListener('change',onMotion)
-      compact.removeEventListener('change',onWidth)
-      document.removeEventListener('visibilitychange',onVisibility)
-      observer.disconnect()
-    }
-  },[])
-
-  const allowPlayback=(visible||(manualPlay&&inViewport))&&!hidden&&!userPaused&&(!reducedMotion&&!saveData||manualPlay)
-  useEffect(()=>{
-    if(allowPlayback&&!sourceReady)setSourceReady(true)
-  },[allowPlayback,sourceReady])
-  useEffect(()=>{
-    const el=video.current
-    if(sourceReady&&el&&!el.hasAttribute('src'))el.load()
-  },[sourceReady,mobileViewport])
-  useEffect(()=>{
-    const el=video.current
-    if(!el)return
-    if(!allowPlayback){
-      el.pause()
-      return
-    }
-    if(!sourceReady)return
-    // Play must be muted and inline. Some browsers require a direct user gesture;
-    // when autoplay is rejected, the visible Play control always remains usable.
-    el.muted=true
-    void el.play().then(()=>setState('playing')).catch(()=>{
-      if(el.paused)setState('blocked')
-    })
-  },[allowPlayback,sourceReady])
-
-  async function toggle(){
-    const el=video.current
-    if(!el)return
-    if(!el.paused){
-      setUserPaused(true)
-      setManualPlay(false)
-      try{window.sessionStorage.setItem('komplyint-video-paused','1')}catch{}
-      el.pause()
-      setState('paused')
-      return
-    }
-    try{window.sessionStorage.removeItem('komplyint-video-paused')}catch{}
-    setUserPaused(false)
-    setManualPlay(true)
-    setState('loading')
-    el.muted=true
-    // Desktop Safari/Chrome autoplay policies may reject effect-driven play.
-    // Supply media and call play() SYNCHRONOUSLY inside the user's click gesture.
-    if(!sourceReady){
-      el.src=window.matchMedia('(max-width: 767px)').matches?'/media/hero-mobile.mp4':'/media/hero-optimized.mp4'
-      el.load()
-      setSourceReady(true)
-    }
-    try{
-      await el.play()
-      setState('playing')
-    }catch{
-      // Retain the original 4K source as an explicit recovery fallback.
-      if(el.getAttribute('src')!=='/media/hero.mp4'){
-        el.src='/media/hero.mp4'
-        el.load()
-        try{await el.play();setState('playing');return}catch{}
-      }
-      setState('error')
-    }
-  }
-
-  return <>
-    <div className="qh-film-layer" ref={frame}>
-      <img className="kc-hero-poster" src="/media/hero.webp" srcSet="/media/hero-mobile.webp 800w, /media/hero.webp 1920w" sizes="100vw" alt="" width={1920} height={1080} fetchPriority="high" decoding="sync" aria-hidden="true" />
-      <video className={'kc-hero-video'+(manualPlay?' qh-user-play':'')+(state==='error'?' qh-failed':'')}
-        ref={video} muted loop playsInline preload="none" autoPlay={allowPlayback} aria-hidden="true"
-        onPlaying={()=>setState('playing')}
-        onPause={()=>setState(previous=>previous==='error'?'error':'paused')}
-        onWaiting={()=>setState(previous=>previous==='playing'?'loading':previous)}
-        onError={()=>setState('error')}>
-        {sourceReady&&<><source src={mobileViewport?'/media/hero-mobile.mp4':'/media/hero-optimized.mp4'} type="video/mp4" /><source src="/media/hero.mp4" type="video/mp4" /></>}
-      </video>
-    </div>
-    <div className="qh-video-controls">
-      <button type="button" onClick={toggle}
-        aria-label={state==='playing'?(lang==='fi'?'Pysäytä taustavideo':'Pause background video'):(lang==='fi'?'Toista taustavideo':'Play background video')}>
-        <span aria-hidden="true">{state==='playing'?'Ⅱ':'▶'}</span> {state==='playing'?(lang==='fi'?'Pysäytä':'Pause'):(lang==='fi'?'Toista':'Play')}
-      </button>
-      {(state==='blocked'||state==='error')&&<span className="qh-film-note" role="status">{lang==='fi'?'Automaattinen toisto on estetty. Käynnistä video painikkeesta.':'Autoplay is blocked. Use Play to start the film.'}</span>}
-    </div>
-  </>
-}
-
-function FeaturedWork({lang}:{lang:Lang}){
-  const t=content[lang].impact
-  const item=t.cases[0]
-  return <section className="kc-section qh-featured-work"><div className="kc-shell qh-feature-grid">
-    <div><p className="kc-eyebrow">{lang==='fi'?'HAVAINNOLLISTAVA DEMO':'ILLUSTRATIVE DEMONSTRATION'}</p>
-      <h2>{lang==='fi'?'Pienestä ongelmasta selkeään lopputulokseen.':'From a small problem to a clearer outcome.'}</h2>
-      <p className="kc-lead">{item.title} — {item.before} {item.after}</p>
-      <p className="qh-truth-note">{t.disclaimer}</p>
-      <a className="kc-text-link" href={pathFor(lang,'work')}>{lang==='fi'?'Tutustu esimerkkeihin':'Explore examples'} <Arrow/></a>
-    </div>
-    <div className="qh-work-art" role="img" aria-label={lang==='fi'?'Alkuperäinen kuva tiedon jalostumisesta selkeäksi raportiksi, tumma vihreä, musta ja hillitty punainen':'Original illustration of scattered report data becoming a clear dashboard, in deep forest green, black and restrained red'}>
-      <img src={lang==='fi'?'/media/featured-reporting-art-fi.svg':'/media/featured-reporting-art.svg'} width={960} height={600} loading="lazy" decoding="async" className="qh-work-art-image" alt=""/>
-
-    </div>
-  </div></section>
-}
 function WorkPage({lang}:{lang:Lang}){
   const t=content[lang].impact
   return <><section className="kc-page-top qh-inner-landing"><div className="kc-shell"><p className="kc-eyebrow">{t.eyebrow}</p><h1>{lang==='fi'?'Näin ratkaisu voi toimia.':'See how a solution can work.'}</h1><p>{lang==='fi'?'Tässä esitetyt skenaariot kuvaavat mahdollisia toimituksia kuvitteellisilla tiedoilla.':'These scenarios show possible deliverables using fictional information.'}</p></div></section><Examples lang={lang}/><CTA lang={lang}/></>
@@ -438,14 +292,3 @@ function AccessibilityPage({lang}:{lang:Lang}){
     </div></section></>
 }
 
-function PublicBrochures({lang}:{lang:Lang}){
-  const fi=lang==='fi'
-  return <section className="kc-section qh-downloads"><div className="kc-shell qh-downloads-grid">
-    <div><p className="kc-eyebrow">{fi?'LADATTAVAT PALVELUESITTEET':'DOWNLOAD SERVICE INFORMATION'}</p><h2>{fi?'Tutustu palveluihimme omassa tahdissasi.':'Explore our services in your own time.'}</h2><p>{fi?'Lataa suomen- tai englanninkielinen esite. Molemmat ovat saatavilla myös yhtenä ZIP-pakettina.':'Download a Finnish or English brochure, or get both in one ZIP package.'}</p></div>
-    <div className="qh-download-links">
-      <a href="/downloads/Komplyint_Palveluesite_FI.pdf" download><span>PDF · FI</span><strong>Komplyint Palveluesite</strong><span aria-hidden="true">↓</span></a>
-      <a href="/downloads/Komplyint_Service_Portfolio_EN.pdf" download><span>PDF · EN</span><strong>Komplyint Service Portfolio</strong><span aria-hidden="true">↓</span></a>
-      <a href="/downloads/Komplyint_Service_Documents.zip" download><span>ZIP</span><strong>{fi?'Molemmat esitteet':'Both brochures'}</strong><span aria-hidden="true">↓</span></a>
-    </div>
-  </div></section>
-}

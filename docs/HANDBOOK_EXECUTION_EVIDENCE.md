@@ -20,3 +20,9 @@ Specification: **Komplyint Redesign Handbook v1.0 (25 October 2026)**. This docu
 ## Reuse vs new work
 
 Reused: actual Next.js production routes, `src/lib/commercial.ts`, bilingual paths, existing CSS, current automated browser runner and original hero media. Newly integrated: one small route-locale middleware, Next.js self-hosted font setup, and regression checks. No duplicate site/runtime or externally hosted runtime dependency was added.
+
+## Architecture continuation — E02/C20
+
+The existing public client facade now delegates `VideoHero`, `FeaturedWork`, `PublicBrochures`, `ServiceCard` and `Arrow` to shared components, and `pathFor` to a shared route helper. This is a code extraction and reorganization, not a second site. The original hero/video, bilingual content, links, analytics graphic and contact functionality remain unchanged. A new source-architecture contract is part of the production build's Node tests. Browser-level parity still requires the quality workflow.
+
+Remaining E02: extract the form and service explorer, consolidate the legacy stylesheet cascade and review static rendering boundaries.
