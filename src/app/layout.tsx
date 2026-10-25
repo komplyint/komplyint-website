@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import './globals.css'
 import './commercial.css'
+import './handbook.css'
 import LangSetter from './LangSetter'
 
 export const metadata: Metadata = {
@@ -28,7 +29,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="fi" suppressHydrationWarning>
+    <html lang="fi" className="dark" suppressHydrationWarning>
       <body>
         <LangSetter />
         {children}
