@@ -38,7 +38,12 @@ jobs:
           echo "Vercel token configured in repository: $VERCEL_TOKEN_AVAILABLE"
           echo "Vercel org ID configured in repository: $VERCEL_ORG_AVAILABLE"
           echo "Vercel project ID configured in repository: $VERCEL_PROJECT_AVAILABLE"
+          echo 'GitHub Pages:'
+          curl -sS -H "Authorization: Bearer $GH_TOKEN" -H 'Accept: application/vnd.github+json' -w "\\nHTTP_STATUS=%{http_code}\\n" "https://api.github.com/repos/komplyint/komplyint-website/pages" | head -c 2000 || true
+          echo
+          echo 'Public Pages URL:'
+          curl -sSIL --max-time 12 "https://komplyint.github.io/komplyint-website/" | grep -Ei '^(HTTP/|location:|server:)' | head -n 6 || true
           echo 'GitHub Deployments:'
           curl -fsSL -H "Authorization: Bearer $GH_TOKEN" -H 'Accept: application/vnd.github+json' \
-            "https://api.github.com/repos/\${GITHUB_REPOSITORY}/deployments?per_page=7" | \
+            "https://api.github.com/repos/komplyint/komplyint-website/deployments?per_page=7" | \
             python3 -c 'import sys,json; a=json.load(sys.stdin); print(json.dumps([{"environment":x.get("environment"),"ref":x.get("ref"),"sha":x.get("sha"),"created_at":x.get("created_at"),"id":x.get("id")} for x in a],indent=2))' || true
