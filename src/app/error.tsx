@@ -1,0 +1,4 @@
+'use client'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+export default function ErrorPage({reset}:{error:Error&{digest?:string};reset:()=>void}){const en=(usePathname()||'').startsWith('/en');return <main className="kc-root qh-error-page"><div className="kc-shell"><p className="kc-eyebrow">500 / {en?'SOMETHING WENT WRONG':'ODOTTAMATON VIRHE'}</p><h1>{en?'This page could not be shown.':'Sivun näyttämisessä tapahtui virhe.'}</h1><p>{en?'You can retry or return to the homepage.':'Voit yrittää uudelleen tai palata etusivulle.'}</p><div className="qh-error-actions"><button type="button" className="kc-button kc-button-primary" onClick={reset}>{en?'Retry':'Yritä uudelleen'} ↻</button><Link className="kc-text-link" href={en?'/en':'/'}>{en?'Go home':'Palaa etusivulle'}</Link></div></div></main>}
