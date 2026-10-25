@@ -184,7 +184,7 @@ function SoftwarePage({lang}:{lang:Lang}) {
 }
 function ContactPage({lang}:{lang:Lang}) {
   const t=content[lang].contactPage
-  const [name,setName]=useState(''), [email,setEmail]=useState(''), [message,setMessage]=useState(''), [topic,setTopic]=useState('')
+  const [name,setName]=useState(''), [company,setCompany]=useState(''), [email,setEmail]=useState(''), [message,setMessage]=useState(''), [topic,setTopic]=useState('')
   useEffect(()=>{const slug=new URLSearchParams(window.location.search).get('service');const i=serviceSlugs.indexOf(slug as typeof serviceSlugs[number]);if(i>=0)setTopic(services[lang][i].title)},[lang])
   const [status,setStatus]=useState<'idle'|'sending'|'sent'|'error'>('idle')
   const [trap,setTrap]=useState('')
@@ -193,17 +193,17 @@ function ContactPage({lang}:{lang:Lang}) {
     if(trap) return
     setStatus('sending')
     try {
-      const payload = {name,email,message:((topic ? (lang==='fi'?'Aihe: ':'Topic: ')+topic+'\n\n' : '')+message)}
+      const payload = {name,email,company,website:trap,message:((company ? (lang==='fi'?'Yritys: ':'Company: ')+company+'\n' : '')+(topic ? (lang==='fi'?'Aihe: ':'Topic: ')+topic+'\n\n' : '')+message)}
       const r = await fetch('/api/contact',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)})
       if(!r.ok) throw new Error('send failed')
-      setName('');setEmail('');setMessage('');setTopic('');setStatus('sent')
+      setName('');setCompany('');setEmail('');setMessage('');setTopic('');setStatus('sent')
     } catch {setStatus('error')}
   }
   return <><div className="kc-page-top"><div className="kc-shell"><p className="kc-eyebrow">{t.eyebrow}</p><h1>{t.title}</h1><p>{t.lead}</p></div></div>
     <section className="kc-section"><div className="kc-shell kc-contact-grid"><div className="kc-contact-side"><p className="kc-eyebrow">{t.action}</p><h2>Komplyint Oy</h2><p>{content[lang].footer}</p><p>Finland · European Union</p><a className="kc-text-link" href="mailto:info@komplyint.fi">info@komplyint.fi<Arrow /></a><div className="kc-contact-note">{t.note}</div></div>
-    <form className="kc-form" onSubmit={submit}><div className="kc-form-two"><label>{t.formName}<input type="text" value={name} onChange={e=>setName(e.target.value)} maxLength={120} autoComplete="name" placeholder={lang==='fi'?'Nimesi':'Your name'}/></label><label>{t.formEmail}<input type="email" value={email} onChange={e=>setEmail(e.target.value)} required maxLength={200} autoComplete="email" placeholder="name@company.fi"/></label></div>
+    <form className="kc-form" onSubmit={submit}><div className="kc-form-two"><label>{t.formName}<input type="text" value={name} onChange={e=>setName(e.target.value)} maxLength={120} autoComplete="name" placeholder={lang==='fi'?'Nimesi':'Your name'}/></label><label>{lang==='fi'?'Yritys (valinnainen)':'Company (optional)'}<input type="text" value={company} onChange={e=>setCompany(e.target.value)} maxLength={140} autoComplete="organization" placeholder={lang==='fi'?'Yrityksen nimi':'Company name'}/></label><label>{t.formEmail}<input type="email" value={email} onChange={e=>setEmail(e.target.value)} required maxLength={200} autoComplete="email" placeholder="name@company.fi"/></label></div>
     <label>{t.formService}<select value={topic} onChange={e=>setTopic(e.target.value)}><option value="">{t.select}</option>{services[lang].map(s=><option key={s.title} value={s.title}>{s.title}</option>)}<option value="Other">{t.other}</option></select></label>
-    <label>{t.formMessage}<textarea rows={6} maxLength={4500} required value={message} onChange={e=>setMessage(e.target.value)} placeholder={lang==='fi'?'Kerro lyhyesti ongelma ja toivottu lopputulos.':'Describe the problem and desired outcome.'}/></label>
+    <label>{t.formMessage}<textarea rows={6} maxLength={4500} minLength={10} required value={message} onChange={e=>setMessage(e.target.value)} placeholder={lang==='fi'?'Kerro lyhyesti ongelma ja toivottu lopputulos.':'Describe the problem and desired outcome.'}/></label>
     <label className="kc-honeypot" aria-hidden="true">Website <input tabIndex={-1} autoComplete="off" value={trap} onChange={e=>setTrap(e.target.value)}/></label>
     <p className="kc-form-privacy">{t.privacy} <a href={pathFor(lang,'privacy')}>{content[lang].navigation.privacy}.</a></p>
     {status==='sent' && <p role="status" className="kc-form-success">{t.sent}</p>}
