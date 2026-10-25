@@ -47,5 +47,18 @@ assert.match((await desktop.locator('h1').first().textContent())||'',/Microsoft 
 await desktop.goto(base+'/contact',{waitUntil:'domcontentloaded'})
 assert.equal(await desktop.locator('form.kc-form input[type=email]').count(),1)
 assert.equal(await desktop.locator('form.kc-form button[type=submit]').count(),1)
+const files=[
+  ['/downloads/Komplyint_Palveluesite_FI.pdf','%PDF'],
+  ['/downloads/Komplyint_Service_Portfolio_EN.pdf','%PDF'],
+  ['/downloads/Komplyint_Service_Documents.zip','PK']
+]
+for(const [path,signature] of files){
+  const response=await desktop.request.get(base+path)
+  assert.equal(response.status(),200,'download unavailable: '+path)
+  const data=await response.body()
+  assert.ok(data.length>1000,'download empty: '+path)
+  assert.equal(data.subarray(0,signature.length).toString(),signature,'invalid archive/document: '+path)
+}
+assert.equal(await desktop.locator('a[href^="/downloads/"]').count(),1,'Footer should offer a ZIP download')
 await browser.close()
 console.log('Visual smoke tests passed (FI/EN, desktop/mobile, service tabs, original media element, contact UI).')
