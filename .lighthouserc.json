@@ -6,7 +6,7 @@
         "http://127.0.0.1:3000/en/services",
         "http://127.0.0.1:3000/contact"
       ],
-      "numberOfRuns": 1,
+      "numberOfRuns": 2,
       "settings": {
         "chromeFlags": "--no-sandbox --headless"
       }
