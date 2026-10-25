@@ -1,0 +1,2 @@
+import Link from 'next/link'
+export default function NotFound(){return <main className="kc-root qh-error-page"><div className="kc-shell"><p className="kc-eyebrow">404 / SIVUA EI LÖYDY · PAGE NOT FOUND</p><h1>Sivua ei löydy. / Page not found.</h1><p>Valitse palvelu tai palaa etusivulle. / Explore services or return home.</p><Link className="kc-button kc-button-primary" href="/">Etusivu / Home ↗</Link></div></main>}
