@@ -197,3 +197,13 @@ a:hover .kc-arrow{transform:translate(3px,-3px)}
 
 /* Do not create a scrolling ancestor around the sticky navigation. */
 .kc-root{overflow-x:clip;overflow-y:visible}
+
+
+/* Catalogue detail page has its introduction in the hero already. */
+.kc-services-detail{padding-top:72px}
+@media(max-width:570px){
+  .kc-services-detail{padding-top:45px}
+  .kc-step{min-height:0;padding:23px 23px 25px}
+  .kc-step-no{margin-bottom:15px}
+  .kc-step h3{margin-bottom:8px}
+}
