@@ -5,6 +5,7 @@ import { usePathname, useRouter } from 'next/navigation'
 
 import { navPages, services, content, serviceSlugs, contactEmail, duns, type Page, type Lang } from '@/lib/commercial'
 import ServiceDetail from '@/components/ServiceDetail'
+import ServiceIcon from '@/components/ServiceIcon'
 
 function pathFor(lang: Lang, page: Page): string {
   const prefix = lang === 'en' ? '/en' : ''
@@ -178,7 +179,7 @@ function Home({lang}:{lang:Lang}) {
 
     <section className="kc-section kc-section-intro"><div className="kc-shell">
       <SectionIntro {...t.intro} />
-      <div className="kc-service-grid">{services[lang].map((s,i)=><a className="kc-service-tile" key={s.title} href={pathFor(lang,'services') + '/' + serviceSlugs[i]}><div className="kc-tile-top"><span>{String(i+1).padStart(2,'0')}</span><Arrow /></div><h3>{s.title}</h3><p>{s.intro}</p></a>)}</div>
+      <div className="kc-service-grid">{services[lang].map((s,i)=><a className="kc-service-tile" key={s.title} href={pathFor(lang,'services') + '/' + serviceSlugs[i]}><div className="kc-tile-top"><span>{String(i+1).padStart(2,'0')}</span><Arrow /></div><ServiceIcon index={i}/><h3>{s.title}</h3><p>{s.intro}</p></a>)}</div>
       <div className="kc-moreline"><span>{lang === 'fi' ? 'Lisäksi: ohjelmistotestaus, laadunvarmistus ja digitaalinen toimistotuki.' : 'Also available: software testing, quality assurance and digital office support.'}</span><a href={pathFor(lang,'services')}>{t.explore} <Arrow /></a></div>
     </div></section>
 
@@ -385,11 +386,9 @@ function FeaturedWork({lang}:{lang:Lang}){
       <p className="qh-truth-note">{t.disclaimer}</p>
       <a className="kc-text-link" href={pathFor(lang,'work')}>{lang==='fi'?'Tutustu esimerkkeihin':'Explore examples'} <Arrow/></a>
     </div>
-    <div className="qh-work-art" role="img" aria-label={lang==='fi'?'Havainnollistava raporttirakenne':'Illustrative reporting composition'}>
-      <div className="qh-art-tick">K — 001</div><div className="qh-art-block qh-art-block-1"/><div className="qh-art-block qh-art-block-2"/>
-      <div className="qh-art-sample"><span>01</span><div className="qh-art-rows"><i/><i/><i/><i/></div></div>
-      <div className="qh-art-sample qh-art-sample-second"><span>02</span><div className="qh-art-bars"><i/><i/><i/><i/></div></div>
-      <span className="qh-art-legend">{lang==='fi'?'Esimerkkirakenne, ei asiakasreferenssi':'Illustration, not a client reference'}</span>
+    <div className="qh-work-art" role="img" aria-label={lang==='fi'?'Alkuperäinen kuva tiedon jalostumisesta selkeäksi raportiksi, tumma vihreä, musta ja hillitty punainen':'Original illustration of scattered report data becoming a clear dashboard, in deep forest green, black and restrained red'}>
+      <img src="/media/featured-reporting-art.svg" width={960} height={600} loading="lazy" decoding="async" className="qh-work-art-image" alt=""/>
+
     </div>
   </div></section>
 }
