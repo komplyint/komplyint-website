@@ -68,7 +68,11 @@ async function audit(locale,theme,width){
   const formRoute=locale==='fi'?'/contact':'/'+locale+'/contact'
   const pageRole=page.locator('.kc-root h1').first()
   assert.equal(await pageRole.count(),1)
-  assert.ok(hero.bg.startsWith('rgba(15, 20, 23, 0.95)'),'Hero reading panel should be translucent charcoal')
+  if(width>=768){
+    assert.ok(hero.bg.startsWith('rgba(15, 20, 23, 0.95)'),'Desktop hero reading panel should be translucent charcoal, got '+hero.bg)
+  }else{
+    assert.deepEqual(rgb(hero.bg),[21,27,31],'Mobile hero uses opaque charcoal for readability')
+  }
   assert.equal(await page.locator('.ki-locale-switcher [data-locale="sv"]').first().count(),1,'Swedish language selector preserved')
   const widthCheck=await page.evaluate(()=>({scroll:document.documentElement.scrollWidth,viewport:innerWidth}))
   assert.ok(widthCheck.scroll<=widthCheck.viewport+2,'Horizontal overflow on '+locale+' '+theme+' '+width+': '+JSON.stringify(widthCheck))
