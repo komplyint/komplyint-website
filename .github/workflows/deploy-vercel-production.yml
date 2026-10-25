@@ -1,0 +1,95 @@
+name: Deploy Komplyint production to existing Vercel project
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: komplyint-production
+  cancel-in-progress: false
+jobs:
+  credential-preflight:
+    runs-on: ubuntu-latest
+    outputs:
+      ready: ${{ steps.readiness.outputs.ready }}
+    env:
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+    steps:
+      - name: Report integration readiness without exposing credentials
+        id: readiness
+        shell: bash
+        run: |
+          missing=0
+          for name in VERCEL_TOKEN VERCEL_ORG_ID VERCEL_PROJECT_ID; do
+            if [ -z "${!name:-}" ]; then
+              echo "::warning::Vercel production deployment is blocked until repository secret $name is configured."
+              missing=1
+            fi
+          done
+          if [ "$missing" -eq 0 ]; then echo "Vercel CLI credentials available."; echo "ready=true" >> "$GITHUB_OUTPUT"; else echo "ready=false" >> "$GITHUB_OUTPUT"; fi
+  production:
+    needs: credential-preflight
+    if: github.event_name != 'pull_request' && needs.credential-preflight.outputs.ready == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Verify existing Vercel project credentials
+        shell: bash
+        run: |
+          set -euo pipefail
+          for name in VERCEL_TOKEN VERCEL_ORG_ID VERCEL_PROJECT_ID; do
+            if [ -z "${!name:-}" ]; then
+              echo "::error title=Vercel project authorization missing::Set $name in repository Settings / Secrets and variables / Actions, or reconnect the existing Vercel project to GitHub main."
+              exit 1
+            fi
+          done
+          echo "Existing Vercel project credentials available."
+      - name: Install Vercel CLI
+        run: npm install --global vercel@latest
+      - name: Load existing project's production settings
+        run: vercel pull --yes --environment=production
+      - name: Build production from verified main
+        run: vercel build --prod
+      - name: Deploy prebuilt artifact to existing production project
+        run: |
+          set -euo pipefail
+          vercel deploy --prebuilt --prod > /tmp/komplyint-vercel-deployment-url.txt
+          echo "Vercel production deployment submitted."
+      - name: Verify live handbook design and brochure delivery
+        shell: bash
+        run: |
+          set -euo pipefail
+          ok=0
+          for attempt in 1 2 3 4 5 6 7 8 9 10; do
+            page="$(curl -fsSL --max-time 18 -H 'Cache-Control: no-cache' "https://www.komplyint.fi/?verify=${GITHUB_SHA}" 2>/dev/null || true)"
+            if printf '%s' "$page" | grep -q 'Selkeyttä työhön'; then
+              ok=1
+              break
+            fi
+            sleep 6
+          done
+          if [ "$ok" -ne 1 ]; then
+            echo "::error::www.komplyint.fi is not yet serving the new design. Check Vercel domain assignment and Git project mapping."
+            exit 1
+          fi
+          for path in /services/data-reporting /about /downloads/Komplyint_Service_Documents.zip; do
+            http="$(curl -LsS --max-time 20 -o /dev/null -w '${http_code}' "https://www.komplyint.fi$path")"
+            if [ "$http" != 200 ]; then
+              echo "::error::Production route $path returned $http"
+              exit 1
+            fi
+          done
+          echo "Production deployment and critical routes verified."

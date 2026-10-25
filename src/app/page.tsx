@@ -29,6 +29,8 @@ export default function KomplyintWebsite() {
   const pathParts=pathname.replace(/^\/en(?=\/|$)/,'').split('/').filter(Boolean)
   const serviceIndex=page==='services' && pathParts.length===2 ? serviceSlugs.indexOf(pathParts[1] as typeof serviceSlugs[number]) : -1
   const [menuOpen, setMenuOpen] = useState(false)
+  const menuRef=useRef<HTMLElement>(null)
+  const menuTrigger=useRef<HTMLButtonElement>(null)
   const [appearance, setAppearance] = useState<'dark'|'light'|'system'>('dark')
   useEffect(() => {
     let next:'dark'|'light'|'system'='dark'
@@ -36,16 +38,58 @@ export default function KomplyintWebsite() {
     setAppearance(next)
   }, [])
   useEffect(() => { setMenuOpen(false) }, [pathname])
+  useEffect(()=>{
+    if(!menuOpen)return
+    const previousOverflow=document.body.style.overflow
+    const main=document.getElementById('main-content')
+    const footer=document.querySelector('footer.kc-footer')
+    const mainAlreadyInert=main?.hasAttribute('inert')
+    const footerAlreadyInert=footer?.hasAttribute('inert')
+    main?.setAttribute('inert','')
+    footer?.setAttribute('inert','')
+    document.body.style.overflow='hidden'
+    menuRef.current?.querySelector<HTMLButtonElement>('.qh-menu-close')?.focus()
+    function onKeyDown(event:KeyboardEvent){
+      if(event.key==='Escape'){event.preventDefault();setMenuOpen(false);return}
+      if(event.key!=='Tab'||!menuRef.current)return
+      const focusables=Array.from(menuRef.current.querySelectorAll<HTMLElement>('a[href],button:not([disabled]),select,summary'))
+        .filter(node=>node.getClientRects().length>0)
+      if(!focusables.length)return
+      const first=focusables[0],last=focusables[focusables.length-1]
+      if(event.shiftKey&&document.activeElement===first){event.preventDefault();last.focus()}
+      else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first.focus()}
+    }
+    document.addEventListener('keydown',onKeyDown)
+    return()=>{
+      document.removeEventListener('keydown',onKeyDown)
+      document.body.style.overflow=previousOverflow
+      if(!mainAlreadyInert)main?.removeAttribute('inert')
+      if(!footerAlreadyInert)footer?.removeAttribute('inert')
+      menuTrigger.current?.focus()
+    }
+  },[menuOpen])
   useEffect(() => {
-    const dark=appearance==='dark'||(appearance==='system'&&window.matchMedia('(prefers-color-scheme: dark)').matches)
-    document.documentElement.classList.toggle('dark',dark)
-    document.documentElement.style.colorScheme=dark?'dark':'light'
+    const media=window.matchMedia('(prefers-color-scheme: dark)')
+    function apply(){
+      const dark=appearance==='dark'||(appearance==='system'&&media.matches)
+      document.documentElement.classList.toggle('dark',dark)
+      document.documentElement.style.colorScheme=dark?'dark':'light'
+    }
+    apply()
+    media.addEventListener('change',apply)
+    return()=>media.removeEventListener('change',apply)
   },[appearance])
   function setTheme(next:'dark'|'light'|'system'){
     setAppearance(next)
     try{window.localStorage.setItem('komplyint-theme',next)}catch{}
   }
   function switchLanguage(){
+    if(page==='contact'){
+      const form=document.querySelector<HTMLFormElement>('form.kc-form')
+      const hasDraft=!!form&&Array.from(form.querySelectorAll<HTMLInputElement|HTMLTextAreaElement>('input:not([type=hidden]),textarea'))
+        .some(field=>field.value.trim().length>0)
+      if(hasDraft&&!window.confirm(lang==='fi'?'Lomakkeen keskeneräiset tiedot voivat hävitä. Vaihdetaanko kieli?':'Your unsent form fields may be lost. Switch language?'))return
+    }
     const target=(lang==='fi'?'/en'+pathname:pathname.replace(/^\/en(?=\/|$)/,''))||'/'
     router.push(target+(typeof window!=='undefined'?window.location.search:''))
   }
@@ -59,21 +103,33 @@ export default function KomplyintWebsite() {
           <span>{t.footer}</span>
         </div>
       </div>
-      <header className="kc-header">
+      <header className={menuOpen ? "kc-header qh-menu-open" : "kc-header"}>
         <div className="kc-shell kc-header-row">
           <a href={pathFor(lang, 'home')} className="kc-logo-link" aria-label="Komplyint Oy">
             <img src="/logo.svg" className="kc-logo" alt="Komplyint Oy" />
           </a>
-          <nav className={menuOpen ? 'main-nav kc-nav is-open' : 'main-nav kc-nav'} aria-label={lang === 'fi' ? 'Päänavigaatio' : 'Main navigation'}>
+          {menuOpen&&<div className="qh-menu-backdrop" aria-hidden="true" onClick={()=>setMenuOpen(false)}/>}
+          <nav id="komplyint-primary-navigation" ref={menuRef}
+            className={menuOpen ? 'kc-nav is-open' : 'kc-nav'}
+            role={menuOpen?'dialog':undefined}
+            aria-modal={menuOpen?'true':undefined}
+            aria-label={lang === 'fi' ? 'Päänavigaatio' : 'Main navigation'}>
+            <div className="qh-mobile-menu-head"><span>Komplyint Oy</span><button className="qh-menu-close" type="button" onClick={()=>setMenuOpen(false)}>{lang==='fi'?'Sulje':'Close'} <span aria-hidden="true">×</span></button></div>
             {navPages.map((item) => <span className="qh-nav-entry" key={item}><a href={pathFor(lang, item)} className={page === item ? 'is-current' : ''} aria-current={page === item ? 'page' : undefined}>{t.navigation[item]}</a>{item==='services'&&<details className="qh-service-menu"><summary aria-label={lang==='fi'?'Näytä palveluluokat':'Show service categories'}>⌄</summary><div className="qh-mega"><span className="qh-mega-eyebrow">{lang==='fi'?'VALITSE PALVELU':'CHOOSE A SERVICE'}</span>{services[lang].map((svc,i)=><a key={serviceSlugs[i]} href={pathFor(lang,'services')+'/'+serviceSlugs[i]}><b>{String(i+1).padStart(2,'0')}</b><span>{svc.title}</span><span aria-hidden="true">↗</span></a>)}</div></details>}</span>)}
+            <div className="qh-mobile-services"><p>{lang==='fi'?'Palvelualueet':'Service areas'}</p>{services[lang].map((svc,i)=><a href={pathFor(lang,'services')+'/'+serviceSlugs[i]} key={serviceSlugs[i]}>{svc.title}<Arrow/></a>)}</div>
+            <div className="qh-mobile-utilities">
+              <button type="button" onClick={switchLanguage}>{lang==='fi'?'English / EN':'Suomi / FI'}</button>
+              <label>{lang==='fi'?'Ulkoasu':'Appearance'}<select value={appearance} onChange={e=>setTheme(e.target.value as 'dark'|'light'|'system')}><option value="dark">{lang==='fi'?'Tumma':'Dark'}</option><option value="light">{lang==='fi'?'Vaalea':'Light'}</option><option value="system">{lang==='fi'?'Järjestelmän mukaan':'System'}</option></select></label>
+            </div>
           </nav>
           <div className="kc-actions">
             <button className="kc-language" type="button" onClick={switchLanguage} aria-label={lang === 'fi' ? 'EN — Switch to English' : 'FI — Vaihda suomeksi'}>{lang === 'fi' ? 'EN' : 'FI'}</button>
             
             <a href={pathFor(lang,'contact')} className="kc-header-cta">{t.contactButton}<Arrow /></a>
-            <button className="kc-mobile-toggle" type="button" onClick={() => setMenuOpen(!menuOpen)} aria-expanded={menuOpen} aria-label={t.navigation.menu}><span /><span /><span /></button>
+            <button className="kc-mobile-toggle" ref={menuTrigger} type="button" onClick={() => setMenuOpen(!menuOpen)} aria-expanded={menuOpen} aria-controls="komplyint-primary-navigation" aria-label={t.navigation.menu}><span /><span /><span /></button>
           </div>
         </div>
+        <noscript><nav className="qh-nojs-nav" aria-label={lang==='fi'?'Päänavigaatio ilman JavaScriptiä':'Navigation without JavaScript'}>{navPages.map(item=><a href={pathFor(lang,item)} key={item}>{t.navigation[item]}</a>)}<a href={pathFor(lang,'services')}>{t.explore}</a></nav></noscript>
       </header>
 
       <main id="main-content">
@@ -217,39 +273,100 @@ function PrivacyPage({lang}:{lang:Lang}) {
 
 
 function VideoHero({lang}:{lang:Lang}){
+  type FilmState='poster'|'loading'|'playing'|'paused'|'blocked'|'error'
+  const frame=useRef<HTMLDivElement>(null)
   const video=useRef<HTMLVideoElement>(null)
-  const [state,setState]=useState<'loading'|'playing'|'paused'|'blocked'|'error'>('loading')
-  const [userPlay,setUserPlay]=useState(false)
+  const [state,setState]=useState<FilmState>('poster')
+  const [sourceReady,setSourceReady]=useState(false)
+  const [reducedMotion,setReducedMotion]=useState(false)
+  const [saveData,setSaveData]=useState(false)
+  const [visible,setVisible]=useState(false)
+  const [hidden,setHidden]=useState(false)
+  const [userPaused,setUserPaused]=useState(false)
+  const [manualPlay,setManualPlay]=useState(false)
+  const [mobileViewport,setMobileViewport]=useState(false)
+
+  useEffect(()=>{
+    const media=window.matchMedia('(prefers-reduced-motion: reduce)')
+    const compact=window.matchMedia('(max-width: 767px)')
+    setMobileViewport(compact.matches)
+    const connection=(navigator as Navigator&{connection?:{saveData?:boolean}}).connection
+    setReducedMotion(media.matches)
+    setSaveData(Boolean(connection?.saveData))
+    try{setUserPaused(window.sessionStorage.getItem('komplyint-video-paused')==='1')}catch{}
+    const onMotion=()=>{setReducedMotion(media.matches);if(media.matches)setManualPlay(false)}
+    const onWidth=()=>setMobileViewport(compact.matches)
+    const onVisibility=()=>setHidden(document.hidden)
+    media.addEventListener('change',onMotion)
+    compact.addEventListener('change',onWidth)
+    document.addEventListener('visibilitychange',onVisibility)
+    onVisibility()
+    const observer=new IntersectionObserver(entries=>setVisible(entries.some(x=>x.isIntersecting)),{threshold:0.05})
+    if(frame.current)observer.observe(frame.current)
+    return()=>{
+      media.removeEventListener('change',onMotion)
+      compact.removeEventListener('change',onWidth)
+      document.removeEventListener('visibilitychange',onVisibility)
+      observer.disconnect()
+    }
+  },[])
+
+  const allowPlayback=visible&&!hidden&&!userPaused&&(!reducedMotion&&!saveData||manualPlay)
+  useEffect(()=>{
+    if(allowPlayback&&!sourceReady)setSourceReady(true)
+  },[allowPlayback,sourceReady,mobileViewport])
+  useEffect(()=>{
+    if(sourceReady)video.current?.load()
+  },[sourceReady,mobileViewport])
   useEffect(()=>{
     const el=video.current
     if(!el)return
-    const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    if(reduced){el.pause();setState('paused');return}
+    if(!allowPlayback){el.pause();return}
+    if(!sourceReady)return
+    setState('loading')
     el.muted=true
-    el.play().then(()=>setState('playing')).catch(()=>setState('blocked'))
-    function onVisibility(){if(document.hidden){el?.pause()}else if(!reduced){el?.play().then(()=>setState('playing')).catch(()=>setState('blocked'))}}
-    document.addEventListener('visibilitychange',onVisibility)
-    return()=>document.removeEventListener('visibilitychange',onVisibility)
-  },[])
-  async function toggle(){
+    el.play().then(()=>setState('playing')).catch(()=>{
+      if(!el.paused)return
+      setState('blocked')
+    })
+  },[allowPlayback,sourceReady])
+
+  function toggle(){
     const el=video.current
     if(!el)return
-    if(!el.paused){el.pause();setState('paused');return}
-    setUserPlay(true)
-    el.muted=true
-    try{await el.play();setState('playing')}catch{setState('blocked')}
+    if(!el.paused&&state==='playing'){
+      setUserPaused(true)
+      setManualPlay(false)
+      try{window.sessionStorage.setItem('komplyint-video-paused','1')}catch{}
+      el.pause()
+      setState('paused')
+      return
+    }
+    setUserPaused(false)
+    setManualPlay(true)
+    setState('loading')
+    try{window.sessionStorage.removeItem('komplyint-video-paused')}catch{}
+    setSourceReady(true)
+    if(sourceReady){
+      el.muted=true
+      el.play().then(()=>setState('playing')).catch(()=>setState('blocked'))
+    }
   }
-  return <div className="qh-film-layer">
+
+  return <div className="qh-film-layer" ref={frame}>
     <img className="kc-hero-poster" src="/media/hero.webp" alt="" width={1920} height={1080} fetchPriority="high" decoding="async" aria-hidden="true" />
-    <video className={'kc-hero-video'+(userPlay?' qh-user-play':'')} ref={video} autoPlay muted loop playsInline preload="metadata" poster="/media/hero.webp" aria-hidden="true"
-      onPlaying={()=>setState('playing')} onPause={()=>setState('paused')} onError={()=>setState('error')}>
-      <source src="/media/hero-optimized.mp4" type="video/mp4" /><source src="/media/hero.mp4" type="video/mp4" />
+    <video className={'kc-hero-video'+(manualPlay?' qh-user-play':'')+(state==='error'?' qh-failed':'')}
+      ref={video} muted loop playsInline preload="none" poster="/media/hero.webp" aria-hidden="true"
+      onPlaying={()=>setState('playing')}
+      onPause={()=>setState(previous=>previous==='error'?'error':'paused')}
+      onError={()=>setState('error')}>
+      {sourceReady&&<><source src={mobileViewport?'/media/hero-mobile.mp4':'/media/hero-optimized.mp4'} type="video/mp4" /><source src="/media/hero.mp4" type="video/mp4" /></>}
     </video>
     <div className="qh-video-controls">
-      <button type="button" onClick={toggle} aria-label={state==='playing'?(lang==='fi'?'Pysäytä video':'Pause video'):(lang==='fi'?'Toista video':'Play video')}>
+      <button type="button" onClick={toggle} aria-label={state==='playing'?(lang==='fi'?'Pysäytä taustavideo':'Pause background video'):(lang==='fi'?'Toista taustavideo':'Play background video')}>
         <span aria-hidden="true">{state==='playing'?'Ⅱ':'▶'}</span> {state==='playing'?(lang==='fi'?'Pysäytä':'Pause'):(lang==='fi'?'Toista':'Play')}
       </button>
-      {(state==='blocked'||state==='error')&&<span className="qh-film-note" role="status">{lang==='fi'?'Video ei käynnistynyt automaattisesti. Paina Toista.':'Video did not start automatically. Select Play.'}</span>}
+      {(state==='blocked'||state==='error')&&<span className="qh-film-note" role="status">{lang==='fi'?'Voit käynnistää videon painikkeesta.':'Use Play to start the film.'}</span>}
     </div>
   </div>
 }

@@ -30,7 +30,7 @@ test('public bilingual site has its intended navigation and contact route', () =
   for (const p of ['home', 'services', 'software', 'work', 'about', 'contact', 'privacy','accessibility']) {
     assert.ok(home.includes("'"+p+"'"), 'missing public route '+p)
   }
-  assert.match(home,/className=\{menuOpen \? 'main-nav kc-nav is-open'/)
+  assert.match(home,/className=\{menuOpen \? 'kc-nav is-open'/)
   assert.match(home,/navPages\.map/)
   assert.match(home,/\/api\/contact/)
   assert.match(home,/pageFromPath/)
@@ -39,7 +39,11 @@ test('brand assets remain untouched and original motion video is used', () => {
   const home=source('src/app/page.tsx')
   assert.match(home,/src="\/logo\.svg"/)
   assert.match(home,/src="\/media\/hero\.mp4"/)
-  assert.match(home,/autoPlay muted loop playsInline/)
+  assert.match(home,/muted loop playsInline preload="none"/)
+  assert.match(home,/sourceReady&&/)
+  assert.match(home,/sessionStorage\.setItem\('komplyint-video-paused'/)
+  assert.match(home,/prefers-reduced-motion: reduce/)
+  assert.match(home,/IntersectionObserver/)
   assert.match(home,/poster="\/media\/hero\.webp"/)
   const css=source('src/app/commercial.css')
   assert.match(css,/\.kc-hero-video\{display:block!important\}/)
