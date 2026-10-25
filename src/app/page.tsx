@@ -110,7 +110,7 @@ export default function KomplyintWebsite() {
           </a>
           {menuOpen&&<div className="qh-menu-backdrop" aria-hidden="true" onClick={()=>setMenuOpen(false)}/>}
           <nav id="komplyint-primary-navigation" ref={menuRef}
-            className={menuOpen ? 'main-nav kc-nav is-open' : 'main-nav kc-nav'}
+            className={menuOpen ? 'kc-nav is-open' : 'kc-nav'}
             role={menuOpen?'dialog':undefined}
             aria-modal={menuOpen?'true':undefined}
             aria-label={lang === 'fi' ? 'Päänavigaatio' : 'Main navigation'}>
