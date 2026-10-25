@@ -104,14 +104,9 @@ function SectionIntro({ eyebrow, title, text }: {eyebrow:string;title:string;tex
 
 function Home({lang}:{lang:Lang}) {
   const t = content[lang]
-  const video = useRef<HTMLVideoElement>(null)
-  useEffect(() => { video.current?.play().catch(() => {}) }, [])
   return <>
     <section className="kc-hero">
-      <div className="kc-hero-poster" aria-hidden="true" />
-      <video className="kc-hero-video" ref={video} autoPlay muted loop playsInline preload="auto" poster="/media/hero.webp" aria-hidden="true">
-        <source src="/media/hero.mp4" type="video/mp4" />
-      </video>
+      <VideoHero lang={lang}/>
       <div className="kc-hero-shade" />
       <div className="kc-shell kc-hero-layout">
         <div className="kc-hero-copy">
@@ -218,4 +213,84 @@ function ContactPage({lang}:{lang:Lang}) {
 function PrivacyPage({lang}:{lang:Lang}) {
   const t=content[lang].privacyPage
   return <><div className="kc-page-top"><div className="kc-shell"><p className="kc-eyebrow">{t.eyebrow}</p><h1>{t.title}</h1><p>{t.lead}</p></div></div><section className="kc-section"><div className="kc-shell kc-privacy-list">{t.sections.map((s,i)=><article key={s.title}><span>{String(i+1).padStart(2,'0')}</span><div><h2>{s.title}</h2><p>{s.body}</p></div></article>)}</div></section></>
+}
+
+
+function VideoHero({lang}:{lang:Lang}){
+  const video=useRef<HTMLVideoElement>(null)
+  const [state,setState]=useState<'loading'|'playing'|'paused'|'blocked'|'error'>('loading')
+  const [userPlay,setUserPlay]=useState(false)
+  useEffect(()=>{
+    const el=video.current
+    if(!el)return
+    const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if(reduced){el.pause();setState('paused');return}
+    el.muted=true
+    el.play().then(()=>setState('playing')).catch(()=>setState('blocked'))
+    function onVisibility(){if(document.hidden){el?.pause()}else if(!reduced){el?.play().then(()=>setState('playing')).catch(()=>setState('blocked'))}}
+    document.addEventListener('visibilitychange',onVisibility)
+    return()=>document.removeEventListener('visibilitychange',onVisibility)
+  },[])
+  async function toggle(){
+    const el=video.current
+    if(!el)return
+    if(!el.paused){el.pause();setState('paused');return}
+    setUserPlay(true)
+    el.muted=true
+    try{await el.play();setState('playing')}catch{setState('blocked')}
+  }
+  return <div className="qh-film-layer">
+    <div className="kc-hero-poster" aria-hidden="true"/>
+    <video className={'kc-hero-video'+(userPlay?' qh-user-play':'')} ref={video} autoPlay muted loop playsInline preload="metadata" poster="/media/hero.webp" aria-hidden="true"
+      onPlaying={()=>setState('playing')} onPause={()=>setState('paused')} onError={()=>setState('error')}>
+      <source src="/media/hero.mp4" type="video/mp4" />
+    </video>
+    <div className="qh-video-controls">
+      <button type="button" onClick={toggle} aria-label={state==='playing'?(lang==='fi'?'Pysäytä video':'Pause video'):(lang==='fi'?'Toista video':'Play video')}>
+        <span aria-hidden="true">{state==='playing'?'Ⅱ':'▶'}</span> {state==='playing'?(lang==='fi'?'Pysäytä':'Pause'):(lang==='fi'?'Toista':'Play')}
+      </button>
+      {(state==='blocked'||state==='error')&&<span className="qh-film-note" role="status">{lang==='fi'?'Video ei käynnistynyt automaattisesti. Paina Toista.':'Video did not start automatically. Select Play.'}</span>}
+    </div>
+  </div>
+}
+
+function FeaturedWork({lang}:{lang:Lang}){
+  const t=content[lang].impact
+  const item=t.cases[0]
+  return <section className="kc-section qh-featured-work"><div className="kc-shell qh-feature-grid">
+    <div><p className="kc-eyebrow">{lang==='fi'?'HAVAINNOLLISTAVA DEMO':'ILLUSTRATIVE DEMONSTRATION'}</p>
+      <h2>{lang==='fi'?'Pienestä ongelmasta selkeään lopputulokseen.':'From a small problem to a clearer outcome.'}</h2>
+      <p className="kc-lead">{item.title} — {item.before} {item.after}</p>
+      <p className="qh-truth-note">{t.disclaimer}</p>
+      <a className="kc-text-link" href={pathFor(lang,'work')}>{lang==='fi'?'Tutustu esimerkkeihin':'Explore examples'} <Arrow/></a>
+    </div>
+    <div className="qh-work-art" role="img" aria-label={lang==='fi'?'Havainnollistava raporttirakenne':'Illustrative reporting composition'}>
+      <div className="qh-art-tick">K — 001</div><div className="qh-art-block qh-art-block-1"/><div className="qh-art-block qh-art-block-2"/>
+      <div className="qh-art-sample"><span>01</span><div className="qh-art-rows"><i/><i/><i/><i/></div></div>
+      <div className="qh-art-sample qh-art-sample-second"><span>02</span><div className="qh-art-bars"><i/><i/><i/><i/></div></div>
+      <span className="qh-art-legend">{lang==='fi'?'Esimerkkirakenne, ei asiakasreferenssi':'Illustration, not a client reference'}</span>
+    </div>
+  </div></section>
+}
+function WorkPage({lang}:{lang:Lang}){
+  const t=content[lang].impact
+  return <><section className="kc-page-top qh-inner-landing"><div className="kc-shell"><p className="kc-eyebrow">{t.eyebrow}</p><h1>{lang==='fi'?'Näin ratkaisu voi toimia.':'See how a solution can work.'}</h1><p>{lang==='fi'?'Tässä esitetyt skenaariot kuvaavat mahdollisia toimituksia kuvitteellisilla tiedoilla.':'These scenarios show possible deliverables using fictional information.'}</p></div></section><Examples lang={lang}/><CTA lang={lang}/></>
+}
+function AboutPage({lang}:{lang:Lang}){
+  const a=content[lang].about
+  const fi=lang==='fi'
+  return <><section className="kc-page-top qh-inner-landing"><div className="kc-shell"><p className="kc-eyebrow">{fi?'YRITYS JA TOIMINTATAPA':'COMPANY AND APPROACH'}</p><h1>{fi?'Pienet ongelmat ansaitsevat hyvän ratkaisun.':'Small problems deserve thoughtful solutions.'}</h1><p>{a.text}</p></div></section>
+    <section className="kc-section"><div className="kc-shell qh-about-detail"><div><p className="kc-eyebrow">{fi?'MIKSI TOIMIMME NÄIN':'OUR APPROACH'}</p><h2>{a.title}</h2><p>{fi?'Kuuntelemme, rajaamme tehtävän, käytämme olemassa olevia työkaluja ja toimitamme selkeän lopputuloksen. Emme väitä asiakkaalle valmiiksi sellaista, mitä ei ole todistettu.':'We listen, scope the task, reuse suitable existing tools and deliver a clear outcome. We do not claim work as completed before it is evidenced.'}</p></div>
+    <div className="qh-company-facts"><h3>Komplyint Oy</h3><dl><div><dt>{fi?'Y-tunnus':'Business ID'}</dt><dd>3588595-3</dd></div><div><dt>D‑U‑N‑S®</dt><dd>{duns}</dd></div><div><dt>{fi?'Sijainti':'Location'}</dt><dd>Helsinki, Finland</dd></div><div><dt>{fi?'Yhteys':'Contact'}</dt><dd><a href={'mailto:'+contactEmail}>{contactEmail}</a></dd></div></dl></div>
+    </div></section><Process lang={lang}/><CTA lang={lang}/></>
+}
+function AccessibilityPage({lang}:{lang:Lang}){
+  const fi=lang==='fi'
+  return <><section className="kc-page-top qh-inner-landing"><div className="kc-shell"><p className="kc-eyebrow">{fi?'SAAVUTETTAVUUS':'ACCESSIBILITY'}</p><h1>{fi?'Saavutettavuustiedot':'Accessibility information'}</h1>
+    <p>{fi?'Pyrimme tekemään palveluistamme saavutettavia ja ymmärrettäviä mahdollisimman monelle.':'We work to make our website accessible and understandable to as many visitors as possible.'}</p></div></section>
+    <section className="kc-section"><div className="kc-shell qh-accessibility-text">
+      <h2>{fi?'Mitä teemme':'What we are doing'}</h2><p>{fi?'Kehitämme näppäimistökäyttöä, luettavuutta, liikkeen hallintaa, lomakepalautetta ja responsiivisuutta. Säännölliset testit eivät yksin muodosta virallista vaatimustenmukaisuusvakuutusta.':'We improve keyboard access, readable content, motion controls, form feedback and responsive layouts. Automated testing alone is not a formal accessibility conformance statement.'}</p>
+      <h2>{fi?'Palaute ja vaihtoehtoinen tapa':'Feedback and alternative contact'}</h2><p>{fi?'Jos huomaat esteen tai tarvitset tietoa toisessa muodossa, kirjoita meille osoitteeseen':'If you encounter a barrier or need information in another format, contact'} <a href={'mailto:'+contactEmail}>{contactEmail}</a>.</p>
+      <h2>{fi?'Arvioinnin tila':'Review status'}</h2><p>{fi?'Laaja WCAG 2.2 AA -arviointi on työn alla. Emme väitä virallista sertifiointia ennen asianmukaista tarkistusta.':'A full WCAG 2.2 AA review is in progress. We do not claim certification without the necessary independent review.'}</p>
+    </div></section></>
 }
