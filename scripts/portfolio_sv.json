@@ -1,0 +1,106 @@
+{
+  "title": "Digitala tjänster / för företag",
+  "subtitle": "Data, automatisering och programvarulösningar",
+  "lead": "Små tekniska problem tar tid. Komplyint hjälper företag att förenkla rapportering, minska manuella arbetsmoment och förbättra verktygen de redan använder.",
+  "kicker": "TJÄNSTEBROSCHYR · SVENSKA · 2026",
+  "overview": "Sex praktiska tjänsteområden",
+  "overviewLead": "Vi kommer överens om ett rimligt upplägg för varje uppdrag. Alla uppdrag bedöms och offereras separat.",
+  "tasks": "Typiska uppdrag",
+  "deliverable": "Leverans",
+  "limit": "Avgränsning",
+  "approach": "Så arbetar vi",
+  "steps": [
+    [
+      "01 / Kartläggning",
+      "Beskriv problemet och vilket resultat du behöver."
+    ],
+    [
+      "02 / Avgränsning",
+      "Vi avtalar om leverans, pris, ansvar och tidplan."
+    ],
+    [
+      "03 / Genomförande",
+      "Vi återanvänder lämpliga verktyg och testar lösningen."
+    ],
+    [
+      "04 / Överlämning",
+      "Du får avtalade filer eller programvara och instruktioner."
+    ]
+  ],
+  "contacts": "Berätta vad som kan fungera bättre",
+  "contactcopy": "Skicka en kort beskrivning via e-post. Skicka inte känsliga kunduppgifter i den första förfrågan.",
+  "note": "Komplyint erbjuder för närvarande inte rådgivning om regelefterlevnad. Tjänsterna innebär inte certifiering, formell säkerhetsgranskning eller obegränsat underhåll.",
+  "strapline": "DATA / AUTOMATISERING / PROGRAMVARA",
+  "businessIdLine": "Komplyint Oy · FO-nummer 3588595-3",
+  "deliveryLabel": "LEVERANS",
+  "serviceLabel": "TJÄNST",
+  "subject": "Tjänstebroschyr med tjänsteområden, leveranser och avgränsningar",
+  "services": [
+    [
+      "Excel, data och rapportering",
+      "Tydligare rapporter, färre kalkylbladsfel och strukturerad data.",
+      [
+        "Excel-formler och reparation av filer",
+        "Rensning och sammanställning av data",
+        "Power BI-rapporter och uppdaterbara mallar"
+      ],
+      "En fungerande fil eller rapport, kontroller och instruktioner.",
+      "Datakvalitet, behörigheter och licenser kontrolleras först."
+    ],
+    [
+      "Microsoft 365 och automatisering",
+      "Förenkla återkommande arbetsmoment med befintliga verktyg.",
+      [
+        "Processer med Forms, Lists och SharePoint",
+        "Meddelanden och godkännanden i Power Automate",
+        "Arbetsflöden i Teams, Outlook och OneDrive"
+      ],
+      "En avgränsad automatisering med test och underhållsråd.",
+      "Tillgängliga licenser och rättigheter styr möjligheterna."
+    ],
+    [
+      "Webbplatser och underhåll",
+      "Mindre förbättringar av företagswebbplatser.",
+      [
+        "Förbättra innehåll och mobilanvändbarhet",
+        "Testa kontaktformulär och navigation",
+        "Överenskomna uppdateringar av webbplatsen"
+      ],
+      "Avtalade ändringar och funktionskontroll.",
+      "Hosting, jour och säkerhetsansvar avtalas separat."
+    ],
+    [
+      "Mindre programvaror och integrationer",
+      "Avgränsade interna verktyg utan onödig komplexitet.",
+      [
+        "Uppföljningsverktyg, formulär och kalkylatorer",
+        "Mindre webbapplikationer",
+        "Integrationer via dokumenterade gränssnitt"
+      ],
+      "Avtalade funktioner, test och information om driftsättning.",
+      "Kritiska integrationer kräver en separat bedömning."
+    ],
+    [
+      "Programvarutestning och kvalitetssäkring",
+      "Upptäck funktionsproblem innan publicering.",
+      [
+        "Funktionella tester av webbplatser och formulär",
+        "Återskapa och dokumentera fel",
+        "Kontroll av genomförda rättelser"
+      ],
+      "En prioriterad fellista och testsammanfattning.",
+      "Ingen säkerhetsrevision eller garanti för felfri programvara."
+    ],
+    [
+      "Digitalt kontorsstöd",
+      "Tydligt avgränsade dokument- och informationsuppgifter.",
+      [
+        "Finslipa PowerPoint- och Word-mallar",
+        "Organisera filer och kalkylblad",
+        "Rapporter, instruktioner och enklare dokument"
+      ],
+      "Redigerbara filer och tydlig överlämning.",
+      "Löpande assistans och personuppgifter kräver separat avtal."
+    ]
+  ]
+}

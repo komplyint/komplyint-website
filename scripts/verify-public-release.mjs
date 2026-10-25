@@ -23,6 +23,7 @@ export const REQUIRED_PAGES = [
 export const REQUIRED_DOWNLOADS = [
   ['/downloads/Komplyint_Palveluesite_FI.pdf', '%PDF'],
   ['/downloads/Komplyint_Service_Portfolio_EN.pdf', '%PDF'],
+  ['/downloads/Komplyint_Tjanstebroschyr_SV.pdf', '%PDF'],
   ['/downloads/Komplyint_Service_Documents.zip', 'PK'],
 ]
 export const REQUIRED_MEDIA = [

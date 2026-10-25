@@ -4,6 +4,7 @@ Do not put the 127-item INTERNAL catalogue on the public website.
 """
 from __future__ import annotations
 import os
+import json
 import zipfile
 from html import escape
 from pathlib import Path
@@ -87,6 +88,9 @@ D={
 ]}
 }
 
+# Extend the original reviewed FI/EN ReportLab engine, not a parallel PDF renderer.
+D['sv']=json.loads((Path(__file__).parent/'portfolio_sv.json').read_text(encoding='utf-8'))
+
 def heading(c,text,y,size=29,color=INK,font="KSerif"):
     c.setFillColor(color);c.setFont(font,size);c.drawString(54,y,text)
 
@@ -97,14 +101,15 @@ def para(c,text,x,y,width,size=11,color=INK,leading=17,bold=False):
     item.drawOn(c,x,y-h)
     return y-h
 
-def top(c,n,kicker):
+def top(c,n,kicker,t=None):
+    t=t or {}
     c.setFillColor(PAPER);c.rect(0,0,W,H,fill=1,stroke=0)
     c.setFillColor(DEEP);c.rect(0,H-91,W,91,fill=1,stroke=0)
     c.setFont("KBold",17);c.setFillColor(WHITE);c.drawString(52,H-48,"KOMPLYINT")
-    c.setFont("KRegular",8);c.setFillColor(ACCENT);c.drawRightString(W-51,H-46,"DATA / AUTOMATION / SOFTWARE")
+    c.setFont("KRegular",8);c.setFillColor(ACCENT);c.drawRightString(W-51,H-46,t.get("strapline","DATA / AUTOMATION / SOFTWARE"))
     c.setStrokeColor(RULE);c.line(53,49,W-53,49)
     c.setFont("KRegular",8);c.setFillColor(MUTED)
-    c.drawString(53,30,"Komplyint Oy · Y-tunnus / Business ID 3588595-3")
+    c.drawString(53,30,t.get("businessIdLine","Komplyint Oy · Y-tunnus / Business ID 3588595-3"))
     c.drawRightString(W-53,30,f"{n:02d} / 06")
     c.setFillColor(GREEN);c.setFont("KBold",9);c.drawString(54,H-126,kicker)
 
@@ -122,7 +127,7 @@ def cover(c,t):
     for i in range(4):
         x=54+i*130
         c.line(x,220,x+75,220)
-        c.setFillColor(ACCENT);c.setFont("KRegular",8);c.drawString(x,198,f"0{i+1} / DELIVERY")
+        c.setFillColor(ACCENT);c.setFont("KRegular",8);c.drawString(x,198,f"0{i+1} / {t.get('deliveryLabel','DELIVERY')}")
     c.setFillColor(WHITE);c.setFont("KRegular",9);c.drawString(54,88,t["kicker"])
     c.drawString(54,65,"www.komplyint.fi   /   info@komplyint.fi")
     c.showPage()
@@ -136,7 +141,7 @@ def service_card(c,svc,n,x,y,w,h,lang):
     para(c,overview,x+18,yy-9,w-36,9,MUTED,15)
 
 def overview(c,t):
-    top(c,2,t["kicker"]);heading(c,t["overview"],H-177,27)
+    top(c,2,t["kicker"],t);heading(c,t["overview"],H-177,27)
     para(c,t["overviewLead"],54,H-195,W-110,11,MUTED,18)
     w=(W-127)/2;h=157;gap=19
     for i,svc in enumerate(t["services"]):
@@ -146,7 +151,7 @@ def overview(c,t):
     c.showPage()
 
 def detailed(c,t,lang,start,page):
-    top(c,page,t["kicker"])
+    top(c,page,t["kicker"],t)
     heading(c,t["overview"],H-176,27)
     c.setStrokeColor(RULE)
     c.line(54,H-208,W-54,H-208)
@@ -160,7 +165,7 @@ def detailed(c,t,lang,start,page):
             c.setStrokeColor(RULE)
             c.line(W/2,114,W/2,H-224)
         c.setFillColor(GREEN);c.setFont("KBold",10)
-        c.drawString(x,y,f"{i+1:02d} / SERVICE")
+        c.drawString(x,y,f"{i+1:02d} / {t.get('serviceLabel','SERVICE')}")
         y=para(c,title,x,y-22,colw-14,15.2,INK,22,True)-11
         y=para(c,overview,x,y,colw-12,9.5,MUTED,15)-28
         c.setFillColor(GREEN);c.setFont("KBold",9)
@@ -180,7 +185,7 @@ def detailed(c,t,lang,start,page):
     c.showPage()
 
 def finish(c,t):
-    top(c,6,t["kicker"]);heading(c,t["approach"],H-179,29)
+    top(c,6,t["kicker"],t);heading(c,t["approach"],H-179,29)
     y=H-223
     for i,(name,description) in enumerate(t["steps"]):
         yy=y-i*99
@@ -199,7 +204,7 @@ def build(lang,out):
     cv=canvas.Canvas(str(out),pagesize=(W,H),pageCompression=1)
     cv.setTitle("Komplyint Oy - "+t["title"])
     cv.setAuthor("Komplyint Oy")
-    cv.setSubject("Service portfolio, business delivery and scope")
+    cv.setSubject(t.get("subject","Service portfolio, business delivery and scope"))
     cover(cv,t);overview(cv,t)
     for n,start in [(3,0),(4,2),(5,4)]:
         detailed(cv,t,lang,start,n)
@@ -208,10 +213,12 @@ def build(lang,out):
 
 fi=OUT/"Komplyint_Palveluesite_FI.pdf"
 en=OUT/"Komplyint_Service_Portfolio_EN.pdf"
-build("fi",fi);build("en",en)
+sv=OUT/"Komplyint_Tjanstebroschyr_SV.pdf"
+build("fi",fi);build("en",en);build("sv",sv)
 with zipfile.ZipFile(OUT/"Komplyint_Service_Documents.zip","w",compression=zipfile.ZIP_DEFLATED) as z:
-    for f in (fi,en): z.write(f,f.name)
-    z.writestr("README.txt","Komplyint Oy public service brochures (Finnish and English). For internal multi-service planning use the private catalogue only.\nContact: info@komplyint.fi\n")
+    for f in (fi,en,sv): z.write(f,f.name)
+    z.writestr("README.txt","Komplyint Oy public service brochures in Finnish, English and Swedish (Finland). These are general illustrative service descriptions, not client case studies.\\nContact: info@komplyint.fi\\n")
 with zipfile.ZipFile(OUT/"Komplyint_Service_Documents.zip") as z:
     if z.testzip() is not None: raise RuntimeError("Bad public ZIP")
-print("Created",[(f.name, f.stat().st_size) for f in (fi,en,OUT/"Komplyint_Service_Documents.zip")])
+    assert len([f for f in z.namelist() if f.endswith(".pdf")])==3, "All three language PDFs must be included"
+print("Created",[(f.name, f.stat().st_size) for f in (fi,en,sv,OUT/"Komplyint_Service_Documents.zip")])

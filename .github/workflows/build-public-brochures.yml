@@ -1,40 +1,89 @@
-name: Build reviewed public service PDFs and ZIP
+name: Build reviewed FI/EN/SV service PDFs and ZIP
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - scripts/generate_public_portfolio.py
+      - scripts/portfolio_sv.json
+      - .github/workflows/build-public-brochures.yml
 permissions:
   contents: write
+concurrency:
+  group: komplyint-published-brochures
+  cancel-in-progress: false
 jobs:
   brochures:
     runs-on: ubuntu-latest
-    timeout-minutes: 8
+    timeout-minutes: 12
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: feature/handbook-quiet-precision-20261025
+          ref: main
+          fetch-depth: 0
           persist-credentials: true
-      - name: Build professional bilingual PDFs
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Reuse approved ReportLab brochure generator
         run: |
-          python3 -m pip install --break-system-packages --quiet reportlab pypdf
-          python3 scripts/generate_public_portfolio.py
-      - name: Verify archive and 6-page brochures
+          python -m pip install --disable-pip-version-check --quiet reportlab pypdf pymupdf
+          python scripts/generate_public_portfolio.py
+      - name: Verify all three languages, ZIP integrity and visual rendering
         run: |
-          python3 - <<'PY'
-          from pypdf import PdfReader
+          mkdir -p document-preview
+          python - <<'PY'
           from pathlib import Path
-          import zipfile
+          from pypdf import PdfReader
+          import fitz, zipfile
+
           d=Path('public/downloads')
-          for n in ['Komplyint_Palveluesite_FI.pdf','Komplyint_Service_Portfolio_EN.pdf']:
-            p=d/n
-            r=PdfReader(str(p))
-            assert len(r.pages)==6,(n,len(r.pages))
-            assert 'info@komplyint.fi' in ''.join(x.extract_text() or '' for x in r.pages), n
-          with zipfile.ZipFile(d/'Komplyint_Service_Documents.zip') as z:
-            assert z.testzip() is None
-            assert len([x for x in z.namelist() if x.endswith('.pdf')])==2
+          names={
+            'Komplyint_Palveluesite_FI.pdf':['Komplyint Oy','Excel','info@komplyint.fi'],
+            'Komplyint_Service_Portfolio_EN.pdf':['Komplyint Oy','Excel','info@komplyint.fi'],
+            'Komplyint_Tjanstebroschyr_SV.pdf':['Digitala tjänster','Microsoft 365','info@komplyint.fi'],
+          }
+          for filename,expected in names.items():
+            path=d/filename
+            assert path.stat().st_size>10000,(filename,'empty brochure')
+            reader=PdfReader(str(path))
+            assert len(reader.pages)==6,(filename,len(reader.pages))
+            text='\n'.join(page.extract_text() or '' for page in reader.pages)
+            for marker in expected:
+              assert marker in text,(filename,'missing',marker)
+            document=fitz.open(str(path))
+            for index,page in enumerate(document):
+              pix=page.get_pixmap(matrix=fitz.Matrix(1.1,1.1),alpha=False)
+              pix.save(f'document-preview/{path.stem}-{index+1:02d}.png')
+            document.close()
+          with zipfile.ZipFile(d/'Komplyint_Service_Documents.zip') as archive:
+            assert archive.testzip() is None
+            listed={name for name in archive.namelist() if name.endswith('.pdf')}
+            assert listed==set(names),(listed,names)
+            for name in names:
+              assert archive.read(name)==(d/name).read_bytes(),name
+          print('FI/EN/SV public PDF pages, text, visual renders and ZIP signatures PASS')
           PY
-      - name: Commit downloadable public documents
+      - name: Publish documents to existing main branch
         run: |
+          set -euo pipefail
           git config user.name 'komplyint-delivery[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add public/downloads/
-          if ! git diff --cached --quiet; then git commit -m 'asset(downloads): publish verified FI and EN PDF brochures with ZIP'; git push origin HEAD:feature/handbook-quiet-precision-20261025; fi
+          if git diff --cached --quiet; then
+            echo "Public brochures already match the reviewed generator."
+          else
+            git commit -m 'asset(downloads): publish verified FI/EN/SV PDF brochures and three-language ZIP'
+            git push origin HEAD:main
+            echo "All three verified brochures published to main." >> "$GITHUB_STEP_SUMMARY"
+          fi
+      - name: Upload 18 rendered brochure pages and generated PDFs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: komplyint-trilingual-brochure-visual-review
+          path: |
+            document-preview/
+            public/downloads/*.pdf
+            public/downloads/Komplyint_Service_Documents.zip
+          if-no-files-found: ignore

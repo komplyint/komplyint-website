@@ -8,6 +8,7 @@ export default function PublicBrochures({lang}:{lang:Lang}){
     <div className="qh-download-links">
       <a href="/downloads/Komplyint_Palveluesite_FI.pdf" download><span>PDF · FI</span><strong>Komplyint Palveluesite</strong><span aria-hidden="true">↓</span></a>
       <a href="/downloads/Komplyint_Service_Portfolio_EN.pdf" download><span>PDF · EN</span><strong>Komplyint Service Portfolio</strong><span aria-hidden="true">↓</span></a>
+      <a href="/downloads/Komplyint_Tjanstebroschyr_SV.pdf" download><span>PDF · SV</span><strong>Komplyint Tjänstebroschyr</strong><span aria-hidden="true">↓</span></a>
       <a href="/downloads/Komplyint_Service_Documents.zip" download><span>ZIP</span><strong>{b.both}</strong><span aria-hidden="true">↓</span></a>
     </div>
   </div></section>

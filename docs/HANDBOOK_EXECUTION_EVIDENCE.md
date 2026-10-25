@@ -80,3 +80,9 @@ Localized both 404 and runtime-error recovery screens using the same typed FI/EN
 ## CI runner reliability — F21/F22, Q11 (25 Oct 2026)
 
 The previous `25eaaf7` full QA job was cancelled after the 22-minute budget because a routine `sudo apt-get update && sudo apt-get install ffmpeg` held the runner for approximately 20 minutes. The build, 66 source tests, Swedish initial `lang`/fonts, locale switcher, contact form and hero-media browser tests all passed before the timeout; the final award/accessibility audit did not finish. Reuse the existing system `ffprobe` when available, but always enforce MP4 header and minimum source size without invoking APT. The separate existing real browser media checks remain mandatory. This fix reduces network-dependency risk without weakening functional playback tests.
+
+## Swedish brochure parity — C24/F07/Q11
+
+Extended the **existing** reviewed `scripts/generate_public_portfolio.py` ReportLab engine and six-page template to read `scripts/portfolio_sv.json`. The shared generator now produces a Finnish, English and Swedish edition with exactly three PDFs inside `Komplyint_Service_Documents.zip`. The Services page exposes the Swedish PDF directly and labels all three downloads in all website languages. Rewired the existing brochure workflow to build from `main`, check page counts and text, render all 18 PDF pages for review, check ZIP byte identity and commit the generated assets back to `main`. Source contract tests guard the complete language set. Note that generated binary files are **pending the workflow run**; presence of a source recipe does not prove published PDF bytes.
+
+Improved the production deployment workflow to report missing Vercel credentials as an actual blocked/failing status instead of a misleading green preflight that skips publication. No new hosting project or authorization bypass is used.

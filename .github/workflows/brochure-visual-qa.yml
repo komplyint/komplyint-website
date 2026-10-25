@@ -13,9 +13,9 @@ jobs:
       - name: Validate public download formats and render page previews
         shell: bash
         run: |
-          sudo apt-get update -qq && sudo apt-get install -y -qq poppler-utils unzip >/dev/null
+          command -v pdfinfo >/dev/null && command -v pdftoppm >/dev/null && command -v unzip >/dev/null
           mkdir -p document-preview
-          for name in Komplyint_Palveluesite_FI Komplyint_Service_Portfolio_EN; do
+          for name in Komplyint_Palveluesite_FI Komplyint_Service_Portfolio_EN Komplyint_Tjanstebroschyr_SV; do
             pdfinfo "public/downloads/$name.pdf" | grep -E 'Pages:|Page size:|File size:'
             pdftoppm -png -scale-to 950 "public/downloads/$name.pdf" "document-preview/$name" >/dev/null
             test "$(pdfinfo "public/downloads/$name.pdf" | awk '/^Pages:/ {print $2}')" = "6"

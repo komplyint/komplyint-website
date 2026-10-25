@@ -25,7 +25,7 @@ All three languages have the homepage, six service-detail pages, Services, Softw
 
 The six service descriptions, example scenarios, product/service boundaries, company page, contact page, privacy notice and accessibility information are translated into Swedish without a runtime translation API or English fallback. Original protected assets remain unchanged.
 
-**Brochures:** only Finnish and English PDFs and their shared ZIP package currently exist. The Swedish Services page explains this clearly; no Swedish-language downloadable brochure is claimed.
+**Brochures:** a Swedish six-page PDF is generated using the existing reviewed FI/EN ReportLab engine, with a synchronized three-language ZIP and public availability checks. Never claim the Swedish PDF is published until the generator action has committed the artifact to `main` and the live release has passed.
 
 The historical `src/lib/translations.ts` belongs to the pre-redesign presentation and is not imported by the active Next.js site. The active locale contract is the `i18n.ts` / `commercial.ts` / `i18n-ui.ts` set.
 
@@ -44,3 +44,9 @@ Do not mark the change as deployed until `/api/release` reports the same commit 
 ### Error-state language parity
 
 The global 404 and recoverable 500 error pages use the same FI/EN/SV typed UI catalogue and preserve the selected locale in the return-home link. Browser tests check a real missing Swedish route and its localized message.
+
+### Swedish downloadable PDF
+
+Reusable `scripts/generate_public_portfolio.py` reads `scripts/portfolio_sv.json` and generates `Komplyint_Tjanstebroschyr_SV.pdf` with the same layout and six-service structure as the Finnish and English editions. The existing build workflow now targets `main`, checks text and six-page counts, renders all 18 brochure pages for visual review, verifies all three files inside the ZIP and publishes the generated files back to the original repository. This avoids a second PDF engine or separate manual upload.
+
+Production deployment and independent editorial/legal sign-off remain separate from a successful PDF build.

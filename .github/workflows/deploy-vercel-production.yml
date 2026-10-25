@@ -31,7 +31,7 @@ jobs:
               missing=1
             fi
           done
-          if [ "$missing" -eq 0 ]; then echo "Vercel CLI credentials available."; echo "ready=true" >> "$GITHUB_OUTPUT"; else echo "ready=false" >> "$GITHUB_OUTPUT"; echo "## Production deploy BLOCKED: Vercel authorization missing" >> "$GITHUB_STEP_SUMMARY"; echo "Either reconnect the existing Vercel project to the main branch or configure the three repository secrets. No new Vercel project is needed." >> "$GITHUB_STEP_SUMMARY"; fi
+          if [ "$missing" -eq 0 ]; then echo "Vercel CLI credentials available."; echo "ready=true" >> "$GITHUB_OUTPUT"; else echo "ready=false" >> "$GITHUB_OUTPUT"; echo "## Production deploy BLOCKED: Vercel authorization missing" >> "$GITHUB_STEP_SUMMARY"; echo "Either reconnect the existing Vercel project to the main branch or configure the three repository secrets. No new Vercel project is needed." >> "$GITHUB_STEP_SUMMARY"; echo "::error title=Production deployment blocked::Missing Vercel authorization; no production deployment was attempted."; exit 1; fi
   production:
     needs: credential-preflight
     if: github.event_name != 'pull_request' && needs.credential-preflight.outputs.ready == 'true'
