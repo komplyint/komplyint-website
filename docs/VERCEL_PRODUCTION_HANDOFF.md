@@ -13,12 +13,19 @@ This repo builds the Next.js site for https://www.komplyint.fi. Deploy to the **
 ## Option B — GitHub Actions production deploy
 
 Fallback workflow: .github/workflows/deploy-vercel-production.yml.
+
+The CLI uses the actual Vercel project IDs, passes the authorization token explicitly to pull/build/deploy, and attaches a non-sensitive commit identifier at runtime. Its preflight must not claim publication when the secrets are absent.
+
 Configure GitHub repository Actions secrets (not plaintext files):
 - VERCEL_TOKEN: a token with access to the existing project
 - VERCEL_ORG_ID: the actual team ID of the existing domain-owning project
 - VERCEL_PROJECT_ID: the actual ID of the existing komplyint-website project
 
 IDs come from project settings / Vercel CLI link. The workflow uses vercel pull, vercel build --prod and vercel deploy --prebuilt --prod; it verifies the public homepage and critical routes afterward. Its preflight exposes only missing secret *names*, not values.
+
+## Live release contract
+
+After Vercel deployment, GET /api/release must return site Komplyint Oy and contract komplyint-handbook-2026-10-25. The project must also serve all new public routes and valid document bytes. The standalone verifier is scripts/verify-public-release.mjs. It creates release-evidence.json and fails on any 404, old home title, missing brochure or mismatched reported commit. GitHub runs this verification automatically on every push to main and archives its results even on failure.
 
 ## Acceptance against real public domain
 
