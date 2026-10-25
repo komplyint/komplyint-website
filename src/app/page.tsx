@@ -281,6 +281,7 @@ function VideoHero({lang}:{lang:Lang}){
   const [reducedMotion,setReducedMotion]=useState(false)
   const [saveData,setSaveData]=useState(false)
   const [visible,setVisible]=useState(false)
+  const [inViewport,setInViewport]=useState(false)
   const [hidden,setHidden]=useState(false)
   const [userPaused,setUserPaused]=useState(false)
   const [manualPlay,setManualPlay]=useState(false)
@@ -301,7 +302,10 @@ function VideoHero({lang}:{lang:Lang}){
     compact.addEventListener('change',onWidth)
     document.addEventListener('visibilitychange',onVisibility)
     onVisibility()
-    const observer=new IntersectionObserver(entries=>setVisible(entries.some(x=>x.isIntersecting)),{threshold:0.05})
+    const observer=new IntersectionObserver(entries=>{
+      setInViewport(entries.some(x=>x.isIntersecting))
+      setVisible(entries.some(x=>x.isIntersecting&&x.intersectionRatio>=(compact.matches?0.7:0.05)))
+    },{threshold:[0.05,0.7]})
     if(frame.current)observer.observe(frame.current)
     return()=>{
       media.removeEventListener('change',onMotion)
@@ -311,7 +315,7 @@ function VideoHero({lang}:{lang:Lang}){
     }
   },[])
 
-  const allowPlayback=visible&&!hidden&&!userPaused&&(!reducedMotion&&!saveData||manualPlay)
+  const allowPlayback=(visible||(manualPlay&&inViewport))&&!hidden&&!userPaused&&(!reducedMotion&&!saveData||manualPlay)
   useEffect(()=>{
     if(allowPlayback&&!sourceReady)setSourceReady(true)
   },[allowPlayback,sourceReady,mobileViewport])
@@ -354,9 +358,9 @@ function VideoHero({lang}:{lang:Lang}){
   }
 
   return <div className="qh-film-layer" ref={frame}>
-    <img className="kc-hero-poster" src="/media/hero.webp" alt="" width={1920} height={1080} fetchPriority="high" decoding="async" aria-hidden="true" />
+    <img className="kc-hero-poster" src="/media/hero.webp" srcSet="/media/hero-mobile.webp 800w, /media/hero.webp 1920w" sizes="100vw" alt="" width={1920} height={1080} fetchPriority="high" decoding="sync" aria-hidden="true" />
     <video className={'kc-hero-video'+(manualPlay?' qh-user-play':'')+(state==='error'?' qh-failed':'')}
-      ref={video} muted loop playsInline preload="none" poster="/media/hero.webp" aria-hidden="true"
+      ref={video} muted loop playsInline preload="none" aria-hidden="true"
       onPlaying={()=>setState('playing')}
       onPause={()=>setState(previous=>previous==='error'?'error':'paused')}
       onError={()=>setState('error')}>
