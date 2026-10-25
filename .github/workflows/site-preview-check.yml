@@ -30,6 +30,7 @@ jobs:
 
       - name: Inspect preserved original film
         run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg >/dev/null
           file public/media/hero.mp4
           ffprobe -v error -show_entries format=duration,size,format_name -show_entries stream=codec_name,codec_type,width,height,pix_fmt -of json public/media/hero.mp4
       - name: Install Chromium and visual test harness
