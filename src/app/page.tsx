@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
 
 import { navPages, services, content, serviceSlugs, contactEmail, duns, type Page, type Lang } from '@/lib/commercial'
+import ServiceDetail from '@/components/ServiceDetail'
 
 function pathFor(lang: Lang, page: Page): string {
   const prefix = lang === 'en' ? '/en' : ''
@@ -12,7 +13,7 @@ function pathFor(lang: Lang, page: Page): string {
 
 function pageFromPath(path: string): Page {
   const part = path.replace(/^\/en(?=\/|$)/, '').split('/').filter(Boolean)[0]
-  return part === 'services' || part === 'software' || part === 'contact' || part === 'privacy' ? part : 'home'
+  return part === 'services' || part === 'software' || part === 'work' || part === 'about' || part === 'contact' || part === 'privacy' || part === 'accessibility' ? part : 'home'
 }
 
 function Arrow({ light = false }: { light?: boolean }) {
@@ -25,21 +26,28 @@ export default function KomplyintWebsite() {
   const lang: Lang = pathname.startsWith('/en') ? 'en' : 'fi'
   const page = pageFromPath(pathname)
   const t = content[lang]
+  const pathParts=pathname.replace(/^\/en(?=\/|$)/,'').split('/').filter(Boolean)
+  const serviceIndex=page==='services' && pathParts.length===2 ? serviceSlugs.indexOf(pathParts[1] as typeof serviceSlugs[number]) : -1
   const [menuOpen, setMenuOpen] = useState(false)
-  const [dark, setDark] = useState(false)
-
+  const [appearance, setAppearance] = useState<'dark'|'light'|'system'>('dark')
   useEffect(() => {
-    const saved = window.localStorage.getItem('komplyint-theme')
-    setDark(saved === 'dark')
-    document.documentElement.classList.toggle('dark', saved === 'dark')
+    let next:'dark'|'light'|'system'='dark'
+    try { const saved=window.localStorage.getItem('komplyint-theme');if(saved==='dark'||saved==='light'||saved==='system')next=saved } catch {}
+    setAppearance(next)
   }, [])
   useEffect(() => { setMenuOpen(false) }, [pathname])
-  useEffect(() => { document.documentElement.classList.toggle('dark', dark) }, [dark])
-
-  function toggleTheme() {
-    const next = !dark
-    setDark(next)
-    try { window.localStorage.setItem('komplyint-theme', next ? 'dark' : 'light') } catch {}
+  useEffect(() => {
+    const dark=appearance==='dark'||(appearance==='system'&&window.matchMedia('(prefers-color-scheme: dark)').matches)
+    document.documentElement.classList.toggle('dark',dark)
+    document.documentElement.style.colorScheme=dark?'dark':'light'
+  },[appearance])
+  function setTheme(next:'dark'|'light'|'system'){
+    setAppearance(next)
+    try{window.localStorage.setItem('komplyint-theme',next)}catch{}
+  }
+  function switchLanguage(){
+    const target=(lang==='fi'?'/en'+pathname:pathname.replace(/^\/en(?=\/|$)/,''))||'/'
+    router.push(target+(typeof window!=='undefined'?window.location.search:''))
   }
 
   return (
@@ -57,11 +65,11 @@ export default function KomplyintWebsite() {
             <img src="/logo.svg" className="kc-logo" alt="Komplyint Oy" />
           </a>
           <nav className={menuOpen ? 'main-nav kc-nav is-open' : 'main-nav kc-nav'} aria-label={lang === 'fi' ? 'Päänavigaatio' : 'Main navigation'}>
-            {navPages.map((item) => <a href={pathFor(lang, item)} className={page === item ? 'is-current' : ''} key={item} aria-current={page === item ? 'page' : undefined}>{t.navigation[item]}</a>)}
+            {navPages.map((item) => <span className="qh-nav-entry" key={item}><a href={pathFor(lang, item)} className={page === item ? 'is-current' : ''} aria-current={page === item ? 'page' : undefined}>{t.navigation[item]}</a>{item==='services'&&<details className="qh-service-menu"><summary aria-label={lang==='fi'?'Näytä palveluluokat':'Show service categories'}>⌄</summary><div className="qh-mega"><span className="qh-mega-eyebrow">{lang==='fi'?'VALITSE PALVELU':'CHOOSE A SERVICE'}</span>{services[lang].map((svc,i)=><a key={serviceSlugs[i]} href={pathFor(lang,'services')+'/'+serviceSlugs[i]}><b>{String(i+1).padStart(2,'0')}</b><span>{svc.title}</span><span aria-hidden="true">↗</span></a>)}</div></details>}</span>)}
           </nav>
           <div className="kc-actions">
-            <button className="kc-language" type="button" onClick={() => router.push(pathFor(lang === 'en' ? 'fi' : 'en', page))} aria-label={lang === 'fi' ? 'Switch to English' : 'Vaihda suomeksi'}>{lang === 'fi' ? 'EN' : 'FI'}</button>
-            <button className="kc-theme" type="button" onClick={toggleTheme} aria-label={dark ? 'Light theme' : 'Dark theme'} title={dark ? 'Light theme' : 'Dark theme'}>{dark ? '☀' : '◐'}</button>
+            <button className="kc-language" type="button" onClick={switchLanguage} aria-label={lang === 'fi' ? 'Switch to English' : 'Vaihda suomeksi'}>{lang === 'fi' ? 'EN' : 'FI'}</button>
+            
             <a href={pathFor(lang,'contact')} className="kc-header-cta">{t.contactButton}<Arrow /></a>
             <button className="kc-mobile-toggle" type="button" onClick={() => setMenuOpen(!menuOpen)} aria-expanded={menuOpen} aria-label={t.navigation.menu}><span /><span /><span /></button>
           </div>
@@ -70,7 +78,10 @@ export default function KomplyintWebsite() {
 
       <main id="main-content">
         {page === 'home' && <Home lang={lang} />}
-        {page === 'services' && <ServicesPage lang={lang} />}
+        {page === 'services' && (serviceIndex>=0?<ServiceDetail lang={lang} index={serviceIndex}/>:<ServicesPage lang={lang} />)}
+        {page === 'work' && <WorkPage lang={lang} />}
+        {page === 'about' && <AboutPage lang={lang} />}
+        {page === 'accessibility' && <AccessibilityPage lang={lang} />}
         {page === 'software' && <SoftwarePage lang={lang} />}
         {page === 'contact' && <ContactPage lang={lang} />}
         {page === 'privacy' && <PrivacyPage lang={lang} />}
@@ -78,8 +89,8 @@ export default function KomplyintWebsite() {
       <footer className="kc-footer">
         <div className="kc-shell kc-footer-top">
           <div className="kc-footer-brand"><img src="/logo.svg" alt="Komplyint Oy" /><p>{t.about.text}</p></div>
-          <div className="kc-footer-links"><strong>{lang === 'fi' ? 'Sivusto' : 'Explore'}</strong>{[...navPages,'privacy' as Page].map(item=><a key={item} href={pathFor(lang,item)}>{t.navigation[item]}</a>)}</div>
-          <div className="kc-footer-links"><strong>{lang === 'fi' ? 'Yhteys' : 'Get in touch'}</strong><a href="mailto:info@komplyint.fi">info@komplyint.fi</a><a href={pathFor(lang,'contact')}>{t.contactButton}</a><span>Finland · EU</span></div>
+          <div className="kc-footer-links"><strong>{lang === 'fi' ? 'Sivusto' : 'Explore'}</strong>{[...navPages,'software' as Page,'privacy' as Page,'accessibility' as Page].map(item=><a key={item} href={pathFor(lang,item)}>{t.navigation[item]}</a>)}</div>
+          <div className="kc-footer-links"><strong>{lang === 'fi' ? 'Yhteys' : 'Get in touch'}</strong><a href="mailto:info@komplyint.fi">info@komplyint.fi</a><a href={pathFor(lang,'contact')}>{t.contactButton}</a><span>Finland · EU</span><span>D‑U‑N‑S® {duns}</span><label className="qh-appearance"><span>{lang==='fi'?'Ulkoasu':'Appearance'}</span><select aria-label={lang==='fi'?'Ulkoasu':'Appearance'} value={appearance} onChange={e=>setTheme(e.target.value as 'dark'|'light'|'system')}><option value="dark">{lang==='fi'?'Tumma':'Dark'}</option><option value="light">{lang==='fi'?'Vaalea':'Light'}</option><option value="system">{lang==='fi'?'Järjestelmä':'System'}</option></select></label></div>
         </div>
         <div className="kc-shell kc-footer-bottom"><span>© {new Date().getFullYear()} {t.footer}</span><span>{t.footerNote}</span></div>
       </footer>
@@ -116,12 +127,11 @@ function Home({lang}:{lang:Lang}) {
 
     <section className="kc-section kc-section-intro"><div className="kc-shell">
       <SectionIntro {...t.intro} />
-      <div className="kc-service-grid">{services[lang].slice(0,4).map((s,i)=><a className="kc-service-tile" key={s.title} href={pathFor(lang,'services') + '?service=' + i + '#service-explorer'}><div className="kc-tile-top"><span>{String(i+1).padStart(2,'0')}</span><Arrow /></div><h3>{s.title}</h3><p>{s.intro}</p></a>)}</div>
+      <div className="kc-service-grid">{services[lang].map((s,i)=><a className="kc-service-tile" key={s.title} href={pathFor(lang,'services') + '/' + serviceSlugs[i]}><div className="kc-tile-top"><span>{String(i+1).padStart(2,'0')}</span><Arrow /></div><h3>{s.title}</h3><p>{s.intro}</p></a>)}</div>
       <div className="kc-moreline"><span>{lang === 'fi' ? 'Lisäksi: ohjelmistotestaus, laadunvarmistus ja digitaalinen toimistotuki.' : 'Also available: software testing, quality assurance and digital office support.'}</span><a href={pathFor(lang,'services')}>{t.explore} <Arrow /></a></div>
     </div></section>
 
-    <section className="kc-section kc-muted-section" id="service-explorer"><div className="kc-shell"><ServiceExplorer lang={lang} /></div></section>
-    <Examples lang={lang}/>
+    <FeaturedWork lang={lang}/>
     <Process lang={lang}/>
     <Trust lang={lang}/>
     <About lang={lang}/>
@@ -146,7 +156,7 @@ function ServiceExplorer({lang, showIntro=true}:{lang:Lang;showIntro?:boolean}) 
       </div>
       <div className="kc-detail" role="tabpanel" id="service-detail"><span className="kc-detail-index">{String(selected+1).padStart(2,'0')} / 06</span><h3>{s.title}</h3><p className="kc-detail-lead">{s.intro}</p>
         <div className="kc-detail-grid"><div><h4>{t.examples}</h4><ul>{s.examples.map(ex=><li key={ex}>{ex}</li>)}</ul></div><div className="kc-detail-side"><div><h4>{t.delivered}</h4><p>{s.deliverable}</p></div><div><h4>{t.boundaries}</h4><p>{s.boundaries}</p></div></div></div>
-        <div className="kc-detail-bottom"><div><small>{t.tools}</small><p>{s.tools}</p></div><a className="kc-text-link" href={pathFor(lang,'contact')}>{t.help}<Arrow /></a></div>
+        <div className="kc-detail-bottom"><div><small>{t.tools}</small><p>{s.tools}</p></div><div className="qh-detail-actions"><a className="kc-text-link" href={pathFor(lang,'services')+'/'+serviceSlugs[selected]}>{lang==='fi'?'Lue lisää palvelusta':'View service detail'}<Arrow /></a><a className="kc-text-link" href={pathFor(lang,'contact')+'?service='+serviceSlugs[selected]}>{t.help}<Arrow /></a></div></div>
       </div>
     </div>
   </>
@@ -180,6 +190,7 @@ function SoftwarePage({lang}:{lang:Lang}) {
 function ContactPage({lang}:{lang:Lang}) {
   const t=content[lang].contactPage
   const [name,setName]=useState(''), [email,setEmail]=useState(''), [message,setMessage]=useState(''), [topic,setTopic]=useState('')
+  useEffect(()=>{const slug=new URLSearchParams(window.location.search).get('service');const i=serviceSlugs.indexOf(slug as typeof serviceSlugs[number]);if(i>=0)setTopic(services[lang][i].title)},[lang])
   const [status,setStatus]=useState<'idle'|'sending'|'sent'|'error'>('idle')
   const [trap,setTrap]=useState('')
   async function submit(e: React.FormEvent<HTMLFormElement>) {
