@@ -13,12 +13,15 @@ concurrency:
 jobs:
   credential-preflight:
     runs-on: ubuntu-latest
+    outputs:
+      ready: ${{ steps.readiness.outputs.ready }}
     env:
       VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
       VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
       VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
     steps:
       - name: Report integration readiness without exposing credentials
+        id: readiness
         shell: bash
         run: |
           missing=0
@@ -28,9 +31,10 @@ jobs:
               missing=1
             fi
           done
-          if [ "$missing" -eq 0 ]; then echo "Vercel CLI credentials available."; fi
+          if [ "$missing" -eq 0 ]; then echo "Vercel CLI credentials available."; echo "ready=true" >> "$GITHUB_OUTPUT"; else echo "ready=false" >> "$GITHUB_OUTPUT"; fi
   production:
-    if: github.event_name != 'pull_request'
+    needs: credential-preflight
+    if: github.event_name != 'pull_request' && needs.credential-preflight.outputs.ready == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 20
     env:
