@@ -18,7 +18,7 @@ try{
       await request.fulfill({status:202,contentType:'application/json',body:JSON.stringify({ok:true,accepted:true,status:'queued'})})
     })
     await form.locator('button[type=submit]').click()
-    await page.getByRole('status').waitFor()
+    await form.locator('.kc-form-success[role="status"]').waitFor({state:'visible'})
     assert.equal(observed.service,'data-reporting')
     assert.equal(observed.locale,english?'en':'fi')
     assert.equal(observed.email,'synthetic@example.invalid')
