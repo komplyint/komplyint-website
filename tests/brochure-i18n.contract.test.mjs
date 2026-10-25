@@ -1,6 +1,6 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
-import { readFileSync } from 'node:fs'
+import { readFileSync, statSync } from 'node:fs'
 
 const data=JSON.parse(readFileSync('scripts/portfolio_sv.json','utf8'))
 const generator=readFileSync('scripts/generate_public_portfolio.py','utf8')
@@ -28,4 +28,19 @@ test('download builder uses main and a verifiable ZIP, never the retired feature
   assert.match(workflow,/PdfReader/)
   assert.match(workflow,/document-preview/)
   assert.doesNotMatch(workflow,/feature\/handbook-quiet-precision/)
+})
+
+test('generated FI/EN/SV PDFs are committed, non-placeholder and included by name in the ZIP',()=>{
+  const names=['Komplyint_Palveluesite_FI.pdf','Komplyint_Service_Portfolio_EN.pdf','Komplyint_Tjanstebroschyr_SV.pdf']
+  const archive=readFileSync('public/downloads/Komplyint_Service_Documents.zip')
+  assert.ok(archive.length>100000,'Combined ZIP must contain full PDF payloads')
+  assert.equal(archive.subarray(0,2).toString(),'PK','ZIP container signature')
+  for(const name of names){
+    const path='public/downloads/'+name
+    const bytes=readFileSync(path)
+    assert.ok(statSync(path).size>50000,name+' must be a complete six-page document')
+    assert.equal(bytes.subarray(0,5).toString(),'%PDF-',name+' is not PDF')
+    assert.ok(bytes.subarray(Math.max(0,bytes.length-2048)).includes(Buffer.from('%%EOF')),name+' missing PDF end-of-file signature')
+    assert.ok(archive.includes(Buffer.from(name)),name+' is not present inside the ZIP')
+  }
 })

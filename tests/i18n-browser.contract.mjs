@@ -40,6 +40,33 @@ try{
   assert.equal(missing?.status(),404,'A missing Swedish route should return 404')
   assert.equal(await page.locator('html').getAttribute('lang'),'sv')
   assert.match(await page.locator('h1').innerText(),/Sidan hittades inte/)
+  for(const width of [360,390,768,1024,1200,1366,1440]){
+    await page.setViewportSize({width,height:850})
+    const response=await page.goto(base+'/sv/services',{waitUntil:'domcontentloaded'})
+    assert.equal(response?.status(),200,'Swedish services page '+width)
+    const overflow=await page.evaluate(()=>document.documentElement.scrollWidth-window.innerWidth)
+    assert.ok(overflow<=4,'Unexpected horizontal overflow in Swedish locale at '+width+': '+overflow)
+    if(width>=1200){
+      const locales=page.locator('.kc-actions .ki-locale-switcher a:visible')
+      assert.equal(await locales.count(),3,'Desktop flags must remain visible at '+width)
+    }else{
+      const toggle=page.locator('.kc-mobile-toggle')
+      assert.equal(await toggle.isVisible(),true,'Mobile navigation must remain available at '+width)
+      await toggle.click()
+      assert.equal(await page.locator('.qh-mobile-utilities .ki-locale-switcher a:visible').count(),3)
+    }
+  }
+  await page.setViewportSize({width:1440,height:900})
+  await page.goto(base+'/sv/services',{waitUntil:'domcontentloaded'})
+  const brochures=page.locator('.qh-download-links a')
+  assert.equal(await brochures.count(),4,'Three individual PDFs and one shared ZIP')
+  for(const asset of ['Komplyint_Palveluesite_FI.pdf','Komplyint_Service_Portfolio_EN.pdf','Komplyint_Tjanstebroschyr_SV.pdf']){
+    const link=brochures.locator('a[href$="'+asset+'"]')
+    assert.equal(await link.count(),1,'Missing public '+asset+' link')
+    const pdf=await page.request.get(base+'/downloads/'+asset)
+    assert.equal(pdf.status(),200,'Local download must exist: '+asset)
+    assert.equal((await pdf.body()).subarray(0,5).toString(),'%PDF-',asset+' signature')
+  }
   await page.goto(base+'/en/services/data-reporting?source=i18n-test#main-content',{waitUntil:'domcontentloaded'})
   await page.locator('.kc-actions .ki-locale-switcher [data-locale="sv"]').click()
   await page.waitForURL(/\/sv\/services\/data-reporting\?source=i18n-test#main-content/)
