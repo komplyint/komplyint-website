@@ -61,5 +61,36 @@ try{
   await desktopPage.evaluate(()=>window.scrollTo(0,document.body.scrollHeight))
   await desktopPage.waitForFunction(()=>{const v=document.querySelector('.kc-hero-video');return v&&v.paused},null,{timeout:8000})
   await desktop.close()
+  // Desktop browsers with reduced-motion or blocked autoplay must still let the user
+  // start the original film from the visible control. This is a real click hit-test.
+  const manualDesktop=await browser.newContext({viewport:{width:1440,height:900},reducedMotion:'reduce'})
+  const manualPage=await manualDesktop.newPage()
+  await manualPage.goto(base+'/',{waitUntil:'domcontentloaded'})
+  await manualPage.waitForTimeout(400)
+  assert.equal(await manualPage.locator('.kc-hero-video source').count(),0,'Desktop reduced-motion must defer automatic film loading')
+  const playButton=manualPage.getByRole('button',{name:/Toista taustavideo/})
+  const hit=await playButton.evaluate(button=>{
+    const r=button.getBoundingClientRect()
+    const target=document.elementFromPoint(r.left+r.width/2,r.top+r.height/2)
+    return {
+      clickable:target===button||button.contains(target),
+      buttonRect:{x:r.x,y:r.y,width:r.width,height:r.height},
+      viewport:{height:window.innerHeight,width:window.innerWidth},
+      target:target instanceof Element?target.tagName+'.'+target.className:null,
+      zIndex:getComputedStyle(button.closest('.qh-video-controls')).zIndex,
+    }
+  })
+  assert.equal(hit.clickable,true,'Desktop Play must be clickable without scrolling: '+JSON.stringify(hit))
+  assert.ok(hit.buttonRect.y>=0&&hit.buttonRect.y+hit.buttonRect.height<=hit.viewport.height,'Desktop Play must be visible within first viewport')
+  await playButton.click()
+  await manualPage.waitForFunction(()=>{
+    const v=document.querySelector('.kc-hero-video')
+    return v&&v.currentTime>.25&&!v.paused
+  },null,{timeout:15000})
+  assert.equal(await manualPage.locator('video.kc-hero-video').evaluate(v=>v.videoWidth),1280,
+    'Desktop explicit Play should use the optimized 720p film')
+  await manualPage.getByRole('button',{name:/Pysäytä taustavideo/}).click()
+  assert.equal(await manualPage.locator('video').evaluate(v=>v.paused),true)
+  await manualDesktop.close()
   console.log('Hero media PASS: mobile geometry, reduced motion, manual playback, persistent pause, data saving and offscreen pause')
 }finally{await browser.close()}
