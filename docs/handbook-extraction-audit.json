@@ -1,0 +1,17 @@
+{
+  "schema_version": "handbook-extraction-audit.v1",
+  "source": "Komplyint_Redesign_Handbook.pdf",
+  "source_sha256": "fa3b42f584f9fe79448f9a335b3fd0f81c6171fc5cacbc020b7f15589d233951",
+  "source_page_count": 191,
+  "declared_specification_units": 170,
+  "declared_entries": 1517,
+  "independently_extracted_table_rows": 1257,
+  "independently_extracted_component_tests": 225,
+  "identifiable_entries": 1482,
+  "source_entries_unmapped": 35,
+  "verification_status": "SOURCE_EXTRACTED_UNATTESTED",
+  "full_1517_item_ledger_committed": false,
+  "last_extraction_date": "2026-10-26",
+  "reproduction": "python scripts/import_handbook_pdf.py /path/to/Komplyint_Redesign_Handbook.pdf --output docs/handbook-detailed-acceptance.json",
+  "caution": "Native PDF table/test extraction is a source-mapping work product, not a production PASS, not a review of the 35 unmapped obligations, and not evidence of human signoff."
+}

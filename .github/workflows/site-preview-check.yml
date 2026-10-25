@@ -28,6 +28,7 @@ jobs:
           node --check frontend/src/modern.js
           node --check frontend/server.js
           node --check backend/app/main.js
+          python3 -m py_compile scripts/import_handbook_pdf.py
       - name: Install dependencies
         run: npm install --no-audit --no-fund
       - name: Test public routes and build production Next.js

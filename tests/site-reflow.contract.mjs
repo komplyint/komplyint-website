@@ -43,7 +43,7 @@ try{
     evidence.hasOneH1=geo.headings===1
     const lang=await page.locator('html').getAttribute('lang')
     const canonical=await page.locator('link[rel="canonical"]').getAttribute('href')
-    evidence.canonical=canonical===('https://www.komplyint.fi'+path)
+    evidence.canonical=Boolean(canonical)&&new URL(canonical).origin==='https://www.komplyint.fi'&&new URL(canonical).pathname===path
     evidence.alternates=(await page.locator('link[rel="alternate"][hreflang]').count())>=4
     check(evidence.status===200,'HTTP route '+path+' '+theme+' returned '+evidence.status)
     check(lang===evidence.locale,'SSR lang mismatch '+path+' '+theme+': '+lang)
