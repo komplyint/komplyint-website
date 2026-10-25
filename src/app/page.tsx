@@ -217,39 +217,94 @@ function PrivacyPage({lang}:{lang:Lang}) {
 
 
 function VideoHero({lang}:{lang:Lang}){
+  type FilmState='poster'|'loading'|'playing'|'paused'|'blocked'|'error'
+  const frame=useRef<HTMLDivElement>(null)
   const video=useRef<HTMLVideoElement>(null)
-  const [state,setState]=useState<'loading'|'playing'|'paused'|'blocked'|'error'>('loading')
-  const [userPlay,setUserPlay]=useState(false)
+  const [state,setState]=useState<FilmState>('poster')
+  const [sourceReady,setSourceReady]=useState(false)
+  const [reducedMotion,setReducedMotion]=useState(false)
+  const [saveData,setSaveData]=useState(false)
+  const [visible,setVisible]=useState(false)
+  const [hidden,setHidden]=useState(false)
+  const [userPaused,setUserPaused]=useState(false)
+  const [manualPlay,setManualPlay]=useState(false)
+
+  useEffect(()=>{
+    const media=window.matchMedia('(prefers-reduced-motion: reduce)')
+    const connection=(navigator as Navigator&{connection?:{saveData?:boolean}}).connection
+    setReducedMotion(media.matches)
+    setSaveData(Boolean(connection?.saveData))
+    try{setUserPaused(window.sessionStorage.getItem('komplyint-video-paused')==='1')}catch{}
+    const onMotion=()=>{setReducedMotion(media.matches);if(media.matches)setManualPlay(false)}
+    const onVisibility=()=>setHidden(document.hidden)
+    media.addEventListener('change',onMotion)
+    document.addEventListener('visibilitychange',onVisibility)
+    onVisibility()
+    const observer=new IntersectionObserver(entries=>setVisible(entries.some(x=>x.isIntersecting)),{threshold:0.05})
+    if(frame.current)observer.observe(frame.current)
+    return()=>{
+      media.removeEventListener('change',onMotion)
+      document.removeEventListener('visibilitychange',onVisibility)
+      observer.disconnect()
+    }
+  },[])
+
+  const allowPlayback=visible&&!hidden&&!userPaused&&(!reducedMotion&&!saveData||manualPlay)
+  useEffect(()=>{
+    if(allowPlayback&&!sourceReady)setSourceReady(true)
+  },[allowPlayback,sourceReady])
+  useEffect(()=>{
+    if(sourceReady)video.current?.load()
+  },[sourceReady])
   useEffect(()=>{
     const el=video.current
     if(!el)return
-    const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    if(reduced){el.pause();setState('paused');return}
+    if(!allowPlayback){el.pause();return}
+    if(!sourceReady)return
+    setState('loading')
     el.muted=true
-    el.play().then(()=>setState('playing')).catch(()=>setState('blocked'))
-    function onVisibility(){if(document.hidden){el?.pause()}else if(!reduced){el?.play().then(()=>setState('playing')).catch(()=>setState('blocked'))}}
-    document.addEventListener('visibilitychange',onVisibility)
-    return()=>document.removeEventListener('visibilitychange',onVisibility)
-  },[])
-  async function toggle(){
+    el.play().then(()=>setState('playing')).catch(()=>{
+      if(!el.paused)return
+      setState('blocked')
+    })
+  },[allowPlayback,sourceReady])
+
+  function toggle(){
     const el=video.current
     if(!el)return
-    if(!el.paused){el.pause();setState('paused');return}
-    setUserPlay(true)
-    el.muted=true
-    try{await el.play();setState('playing')}catch{setState('blocked')}
+    if(!el.paused&&state==='playing'){
+      setUserPaused(true)
+      setManualPlay(false)
+      try{window.sessionStorage.setItem('komplyint-video-paused','1')}catch{}
+      el.pause()
+      setState('paused')
+      return
+    }
+    setUserPaused(false)
+    setManualPlay(true)
+    setState('loading')
+    try{window.sessionStorage.removeItem('komplyint-video-paused')}catch{}
+    setSourceReady(true)
+    if(sourceReady){
+      el.muted=true
+      el.play().then(()=>setState('playing')).catch(()=>setState('blocked'))
+    }
   }
-  return <div className="qh-film-layer">
+
+  return <div className="qh-film-layer" ref={frame}>
     <img className="kc-hero-poster" src="/media/hero.webp" alt="" width={1920} height={1080} fetchPriority="high" decoding="async" aria-hidden="true" />
-    <video className={'kc-hero-video'+(userPlay?' qh-user-play':'')} ref={video} autoPlay muted loop playsInline preload="metadata" poster="/media/hero.webp" aria-hidden="true"
-      onPlaying={()=>setState('playing')} onPause={()=>setState('paused')} onError={()=>setState('error')}>
-      <source src="/media/hero-optimized.mp4" type="video/mp4" /><source src="/media/hero.mp4" type="video/mp4" />
+    <video className={'kc-hero-video'+(manualPlay?' qh-user-play':'')+(state==='error'?' qh-failed':'')}
+      ref={video} muted loop playsInline preload="none" poster="/media/hero.webp" aria-hidden="true"
+      onPlaying={()=>setState('playing')}
+      onPause={()=>setState(previous=>previous==='error'?'error':'paused')}
+      onError={()=>setState('error')}>
+      {sourceReady&&<><source src="/media/hero-optimized.mp4" type="video/mp4" /><source src="/media/hero.mp4" type="video/mp4" /></>}
     </video>
     <div className="qh-video-controls">
-      <button type="button" onClick={toggle} aria-label={state==='playing'?(lang==='fi'?'Pysäytä video':'Pause video'):(lang==='fi'?'Toista video':'Play video')}>
+      <button type="button" onClick={toggle} aria-label={state==='playing'?(lang==='fi'?'Pysäytä taustavideo':'Pause background video'):(lang==='fi'?'Toista taustavideo':'Play background video')}>
         <span aria-hidden="true">{state==='playing'?'Ⅱ':'▶'}</span> {state==='playing'?(lang==='fi'?'Pysäytä':'Pause'):(lang==='fi'?'Toista':'Play')}
       </button>
-      {(state==='blocked'||state==='error')&&<span className="qh-film-note" role="status">{lang==='fi'?'Video ei käynnistynyt automaattisesti. Paina Toista.':'Video did not start automatically. Select Play.'}</span>}
+      {(state==='blocked'||state==='error')&&<span className="qh-film-note" role="status">{lang==='fi'?'Voit käynnistää videon painikkeesta.':'Use Play to start the film.'}</span>}
     </div>
   </div>
 }
