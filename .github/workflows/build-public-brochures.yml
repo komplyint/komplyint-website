@@ -1,15 +1,10 @@
 name: Build reviewed public service PDFs and ZIP
 on:
-  pull_request:
-    branches: [main]
-    paths:
-      - 'scripts/generate_public_portfolio.py'
-      - '.github/workflows/build-public-brochures.yml'
+  workflow_dispatch:
 permissions:
   contents: write
 jobs:
   brochures:
-    if: github.head_ref == 'feature/handbook-quiet-precision-20261025'
     runs-on: ubuntu-latest
     timeout-minutes: 8
     steps:
