@@ -245,3 +245,16 @@ html:not(.dark) .kc-root :focus-visible{outline-color:#294DB5}
   .kc-hero-video.qh-user-play{display:block!important}
   .kc-root *, .kc-root *:before,.kc-root *:after{transition:none!important;animation:none!important;scroll-behavior:auto!important}
 }
+
+/* Reviewed public portfolio downloads — permanent host-relative assets. */
+.qh-downloads{background:var(--kc-bg)}
+.qh-downloads-grid{display:grid;grid-template-columns:6fr 6fr;gap:68px;align-items:start}
+.qh-downloads h2{font-size:clamp(36px,3.7vw,50px);max-width:15ch;margin-bottom:22px}
+.qh-downloads p:not(.kc-eyebrow){max-width:48ch;color:var(--kc-muted);font-size:18px}
+.qh-download-links{display:flex;flex-direction:column;gap:12px}
+.qh-download-links a{display:grid;grid-template-columns:75px 1fr 24px;gap:17px;align-items:center;border:1px solid var(--kc-border);background:var(--kc-surface);padding:23px 21px;border-radius:12px;transition:transform .18s,border-color .18s}
+.qh-download-links a:hover{transform:translateY(-2px);border-color:var(--kc-teal)}
+.qh-download-links a span:first-child{font-size:12px;font-weight:700;color:var(--kc-teal)}
+.qh-download-links a strong{font-size:17px;font-weight:700}
+.qh-download-links a span:last-child{font-size:22px;color:var(--kc-teal)}
+@media(max-width:767px){.qh-downloads-grid{grid-template-columns:1fr;gap:32px}.qh-download-links a{padding:19px 16px;grid-template-columns:56px 1fr 20px;gap:10px}.qh-download-links a strong{font-size:15px}}
