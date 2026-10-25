@@ -1,21 +1,16 @@
 name: Generate protected film mobile delivery derivative
 on:
-  pull_request:
-    branches: [main]
-    paths:
-      - '.github/workflows/optimize-hero.yml'
   workflow_dispatch:
 permissions:
   contents: write
 jobs:
   mobile-transcode:
-    if: github.head_ref == 'feature/handbook-media-parity-release-20261025'
     runs-on: ubuntu-latest
     timeout-minutes: 12
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: feature/handbook-media-parity-release-20261025
+          ref: ${{ github.ref_name }}
           persist-credentials: true
       - name: Produce same original film in mobile-friendly H264
         run: |
@@ -32,5 +27,5 @@ jobs:
           git add public/media/hero-mobile.mp4
           if ! git diff --cached --quiet; then
             git commit -m 'asset(media): publish verified sub-2MB mobile encode of protected hero film'
-            git push origin HEAD:feature/handbook-media-parity-release-20261025
+            git push origin HEAD:${GITHUB_REF_NAME}
           fi
