@@ -1,8 +1,9 @@
-name: Website preview quality checks
+name: Komplyint handbook and awards-oriented quality checks
 on:
   push:
     branches:
       - feature/digital-services-redesign-20261025
+      - feature/handbook-quiet-precision-20261025
   pull_request:
     branches:
       - main
@@ -11,7 +12,7 @@ permissions:
 jobs:
   quality:
     runs-on: ubuntu-latest
-    timeout-minutes: 12
+    timeout-minutes: 22
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -27,9 +28,13 @@ jobs:
       - name: Test public routes and build production Next.js
         run: npm run build
 
+      - name: Inspect preserved original film
+        run: |
+          file public/media/hero.mp4
+          ffprobe -v error -show_entries format=duration,size,format_name -show_entries stream=codec_name,codec_type,width,height,pix_fmt -of json public/media/hero.mp4
       - name: Install Chromium and visual test harness
         run: |
-          npm install --no-save playwright --no-audit --no-fund
+          npm install --no-save playwright @axe-core/playwright --no-audit --no-fund
           npx playwright install --with-deps chromium
       - name: Browser smoke tests with screenshots
         run: |
@@ -39,6 +44,7 @@ jobs:
           HOSTNAME=127.0.0.1 PORT=3000 node .next/standalone/server.js > /tmp/komplyint-website.log 2>&1 &
           for i in $(seq 1 40); do if curl -fsS http://127.0.0.1:3000/ > /dev/null; then break; fi; sleep 2; done
           node tests/visual.smoke.mjs
+          node tests/award-audit.mjs
       - name: Attach review screenshots
         if: always()
         uses: actions/upload-artifact@v4
