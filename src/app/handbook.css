@@ -632,3 +632,12 @@ html:not(.dark){color-scheme:light;background:#F7F6F2}
   .kc-service-tile:hover{transform:none}
   .kc-service-tile:focus-visible{transition:none}
 }
+
+/* C20: preserve the 32px icon-to-heading breathing room; 24px at narrow widths. */
+.kc-service-tile .qh-service-icon{margin-bottom:32px}
+@media(max-width:767px){.kc-service-tile .qh-service-icon{margin-bottom:24px}}
+
+/* WCAG reflow under 200% enlarged type: flex items must shrink to card width;
+   any unusually long translated word may wrap rather than become clipped. */
+.kc-service-tile h3,.kc-service-tile p{min-width:0;max-width:100%;overflow-wrap:anywhere;hyphens:auto}
+.kc-service-card-action{min-width:0;max-width:100%;width:100%;flex-wrap:wrap;overflow-wrap:anywhere}

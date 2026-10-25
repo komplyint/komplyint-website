@@ -56,6 +56,7 @@ try{
         height:rect.height,padding:css.paddingTop,
         headingSize:getComputedStyle(heading).fontSize,
         bodySize:getComputedStyle(text).fontSize,
+        iconGap:getComputedStyle(el.querySelector('.qh-service-icon')).marginBottom,
         actionSize:getComputedStyle(action).fontSize,
         headingFits:headingRect.left>=rect.left-1&&headingRect.right<=rect.right+1,
         textFits:textRect.right<=rect.right+1,
@@ -68,6 +69,7 @@ try{
     assert.equal(metric.padding,size.padding,'Card padding must match source specification')
     assert.equal(metric.headingSize,size.heading,'Card heading size must match handbook C20')
     assert.equal(metric.bodySize,'18px')
+    assert.equal(metric.iconGap,size.width===320?'24px':'32px','Icon-to-heading gap matches C20 spacing')
     assert.equal(metric.actionSize,'16px')
     assert.ok(metric.headingFits&&metric.textFits&&metric.actionFits,'Card parts must remain within their surface')
     assert.ok(metric.selected.length>3,'Card text should be selectable')
@@ -82,7 +84,11 @@ try{
         const rect=el.getBoundingClientRect()
         const heading=el.querySelector('h3').getBoundingClientRect()
         const action=el.querySelector('.kc-service-card-action').getBoundingClientRect()
-        return {clip:el.scrollWidth-el.clientWidth,head:heading.right-rect.right,action:action.right-rect.right,height:rect.height,actionBottom:action.bottom-rect.bottom}
+        const offenders=[...el.querySelectorAll('h3,p,span,svg')].map(node=>{
+          const box=node.getBoundingClientRect()
+          return {tag:node.tagName,className:node.getAttribute('class')||'',right:Math.round(box.right-rect.right),width:Math.round(box.width),scroll:node.scrollWidth-node.clientWidth}
+        }).filter(node=>node.right>1||node.scroll>2).slice(0,8)
+        return {clip:el.scrollWidth-el.clientWidth,head:heading.right-rect.right,action:action.right-rect.right,height:rect.height,actionBottom:action.bottom-rect.bottom,offenders}
       })
       assert.ok(over.clip<=2&&over.head<=2&&over.action<=2&&over.actionBottom<=2,'200% text should reflow, not clip: '+f.locale+' card '+i+' '+JSON.stringify(over))
      }

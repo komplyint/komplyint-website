@@ -65,9 +65,12 @@
       "implementation_evidence": [
         "src/middleware.ts",
         "src/app/layout.tsx",
-        "tests/language-font.contract.mjs"
+        "tests/language-font.contract.mjs",
+        "src/lib/i18n.ts",
+        "src/lib/i18n-ui.ts",
+        "tests/i18n-browser.contract.mjs"
       ],
-      "implementation_note": "Relevant code or test exists. Full handbook acceptance is not established."
+      "implementation_note": "Implementation source and automated test pointers are present; full handbook acceptance, live production and independent signoff are NOT TESTED."
     },
     {
       "id": "F08",
@@ -82,48 +85,70 @@
       "title": "Color system: light surfaces",
       "page": 20,
       "verification": "NOT_TESTED",
-      "implementation_evidence": [],
-      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+      "implementation_evidence": [
+        "src/design/tokens.json",
+        "src/app/handbook.css",
+        "tests/design-tokens.contract.test.mjs"
+      ],
+      "implementation_note": "Implementation source and automated test pointers are present; full handbook acceptance, live production and independent signoff are NOT TESTED."
     },
     {
       "id": "F10",
       "title": "Color system: dark and semantic states",
       "page": 22,
       "verification": "NOT_TESTED",
-      "implementation_evidence": [],
-      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+      "implementation_evidence": [
+        "src/design/tokens.json",
+        "src/app/handbook.css",
+        "tests/theme-preference.contract.mjs"
+      ],
+      "implementation_note": "Implementation source and automated test pointers are present; full handbook acceptance, live production and independent signoff are NOT TESTED."
     },
     {
       "id": "F11",
       "title": "Contrast register and overlay discipline",
       "page": 23,
       "verification": "NOT_TESTED",
-      "implementation_evidence": [],
-      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+      "implementation_evidence": [
+        "tests/charcoal-theme.contract.mjs",
+        "tests/award-audit.mjs"
+      ],
+      "implementation_note": "Implementation source and automated test pointers are present; full handbook acceptance, live production and independent signoff are NOT TESTED."
     },
     {
       "id": "F12",
       "title": "Depth, light and shadow",
       "page": 24,
       "verification": "NOT_TESTED",
-      "implementation_evidence": [],
-      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+      "implementation_evidence": [
+        "src/design/tokens.json",
+        "src/app/handbook.css",
+        "tests/service-card.contract.mjs"
+      ],
+      "implementation_note": "Implementation source and automated test pointers are present; full handbook acceptance, live production and independent signoff are NOT TESTED."
     },
     {
       "id": "F13",
       "title": "Geometry, spacing and optical correction",
       "page": 26,
       "verification": "NOT_TESTED",
-      "implementation_evidence": [],
-      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+      "implementation_evidence": [
+        "src/design/tokens.json",
+        "src/app/handbook.css",
+        "tests/service-card.contract.mjs"
+      ],
+      "implementation_note": "Implementation source and automated test pointers are present; full handbook acceptance, live production and independent signoff are NOT TESTED."
     },
     {
       "id": "F14",
       "title": "Responsive grid and exact anchors",
       "page": 27,
       "verification": "NOT_TESTED",
-      "implementation_evidence": [],
-      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+      "implementation_evidence": [
+        "src/app/handbook.css",
+        "tests/site-reflow.contract.mjs"
+      ],
+      "implementation_note": "Implementation source and automated test pointers are present; full handbook acceptance, live production and independent signoff are NOT TESTED."
     },
     {
       "id": "F15",
@@ -135,15 +160,18 @@
         "src/app/handbook.css",
         "tests/language-font.contract.mjs"
       ],
-      "implementation_note": "Relevant code or test exists. Full handbook acceptance is not established."
+      "implementation_note": "Implementation source and automated test pointers are present; full handbook acceptance, live production and independent signoff are NOT TESTED."
     },
     {
       "id": "F16",
       "title": "Type scale and responsive behavior",
       "page": 30,
       "verification": "NOT_TESTED",
-      "implementation_evidence": [],
-      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+      "implementation_evidence": [
+        "src/app/handbook.css",
+        "tests/service-card.contract.mjs"
+      ],
+      "implementation_note": "Implementation source and automated test pointers are present; full handbook acceptance, live production and independent signoff are NOT TESTED."
     },
     {
       "id": "F17",
@@ -177,24 +205,35 @@
       "title": "Imagery and demonstrations",
       "page": 35,
       "verification": "NOT_TESTED",
-      "implementation_evidence": [],
-      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+      "implementation_evidence": [
+        "src/components/FeaturedWork.tsx",
+        "src/components/WorkExampleArt.tsx",
+        "tests/visual.smoke.mjs"
+      ],
+      "implementation_note": "Implementation source and automated test pointers are present; full handbook acceptance, live production and independent signoff are NOT TESTED."
     },
     {
       "id": "F21",
       "title": "Hero composition and video position",
       "page": 36,
       "verification": "NOT_TESTED",
-      "implementation_evidence": [],
-      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+      "implementation_evidence": [
+        "src/components/VideoHero.tsx",
+        "tests/hero-media.contract.mjs"
+      ],
+      "implementation_note": "Implementation source and automated test pointers are present; full handbook acceptance, live production and independent signoff are NOT TESTED."
     },
     {
       "id": "F22",
       "title": "Video playback and resource state machine",
       "page": 38,
       "verification": "NOT_TESTED",
-      "implementation_evidence": [],
-      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+      "implementation_evidence": [
+        "src/components/VideoHero.tsx",
+        "tests/hero-media.contract.mjs",
+        "scripts/verify-public-release.mjs"
+      ],
+      "implementation_note": "Implementation source and automated test pointers are present; full handbook acceptance, live production and independent signoff are NOT TESTED."
     },
     {
       "id": "F23",
@@ -217,8 +256,12 @@
       "title": "Page shell and landmarks",
       "page": 41,
       "verification": "NOT_TESTED",
-      "implementation_evidence": [],
-      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping.",
+      "implementation_evidence": [
+        "src/app/layout.tsx",
+        "src/app/page.tsx",
+        "tests/site-reflow.contract.mjs"
+      ],
+      "implementation_note": "Implementation source and automated test pointers are present; full handbook acceptance, live production and independent signoff are NOT TESTED.",
       "explicit_acceptance_test_ids": [
         "C01-T01",
         "C01-T02",
@@ -245,8 +288,12 @@
       "title": "Skip-to-content control",
       "page": 43,
       "verification": "NOT_TESTED",
-      "implementation_evidence": [],
-      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping.",
+      "implementation_evidence": [
+        "src/app/page.tsx",
+        "src/app/handbook.css",
+        "tests/site-reflow.contract.mjs"
+      ],
+      "implementation_note": "Implementation source and automated test pointers are present; full handbook acceptance, live production and independent signoff are NOT TESTED.",
       "explicit_acceptance_test_ids": [
         "C03-T01",
         "C03-T02",
@@ -486,9 +533,11 @@
       "verification": "NOT_TESTED",
       "implementation_evidence": [
         "src/components/ServiceCard.tsx",
-        "tests/source-architecture.contract.test.mjs"
+        "tests/source-architecture.contract.test.mjs",
+        "src/app/handbook.css",
+        "tests/service-card.contract.mjs"
       ],
-      "implementation_note": "Relevant code or test exists. Full handbook acceptance is not established.",
+      "implementation_note": "Implementation source and automated test pointers are present; full handbook acceptance, live production and independent signoff are NOT TESTED.",
       "explicit_acceptance_test_ids": [
         "C20-T01",
         "C20-T02",
@@ -1230,8 +1279,11 @@
       "title": "Whole-site responsive composition review",
       "page": 125,
       "verification": "NOT_TESTED",
-      "implementation_evidence": [],
-      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+      "implementation_evidence": [
+        "src/app/handbook.css",
+        "tests/site-reflow.contract.mjs"
+      ],
+      "implementation_note": "Implementation source and automated test pointers are present; full handbook acceptance, live production and independent signoff are NOT TESTED."
     },
     {
       "id": "T01",
@@ -1410,17 +1462,25 @@
         "src/app/page.tsx",
         "src/components/VideoHero.tsx",
         "src/components/FeaturedWork.tsx",
-        "tests/source-architecture.contract.test.mjs"
+        "tests/source-architecture.contract.test.mjs",
+        "src/app/globals.css",
+        "src/app/commercial.css",
+        "src/app/handbook.css",
+        "tests/css-boundary.contract.test.mjs"
       ],
-      "implementation_note": "Relevant code or test exists. Full handbook acceptance is not established."
+      "implementation_note": "Implementation source and automated test pointers are present; full handbook acceptance, live production and independent signoff are NOT TESTED."
     },
     {
       "id": "E03",
       "title": "Tokens, components and design-source structure",
       "page": 149,
       "verification": "NOT_TESTED",
-      "implementation_evidence": [],
-      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+      "implementation_evidence": [
+        "src/design/tokens.json",
+        "src/app/handbook.css",
+        "tests/design-tokens.contract.test.mjs"
+      ],
+      "implementation_note": "Implementation source and automated test pointers are present; full handbook acceptance, live production and independent signoff are NOT TESTED."
     },
     {
       "id": "E04",
@@ -1459,16 +1519,23 @@
       "title": "Contact API: exact request and validation contract",
       "page": 154,
       "verification": "NOT_TESTED",
-      "implementation_evidence": [],
-      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+      "implementation_evidence": [
+        "src/app/api/contact/route.ts",
+        "src/components/ContactForm.tsx",
+        "tests/contact-flow.contract.mjs"
+      ],
+      "implementation_note": "Implementation source and automated test pointers are present; full handbook acceptance, live production and independent signoff are NOT TESTED."
     },
     {
       "id": "E09",
       "title": "Contact state machine and delivery truth",
       "page": 155,
       "verification": "NOT_TESTED",
-      "implementation_evidence": [],
-      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+      "implementation_evidence": [
+        "src/app/api/contact/route.ts",
+        "tests/contact-flow.contract.mjs"
+      ],
+      "implementation_note": "Implementation source and automated test pointers are present; full handbook acceptance, live production and independent signoff are NOT TESTED."
     },
     {
       "id": "E10",
@@ -1491,8 +1558,12 @@
       "title": "Route metadata ledger 1",
       "page": 159,
       "verification": "NOT_TESTED",
-      "implementation_evidence": [],
-      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+      "implementation_evidence": [
+        "src/lib/route-meta.ts",
+        "src/app/sitemap.ts",
+        "tests/i18n-browser.contract.mjs"
+      ],
+      "implementation_note": "Implementation source and automated test pointers are present; full handbook acceptance, live production and independent signoff are NOT TESTED."
     },
     {
       "id": "E13",
@@ -1603,8 +1674,11 @@
       "title": "Browser, device and preference matrix",
       "page": 173,
       "verification": "NOT_TESTED",
-      "implementation_evidence": [],
-      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+      "implementation_evidence": [
+        "tests/site-reflow.contract.mjs",
+        "tests/charcoal-theme.contract.mjs"
+      ],
+      "implementation_note": "Implementation source and automated test pointers are present; full handbook acceptance, live production and independent signoff are NOT TESTED."
     },
     {
       "id": "Q11",
@@ -1613,9 +1687,11 @@
       "verification": "NOT_TESTED",
       "implementation_evidence": [
         "tests/language-font.contract.mjs",
-        "tests/visual.smoke.mjs"
+        "tests/visual.smoke.mjs",
+        "tests/site-reflow.contract.mjs",
+        "tests/service-card.contract.mjs"
       ],
-      "implementation_note": "Relevant code or test exists. Full handbook acceptance is not established."
+      "implementation_note": "Implementation source and automated test pointers are present; full handbook acceptance, live production and independent signoff are NOT TESTED."
     },
     {
       "id": "Q12",
@@ -1654,16 +1730,21 @@
       "title": "Independent design and jury rehearsal",
       "page": 179,
       "verification": "NOT_TESTED",
-      "implementation_evidence": [],
-      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+      "implementation_evidence": [
+        "tests/award-audit.mjs",
+        "AWARD_READINESS_Q16_Q21.md"
+      ],
+      "implementation_note": "Implementation source and automated test pointers are present; full handbook acceptance, live production and independent signoff are NOT TESTED."
     },
     {
       "id": "Q17",
       "title": "Severity, acceptance and release decision",
       "page": 180,
       "verification": "NOT_TESTED",
-      "implementation_evidence": [],
-      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+      "implementation_evidence": [
+        "AWARD_READINESS_Q16_Q21.md"
+      ],
+      "implementation_note": "Implementation source and automated test pointers are present; full handbook acceptance, live production and independent signoff are NOT TESTED."
     },
     {
       "id": "Q18",
@@ -1672,9 +1753,12 @@
       "verification": "NOT_TESTED",
       "implementation_evidence": [
         "docs/HANDBOOK_EXECUTION_EVIDENCE.md",
-        "tests/award-audit.mjs"
+        "tests/award-audit.mjs",
+        "docs/handbook-extraction-audit.json",
+        "docs/HANDBOOK_SOURCE_RECONCILIATION.md",
+        "scripts/handbook-progress.mjs"
       ],
-      "implementation_note": "Relevant code or test exists. Full handbook acceptance is not established."
+      "implementation_note": "Implementation source and automated test pointers are present; full handbook acceptance, live production and independent signoff are NOT TESTED."
     },
     {
       "id": "Q19",
@@ -1689,16 +1773,24 @@
       "title": "Delivery phases and completion gates",
       "page": 183,
       "verification": "NOT_TESTED",
-      "implementation_evidence": [],
-      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+      "implementation_evidence": [
+        ".github/workflows/site-preview-check.yml",
+        ".github/workflows/deploy-vercel-production.yml",
+        "scripts/verify-public-release.mjs"
+      ],
+      "implementation_note": "Implementation source and automated test pointers are present; full handbook acceptance, live production and independent signoff are NOT TESTED."
     },
     {
       "id": "Q21",
       "title": "Competition submission package",
       "page": 184,
       "verification": "NOT_TESTED",
-      "implementation_evidence": [],
-      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+      "implementation_evidence": [
+        "AWARD_READINESS_Q16_Q21.md",
+        "docs/VERCEL_PRODUCTION_HANDOFF.md",
+        "scripts/verify-public-release.mjs"
+      ],
+      "implementation_note": "Implementation source and automated test pointers are present; full handbook acceptance, live production and independent signoff are NOT TESTED."
     },
     {
       "id": "Q22",
@@ -1722,9 +1814,12 @@
       "page": 187,
       "verification": "NOT_TESTED",
       "implementation_evidence": [
-        "docs/HANDBOOK_EXECUTION_EVIDENCE.md"
+        "docs/HANDBOOK_EXECUTION_EVIDENCE.md",
+        "scripts/import_handbook_pdf.py",
+        "docs/handbook-extraction-audit.json",
+        "docs/HANDBOOK_SOURCE_RECONCILIATION.md"
       ],
-      "implementation_note": "Relevant code or test exists. Full handbook acceptance is not established."
+      "implementation_note": "Implementation source and automated test pointers are present; full handbook acceptance, live production and independent signoff are NOT TESTED."
     },
     {
       "id": "R03",
