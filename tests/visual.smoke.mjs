@@ -18,6 +18,7 @@ assert.equal(await desktop.locator('.kc-service-tile').count(),6)
 assert.equal(await desktop.locator('.kc-service-tile .qh-service-icon').count(),6,'Every service should have its own original graphic')
 const picture=desktop.locator('.qh-featured-work .qh-work-art-image')
 await picture.waitFor()
+assert.match((await picture.getAttribute('src'))||'',/featured-reporting-art-fi\.svg$/,'Finnish homepage must use Finnish-language artwork')
 await picture.evaluate(img=>img.decode())
 assert.equal(await picture.evaluate(img=>img.naturalWidth),960,'Featured graphic should render as valid original SVG')
 await desktop.locator('.qh-featured-work').screenshot({path:out+'/featured-work-desktop.png',animations:'disabled'})
@@ -54,6 +55,7 @@ await mobile.screenshot({path:out+'/mobile-fi.png',fullPage:true,animations:'dis
 await mobile.locator('.qh-featured-work').screenshot({path:out+'/featured-work-mobile.png',animations:'disabled'})
 
 await desktop.goto(base+'/en',{waitUntil:'domcontentloaded'})
+assert.match((await desktop.locator('.qh-work-art-image').getAttribute('src'))||'',/featured-reporting-art\.svg$/,'English homepage must use English-language artwork')
 assert.match((await desktop.locator('h1').first().textContent())||'',/Clarity/)
 await desktop.screenshot({path:out+'/desktop-en.png',fullPage:true,animations:'disabled'})
 

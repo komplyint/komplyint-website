@@ -67,7 +67,7 @@
   <circle cx="782" cy="262" r="14" fill="#C3F7D3" opacity=".19" filter="url(#pointGlow)"/>
   <rect x="558" y="417" width="176" height="31" rx="15.5" fill="#0D3B29" stroke="#459A68" stroke-opacity=".64"/>
   <circle cx="577" cy="432.5" r="4.5" fill="#A8E7C0"/>
-  <text x="590" y="437.5" font-family="Arial, sans-serif" font-size="13" fill="#C6EBD5" letter-spacing=".4">VERIFIED OUTPUT</text>
+  <text x="590" y="437.5" font-family="Arial, sans-serif" font-size="13" fill="#C6EBD5" letter-spacing=".4">TARGET OUTCOME</text>
  </g>
  <path d="M37 551H923" stroke="#9BD3B1" stroke-opacity=".26"/>
  <text x="37" y="579" font-family="Arial, sans-serif" font-size="13" letter-spacing=".7" fill="#BED7C6" opacity=".85">CONCEPT EXAMPLE — NOT CUSTOMER DATA</text>
