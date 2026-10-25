@@ -127,7 +127,7 @@ export default function KomplyintWebsite() {
         <noscript><nav className="qh-nojs-nav" aria-label={l.noScriptNav}>{navPages.map(item=><a href={pathFor(lang,item)} key={item}>{t.navigation[item]}</a>)}<a href={pathFor(lang,'services')}>{t.explore}</a>{languages.map(language=><a key={language.code} href={localizedPath(pathname,language.code)} hrefLang={language.code} lang={language.code}><span aria-hidden="true">{language.flag}</span> {language.name}</a>)}</nav></noscript>
       </header>
 
-      <main id="main-content">
+      <main id="main-content" tabIndex={-1}>
         {page === 'home' && <Home lang={lang} />}
         {page === 'services' && (serviceIndex>=0?<ServiceDetail lang={lang} index={serviceIndex}/>:<ServicesPage lang={lang} />)}
         {page === 'work' && <WorkPage lang={lang} />}

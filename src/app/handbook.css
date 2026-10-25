@@ -579,3 +579,8 @@ html:not(.dark){color-scheme:light;background:#F7F6F2}
  .qh-featured-work .kc-text-link{transition:none}
 }
 /* END CHARCOAL PRECISION */
+
+/* C01/C03 / Q10: native skip link must land on the actual main focus target.
+   Retain a visible keyboard outline; account for the sticky header without JS. */
+.kc-root #main-content{scroll-margin-top:112px}
+@media(max-width:767px){.kc-root #main-content{scroll-margin-top:90px}}
