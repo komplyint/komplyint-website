@@ -25,6 +25,8 @@ test('Swedish catalogue includes six translated services and privacy content',()
   for(const phrase of ['Excel, data och rapportering','Microsoft 365 och automatisering','Webbplatser och underhåll','Mindre programvaror och integrationer','Programvarutestning och kvalitetssäkring','Digitalt kontorsstöd','Personuppgiftsansvarig']){
     assert.ok(sv.includes(phrase),'Swedish translation missing: '+phrase)
   }
+  assert.ok(labels.includes('SIDAN HITTADES INTE'))
+  assert.ok(labels.includes('ETT OVÄNTAT FEL'))
   assert.ok(labels.includes("Svenska")===false,'Language names must come from the single locale config')
   for(const field of ['languageSwitcher','localeDraftWarning','serviceDetailLink','accessibility','video','form','serviceDetail']){
     assert.ok(labels.includes(field),'Missing UI translation category '+field)

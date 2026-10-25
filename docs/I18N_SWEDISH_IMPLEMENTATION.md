@@ -40,3 +40,7 @@ The historical `src/lib/translations.ts` belongs to the pre-redesign presentatio
 - `scripts/verify-public-release.mjs`: checks Swedish public pages, actual server-side language and Swedish illustration signature on the real public domain.
 
 Do not mark the change as deployed until `/api/release` reports the same commit as `main` and live page/media checks pass.
+
+### Error-state language parity
+
+The global 404 and recoverable 500 error pages use the same FI/EN/SV typed UI catalogue and preserve the selected locale in the return-home link. Browser tests check a real missing Swedish route and its localized message.

@@ -36,6 +36,10 @@ try{
     }
     assert.equal(await page.locator('.kc-actions .ki-locale-switcher [data-locale="'+route.locale+'"]').getAttribute('aria-current'),'true')
   }
+  const missing=await page.goto(base+'/sv/does-not-exist',{waitUntil:'domcontentloaded'})
+  assert.equal(missing?.status(),404,'A missing Swedish route should return 404')
+  assert.equal(await page.locator('html').getAttribute('lang'),'sv')
+  assert.match(await page.locator('h1').innerText(),/Sidan hittades inte/)
   await page.goto(base+'/en/services/data-reporting?source=i18n-test#main-content',{waitUntil:'domcontentloaded'})
   await page.locator('.kc-actions .ki-locale-switcher [data-locale="sv"]').click()
   await page.waitForURL(/\/sv\/services\/data-reporting\?source=i18n-test#main-content/)

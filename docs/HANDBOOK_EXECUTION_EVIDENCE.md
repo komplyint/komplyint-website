@@ -72,3 +72,7 @@ The process-local idempotency key cache is explicitly best-effort; **distributed
 Added complete Swedish (Finland) site content under explicit `/sv` routes alongside the existing Finnish default and English `/en` routes, all backed by one typed locale table. Added a three-language, flag-and-native-name selector to desktop and mobile navigation. Preserved deep links, query/hash and contact-draft protection. Reused the existing Next.js route templates, editorial content, original film and two existing downloadable brochure PDFs; only the Swedish UI dictionary, Swedish illustrations, locale paths and tests were built new. Added server `lang=sv`, Swedish canonical/OpenGraph metadata, three-language `hreflang` and sitemap. See `docs/I18N_SWEDISH_IMPLEMENTATION.md`.
 
 **Acceptance state:** code and tests awaiting GitHub CI. Production requires an authorized deploy to the existing Vercel project; no live release is claimed.
+
+## Error-state locale parity (F07/Q11)
+
+Localized both 404 and runtime-error recovery screens using the same typed FI/EN/SV dictionary, keeping the current-language homepage return route. The trilingual browser test now checks a real Swedish 404 response; no duplicate error handling runtime was introduced.

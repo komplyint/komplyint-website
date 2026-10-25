@@ -7,7 +7,7 @@ import test from 'node:test'
 const root = join(dirname(fileURLToPath(import.meta.url)), '..')
 const source = path => readFileSync(join(root, path), 'utf8')
 const publicFiles = [
-  'src/app/page.tsx','src/app/layout.tsx','src/app/en/page.tsx','src/app/sv/page.tsx',
+  'src/app/page.tsx','src/app/layout.tsx','src/app/error.tsx','src/app/not-found.tsx','src/app/en/page.tsx','src/app/sv/page.tsx',
   'src/app/services/page.tsx','src/app/en/services/page.tsx','src/app/sv/services/page.tsx',
   'src/app/software/page.tsx','src/app/en/software/page.tsx','src/app/sv/software/page.tsx',
   'src/app/contact/page.tsx','src/app/en/contact/page.tsx','src/app/sv/contact/page.tsx',
