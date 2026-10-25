@@ -322,3 +322,8 @@ html:not(.dark) .kc-root :focus-visible{outline-color:#294DB5}
   .qh-mobile-utilities label{font-size:16px;color:var(--kc-ink);font-weight:700;display:flex;flex-direction:column;gap:8px}
   .qh-mobile-utilities select{min-height:48px;padding:10px 14px;border:1px solid var(--kc-border);background:var(--kc-surface);color:var(--kc-ink);border-radius:8px}
 }
+
+/* C06 no-script recovery: public services remain navigable when React is unavailable. */
+.qh-nojs-nav{display:flex;gap:14px;flex-wrap:wrap;align-items:center;padding:14px max(20px,calc((100vw - 1280px)/2));background:#0D1E17;color:#F3F6EE}
+.qh-nojs-nav a{display:inline-block;padding:8px 11px;border:1px solid #60856A;border-radius:7px;color:#F3F6EE;text-decoration:none;font-weight:700;font-size:15px}
+.qh-nojs-nav a:focus-visible{outline:3px solid #B2C5FF}
