@@ -17,7 +17,7 @@ function fakeResponse(path,{commit='abc123',stale=false,missing=[],badDownload=f
   }
   const media=REQUIRED_MEDIA.find(row=>row[0]===path)
   if(media){
-    if(media[1]==='svg')return new Response(badMedia?'<bad />':'<svg xmlns="http://www.w3.org/2000/svg">'+media[2]+'</svg>')
+    if(media[1]==='svg')return new Response(badMedia?'<bad />':'<svg xmlns="http://www.w3.org/2000/svg"><title>'+media[2]+'</title><desc>'+('Illustrative non-client source artwork. '.repeat(12))+'</desc></svg>')
     const buf=Buffer.alloc(1200)
     if(!badMedia){
       if(media[1]==='mp4')buf.write('ftyp',4)
