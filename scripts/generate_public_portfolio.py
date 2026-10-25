@@ -112,7 +112,7 @@ def cover(c,t):
     c.setFillColor(DEEP);c.rect(0,0,W,H,fill=1,stroke=0)
     c.setFillColor(ACCENT);c.setFont("KBold",19);c.drawString(54,H-82,"KOMPLYINT OY")
     c.setStrokeColor(ACCENT);c.setLineWidth(1);c.line(54,H-105,W-54,H-105)
-    c.setFillColor(WHITE);c.setFont("KSerif",38)
+    c.setFillColor(WHITE);c.setFont("KSerif",30 if t["kicker"].startswith("SERVICE") else 34)
     y=H-255
     for line in t["title"].split(" / "):
         c.drawString(54,y,line);y-=46
@@ -146,24 +146,37 @@ def overview(c,t):
     c.showPage()
 
 def detailed(c,t,lang,start,page):
-    top(c,page,t["kicker"]);heading(c,t["overview"],H-177,27)
-    y=H-215
-    for i in range(start,start+2):
+    top(c,page,t["kicker"])
+    heading(c,t["overview"],H-176,27)
+    c.setStrokeColor(RULE)
+    c.line(54,H-208,W-54,H-208)
+    colw=(W-126)/2
+    for offset in (0,1):
+        i=start+offset
         title,overview,tasks,delivery,limit=t["services"][i]
-        c.setStrokeColor(RULE);c.line(54,y-5,W-54,y-5)
-        c.setFillColor(GREEN);c.setFont("KBold",10);c.drawString(54,y-32,f"{i+1:02d} / SERVICE")
-        yy=para(c,title,54,y-52,W-110,20,INK,27,True)
-        yy=para(c,overview,54,yy-10,W-110,11,MUTED,17)
-        c.setFont("KBold",9.5);c.setFillColor(GREEN);c.drawString(54,yy-29,t["tasks"])
-        yy-=46
+        x=54+offset*(colw+18)
+        y=H-248
+        if offset:
+            c.setStrokeColor(RULE)
+            c.line(W/2,114,W/2,H-224)
+        c.setFillColor(GREEN);c.setFont("KBold",10)
+        c.drawString(x,y,f"{i+1:02d} / SERVICE")
+        y=para(c,title,x,y-22,colw-14,15.2,INK,22,True)-11
+        y=para(c,overview,x,y,colw-12,9.5,MUTED,15)-28
+        c.setFillColor(GREEN);c.setFont("KBold",9)
+        c.drawString(x,y,t["tasks"])
+        y-=18
         for task in tasks:
-            c.setFillColor(ACCENT);c.circle(61,yy-2,2.5,fill=1,stroke=0)
-            yy=para(c,task,73,yy+8,W-142,10,INK,15)-12
-        c.setFillColor(GREEN);c.setFont("KBold",9);c.drawString(54,yy-19,t["deliverable"])
-        yy=para(c,delivery,54,yy-27,W-110,10,INK,15)
-        c.setFillColor(GREEN);c.setFont("KBold",9);c.drawString(54,yy-20,t["limit"])
-        yy=para(c,limit,54,yy-27,W-110,9.5,MUTED,15)
-        y=H-475 if i==start else y
+            c.setFillColor(ACCENT);c.circle(x+4,y-2,2.5,fill=1,stroke=0)
+            y=para(c,task,x+14,y+7,colw-24,9.5,INK,14)-11
+        y-=9
+        c.setFillColor(GREEN);c.setFont("KBold",9)
+        c.drawString(x,y,t["deliverable"])
+        y=para(c,delivery,x,y-8,colw-15,9.5,INK,14)-25
+        c.setFillColor(GREEN);c.setFont("KBold",9)
+        c.drawString(x,y,t["limit"])
+        y=para(c,limit,x,y-8,colw-15,9.5,MUTED,14)-10
+        if y<103:raise RuntimeError(f"Page {page} service {i+1} overflows footer at y={y}")
     c.showPage()
 
 def finish(c,t):
@@ -174,11 +187,11 @@ def finish(c,t):
         c.setStrokeColor(RULE);c.line(54,yy+7,W-54,yy+7)
         c.setFillColor(GREEN);c.setFont("KBold",12);c.drawString(54,yy-25,name)
         para(c,description,54,yy-35,W-110,10,MUTED,16)
-    c.setFillColor(DEEP);c.roundRect(54,124,W-108,186,13,fill=1,stroke=0)
-    c.setFillColor(WHITE);c.setFont("KSerif",21);c.drawString(75,269,t["contacts"][:62])
-    para(c,t["contactcopy"],75,241,W-154,10,WHITE,17)
-    c.setFillColor(ACCENT);c.setFont("KBold",15);c.drawString(75,165,"info@komplyint.fi")
-    para(c,t["note"],54,99,W-110,8.5,MUTED,13)
+    c.setFillColor(DEEP);c.roundRect(54,101,W-108,150,13,fill=1,stroke=0)
+    para(c,t["contacts"],75,233,W-156,18,WHITE,21)
+    para(c,t["contactcopy"],75,190,W-154,9.5,WHITE,15)
+    c.setFillColor(ACCENT);c.setFont("KBold",14);c.drawString(75,128,"info@komplyint.fi")
+    para(c,t["note"],54,91,W-110,8.3,MUTED,12)
     c.showPage()
 
 def build(lang,out):
