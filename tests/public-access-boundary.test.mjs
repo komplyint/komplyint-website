@@ -26,7 +26,7 @@ const forbidden = [
   [/(?:<form[^>]+(?:password|login)|<input[^>]+type\s*=\s*['"]password['"])/i, 'password form'],
 ]
 test('public bilingual site has its intended navigation and contact route', () => {
-  const home = source('src/app/page.tsx') + source('src/lib/commercial.ts')
+  const home = source('src/app/page.tsx') + source('src/lib/commercial.ts') + source('src/components/ContactForm.tsx')
   for (const p of ['home', 'services', 'software', 'work', 'about', 'contact', 'privacy','accessibility']) {
     assert.ok(home.includes("'"+p+"'"), 'missing public route '+p)
   }
