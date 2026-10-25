@@ -1,10 +1,10 @@
 
 /* F07: three-language internationalization navigation. Flags are decorative;
    native-language names are the accessible link labels. */
-.ki-locale-switcher{display:flex;align-items:center;gap:3px;flex-shrink:0;padding:4px;border:1px solid #4D7258;border-radius:10px;background:rgba(1,18,10,.18)}
-.ki-locale-switcher a{display:inline-flex;align-items:center;justify-content:center;gap:5px;min-height:42px;min-width:0;padding:8px 9px;border-radius:7px;color:#E4F0E5;text-decoration:none;font-family:var(--font-lato),Lato,Arial,sans-serif;font-size:12px;font-weight:700;line-height:1.2;letter-spacing:0;white-space:nowrap}
-.ki-locale-switcher a:hover{background:#234D37;color:#FFFFFF}
-.ki-locale-switcher a[aria-current="true"]{background:#B6E8B9;color:#0D1E17;pointer-events:auto}
+.ki-locale-switcher{display:flex;align-items:center;gap:3px;flex-shrink:0;padding:4px;border:1px solid #52615E;border-radius:10px;background:rgba(0,0,0,.18)}
+.ki-locale-switcher a{display:inline-flex;align-items:center;justify-content:center;gap:5px;min-height:42px;min-width:0;padding:8px 9px;border-radius:7px;color:#E5E9E7;text-decoration:none;font-family:var(--font-lato),Lato,Arial,sans-serif;font-size:12px;font-weight:700;line-height:1.2;letter-spacing:0;white-space:nowrap}
+.ki-locale-switcher a:hover{background:#2C383B;color:#FFFFFF}
+.ki-locale-switcher a[aria-current="true"]{background:#B6E5C5;color:#101418;pointer-events:auto}
 .ki-locale-switcher a:focus-visible{outline:3px solid #B2C5FF;outline-offset:2px}
 .ki-language-flag{font-size:20px;line-height:1;font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif}
 .ki-language-name{line-height:1.2}
@@ -15,9 +15,9 @@
 }
 @media(max-width:1199px){
   .kc-actions .ki-locale-switcher{display:none}
-  .qh-mobile-utilities .ki-locale-switcher{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px;width:100%;border-color:#42624D;padding:6px}
-  .kc-header .kc-nav .qh-mobile-utilities .ki-locale-switcher a{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;min-height:48px;gap:6px;padding:10px 6px;color:#E4F0E5;text-decoration:none;font-size:14px;white-space:normal}
-  .kc-header .kc-nav .qh-mobile-utilities .ki-locale-switcher a[aria-current="true"]{color:#0D1E17;background:#B6E8B9}
+  .qh-mobile-utilities .ki-locale-switcher{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px;width:100%;border-color:#536463;padding:6px}
+  .kc-header .kc-nav .qh-mobile-utilities .ki-locale-switcher a{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;min-height:48px;gap:6px;padding:10px 6px;color:#E5E9E7;text-decoration:none;font-size:14px;white-space:normal}
+  .kc-header .kc-nav .qh-mobile-utilities .ki-locale-switcher a[aria-current="true"]{color:#101418;background:#B6E5C5}
   .kc-header .kc-nav .qh-mobile-utilities .ki-locale-switcher a:after{display:none}
 }
 @media(max-width:370px){

@@ -1,26 +1,26 @@
-/* BEGIN F09/F10/F12/F13/E03 DESIGN TOKENS v1.1.0 — synchronized with src/design/tokens.json */
+/* BEGIN F09/F10/F12/F13/E03 DESIGN TOKENS v1.2.0 — synchronized with src/design/tokens.json */
 .kc-root{
---ki-color-page:#F7F8F4;
+--ki-color-page:#F7F6F2;
 --ki-color-surface:#FFFFFF;
---ki-color-panel:#EAF0E9;
---ki-color-ink:#14291F;
---ki-color-muted:#526257;
---ki-color-border:#D9E1D8;
+--ki-color-panel:#ECEDEA;
+--ki-color-ink:#171B1F;
+--ki-color-muted:#536068;
+--ki-color-border:#D6DBD8;
 --ki-color-action:#124C35;
---ki-color-deep:#124C35;
---ki-color-accent:#6EA78A;
---ki-color-focus:#294DB5;
---ki-color-control:#6C7E70;
+--ki-color-deep:#101418;
+--ki-color-accent:#7FAD93;
+--ki-color-focus:#3058C8;
+--ki-color-control:#66727A;
 --ki-color-red:#C74C57;
 --ki-color-white:#FFFFFF;
 --ki-color-forestHover:#0B3C29;
 --ki-color-slate:#6B7896;
 --ki-color-lime:#6FE06B;
 --ki-shadow-e0:none;
---ki-shadow-e1:0 1px 2px rgba(20,41,31,.05), 0 6px 16px -8px rgba(20,41,31,.12);
---ki-shadow-e2:0 2px 4px rgba(20,41,31,.05), 0 12px 28px -10px rgba(20,41,31,.14);
---ki-shadow-e3:0 3px 6px rgba(20,41,31,.06), 0 24px 48px -16px rgba(20,41,31,.20);
---ki-shadow-e4:0 8px 16px rgba(20,41,31,.08), 0 32px 64px -20px rgba(20,41,31,.24);
+--ki-shadow-e1:0 1px 2px rgba(16,20,24,.06), 0 6px 16px -8px rgba(16,20,24,.13);
+--ki-shadow-e2:0 2px 4px rgba(16,20,24,.06), 0 12px 28px -10px rgba(16,20,24,.17);
+--ki-shadow-e3:0 3px 6px rgba(16,20,24,.08), 0 24px 48px -16px rgba(16,20,24,.24);
+--ki-shadow-e4:0 8px 16px rgba(16,20,24,.10), 0 32px 64px -20px rgba(16,20,24,.29);
 --ki-space-1:4px;
 --ki-space-2:8px;
 --ki-space-3:12px;
@@ -40,24 +40,24 @@
 --ki-radius-feature:24px;
 }
 .dark .kc-root{
---ki-color-page:#0D1E17;
---ki-color-surface:#20392B;
---ki-color-panel:#172B21;
---ki-color-ink:#F3F6EE;
---ki-color-muted:#BACBBC;
---ki-color-border:#385343;
---ki-color-action:#B6E8B9;
---ki-color-deep:#0D1E17;
---ki-color-accent:#9FCFA8;
+--ki-color-page:#101418;
+--ki-color-surface:#1D2529;
+--ki-color-panel:#252E32;
+--ki-color-ink:#F5F3EE;
+--ki-color-muted:#B9C1C2;
+--ki-color-border:#3E4A4E;
+--ki-color-action:#A4DDBA;
+--ki-color-deep:#0D1013;
+--ki-color-accent:#8FBFA6;
 --ki-color-focus:#B2C5FF;
---ki-color-control:#789481;
+--ki-color-control:#94A0A0;
 --ki-color-red:#C74C57;
 --ki-color-white:#FFFFFF;
 --ki-color-forestHover:#C9F0CA;
 --ki-color-slate:#6B7896;
 --ki-color-lime:#6FE06B;
---ki-shadow-e2:0 2px 12px rgba(0,0,0,.12);
---ki-shadow-e3:0 14px 36px rgba(0,0,0,.17);
+--ki-shadow-e2:0 2px 12px rgba(0,0,0,.18);
+--ki-shadow-e3:0 14px 36px rgba(0,0,0,.29);
 }
 /* END F09/F10/F12/F13/E03 DESIGN TOKENS */
 /* Komplyint Quiet Precision — handbook v1.0
@@ -66,8 +66,8 @@
 /* F15-F18: next/font/google downloads and self-hosts real EB Garamond and Lato files at build time. CSS fallback remains readable. */
 :root{color-scheme:dark}
 html{scroll-behavior:smooth}
-html.dark{color-scheme:dark;background:#0D1E17}
-html:not(.dark){color-scheme:light;background:#F7F8F4}
+html.dark{color-scheme:dark;background:#101418}
+html:not(.dark){color-scheme:light;background:#F7F6F2}
 .kc-root{--kc-bg:var(--ki-color-page);--kc-surface:var(--ki-color-panel);--kc-ink:var(--ki-color-ink);--kc-muted:var(--ki-color-muted);--kc-border:var(--ki-color-border);--kc-teal:var(--ki-color-action);--kc-deep:var(--ki-color-deep);--kc-accent:var(--ki-color-accent);--kc-white:var(--ki-color-white);background:var(--kc-bg);color:var(--kc-ink);font-family:var(--font-lato),Lato,Arial,sans-serif;font-size:18px;line-height:1.65}
 .dark .kc-root{--kc-bg:var(--ki-color-page);--kc-surface:var(--ki-color-panel);--kc-ink:var(--ki-color-ink);--kc-muted:var(--ki-color-muted);--kc-border:var(--ki-color-border);--kc-teal:var(--ki-color-action);--kc-deep:var(--ki-color-deep);--kc-accent:var(--ki-color-accent);background:var(--kc-bg);color:var(--kc-ink)}
 .kc-root h1,.kc-root h2,.kc-root .kc-intro h2,.kc-root .kc-cta h2,.kc-root .kc-about h2,.kc-root .kc-page-top h1,.kc-root .qh-service-page h1{font-family:var(--font-eb-garamond),"EB Garamond",Georgia,serif;font-weight:400;letter-spacing:-.012em;line-height:1.1}
@@ -440,3 +440,142 @@ html:not(.dark){color-scheme:light;background:#F7F8F4}
 .kc-example .qh-example-art{display:block;width:100%;aspect-ratio:420/152;overflow:hidden;border-radius:12px;margin:0 0 23px;background:var(--ki-color-deep);border:1px solid var(--ki-color-border)}
 .kc-example .qh-example-art svg{display:block;width:100%;height:100%;object-fit:cover}
 @media(max-width:767px){.kc-example .qh-example-art{margin-bottom:17px}}
+
+
+/* BEGIN CHARCOAL PRECISION v1.2 — F09/F10/F12/F20 / C02–C64 / Q11
+ * Near-black and warm-white supply the editorial structure. Forest green remains
+ * the recognizable interaction accent; crimson is confined to rare story markers.
+ * These are production component overrides, not a theme-only static mockup.
+ * Protect original logo/film and shared FI/EN/SV text/routes.
+ */
+.kc-root{
+  --ki-color-charcoal:#101418;
+  --ki-color-charcoal-deep:#0B0F12;
+  --ki-color-charcoal-surface:#192126;
+  --ki-color-cream:#F7F6F2;
+  --ki-color-rose-action:#B52D43;
+  --ki-color-mint-on-dark:#B6E5C5;
+}
+.kc-root .kc-topbar{background:#0B0F12;color:#E2E7E5;border-bottom:1px solid #242D30}
+.kc-small-dot{background:var(--ki-color-red);box-shadow:0 0 0 3px rgba(199,76,87,.12)}
+.kc-header{background:#101418;color:#E5E9E7;border-color:#353F43;box-shadow:0 7px 24px rgba(0,0,0,.14)}
+.kc-header .kc-nav a{color:#E5E9E7}
+.kc-header .kc-nav a:hover,.kc-header .kc-nav a.is-current{color:#B6E5C5}
+.kc-header .kc-nav a.is-current:after{background:#9CCFAE}
+.kc-header .qh-service-menu summary{color:#C5D2CB}
+.kc-header-cta{background:#B6E5C5;color:#101418!important;border-radius:8px}
+.dark .kc-header-cta{color:#101418!important}
+.kc-header-cta:hover{background:#D0F2D9}
+.kc-mobile-toggle span{background:#F4F3EF}
+.qh-mega{background:#F7F6F2;border-color:#D6DBD8;color:#171B1F;box-shadow:0 22px 50px rgba(0,0,0,.29)}
+.kc-header .kc-nav .qh-mega a{color:#171B1F}
+.kc-nav .qh-mega a:hover{background:#E8EDE9;color:#124C35}
+
+.kc-hero{background:#0B0F12}
+.kc-hero-shade{z-index:2;background:linear-gradient(90deg,rgba(10,14,16,.46) 0%,rgba(10,14,16,.17) 52%,rgba(10,14,16,.06) 100%),linear-gradient(0deg,rgba(9,13,15,.40),transparent 35%)}
+.kc-hero-copy{background:rgba(15,20,23,.95);border:1px solid rgba(218,224,219,.19);box-shadow:0 28px 84px rgba(0,0,0,.46);backdrop-filter:blur(11px)}
+.kc-hero h1{color:#F7F6F2}
+.kc-hero-tag{color:#B7E2C4}
+.kc-hero-lead{color:#DDE1DE}
+.kc-hero-side{border-color:rgba(238,238,232,.45)}
+.kc-hero-side-label,.kc-side-marker{color:#C6E9D0}
+.kc-hero-edge{background:linear-gradient(90deg,#C74C57 0%,#C74C57 12%,#7FAD93 39%,transparent 86%)}
+.kc-button-primary{background:#B6E5C5;color:#101418!important;border:1px solid transparent}
+.kc-button-primary:hover{background:#CFF0D8;color:#101418!important}
+.kc-button-ghost{border-color:#B9C2BF;color:#F7F6F2!important}
+.kc-button-light{background:#B6E5C5;color:#101418!important}
+.kc-hero>.qh-video-controls button{background:rgba(12,16,19,.94);border-color:#ABB4B0;color:#F7F6F2;box-shadow:0 7px 24px rgba(0,0,0,.37)}
+.kc-hero>.qh-video-controls button:hover{background:#252E31}
+
+.kc-section-intro{background:var(--ki-color-page)}
+.kc-service-tile{background:var(--ki-color-surface);border:1px solid var(--ki-color-border);box-shadow:var(--ki-shadow-e2)}
+.kc-service-tile:hover{border-color:var(--ki-color-accent);box-shadow:var(--ki-shadow-e3)}
+.kc-service-grid .kc-service-tile:nth-child(4):before{content:"";position:absolute;top:0;left:30px;width:44px;height:3px;border-radius:0 0 3px 3px;background:#C74C57}
+.kc-service-tile .kc-tile-top{color:var(--ki-color-muted)}
+.kc-muted-section{background:var(--ki-color-panel)}
+.kc-explorer{background:var(--ki-color-surface);border-color:var(--ki-color-border);box-shadow:var(--ki-shadow-e2)}
+.kc-explorer-tabs{background:var(--ki-color-panel)}
+.kc-explorer-tab.active{border-left-color:var(--ki-color-action)}
+.kc-detail li:before{background:var(--ki-color-accent)}
+.kc-service-tile h3,.kc-detail h3,.kc-value h3,.kc-about h2{color:var(--ki-color-ink)}
+
+.kc-process{background:#1A2024;color:#F5F3EE}
+.kc-process h2,.kc-process .kc-step h3{color:#F7F6F2}
+.kc-process .kc-eyebrow{color:#F18D9A}
+.kc-steps{border-top-color:#3F4C4F}
+.kc-step{border-left-color:#3F4C4F}
+.kc-step:last-child{border-right-color:#3F4C4F}
+.kc-step-no{color:#B7E2C4}
+.kc-step p{color:#CCD3D0}
+.kc-process .kc-step p{color:#CCD3D0}
+
+.qh-featured-work{background:#131A1E;color:#F7F6F2;position:relative;isolation:isolate}
+.qh-featured-work .kc-eyebrow{color:#F08D9A}
+.qh-featured-work h2{color:#F7F6F2}
+.qh-featured-work .kc-lead{color:#DFE3E0}
+.qh-featured-work .qh-truth-note{color:#C3CDCA}
+.qh-featured-work .kc-text-link{
+  display:inline-flex;align-items:center;gap:14px;
+  min-height:50px;padding:12px 22px;
+  border-radius:10px;border:1px solid #B52D43;
+  color:#FFFFFF!important;background:#B52D43;
+  font-weight:700;box-shadow:0 12px 24px rgba(0,0,0,.25);
+}
+.qh-featured-work .kc-text-link:hover{background:#99243A;border-color:#99243A;color:#FFFFFF!important}
+.qh-work-art{border-color:#416657;box-shadow:0 27px 64px rgba(0,0,0,.35)}
+.qh-featured-work .kc-eyebrow::before{background:#F08D9A;box-shadow:0 0 0 4px rgba(199,76,87,.14)}
+
+.kc-cta{background:#101418;color:#F7F6F2;border-top:3px solid #33423D}
+.kc-cta h2{color:#F7F6F2}
+.kc-cta .kc-eyebrow{color:#F18D9A}
+.kc-cta p:last-child{color:#D8DEDB}
+.kc-cta .kc-button-light{background:#B6E5C5;color:#101418!important}
+.kc-footer{background:#0B0F12;color:#E0E4E2}
+.kc-footer-brand p,.kc-footer-links,.kc-footer-bottom{color:#B5C0BD}
+.kc-footer-links strong{color:#F7F6F2}
+.kc-footer-links a:hover{color:#B6E5C5}
+.kc-footer-bottom{border-top-color:#303A3E}
+.qh-appearance select{background:#1A2327;color:#F5F3EE;border-color:#657575}
+.qh-nojs-nav{background:#101418}
+.qh-nojs-nav a{border-color:#667772}
+
+.kc-page-top,.qh-inner-hero{background:var(--ki-color-panel);color:var(--ki-color-ink)}
+.kc-page-top h1,.qh-inner-hero h1{color:var(--ki-color-ink)}
+.kc-page-top p:not(.kc-eyebrow){color:var(--ki-color-muted)}
+.kc-contact-side,.kc-form{background:var(--ki-color-surface)}
+.kc-form input,.kc-form select,.kc-form textarea{background:var(--ki-color-page);border-color:var(--ki-color-control);color:var(--ki-color-ink)}
+.kc-form input:focus,.kc-form select:focus,.kc-form textarea:focus{border-color:var(--ki-color-focus);box-shadow:0 0 0 2px rgba(48,88,200,.16)}
+.qh-art-panel{background:linear-gradient(145deg,var(--ki-color-surface),var(--ki-color-panel));border-color:var(--ki-color-border);box-shadow:var(--ki-shadow-e2)}
+.qh-scope-card,.qh-company-facts,.qh-download-links a{background:var(--ki-color-surface)}
+.qh-download-links a:hover{border-color:var(--ki-color-action);box-shadow:var(--ki-shadow-e2)}
+.qh-phase{background:var(--ki-color-surface);box-shadow:var(--ki-shadow-e1)}
+.kc-software-card{background:var(--ki-color-surface);border-radius:16px;box-shadow:var(--ki-shadow-e1)}
+.kc-example{background:var(--ki-color-surface);box-shadow:var(--ki-shadow-e1)}
+.qh-work-art{background:#101418}
+.kc-hero .qh-film-note{background:#101418;color:#F7F6F2}
+
+@media(max-width:1199px){
+ .qh-menu-backdrop{background:rgba(5,9,12,.64)}
+ .kc-header .kc-nav.is-open{
+  background:#192126;color:#F7F6F2;
+  --kc-bg:#192126;--kc-ink:#F7F6F2;--kc-muted:#BECBC5;--kc-border:#3E4B4A;
+  --kc-surface:#252F32;--kc-teal:#B6E5C5;
+  box-shadow:-18px 0 60px rgba(0,0,0,.40)
+ }
+ .kc-header .kc-nav.is-open .qh-nav-entry>a{color:#F7F6F2}
+ .kc-header .kc-nav.is-open .qh-nav-entry>a.is-current{color:#B6E5C5}
+ .kc-header .kc-nav.is-open .qh-mobile-services a{color:#F7F6F2}
+}
+@media(max-width:767px){
+ .kc-hero{background:#151B1F}
+ .kc-hero .kc-hero-copy{background:#151B1F}
+ .kc-hero>.qh-film-layer{background:#0B0F12}
+ .kc-hero .kc-hero-shade{display:none}
+ .kc-hero .kc-hero-lead{color:#DDE1DE}
+ .qh-featured-work .kc-text-link{width:max-content;max-width:100%;justify-content:center}
+}
+@media(prefers-reduced-motion:reduce){
+ .kc-service-tile:hover{transform:none}
+ .qh-featured-work .kc-text-link{transition:none}
+}
+/* END CHARCOAL PRECISION */

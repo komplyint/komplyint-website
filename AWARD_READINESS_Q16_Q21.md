@@ -93,3 +93,7 @@ The engineering redesign and responsive/video/navigation tests have been merged 
 
 ### Next review
 Open the rendered public preview, review at 390px/768px/1440px for both languages, test the film moving (currentTime must increase), check service discoverability with actual users, then decide release or correction.
+
+## Charcoal Precision visual revision — 25 October 2026
+
+Owner requested reduced green saturation and greater black/charcoal emphasis. The current source adopts a neutral-led light/dark system, charcoal video-reading panel, graphite process/featured-work section, original green illustrations with a restrained high-contrast crimson call-to-action, and a near-black footer. Human art-direction approval **remains pending**; the source commit and site screenshot artifact must be linked to this register before scoring. The old visual reference should no longer be used as a signed target. The design intent is in `docs/CHARCOAL_PRECISION_IMPLEMENTATION.md`. No competition submission or overall handbook completion is claimed.

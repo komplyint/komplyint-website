@@ -90,3 +90,9 @@ Improved the production deployment workflow to report missing Vercel credentials
 ## Published three-language brochure verification — C24, Q11
 
 The existing CI builder succeeded for source commit `fd873d3` and produced **all three real six-page PDF binaries**, an integrity-checked three-file ZIP, and 18 render previews. Bot asset commit: `60a6a00d93629316dae0f903993c9cd8ba452ea8`. The updated source contract now checks the exact committed binary signatures and ZIP directory names; Playwright additionally fetches each public PDF from the local Next.js static server, checks byte signatures, and tests the Swedish page's responsiveness at 360–1440px. Human visual sign-off remains pending. Note that the live Vercel domain has not yet published these assets.
+
+## Charcoal Precision revision — F09/F10/F12/E03, C02–C64, Q11 (25 Oct 2026)
+
+Applied the owner-directed near-black/charcoal + warm-white visual hierarchy through `src/design/tokens.json` v1.2.0 and the **existing** `src/app/handbook.css` component consumers, preserving the original logo/video and the FI/EN/SV routes and assets. The hero's reading plate, navigation, process, feature-work stage, contact CTA and footer now use charcoal instead of large green surfaces. Cards use true white/light or graphite/dark; forest green remains the primary action/accent; crimson is used in the demo CTA and small highlights, not as an entire-page fill. The previous full-bleed green mobile hero has been overridden as well.
+
+Reused: all existing Next.js components, three-language content, media, layout, tokens, CI browser harness. Newly authored: CSS art-direction changes, v1.2 token contract, browser computed-style and text-contrast regression tests, review evidence. Visual and source checks still require the referenced CI run. Manual human art-direction approval and production publication remain pending. See `docs/CHARCOAL_PRECISION_IMPLEMENTATION.md`.

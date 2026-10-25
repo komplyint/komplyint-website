@@ -75,6 +75,7 @@ jobs:
           node tests/i18n-browser.contract.mjs
           node tests/service-keyboard.contract.mjs
           node tests/theme-preference.contract.mjs
+          node tests/charcoal-theme.contract.mjs
           node tests/contact-flow.contract.mjs
           node tests/hero-media.contract.mjs
           node tests/layout-shift.diagnostics.mjs
