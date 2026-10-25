@@ -228,22 +228,28 @@ function VideoHero({lang}:{lang:Lang}){
   const [hidden,setHidden]=useState(false)
   const [userPaused,setUserPaused]=useState(false)
   const [manualPlay,setManualPlay]=useState(false)
+  const [mobileViewport,setMobileViewport]=useState(false)
 
   useEffect(()=>{
     const media=window.matchMedia('(prefers-reduced-motion: reduce)')
+    const compact=window.matchMedia('(max-width: 767px)')
+    setMobileViewport(compact.matches)
     const connection=(navigator as Navigator&{connection?:{saveData?:boolean}}).connection
     setReducedMotion(media.matches)
     setSaveData(Boolean(connection?.saveData))
     try{setUserPaused(window.sessionStorage.getItem('komplyint-video-paused')==='1')}catch{}
     const onMotion=()=>{setReducedMotion(media.matches);if(media.matches)setManualPlay(false)}
+    const onWidth=()=>setMobileViewport(compact.matches)
     const onVisibility=()=>setHidden(document.hidden)
     media.addEventListener('change',onMotion)
+    compact.addEventListener('change',onWidth)
     document.addEventListener('visibilitychange',onVisibility)
     onVisibility()
     const observer=new IntersectionObserver(entries=>setVisible(entries.some(x=>x.isIntersecting)),{threshold:0.05})
     if(frame.current)observer.observe(frame.current)
     return()=>{
       media.removeEventListener('change',onMotion)
+      compact.removeEventListener('change',onWidth)
       document.removeEventListener('visibilitychange',onVisibility)
       observer.disconnect()
     }
@@ -252,10 +258,10 @@ function VideoHero({lang}:{lang:Lang}){
   const allowPlayback=visible&&!hidden&&!userPaused&&(!reducedMotion&&!saveData||manualPlay)
   useEffect(()=>{
     if(allowPlayback&&!sourceReady)setSourceReady(true)
-  },[allowPlayback,sourceReady])
+  },[allowPlayback,sourceReady,mobileViewport])
   useEffect(()=>{
     if(sourceReady)video.current?.load()
-  },[sourceReady])
+  },[sourceReady,mobileViewport])
   useEffect(()=>{
     const el=video.current
     if(!el)return
@@ -298,7 +304,7 @@ function VideoHero({lang}:{lang:Lang}){
       onPlaying={()=>setState('playing')}
       onPause={()=>setState(previous=>previous==='error'?'error':'paused')}
       onError={()=>setState('error')}>
-      {sourceReady&&<><source src="/media/hero-optimized.mp4" type="video/mp4" /><source src="/media/hero.mp4" type="video/mp4" /></>}
+      {sourceReady&&<><source src={mobileViewport?'/media/hero-mobile.mp4':'/media/hero-optimized.mp4'} type="video/mp4" /><source src="/media/hero.mp4" type="video/mp4" /></>}
     </video>
     <div className="qh-video-controls">
       <button type="button" onClick={toggle} aria-label={state==='playing'?(lang==='fi'?'Pysäytä taustavideo':'Pause background video'):(lang==='fi'?'Toista taustavideo':'Play background video')}>
