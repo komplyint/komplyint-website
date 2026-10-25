@@ -1,0 +1,1 @@
+Copilot: read AGENTS.md, GLOBAL-AGENT-RUN-PROOF v1, before every run. Mandatory exact plan subsection, previous/current stage, core app function proof, inspected/licensed earlier code reused/adapted vs scratch, original CI/live evidence, whole-project DONE/IN PROGRESS/NOT STARTED/BLOCKED. Preserve existing independent approval and production safeguards.

@@ -1,0 +1,1 @@
+Claude: read root AGENTS.md before any work, obey GLOBAL-AGENT-RUN-PROOF v1. Each run report exact plan subpart, before/after user-relevant core function, reused/cleaned/adapted code and scratch with security/licensing proof, actual CI/deployment state, overall project progress and blockers. More restrictive original policies remain binding.
