@@ -23,7 +23,7 @@ function escapeHtml(text:string){
 function countCodePoints(text:string){return Array.from(text).length}
 function normalized(value:unknown):string{return typeof value==='string'?value.normalize('NFC').trim():''}
 function validEmail(value:string){
-  return value.length<=254 && /^[^\s@]+@[^\s@]+\.[^\s@]+$/u.test(value) && !/[\r\n]/.test(value)
+  return value.length<=254 && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value) && !/[\r\n]/.test(value)
 }
 async function boundedJson(request:NextRequest):Promise<{data:unknown}|{error:number}>{
   const declared=Number(request.headers.get('content-length')||0)
