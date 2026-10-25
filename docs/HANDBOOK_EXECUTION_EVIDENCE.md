@@ -52,3 +52,7 @@ Changed the first-time appearance choice from a forced dark theme to the handboo
 ## Component-by-component acceptance — C01-C64 / Q18
 
 Imported **all 225 explicitly numbered C01-T01 through C64-T03 style component tests** from pages 41–106 of the original PDF into `docs/handbook-component-acceptance.json`. Each test has its exact source wording, parent Cxx unit, page and initial **NOT_TESTED** result, linked back to the 170-unit register. `npm run build` checks count, unique IDs, parent references and status honesty. These 225 are not a substitute for the rest of the 1,517-item detailed acceptance/verification obligations.
+
+## Public release media and locale attestation — F20/F22/Q11/Q21
+
+Extended the existing `scripts/verify-public-release.mjs` production verifier to require the actual original vector graphics in both languages, valid optimized/mobile MP4 headers, the responsive WebP poster and the correct initial FI/EN HTML language alongside the existing release commit, routes and brochure signatures. The Node contract includes broken-media, missing-art and incorrect-language failure cases. This is a byte/availability gate; real video decoding and interaction remain separately covered by Playwright and actual production browser review.

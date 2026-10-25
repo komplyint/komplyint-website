@@ -1,10 +1,10 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
 import {
-  verifyPublicRelease, REQUIRED_DOWNLOADS, REQUIRED_PAGES,
+  verifyPublicRelease, REQUIRED_DOWNLOADS, REQUIRED_PAGES, REQUIRED_MEDIA,
 } from '../scripts/verify-public-release.mjs'
 
-function fakeResponse(path,{commit='abc123',stale=false,missing=[],badDownload=false}={}){
+function fakeResponse(path,{commit='abc123',stale=false,missing=[],badDownload=false,badMedia=false,badLocale=false}={}){
   if(missing.includes(path))return new Response('Not Found',{status:404})
   if(path==='/api/release')return Response.json({
     site:'Komplyint Oy',contract:'komplyint-handbook-2026-10-25',commit,
@@ -15,9 +15,20 @@ function fakeResponse(path,{commit='abc123',stale=false,missing=[],badDownload=f
     data.write(badDownload?'FAIL':download[1])
     return new Response(data,{status:200})
   }
+  const media=REQUIRED_MEDIA.find(row=>row[0]===path)
+  if(media){
+    if(media[1]==='svg')return new Response(badMedia?'<bad />':'<svg xmlns="http://www.w3.org/2000/svg">'+media[2]+'</svg>')
+    const buf=Buffer.alloc(1200)
+    if(!badMedia){
+      if(media[1]==='mp4')buf.write('ftyp',4)
+      if(media[1]==='webp'){buf.write('RIFF',0);buf.write('WEBP',8)}
+    }
+    return new Response(buf)
+  }
   const phrases=REQUIRED_PAGES.find(row=>row[0]===path)?.[1]||[]
   const body=phrases.join(' / ')+(stale&&path==='/'?' Teknologiaa, joka helpottaa oikeaa työtä.':'')
-  return new Response(body,{status:200,headers:{'Content-Type':'text/html; charset=utf-8'}})
+  const lang=path.startsWith('/en')&&!badLocale?'en':'fi'
+  return new Response('<html lang="'+lang+'"><body>'+body+'</body></html>',{status:200,headers:{'Content-Type':'text/html; charset=utf-8'}})
 }
 function fetcher(options={}) {
   return async url=>fakeResponse(new URL(url).pathname,options)
@@ -27,7 +38,7 @@ test('all current bilingual pages and real download signatures satisfy the relea
   const result=await verifyPublicRelease({fetcher:fetcher(),origin:'https://www.komplyint.fi',expectedCommit:'abc123'})
   assert.equal(result.pass,true)
   assert.equal(result.commitVerified,true)
-  assert.equal(result.checks.length,1+REQUIRED_PAGES.length+REQUIRED_DOWNLOADS.length)
+  assert.equal(result.checks.length,1+REQUIRED_PAGES.length+REQUIRED_DOWNLOADS.length+REQUIRED_MEDIA.length)
 })
 test('a previous homepage is rejected even if it has some similar service content',async()=>{
   const result=await verifyPublicRelease({fetcher:fetcher({stale:true})})
@@ -53,4 +64,18 @@ test('when Git integration does not expose the commit, require the deployed cont
   const result=await verifyPublicRelease({fetcher:fetcher({commit:null}),expectedCommit:'new-commit'})
   assert.equal(result.pass,true)
   assert.equal(result.commitVerified,false)
+})
+
+test('missing original-feature art or an optimized film fails production release',async()=>{
+  const missing=await verifyPublicRelease({fetcher:fetcher({missing:['/media/featured-reporting-art-fi.svg']})})
+  assert.equal(missing.pass,false)
+  assert.match(missing.problems.join(' '),/featured-reporting-art-fi/)
+  const bad=await verifyPublicRelease({fetcher:fetcher({badMedia:true})})
+  assert.equal(bad.pass,false)
+  assert.equal(bad.problems.length,REQUIRED_MEDIA.length)
+})
+test('the production verifier rejects an English page served with Finnish initial document language',async()=>{
+  const result=await verifyPublicRelease({fetcher:fetcher({badLocale:true})})
+  assert.equal(result.pass,false)
+  assert.ok(result.problems.some(x=>x.includes('incorrect SSR document language')))
 })

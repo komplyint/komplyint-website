@@ -18,6 +18,13 @@ export const REQUIRED_DOWNLOADS = [
   ['/downloads/Komplyint_Service_Portfolio_EN.pdf', '%PDF'],
   ['/downloads/Komplyint_Service_Documents.zip', 'PK'],
 ]
+export const REQUIRED_MEDIA = [
+  ['/media/featured-reporting-art.svg', 'svg', 'CONCEPT EXAMPLE'],
+  ['/media/featured-reporting-art-fi.svg', 'svg', 'ESIMERKKIKUVA'],
+  ['/media/hero-optimized.mp4', 'mp4'],
+  ['/media/hero-mobile.mp4', 'mp4'],
+  ['/media/hero-mobile.webp', 'webp'],
+]
 const RELEASE_CONTRACT='komplyint-handbook-2026-10-25'
 
 export async function verifyPublicRelease({
@@ -66,6 +73,8 @@ export async function verifyPublicRelease({
     await checked('page '+path,path,async response=>{
       const html=await response.text()
       for(const phrase of phrases)assert.ok(html.includes(phrase),'missing content: '+phrase)
+      const expectedLang=path==='/en'||path.startsWith('/en/')?'en':'fi'
+      assert.match(html,new RegExp('<html[^>]*\\\\blang="'+expectedLang+'"'),'incorrect SSR document language: '+path)
       if(path==='/'){
         assert.ok(!html.includes('Teknologiaa, joka helpottaa oikeaa työtä.'),
           'stale pre-handbook homepage still deployed')
@@ -79,6 +88,25 @@ export async function verifyPublicRelease({
       assert.ok(buffer.byteLength>=1000,'download is empty or placeholder')
       const prefix=Buffer.from(buffer.slice(0,signature.length)).toString('ascii')
       assert.equal(prefix,signature,'download is not the expected file type')
+    })
+  }
+  // F20/F22/Q11: the public release must actually serve custom artwork and
+  // both original-derived hero media formats. A commit hash alone is insufficient.
+  for(const [path,kind,marker] of REQUIRED_MEDIA){
+    await checked('media '+path,path,async response=>{
+      const bytes=Buffer.from(await response.arrayBuffer())
+      assert.ok(bytes.length>=200,'missing or placeholder media')
+      if(kind==='svg'){
+        const source=bytes.toString('utf8')
+        assert.match(source,/<svg\\b/)
+        assert.ok(source.includes(marker),'missing localized illustration label')
+      }else if(kind==='mp4'){
+        assert.ok(bytes.length>=1000,'empty hero film')
+        assert.equal(bytes.subarray(4,8).toString('ascii'),'ftyp','invalid MP4 brand')
+      }else if(kind==='webp'){
+        assert.equal(bytes.subarray(0,4).toString('ascii'),'RIFF','invalid WebP container')
+        assert.equal(bytes.subarray(8,12).toString('ascii'),'WEBP','invalid WebP type')
+      }
     })
   }
   return {pass:problems.length===0,origin,releaseCommit,
