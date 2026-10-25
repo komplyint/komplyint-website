@@ -60,3 +60,9 @@ Extended the existing `scripts/verify-public-release.mjs` production verifier to
 ## Work page illustration family — F19/F20/C23
 
 Added three original, editable SVG-in-React compositions for the existing honest demonstration scenarios: Excel reporting, request workflow automation, and website functional review. They share the established green/charcoal/crimson art direction, remain decorative to assistive technology, carry no fabricated client values, and sit under the already-present demonstration disclaimer. The browser quality workflow now asserts all three visuals render and captures a dedicated work-gallery screenshot.
+
+## Contact request contract — E08/E09/E11
+
+The existing Next.js contact API now reads request bodies with an actual 32KB bound before JSON parsing; normalizes Unicode input, validates email, six stable service keys and FI/EN locale, enforces message code-point limits and returns structured 422 field failures. The email recipient remains server-controlled. The existing SMTP acceptance requirement, escaping and honeypot are preserved. The form now sends independent service/locale fields, surfaces 422/429/unknown statuses and preserves drafts on failures. Browser tests intercept the endpoint and use fictional data only.
+
+The process-local idempotency key cache is explicitly best-effort; **distributed durable idempotency, anti-abuse coordination across instances and real inbox delivery remain operational NOT_TESTED gates**, not claimed complete.
