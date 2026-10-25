@@ -36,3 +36,7 @@ The actual 191-page PDF table of contents has been normalized into `docs/handboo
 Replaced the unused pre-redesign site selectors in `src/app/globals.css` with a minimal reset. The scoped `kc-*` and `qh-*` styling still comes from the existing `commercial.css` and `handbook.css` (no new CSS engine). This eliminates the obsolete bare `section` rule and conflicting `.hero`, `.header`, `.card`, `.footer` and `.contact` declarations from the production CSS. Structural checks run during `npm run build`; responsive visual-parity checks are required before marking E02 complete.
 
 GitHub quality CI now cancels superseded runs on the same ref so the latest main build gets the evidence without wasting execution time.
+
+## Service and contact component extraction — C20/C27/C35 / E02
+
+Moved `SectionIntro`, `ServiceExplorer` and the actual inquiry `ContactForm` out of the public routing monolith while retaining the existing service catalogue and `/api/contact` backend. Added keyboard-operable service tabs (Arrow keys, Home, End, roving Tab order and labelled active panel) and both-locale browser regression evidence. Contact form validation, submitted data, labels, error states, anti-spam field and links are reused verbatim; live inbox delivery still requires independent end-to-end proof.

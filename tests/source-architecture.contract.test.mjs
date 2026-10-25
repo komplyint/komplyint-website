@@ -5,7 +5,7 @@ import { readFileSync, existsSync } from 'node:fs'
 // E02/C20: enforce reuse of the real component library instead of duplicating
 // feature/film/graphic JSX in the monolithic public routing component.
 const page=readFileSync('src/app/page.tsx','utf8')
-const names=['Arrow','FeaturedWork','PublicBrochures','ServiceCard','VideoHero']
+const names=['Arrow','FeaturedWork','PublicBrochures','ServiceCard','VideoHero','SectionIntro','ServiceExplorer']
 for(const name of names){
   test(name+' is extracted and imported by the public app',()=>{
     assert.equal(existsSync('src/components/'+name+'.tsx'),true)
