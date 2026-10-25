@@ -1,0 +1,28 @@
+name: Website preview quality checks
+on:
+  push:
+    branches:
+      - feature/digital-services-redesign-20261025
+  pull_request:
+    branches:
+      - main
+permissions:
+  contents: read
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Validate legacy JavaScript
+        run: |
+          node --check frontend/src/modern.js
+          node --check frontend/server.js
+          node --check backend/app/main.js
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+      - name: Test public routes and build production Next.js
+        run: npm run build
