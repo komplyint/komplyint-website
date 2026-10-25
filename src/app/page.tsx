@@ -29,6 +29,8 @@ export default function KomplyintWebsite() {
   const pathParts=pathname.replace(/^\/en(?=\/|$)/,'').split('/').filter(Boolean)
   const serviceIndex=page==='services' && pathParts.length===2 ? serviceSlugs.indexOf(pathParts[1] as typeof serviceSlugs[number]) : -1
   const [menuOpen, setMenuOpen] = useState(false)
+  const menuRef=useRef<HTMLElement>(null)
+  const menuTrigger=useRef<HTMLButtonElement>(null)
   const [appearance, setAppearance] = useState<'dark'|'light'|'system'>('dark')
   useEffect(() => {
     let next:'dark'|'light'|'system'='dark'
@@ -36,6 +38,36 @@ export default function KomplyintWebsite() {
     setAppearance(next)
   }, [])
   useEffect(() => { setMenuOpen(false) }, [pathname])
+  useEffect(()=>{
+    if(!menuOpen)return
+    const previousOverflow=document.body.style.overflow
+    const main=document.getElementById('main-content')
+    const footer=document.querySelector('footer.kc-footer')
+    const mainAlreadyInert=main?.hasAttribute('inert')
+    const footerAlreadyInert=footer?.hasAttribute('inert')
+    main?.setAttribute('inert','')
+    footer?.setAttribute('inert','')
+    document.body.style.overflow='hidden'
+    menuRef.current?.querySelector<HTMLButtonElement>('.qh-menu-close')?.focus()
+    function onKeyDown(event:KeyboardEvent){
+      if(event.key==='Escape'){event.preventDefault();setMenuOpen(false);return}
+      if(event.key!=='Tab'||!menuRef.current)return
+      const focusables=Array.from(menuRef.current.querySelectorAll<HTMLElement>('a[href],button:not([disabled]),select,summary'))
+        .filter(node=>node.getClientRects().length>0)
+      if(!focusables.length)return
+      const first=focusables[0],last=focusables[focusables.length-1]
+      if(event.shiftKey&&document.activeElement===first){event.preventDefault();last.focus()}
+      else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first.focus()}
+    }
+    document.addEventListener('keydown',onKeyDown)
+    return()=>{
+      document.removeEventListener('keydown',onKeyDown)
+      document.body.style.overflow=previousOverflow
+      if(!mainAlreadyInert)main?.removeAttribute('inert')
+      if(!footerAlreadyInert)footer?.removeAttribute('inert')
+      menuTrigger.current?.focus()
+    }
+  },[menuOpen])
   useEffect(() => {
     const dark=appearance==='dark'||(appearance==='system'&&window.matchMedia('(prefers-color-scheme: dark)').matches)
     document.documentElement.classList.toggle('dark',dark)
@@ -64,14 +96,25 @@ export default function KomplyintWebsite() {
           <a href={pathFor(lang, 'home')} className="kc-logo-link" aria-label="Komplyint Oy">
             <img src="/logo.svg" className="kc-logo" alt="Komplyint Oy" />
           </a>
-          <nav className={menuOpen ? 'main-nav kc-nav is-open' : 'main-nav kc-nav'} aria-label={lang === 'fi' ? 'Päänavigaatio' : 'Main navigation'}>
+          {menuOpen&&<div className="qh-menu-backdrop" aria-hidden="true" onClick={()=>setMenuOpen(false)}/>}
+          <nav id="komplyint-primary-navigation" ref={menuRef}
+            className={menuOpen ? 'main-nav kc-nav is-open' : 'main-nav kc-nav'}
+            role={menuOpen?'dialog':undefined}
+            aria-modal={menuOpen?'true':undefined}
+            aria-label={lang === 'fi' ? 'Päänavigaatio' : 'Main navigation'}>
+            <div className="qh-mobile-menu-head"><span>Komplyint Oy</span><button className="qh-menu-close" type="button" onClick={()=>setMenuOpen(false)}>{lang==='fi'?'Sulje':'Close'} <span aria-hidden="true">×</span></button></div>
             {navPages.map((item) => <span className="qh-nav-entry" key={item}><a href={pathFor(lang, item)} className={page === item ? 'is-current' : ''} aria-current={page === item ? 'page' : undefined}>{t.navigation[item]}</a>{item==='services'&&<details className="qh-service-menu"><summary aria-label={lang==='fi'?'Näytä palveluluokat':'Show service categories'}>⌄</summary><div className="qh-mega"><span className="qh-mega-eyebrow">{lang==='fi'?'VALITSE PALVELU':'CHOOSE A SERVICE'}</span>{services[lang].map((svc,i)=><a key={serviceSlugs[i]} href={pathFor(lang,'services')+'/'+serviceSlugs[i]}><b>{String(i+1).padStart(2,'0')}</b><span>{svc.title}</span><span aria-hidden="true">↗</span></a>)}</div></details>}</span>)}
+            <div className="qh-mobile-services"><p>{lang==='fi'?'Palvelualueet':'Service areas'}</p>{services[lang].map((svc,i)=><a href={pathFor(lang,'services')+'/'+serviceSlugs[i]} key={serviceSlugs[i]}>{svc.title}<Arrow/></a>)}</div>
+            <div className="qh-mobile-utilities">
+              <button type="button" onClick={switchLanguage}>{lang==='fi'?'English / EN':'Suomi / FI'}</button>
+              <label>{lang==='fi'?'Ulkoasu':'Appearance'}<select value={appearance} onChange={e=>setTheme(e.target.value as 'dark'|'light'|'system')}><option value="dark">{lang==='fi'?'Tumma':'Dark'}</option><option value="light">{lang==='fi'?'Vaalea':'Light'}</option><option value="system">{lang==='fi'?'Järjestelmän mukaan':'System'}</option></select></label>
+            </div>
           </nav>
           <div className="kc-actions">
             <button className="kc-language" type="button" onClick={switchLanguage} aria-label={lang === 'fi' ? 'EN — Switch to English' : 'FI — Vaihda suomeksi'}>{lang === 'fi' ? 'EN' : 'FI'}</button>
             
             <a href={pathFor(lang,'contact')} className="kc-header-cta">{t.contactButton}<Arrow /></a>
-            <button className="kc-mobile-toggle" type="button" onClick={() => setMenuOpen(!menuOpen)} aria-expanded={menuOpen} aria-label={t.navigation.menu}><span /><span /><span /></button>
+            <button className="kc-mobile-toggle" ref={menuTrigger} type="button" onClick={() => setMenuOpen(!menuOpen)} aria-expanded={menuOpen} aria-controls="komplyint-primary-navigation" aria-label={t.navigation.menu}><span /><span /><span /></button>
           </div>
         </div>
       </header>
