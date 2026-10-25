@@ -13,6 +13,10 @@ const publicFiles = [
   'src/app/contact/page.tsx','src/app/en/contact/page.tsx',
   'src/app/privacy/page.tsx','src/app/en/privacy/page.tsx',
   'frontend/src/index.html','frontend/src/app.js',
+  'src/app/work/page.tsx','src/app/en/work/page.tsx',
+  'src/app/about/page.tsx','src/app/en/about/page.tsx',
+  'src/app/accessibility/page.tsx','src/app/en/accessibility/page.tsx',
+  'src/app/services/[slug]/page.tsx','src/app/en/services/[slug]/page.tsx',
 ]
 const forbidden = [
   [/auth\.komplyint\.fi/i, 'central identity provider'],
@@ -22,8 +26,8 @@ const forbidden = [
   [/(?:<form[^>]+(?:password|login)|<input[^>]+type\s*=\s*['"]password['"])/i, 'password form'],
 ]
 test('public bilingual site has its intended navigation and contact route', () => {
-  const home = source('src/app/page.tsx')
-  for (const p of ['home', 'services', 'software', 'contact', 'privacy']) {
+  const home = source('src/app/page.tsx') + source('src/lib/commercial.ts')
+  for (const p of ['home', 'services', 'software', 'work', 'about', 'contact', 'privacy','accessibility']) {
     assert.ok(home.includes("'"+p+"'"), 'missing public route '+p)
   }
   assert.match(home,/className=\{menuOpen \? 'main-nav kc-nav is-open'/)
@@ -42,7 +46,7 @@ test('brand assets remain untouched and original motion video is used', () => {
   assert.match(css,/prefers-reduced-motion/)
 })
 test('primary sales focus is practical services rather than compliance consultancy', () => {
-  const home=source('src/app/page.tsx')
+  const home=source('src/app/page.tsx')+source('src/lib/commercial.ts')
   for(const term of ['Power BI','Power Automate','Software testing','Ohjelmistotestaus','data','automation']) {
     assert.ok(home.includes(term),'missing service coverage '+term)
   }
@@ -54,3 +58,9 @@ for(const path of publicFiles){
     for(const [pattern,what] of forbidden) assert.doesNotMatch(file,pattern,path+' contains '+what)
   })
 }
+
+test('handbook requirements: contact and D-U-N-S identity are consistent',()=>{
+  const c=source('src/lib/commercial.ts'); const route=source('src/app/api/contact/route.ts');
+  assert.match(c,/info@komplyint\.fi/);assert.match(c,/369283279/);
+  assert.match(route,/info@komplyint\.fi/);assert.doesNotMatch(route,/gliavex@/);
+})
