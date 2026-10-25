@@ -1,14 +1,14 @@
 /* Komplyint Quiet Precision — handbook v1.0
    Reuses existing Next.js components and accessible shadcn/Radix tab conventions.
    Original logo and hero film remain unmodified. All art is original vector/CSS. */
-/* Keep first-paint layout deterministic. Do not block the critical mobile hero rules on an external font stylesheet. The EB Garamond/Lato declarations retain system-serif/sans fallbacks. */
+/* F15-F18: next/font/google downloads and self-hosts real EB Garamond and Lato files at build time. CSS fallback remains readable. */
 :root{color-scheme:dark}
 html{scroll-behavior:smooth}
 html.dark{color-scheme:dark;background:#0D1E17}
 html:not(.dark){color-scheme:light;background:#F7F8F4}
-.kc-root{--kc-bg:#F7F8F4;--kc-surface:#EAF0E9;--kc-ink:#14291F;--kc-muted:#526257;--kc-border:#D9E1D8;--kc-teal:#124C35;--kc-deep:#124C35;--kc-accent:#6EA78A;--kc-white:#fff;background:var(--kc-bg);color:var(--kc-ink);font-family:Lato,Arial,sans-serif;font-size:18px;line-height:1.65}
+.kc-root{--kc-bg:#F7F8F4;--kc-surface:#EAF0E9;--kc-ink:#14291F;--kc-muted:#526257;--kc-border:#D9E1D8;--kc-teal:#124C35;--kc-deep:#124C35;--kc-accent:#6EA78A;--kc-white:#fff;background:var(--kc-bg);color:var(--kc-ink);font-family:var(--font-lato),Lato,Arial,sans-serif;font-size:18px;line-height:1.65}
 .dark .kc-root{--kc-bg:#0D1E17;--kc-surface:#172B21;--kc-ink:#F3F6EE;--kc-muted:#BACBBC;--kc-border:#385343;--kc-teal:#B6E8B9;--kc-deep:#0D1E17;--kc-accent:#9FCFA8;background:var(--kc-bg);color:var(--kc-ink)}
-.kc-root h1,.kc-root h2,.kc-root .kc-intro h2,.kc-root .kc-cta h2,.kc-root .kc-about h2,.kc-root .kc-page-top h1,.kc-root .qh-service-page h1{font-family:"EB Garamond",Georgia,serif;font-weight:400;letter-spacing:-.012em;line-height:1.1}
+.kc-root h1,.kc-root h2,.kc-root .kc-intro h2,.kc-root .kc-cta h2,.kc-root .kc-about h2,.kc-root .kc-page-top h1,.kc-root .qh-service-page h1{font-family:var(--font-eb-garamond),"EB Garamond",Georgia,serif;font-weight:400;letter-spacing:-.012em;line-height:1.1}
 .kc-root h3,.kc-root h4{font-family:Lato,Arial,sans-serif;letter-spacing:0;line-height:1.32}
 .kc-root p{line-height:1.66}
 .kc-shell{width:min(1280px,calc(100% - 96px))}

@@ -1,8 +1,15 @@
 import type { Metadata } from 'next'
+import { headers } from 'next/headers'
+import { EB_Garamond, Lato } from 'next/font/google'
 import './globals.css'
 import './commercial.css'
 import './handbook.css'
 import LangSetter from './LangSetter'
+
+// F15-F18: real, build-time self-hosted font files with immutable Next.js URLs.
+// Only the required upright EB Garamond and Lato 400/700 weights are preloaded.
+const displayFont = EB_Garamond({ subsets: ['latin'], weight: ['400'], style: ['normal'], display: 'swap', variable: '--font-eb-garamond' })
+const bodyFont = Lato({ subsets: ['latin'], weight: ['400', '700'], style: ['normal'], display: 'swap', variable: '--font-lato' })
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.komplyint.fi'),
@@ -28,8 +35,12 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  // F07/T12: locale must be correct in *server HTML*, not only after React hydrates.
+  // Middleware always overrides the incoming locale header; client navigation is
+  // still handled by LangSetter after a language switch.
+  const locale = headers().get('x-komplyint-locale') === 'en' ? 'en' : 'fi'
   return (
-    <html lang="fi" className="dark" suppressHydrationWarning>
+    <html lang={locale} className={`${displayFont.variable} ${bodyFont.variable} dark`} suppressHydrationWarning>
       <head><script dangerouslySetInnerHTML={{__html:`(function(){try{var v=localStorage.getItem('komplyint-theme')||'dark';var d=v==='dark'||(v==='system'&&matchMedia('(prefers-color-scheme: dark)').matches);document.documentElement.classList.toggle('dark',d);document.documentElement.style.colorScheme=d?'dark':'light'}catch(e){}})();`}}/></head>
       <body>
         <LangSetter />
