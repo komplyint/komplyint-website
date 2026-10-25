@@ -72,9 +72,16 @@ try{
   const hit=await playButton.evaluate(button=>{
     const r=button.getBoundingClientRect()
     const target=document.elementFromPoint(r.left+r.width/2,r.top+r.height/2)
-    return target===button||button.contains(target)
+    return {
+      clickable:target===button||button.contains(target),
+      buttonRect:{x:r.x,y:r.y,width:r.width,height:r.height},
+      viewport:{height:window.innerHeight,width:window.innerWidth},
+      target:target instanceof Element?target.tagName+'.'+target.className:null,
+      zIndex:getComputedStyle(button.closest('.qh-video-controls')).zIndex,
+    }
   })
-  assert.equal(hit,true,'Desktop Play control must be above hero text and overlays for actual pointer clicks')
+  assert.equal(hit.clickable,true,'Desktop Play must be clickable without scrolling: '+JSON.stringify(hit))
+  assert.ok(hit.buttonRect.y>=0&&hit.buttonRect.y+hit.buttonRect.height<=hit.viewport.height,'Desktop Play must be visible within first viewport')
   await playButton.click()
   await manualPage.waitForFunction(()=>{
     const v=document.querySelector('.kc-hero-video')
