@@ -218,7 +218,13 @@
       "page": 41,
       "verification": "NOT_TESTED",
       "implementation_evidence": [],
-      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping.",
+      "explicit_acceptance_test_ids": [
+        "C01-T01",
+        "C01-T02",
+        "C01-T03",
+        "C01-T04"
+      ]
     },
     {
       "id": "C02",
@@ -226,7 +232,13 @@
       "page": 42,
       "verification": "NOT_TESTED",
       "implementation_evidence": [],
-      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping.",
+      "explicit_acceptance_test_ids": [
+        "C02-T01",
+        "C02-T02",
+        "C02-T03",
+        "C02-T04"
+      ]
     },
     {
       "id": "C03",
@@ -234,7 +246,12 @@
       "page": 43,
       "verification": "NOT_TESTED",
       "implementation_evidence": [],
-      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping.",
+      "explicit_acceptance_test_ids": [
+        "C03-T01",
+        "C03-T02",
+        "C03-T03"
+      ]
     },
     {
       "id": "C04",
@@ -242,7 +259,13 @@
       "page": 44,
       "verification": "NOT_TESTED",
       "implementation_evidence": [],
-      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping.",
+      "explicit_acceptance_test_ids": [
+        "C04-T01",
+        "C04-T02",
+        "C04-T03",
+        "C04-T04"
+      ]
     },
     {
       "id": "C05",
@@ -250,7 +273,12 @@
       "page": 45,
       "verification": "NOT_TESTED",
       "implementation_evidence": [],
-      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping.",
+      "explicit_acceptance_test_ids": [
+        "C05-T01",
+        "C05-T02",
+        "C05-T03"
+      ]
     },
     {
       "id": "C06",
@@ -258,7 +286,13 @@
       "page": 46,
       "verification": "NOT_TESTED",
       "implementation_evidence": [],
-      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping.",
+      "explicit_acceptance_test_ids": [
+        "C06-T01",
+        "C06-T02",
+        "C06-T03",
+        "C06-T04"
+      ]
     },
     {
       "id": "C07",
@@ -266,7 +300,13 @@
       "page": 47,
       "verification": "NOT_TESTED",
       "implementation_evidence": [],
-      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping.",
+      "explicit_acceptance_test_ids": [
+        "C07-T01",
+        "C07-T02",
+        "C07-T03",
+        "C07-T04"
+      ]
     },
     {
       "id": "C08",
@@ -274,7 +314,13 @@
       "page": 48,
       "verification": "NOT_TESTED",
       "implementation_evidence": [],
-      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping.",
+      "explicit_acceptance_test_ids": [
+        "C08-T01",
+        "C08-T02",
+        "C08-T03",
+        "C08-T04"
+      ]
     },
     {
       "id": "C09",
@@ -282,7 +328,13 @@
       "page": 49,
       "verification": "NOT_TESTED",
       "implementation_evidence": [],
-      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping.",
+      "explicit_acceptance_test_ids": [
+        "C09-T01",
+        "C09-T02",
+        "C09-T03",
+        "C09-T04"
+      ]
     },
     {
       "id": "C10",
@@ -290,7 +342,12 @@
       "page": 50,
       "verification": "NOT_TESTED",
       "implementation_evidence": [],
-      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping.",
+      "explicit_acceptance_test_ids": [
+        "C10-T01",
+        "C10-T02",
+        "C10-T03"
+      ]
     },
     {
       "id": "C11",
@@ -301,7 +358,13 @@
         "src/app/page.tsx",
         "src/app/handbook.css"
       ],
-      "implementation_note": "Relevant code or test exists. Full handbook acceptance is not established."
+      "implementation_note": "Relevant code or test exists. Full handbook acceptance is not established.",
+      "explicit_acceptance_test_ids": [
+        "C11-T01",
+        "C11-T02",
+        "C11-T03",
+        "C11-T04"
+      ]
     },
     {
       "id": "C12",
@@ -312,7 +375,13 @@
         "src/components/VideoHero.tsx",
         "tests/hero-media.contract.mjs"
       ],
-      "implementation_note": "Relevant code or test exists. Full handbook acceptance is not established."
+      "implementation_note": "Relevant code or test exists. Full handbook acceptance is not established.",
+      "explicit_acceptance_test_ids": [
+        "C12-T01",
+        "C12-T02",
+        "C12-T03",
+        "C12-T04"
+      ]
     },
     {
       "id": "C13",
@@ -323,7 +392,13 @@
         "src/components/VideoHero.tsx",
         "tests/hero-media.contract.mjs"
       ],
-      "implementation_note": "Relevant code or test exists. Full handbook acceptance is not established."
+      "implementation_note": "Relevant code or test exists. Full handbook acceptance is not established.",
+      "explicit_acceptance_test_ids": [
+        "C13-T01",
+        "C13-T02",
+        "C13-T03",
+        "C13-T04"
+      ]
     },
     {
       "id": "C14",
@@ -331,7 +406,12 @@
       "page": 54,
       "verification": "NOT_TESTED",
       "implementation_evidence": [],
-      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping.",
+      "explicit_acceptance_test_ids": [
+        "C14-T01",
+        "C14-T02",
+        "C14-T03"
+      ]
     },
     {
       "id": "C15",
@@ -339,7 +419,13 @@
       "page": 55,
       "verification": "NOT_TESTED",
       "implementation_evidence": [],
-      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping.",
+      "explicit_acceptance_test_ids": [
+        "C15-T01",
+        "C15-T02",
+        "C15-T03",
+        "C15-T04"
+      ]
     },
     {
       "id": "C16",
@@ -347,7 +433,12 @@
       "page": 56,
       "verification": "NOT_TESTED",
       "implementation_evidence": [],
-      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping.",
+      "explicit_acceptance_test_ids": [
+        "C16-T01",
+        "C16-T02",
+        "C16-T03"
+      ]
     },
     {
       "id": "C17",
@@ -355,7 +446,12 @@
       "page": 57,
       "verification": "NOT_TESTED",
       "implementation_evidence": [],
-      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping.",
+      "explicit_acceptance_test_ids": [
+        "C17-T01",
+        "C17-T02",
+        "C17-T03"
+      ]
     },
     {
       "id": "C18",
@@ -363,7 +459,12 @@
       "page": 58,
       "verification": "NOT_TESTED",
       "implementation_evidence": [],
-      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping.",
+      "explicit_acceptance_test_ids": [
+        "C18-T01",
+        "C18-T02",
+        "C18-T03"
+      ]
     },
     {
       "id": "C19",
@@ -371,7 +472,12 @@
       "page": 59,
       "verification": "NOT_TESTED",
       "implementation_evidence": [],
-      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping.",
+      "explicit_acceptance_test_ids": [
+        "C19-T01",
+        "C19-T02",
+        "C19-T03"
+      ]
     },
     {
       "id": "C20",
@@ -382,7 +488,13 @@
         "src/components/ServiceCard.tsx",
         "tests/source-architecture.contract.test.mjs"
       ],
-      "implementation_note": "Relevant code or test exists. Full handbook acceptance is not established."
+      "implementation_note": "Relevant code or test exists. Full handbook acceptance is not established.",
+      "explicit_acceptance_test_ids": [
+        "C20-T01",
+        "C20-T02",
+        "C20-T03",
+        "C20-T04"
+      ]
     },
     {
       "id": "C21",
@@ -390,7 +502,12 @@
       "page": 62,
       "verification": "NOT_TESTED",
       "implementation_evidence": [],
-      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping.",
+      "explicit_acceptance_test_ids": [
+        "C21-T01",
+        "C21-T02",
+        "C21-T03"
+      ]
     },
     {
       "id": "C22",
@@ -398,7 +515,13 @@
       "page": 63,
       "verification": "NOT_TESTED",
       "implementation_evidence": [],
-      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping.",
+      "explicit_acceptance_test_ids": [
+        "C22-T01",
+        "C22-T02",
+        "C22-T03",
+        "C22-T04"
+      ]
     },
     {
       "id": "C23",
@@ -406,7 +529,12 @@
       "page": 65,
       "verification": "NOT_TESTED",
       "implementation_evidence": [],
-      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping.",
+      "explicit_acceptance_test_ids": [
+        "C23-T01",
+        "C23-T02",
+        "C23-T03"
+      ]
     },
     {
       "id": "C24",
@@ -414,7 +542,12 @@
       "page": 66,
       "verification": "NOT_TESTED",
       "implementation_evidence": [],
-      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping.",
+      "explicit_acceptance_test_ids": [
+        "C24-T01",
+        "C24-T02",
+        "C24-T03"
+      ]
     },
     {
       "id": "C25",
@@ -422,7 +555,12 @@
       "page": 67,
       "verification": "NOT_TESTED",
       "implementation_evidence": [],
-      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping.",
+      "explicit_acceptance_test_ids": [
+        "C25-T01",
+        "C25-T02",
+        "C25-T03"
+      ]
     },
     {
       "id": "C26",
@@ -430,7 +568,13 @@
       "page": 68,
       "verification": "NOT_TESTED",
       "implementation_evidence": [],
-      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping.",
+      "explicit_acceptance_test_ids": [
+        "C26-T01",
+        "C26-T02",
+        "C26-T03",
+        "C26-T04"
+      ]
     },
     {
       "id": "C27",
@@ -438,7 +582,13 @@
       "page": 69,
       "verification": "NOT_TESTED",
       "implementation_evidence": [],
-      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping.",
+      "explicit_acceptance_test_ids": [
+        "C27-T01",
+        "C27-T02",
+        "C27-T03",
+        "C27-T04"
+      ]
     },
     {
       "id": "C28",
@@ -446,7 +596,12 @@
       "page": 70,
       "verification": "NOT_TESTED",
       "implementation_evidence": [],
-      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping.",
+      "explicit_acceptance_test_ids": [
+        "C28-T01",
+        "C28-T02",
+        "C28-T03"
+      ]
     },
     {
       "id": "C29",
@@ -454,7 +609,12 @@
       "page": 71,
       "verification": "NOT_TESTED",
       "implementation_evidence": [],
-      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping.",
+      "explicit_acceptance_test_ids": [
+        "C29-T01",
+        "C29-T02",
+        "C29-T03"
+      ]
     },
     {
       "id": "C30",
@@ -462,7 +622,12 @@
       "page": 72,
       "verification": "NOT_TESTED",
       "implementation_evidence": [],
-      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping.",
+      "explicit_acceptance_test_ids": [
+        "C30-T01",
+        "C30-T02",
+        "C30-T03"
+      ]
     },
     {
       "id": "C31",
@@ -470,7 +635,12 @@
       "page": 73,
       "verification": "NOT_TESTED",
       "implementation_evidence": [],
-      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping.",
+      "explicit_acceptance_test_ids": [
+        "C31-T01",
+        "C31-T02",
+        "C31-T03"
+      ]
     },
     {
       "id": "C32",
@@ -478,7 +648,12 @@
       "page": 74,
       "verification": "NOT_TESTED",
       "implementation_evidence": [],
-      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping.",
+      "explicit_acceptance_test_ids": [
+        "C32-T01",
+        "C32-T02",
+        "C32-T03"
+      ]
     },
     {
       "id": "C33",
@@ -486,7 +661,12 @@
       "page": 75,
       "verification": "NOT_TESTED",
       "implementation_evidence": [],
-      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping.",
+      "explicit_acceptance_test_ids": [
+        "C33-T01",
+        "C33-T02",
+        "C33-T03"
+      ]
     },
     {
       "id": "C34",
@@ -494,7 +674,13 @@
       "page": 76,
       "verification": "NOT_TESTED",
       "implementation_evidence": [],
-      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping.",
+      "explicit_acceptance_test_ids": [
+        "C34-T01",
+        "C34-T02",
+        "C34-T03",
+        "C34-T04"
+      ]
     },
     {
       "id": "C35",
@@ -502,7 +688,13 @@
       "page": 77,
       "verification": "NOT_TESTED",
       "implementation_evidence": [],
-      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping.",
+      "explicit_acceptance_test_ids": [
+        "C35-T01",
+        "C35-T02",
+        "C35-T03",
+        "C35-T04"
+      ]
     },
     {
       "id": "C36",
@@ -510,7 +702,12 @@
       "page": 78,
       "verification": "NOT_TESTED",
       "implementation_evidence": [],
-      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping.",
+      "explicit_acceptance_test_ids": [
+        "C36-T01",
+        "C36-T02",
+        "C36-T03"
+      ]
     },
     {
       "id": "C37",
@@ -518,7 +715,13 @@
       "page": 79,
       "verification": "NOT_TESTED",
       "implementation_evidence": [],
-      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping.",
+      "explicit_acceptance_test_ids": [
+        "C37-T01",
+        "C37-T02",
+        "C37-T03",
+        "C37-T04"
+      ]
     },
     {
       "id": "C38",
@@ -526,7 +729,13 @@
       "page": 80,
       "verification": "NOT_TESTED",
       "implementation_evidence": [],
-      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping.",
+      "explicit_acceptance_test_ids": [
+        "C38-T01",
+        "C38-T02",
+        "C38-T03",
+        "C38-T04"
+      ]
     },
     {
       "id": "C39",
@@ -534,7 +743,13 @@
       "page": 81,
       "verification": "NOT_TESTED",
       "implementation_evidence": [],
-      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping.",
+      "explicit_acceptance_test_ids": [
+        "C39-T01",
+        "C39-T02",
+        "C39-T03",
+        "C39-T04"
+      ]
     },
     {
       "id": "C40",
@@ -542,7 +757,12 @@
       "page": 82,
       "verification": "NOT_TESTED",
       "implementation_evidence": [],
-      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping.",
+      "explicit_acceptance_test_ids": [
+        "C40-T01",
+        "C40-T02",
+        "C40-T03"
+      ]
     },
     {
       "id": "C41",
@@ -550,7 +770,13 @@
       "page": 83,
       "verification": "NOT_TESTED",
       "implementation_evidence": [],
-      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping.",
+      "explicit_acceptance_test_ids": [
+        "C41-T01",
+        "C41-T02",
+        "C41-T03",
+        "C41-T04"
+      ]
     },
     {
       "id": "C42",
@@ -558,7 +784,12 @@
       "page": 84,
       "verification": "NOT_TESTED",
       "implementation_evidence": [],
-      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping.",
+      "explicit_acceptance_test_ids": [
+        "C42-T01",
+        "C42-T02",
+        "C42-T03"
+      ]
     },
     {
       "id": "C43",
@@ -566,7 +797,13 @@
       "page": 85,
       "verification": "NOT_TESTED",
       "implementation_evidence": [],
-      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping.",
+      "explicit_acceptance_test_ids": [
+        "C43-T01",
+        "C43-T02",
+        "C43-T03",
+        "C43-T04"
+      ]
     },
     {
       "id": "C44",
@@ -574,7 +811,13 @@
       "page": 86,
       "verification": "NOT_TESTED",
       "implementation_evidence": [],
-      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping.",
+      "explicit_acceptance_test_ids": [
+        "C44-T01",
+        "C44-T02",
+        "C44-T03",
+        "C44-T04"
+      ]
     },
     {
       "id": "C45",
@@ -582,7 +825,13 @@
       "page": 87,
       "verification": "NOT_TESTED",
       "implementation_evidence": [],
-      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping.",
+      "explicit_acceptance_test_ids": [
+        "C45-T01",
+        "C45-T02",
+        "C45-T03",
+        "C45-T04"
+      ]
     },
     {
       "id": "C46",
@@ -590,7 +839,13 @@
       "page": 88,
       "verification": "NOT_TESTED",
       "implementation_evidence": [],
-      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping.",
+      "explicit_acceptance_test_ids": [
+        "C46-T01",
+        "C46-T02",
+        "C46-T03",
+        "C46-T04"
+      ]
     },
     {
       "id": "C47",
@@ -598,7 +853,13 @@
       "page": 89,
       "verification": "NOT_TESTED",
       "implementation_evidence": [],
-      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping.",
+      "explicit_acceptance_test_ids": [
+        "C47-T01",
+        "C47-T02",
+        "C47-T03",
+        "C47-T04"
+      ]
     },
     {
       "id": "C48",
@@ -606,7 +867,13 @@
       "page": 90,
       "verification": "NOT_TESTED",
       "implementation_evidence": [],
-      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping.",
+      "explicit_acceptance_test_ids": [
+        "C48-T01",
+        "C48-T02",
+        "C48-T03",
+        "C48-T04"
+      ]
     },
     {
       "id": "C49",
@@ -614,7 +881,13 @@
       "page": 91,
       "verification": "NOT_TESTED",
       "implementation_evidence": [],
-      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping.",
+      "explicit_acceptance_test_ids": [
+        "C49-T01",
+        "C49-T02",
+        "C49-T03",
+        "C49-T04"
+      ]
     },
     {
       "id": "C50",
@@ -622,7 +895,13 @@
       "page": 92,
       "verification": "NOT_TESTED",
       "implementation_evidence": [],
-      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping.",
+      "explicit_acceptance_test_ids": [
+        "C50-T01",
+        "C50-T02",
+        "C50-T03",
+        "C50-T04"
+      ]
     },
     {
       "id": "C51",
@@ -630,7 +909,12 @@
       "page": 93,
       "verification": "NOT_TESTED",
       "implementation_evidence": [],
-      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping.",
+      "explicit_acceptance_test_ids": [
+        "C51-T01",
+        "C51-T02",
+        "C51-T03"
+      ]
     },
     {
       "id": "C52",
@@ -638,7 +922,13 @@
       "page": 94,
       "verification": "NOT_TESTED",
       "implementation_evidence": [],
-      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping.",
+      "explicit_acceptance_test_ids": [
+        "C52-T01",
+        "C52-T02",
+        "C52-T03",
+        "C52-T04"
+      ]
     },
     {
       "id": "C53",
@@ -646,7 +936,12 @@
       "page": 95,
       "verification": "NOT_TESTED",
       "implementation_evidence": [],
-      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping.",
+      "explicit_acceptance_test_ids": [
+        "C53-T01",
+        "C53-T02",
+        "C53-T03"
+      ]
     },
     {
       "id": "C54",
@@ -654,7 +949,12 @@
       "page": 96,
       "verification": "NOT_TESTED",
       "implementation_evidence": [],
-      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping.",
+      "explicit_acceptance_test_ids": [
+        "C54-T01",
+        "C54-T02",
+        "C54-T03"
+      ]
     },
     {
       "id": "C55",
@@ -662,7 +962,13 @@
       "page": 97,
       "verification": "NOT_TESTED",
       "implementation_evidence": [],
-      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping.",
+      "explicit_acceptance_test_ids": [
+        "C55-T01",
+        "C55-T02",
+        "C55-T03",
+        "C55-T04"
+      ]
     },
     {
       "id": "C56",
@@ -670,7 +976,12 @@
       "page": 98,
       "verification": "NOT_TESTED",
       "implementation_evidence": [],
-      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping.",
+      "explicit_acceptance_test_ids": [
+        "C56-T01",
+        "C56-T02",
+        "C56-T03"
+      ]
     },
     {
       "id": "C57",
@@ -678,7 +989,13 @@
       "page": 99,
       "verification": "NOT_TESTED",
       "implementation_evidence": [],
-      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping.",
+      "explicit_acceptance_test_ids": [
+        "C57-T01",
+        "C57-T02",
+        "C57-T03",
+        "C57-T04"
+      ]
     },
     {
       "id": "C58",
@@ -686,7 +1003,12 @@
       "page": 100,
       "verification": "NOT_TESTED",
       "implementation_evidence": [],
-      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping.",
+      "explicit_acceptance_test_ids": [
+        "C58-T01",
+        "C58-T02",
+        "C58-T03"
+      ]
     },
     {
       "id": "C59",
@@ -694,7 +1016,13 @@
       "page": 101,
       "verification": "NOT_TESTED",
       "implementation_evidence": [],
-      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping.",
+      "explicit_acceptance_test_ids": [
+        "C59-T01",
+        "C59-T02",
+        "C59-T03",
+        "C59-T04"
+      ]
     },
     {
       "id": "C60",
@@ -702,7 +1030,12 @@
       "page": 102,
       "verification": "NOT_TESTED",
       "implementation_evidence": [],
-      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping.",
+      "explicit_acceptance_test_ids": [
+        "C60-T01",
+        "C60-T02",
+        "C60-T03"
+      ]
     },
     {
       "id": "C61",
@@ -710,7 +1043,12 @@
       "page": 103,
       "verification": "NOT_TESTED",
       "implementation_evidence": [],
-      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping.",
+      "explicit_acceptance_test_ids": [
+        "C61-T01",
+        "C61-T02",
+        "C61-T03"
+      ]
     },
     {
       "id": "C62",
@@ -718,7 +1056,12 @@
       "page": 104,
       "verification": "NOT_TESTED",
       "implementation_evidence": [],
-      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping.",
+      "explicit_acceptance_test_ids": [
+        "C62-T01",
+        "C62-T02",
+        "C62-T03"
+      ]
     },
     {
       "id": "C63",
@@ -726,7 +1069,12 @@
       "page": 105,
       "verification": "NOT_TESTED",
       "implementation_evidence": [],
-      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping.",
+      "explicit_acceptance_test_ids": [
+        "C63-T01",
+        "C63-T02",
+        "C63-T03"
+      ]
     },
     {
       "id": "C64",
@@ -734,7 +1082,12 @@
       "page": 106,
       "verification": "NOT_TESTED",
       "implementation_evidence": [],
-      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping.",
+      "explicit_acceptance_test_ids": [
+        "C64-T01",
+        "C64-T02",
+        "C64-T03"
+      ]
     },
     {
       "id": "P01",

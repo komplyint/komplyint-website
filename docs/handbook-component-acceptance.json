@@ -1,0 +1,1810 @@
+{
+  "schema_version": "komplyint-handbook-component-acceptance-v1",
+  "handbook_version": "1.0",
+  "source_pages": "41-106 of Komplyint_Redesign_Handbook.pdf",
+  "component_count": 64,
+  "explicit_component_tests": 225,
+  "distinction": "These 225 explicit component acceptance tests are a subset of the wider 1,517 tracked specification and acceptance entries. All unexecuted checks are NOT_TESTED.",
+  "tests": [
+    {
+      "id": "C01-T01",
+      "unit_id": "C01",
+      "source_page": 41,
+      "text": "Inspect server HTML in both locales: document language, title, main landmark and headings are correct before scripts run.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C01-T02",
+      "unit_id": "C01",
+      "source_page": 41,
+      "text": "Disable JavaScript and open every route family: useful content and navigation remain available.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C01-T03",
+      "unit_id": "C01",
+      "source_page": 41,
+      "text": "At 320 px and 400% zoom, no non-exempt page region requires horizontal scrolling.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C01-T04",
+      "unit_id": "C01",
+      "source_page": 41,
+      "text": "In both themes, the first keyboard Tab reveals the skip link and Enter reaches main content.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C02-T01",
+      "unit_id": "C02",
+      "source_page": 42,
+      "text": "Compare the published SVG checksum with the preserved approved asset.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C02-T02",
+      "unit_id": "C02",
+      "source_page": 42,
+      "text": "Test 1x/2x rendering and keyboard focus at 320, 390, 1024 and 1440 px.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C02-T03",
+      "unit_id": "C02",
+      "source_page": 42,
+      "text": "Block the logo request: company identity and the home destination remain understandable.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C02-T04",
+      "unit_id": "C02",
+      "source_page": 42,
+      "text": "Screen-reader output announces one clear home link, not duplicate brand names.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C03-T01",
+      "unit_id": "C03",
+      "source_page": 43,
+      "text": "From a new page load, first Tab exposes the control completely.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C03-T02",
+      "unit_id": "C03",
+      "source_page": 43,
+      "text": "Enter moves the screen-reader/keyboard position to main content.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C03-T03",
+      "unit_id": "C03",
+      "source_page": 43,
+      "text": "The control remains readable in dark mode, forced colors and 200% text enlargement.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C04-T01",
+      "unit_id": "C04",
+      "source_page": 44,
+      "text": "At 1199 and 1200 px, the header changes mode without clipped navigation or a sudden horizontal scrollbar.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C04-T02",
+      "unit_id": "C04",
+      "source_page": 44,
+      "text": "At 200% zoom, no destination or language action is lost.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C04-T03",
+      "unit_id": "C04",
+      "source_page": 44,
+      "text": "Focus remains visible when tabbing to links after scrolling down the page.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C04-T04",
+      "unit_id": "C04",
+      "source_page": 44,
+      "text": "Header does not cover an anchored section heading or form error.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C05-T01",
+      "unit_id": "C05",
+      "source_page": 45,
+      "text": "Activate every item in both locales and check final URL and localized page title.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C05-T02",
+      "unit_id": "C05",
+      "source_page": 45,
+      "text": "The current destination remains identifiable in a grayscale screenshot.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C05-T03",
+      "unit_id": "C05",
+      "source_page": 45,
+      "text": "Open each link in a new tab using normal browser behavior.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C06-T01",
+      "unit_id": "C06",
+      "source_page": 46,
+      "text": "At 320 px the full control and the preserved logo fit without overlap.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C06-T02",
+      "unit_id": "C06",
+      "source_page": 46,
+      "text": "Button name and expanded state are announced correctly.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C06-T03",
+      "unit_id": "C06",
+      "source_page": 46,
+      "text": "When the menu closes, focus returns to the same trigger.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C06-T04",
+      "unit_id": "C06",
+      "source_page": 46,
+      "text": "With JavaScript disabled, the navigation destinations remain available.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C07-T01",
+      "unit_id": "C07",
+      "source_page": 47,
+      "text": "Keyboard focus cannot escape into covered page content while the sheet is open.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C07-T02",
+      "unit_id": "C07",
+      "source_page": 47,
+      "text": "Escape, Close, link activation and browser Back each leave a usable page state.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C07-T03",
+      "unit_id": "C07",
+      "source_page": 47,
+      "text": "At landscape 667 by 375 px all menu content can be reached by scrolling.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C07-T04",
+      "unit_id": "C07",
+      "source_page": 47,
+      "text": "At reduced motion the sheet appears without translation.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C08-T01",
+      "unit_id": "C08",
+      "source_page": 48,
+      "text": "Switch from every service page and confirm the same service remains selected.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C08-T02",
+      "unit_id": "C08",
+      "source_page": 48,
+      "text": "Inspect initial HTML for the correct language and localized metadata.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C08-T03",
+      "unit_id": "C08",
+      "source_page": 48,
+      "text": "Enter a sample message, switch language and verify that data is preserved or a clear confirmation protects it.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C08-T04",
+      "unit_id": "C08",
+      "source_page": 48,
+      "text": "Screen-reader pronunciation follows the actual page language.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C09-T01",
+      "unit_id": "C09",
+      "source_page": 49,
+      "text": "System mode follows a device preference change; explicit Light/Dark does not.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C09-T02",
+      "unit_id": "C09",
+      "source_page": 49,
+      "text": "Blocked localStorage produces no uncaught error or blank page.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C09-T03",
+      "unit_id": "C09",
+      "source_page": 49,
+      "text": "Radio group works with keyboard arrows and has a readable group label.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C09-T04",
+      "unit_id": "C09",
+      "source_page": 49,
+      "text": "Theme change preserves form data, route and scroll position.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C10-T01",
+      "unit_id": "C10",
+      "source_page": 50,
+      "text": "The trail matches route hierarchy in both languages.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C10-T02",
+      "unit_id": "C10",
+      "source_page": 50,
+      "text": "At 320 px all breadcrumb text remains reachable and does not overlap the H1.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C10-T03",
+      "unit_id": "C10",
+      "source_page": 50,
+      "text": "Screen-reader output announces a breadcrumb navigation region without reading decorative separators.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C11-T01",
+      "unit_id": "C11",
+      "source_page": 51,
+      "text": "Read the hero with video blocked, reduced motion enabled and JavaScript disabled.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C11-T02",
+      "unit_id": "C11",
+      "source_page": 51,
+      "text": "Verify exact headline spelling, typography and approved line breaks in FI and EN.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C11-T03",
+      "unit_id": "C11",
+      "source_page": 51,
+      "text": "At 200% text enlargement, copy and actions remain inside an expanded panel.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C11-T04",
+      "unit_id": "C11",
+      "source_page": 51,
+      "text": "Measure text contrast on the opaque panel rather than a convenient video frame.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C12-T01",
+      "unit_id": "C12",
+      "source_page": 52,
+      "text": "Compare representative source and delivery frames for crop, color and compression.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C12-T02",
+      "unit_id": "C12",
+      "source_page": 52,
+      "text": "Observe real playback through advancing currentTime on supported desktop and mobile browsers.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C12-T03",
+      "unit_id": "C12",
+      "source_page": 52,
+      "text": "Block media downloads and confirm the poster geometry and main journey remain intact.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C12-T04",
+      "unit_id": "C12",
+      "source_page": 52,
+      "text": "Reduced-motion first load makes no automatic MP4 request.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C13-T01",
+      "unit_id": "C13",
+      "source_page": 53,
+      "text": "Pause stops actual playback and it stays paused after scrolling away and back.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C13-T02",
+      "unit_id": "C13",
+      "source_page": 53,
+      "text": "A rejected play promise leaves an accurate Play action, not a false playing state.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C13-T03",
+      "unit_id": "C13",
+      "source_page": 53,
+      "text": "Control works by touch and keyboard at every breakpoint.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C13-T04",
+      "unit_id": "C13",
+      "source_page": 53,
+      "text": "Screen-reader name describes the next action correctly after each state change.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C14-T01",
+      "unit_id": "C14",
+      "source_page": 54,
+      "text": "Both actions work with scripts disabled and normal new-tab behavior.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C14-T02",
+      "unit_id": "C14",
+      "source_page": 54,
+      "text": "The secondary destination is visually and programmatically different from an in-page scroll action.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C14-T03",
+      "unit_id": "C14",
+      "source_page": 54,
+      "text": "At 320 px and 200% text size, labels are complete and controls remain separate.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C15-T01",
+      "unit_id": "C15",
+      "source_page": 55,
+      "text": "All text/background pairs pass the contrast register at default, hover and pressed states.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C15-T02",
+      "unit_id": "C15",
+      "source_page": 55,
+      "text": "Tab, Enter and Space follow native semantics; navigation links still open in new tabs.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C15-T03",
+      "unit_id": "C15",
+      "source_page": 55,
+      "text": "Repeated activation during busy state produces one operation.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C15-T04",
+      "unit_id": "C15",
+      "source_page": 55,
+      "text": "The button remains readable with forced colors and custom text spacing.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C16-T01",
+      "unit_id": "C16",
+      "source_page": 56,
+      "text": "At rest, a visitor can distinguish primary, secondary and utility roles without reading documentation.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C16-T02",
+      "unit_id": "C16",
+      "source_page": 56,
+      "text": "High-contrast mode preserves the clickable boundary and focus indicator.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C16-T03",
+      "unit_id": "C16",
+      "source_page": 56,
+      "text": "Both localized labels fit without artificially reducing type size.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C17-T01",
+      "unit_id": "C17",
+      "source_page": 57,
+      "text": "Links remain identifiable in grayscale and without hover.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C17-T02",
+      "unit_id": "C17",
+      "source_page": 57,
+      "text": "Keyboard focus is visible across wrapped inline text.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C17-T03",
+      "unit_id": "C17",
+      "source_page": 57,
+      "text": "All external and mail links resolve to the intended verified destination.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C18-T01",
+      "unit_id": "C18",
+      "source_page": 58,
+      "text": "A screen reader announces purpose without relying on the surrounding visual.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C18-T02",
+      "unit_id": "C18",
+      "source_page": 58,
+      "text": "Touch activation works at the edges of the intended 48 px target.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C18-T03",
+      "unit_id": "C18",
+      "source_page": 58,
+      "text": "The control is visible and meaningful when the icon asset fails.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C19-T01",
+      "unit_id": "C19",
+      "source_page": 59,
+      "text": "Heading hierarchy remains correct on every page using the component.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C19-T02",
+      "unit_id": "C19",
+      "source_page": 59,
+      "text": "At user text-spacing overrides, nothing clips or overlaps.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C19-T03",
+      "unit_id": "C19",
+      "source_page": 59,
+      "text": "The introduction can be understood without the decorative eyebrow.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C20-T01",
+      "unit_id": "C20",
+      "source_page": 60,
+      "text": "Every card has one understandable destination and no nested interactive elements.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C20-T02",
+      "unit_id": "C20",
+      "source_page": 60,
+      "text": "Longest FI and EN headings fit at 320 px and 200% text.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C20-T03",
+      "unit_id": "C20",
+      "source_page": 60,
+      "text": "Text remains selectable; the click layer does not steal adjacent actions.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C20-T04",
+      "unit_id": "C20",
+      "source_page": 60,
+      "text": "Default, hover, focus and touch screenshots preserve consistent depth.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C21-T01",
+      "unit_id": "C21",
+      "source_page": 62,
+      "text": "At 20, 24 and 32 px the icon family has consistent visual weight.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C21-T02",
+      "unit_id": "C21",
+      "source_page": 62,
+      "text": "Screen readers do not announce redundant decorative numbers and symbols.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C21-T03",
+      "unit_id": "C21",
+      "source_page": 62,
+      "text": "The service order is identical between card grid, service selector and contact field.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C22-T01",
+      "unit_id": "C22",
+      "source_page": 63,
+      "text": "Visitors can distinguish a demonstration from client work without opening a disclaimer.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C22-T02",
+      "unit_id": "C22",
+      "source_page": 63,
+      "text": "Before/After works with keyboard, touch and reduced motion.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C22-T03",
+      "unit_id": "C22",
+      "source_page": 63,
+      "text": "The figure has an accessible explanation of the same substantive outcome.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C22-T04",
+      "unit_id": "C22",
+      "source_page": 63,
+      "text": "No backing plane or shadow covers a link, caption or focus outline.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C23-T01",
+      "unit_id": "C23",
+      "source_page": 65,
+      "text": "A first-time reader correctly identifies the item's evidence category.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C23-T02",
+      "unit_id": "C23",
+      "source_page": 65,
+      "text": "Grayscale and screen-reader versions retain the distinction.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C23-T03",
+      "unit_id": "C23",
+      "source_page": 65,
+      "text": "Every published Client work label has a linked internal permission record.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C24-T01",
+      "unit_id": "C24",
+      "source_page": 66,
+      "text": "Every number can be traced to an approved evidence record.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C24-T02",
+      "unit_id": "C24",
+      "source_page": 66,
+      "text": "A visitor can tell whether a figure is historical, illustrative or a target.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C24-T03",
+      "unit_id": "C24",
+      "source_page": 66,
+      "text": "The same value is announced by assistive technology and displayed visually.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C25-T01",
+      "unit_id": "C25",
+      "source_page": 67,
+      "text": "Every item has an accessible title, useful image alternative and correct content-type label.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C25-T02",
+      "unit_id": "C25",
+      "source_page": 67,
+      "text": "Card click and title-link destinations match.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C25-T03",
+      "unit_id": "C25",
+      "source_page": 67,
+      "text": "No personal/customer information is exposed in screenshots, thumbnails or metadata.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C26-T01",
+      "unit_id": "C26",
+      "source_page": 68,
+      "text": "All six services can be selected with keyboard and no pointer.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C26-T02",
+      "unit_id": "C26",
+      "source_page": 68,
+      "text": "Selected state, focused state and panel label are independently correct.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C26-T03",
+      "unit_id": "C26",
+      "source_page": 68,
+      "text": "A copied service URL opens the intended service in both languages.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C26-T04",
+      "unit_id": "C26",
+      "source_page": 68,
+      "text": "Back/Forward and invalid service slugs produce a predictable accessible state.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C27-T01",
+      "unit_id": "C27",
+      "source_page": 69,
+      "text": "Each service displays its correct tasks, deliverables, limits and contact topic.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C27-T02",
+      "unit_id": "C27",
+      "source_page": 69,
+      "text": "No heading level is skipped solely because the component is reused.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C27-T03",
+      "unit_id": "C27",
+      "source_page": 69,
+      "text": "The longest translated panel fits with text-spacing overrides.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C27-T04",
+      "unit_id": "C27",
+      "source_page": 69,
+      "text": "Selecting a service does not create repeated noisy live announcements.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C28-T01",
+      "unit_id": "C28",
+      "source_page": 70,
+      "text": "Sequence remains clear when CSS decoration is removed.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C28-T02",
+      "unit_id": "C28",
+      "source_page": 70,
+      "text": "Text uses factual outputs rather than unverifiable promises.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C28-T03",
+      "unit_id": "C28",
+      "source_page": 70,
+      "text": "At mobile widths the reading order remains 01 through 04.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C29-T01",
+      "unit_id": "C29",
+      "source_page": 71,
+      "text": "The notice can be found before an enquiry without dominating the initial service explanation.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C29-T02",
+      "unit_id": "C29",
+      "source_page": 71,
+      "text": "FI and EN versions impose the same scope boundaries.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C29-T03",
+      "unit_id": "C29",
+      "source_page": 71,
+      "text": "Screen readers encounter the notice naturally, without an unnecessary interruption.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C30-T01",
+      "unit_id": "C30",
+      "source_page": 72,
+      "text": "Every published quote exactly matches its approved wording and attribution.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C30-T02",
+      "unit_id": "C30",
+      "source_page": 72,
+      "text": "Permission covers website and competition-submission use.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C30-T03",
+      "unit_id": "C30",
+      "source_page": 72,
+      "text": "The page remains well composed when no testimonial is available.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C31-T01",
+      "unit_id": "C31",
+      "source_page": 73,
+      "text": "Business identity and service claims match approved company information.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C31-T02",
+      "unit_id": "C31",
+      "source_page": 73,
+      "text": "The visitor understands current capabilities without mistaking future plans for available services.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C31-T03",
+      "unit_id": "C31",
+      "source_page": 73,
+      "text": "All personal information and portraits have publication permission.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C32-T01",
+      "unit_id": "C32",
+      "source_page": 74,
+      "text": "The pictured person and the published identity match the authorized source.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C32-T02",
+      "unit_id": "C32",
+      "source_page": 74,
+      "text": "At all crops the face is not cut awkwardly or distorted.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C32-T03",
+      "unit_id": "C32",
+      "source_page": 74,
+      "text": "The biography has owner approval and does not contain unverified credentials.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C33-T01",
+      "unit_id": "C33",
+      "source_page": 75,
+      "text": "The CTA destination and optional service topic are correct.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C33-T02",
+      "unit_id": "C33",
+      "source_page": 75,
+      "text": "The section remains readable at 320 px and enlarged text.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C33-T03",
+      "unit_id": "C33",
+      "source_page": 75,
+      "text": "No unverified response-time or outcome promise appears in the copy.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C34-T01",
+      "unit_id": "C34",
+      "source_page": 76,
+      "text": "All footer links resolve correctly in FI and EN.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C34-T02",
+      "unit_id": "C34",
+      "source_page": 76,
+      "text": "The original logo colors remain intact.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C34-T03",
+      "unit_id": "C34",
+      "source_page": 76,
+      "text": "A visitor can find the privacy notice and operational contact fallback from any page.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C34-T04",
+      "unit_id": "C34",
+      "source_page": 76,
+      "text": "Mobile footer spacing and contrast remain comfortable at enlarged text.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C35-T01",
+      "unit_id": "C35",
+      "source_page": 77,
+      "text": "A real synthetic test enquiry reaches the controlled receiving mailbox before release.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C35-T02",
+      "unit_id": "C35",
+      "source_page": 77,
+      "text": "Blank required fields and malformed email produce helpful localized feedback.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C35-T03",
+      "unit_id": "C35",
+      "source_page": 77,
+      "text": "Form can be completed by keyboard and assistive technology.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C35-T04",
+      "unit_id": "C35",
+      "source_page": 77,
+      "text": "Blocked scripts or a failed mail service leave an honest recovery path.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C36-T01",
+      "unit_id": "C36",
+      "source_page": 78,
+      "text": "Test Finnish diacritics, multi-part names, apostrophes and non-Latin names through appropriate fallback rendering.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C36-T02",
+      "unit_id": "C36",
+      "source_page": 78,
+      "text": "An empty name does not block a valid enquiry.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C36-T03",
+      "unit_id": "C36",
+      "source_page": 78,
+      "text": "The field label and any error are programmatically associated.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C37-T01",
+      "unit_id": "C37",
+      "source_page": 79,
+      "text": "Valid plus-addressed and long-domain email examples are accepted.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C37-T02",
+      "unit_id": "C37",
+      "source_page": 79,
+      "text": "Malformed input gets a localized, associated error without clearing other fields.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C37-T03",
+      "unit_id": "C37",
+      "source_page": 79,
+      "text": "Header-control characters are rejected safely by server validation.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C37-T04",
+      "unit_id": "C37",
+      "source_page": 79,
+      "text": "Mobile keyboards expose an appropriate email-entry layout.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C38-T01",
+      "unit_id": "C38",
+      "source_page": 80,
+      "text": "Every service-specific contact link prefills the matching service.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C38-T02",
+      "unit_id": "C38",
+      "source_page": 80,
+      "text": "Keyboard and mobile-native selection work without custom gesture requirements.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C38-T03",
+      "unit_id": "C38",
+      "source_page": 80,
+      "text": "A malformed query value cannot inject markup or alter the form structure.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C38-T04",
+      "unit_id": "C38",
+      "source_page": 80,
+      "text": "The visible and submitted option correspond in both locales.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C39-T01",
+      "unit_id": "C39",
+      "source_page": 81,
+      "text": "Long Finnish text, line breaks and pasted plain text remain readable and preserved after an error.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C39-T02",
+      "unit_id": "C39",
+      "source_page": 81,
+      "text": "Whitespace-only input is rejected with a useful explanation.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C39-T03",
+      "unit_id": "C39",
+      "source_page": 81,
+      "text": "Maximum-length behavior is identical in client and server intent; no silent content loss.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C39-T04",
+      "unit_id": "C39",
+      "source_page": 81,
+      "text": "Text-area resize does not cover the submit control.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C40-T01",
+      "unit_id": "C40",
+      "source_page": 82,
+      "text": "The note describes the actual deployed data flow.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C40-T02",
+      "unit_id": "C40",
+      "source_page": 82,
+      "text": "There is no bundled or preselected marketing permission.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C40-T03",
+      "unit_id": "C40",
+      "source_page": 82,
+      "text": "Privacy link is operable and form content is not accidentally lost when reviewing it.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C41-T01",
+      "unit_id": "C41",
+      "source_page": 83,
+      "text": "Submitting multiple invalid fields moves focus to a summary that lists all actionable errors.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C41-T02",
+      "unit_id": "C41",
+      "source_page": 83,
+      "text": "Each summary link reaches the correct input and its label/error is announced.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C41-T03",
+      "unit_id": "C41",
+      "source_page": 83,
+      "text": "Correcting one field does not erase another field's value.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C41-T04",
+      "unit_id": "C41",
+      "source_page": 83,
+      "text": "Errors are understandable without red color.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C42-T01",
+      "unit_id": "C42",
+      "source_page": 84,
+      "text": "Every invalid control has a readable associated repair message.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C42-T02",
+      "unit_id": "C42",
+      "source_page": 84,
+      "text": "No duplicate announcement storm occurs on submit.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C42-T03",
+      "unit_id": "C42",
+      "source_page": 84,
+      "text": "At large text and narrow widths messages expand cleanly beneath inputs.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C43-T01",
+      "unit_id": "C43",
+      "source_page": 85,
+      "text": "Rapid double-click and Enter repetition create one accepted enquiry.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C43-T02",
+      "unit_id": "C43",
+      "source_page": 85,
+      "text": "Slow-network state acknowledges submission without moving the layout.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C43-T03",
+      "unit_id": "C43",
+      "source_page": 85,
+      "text": "Timeout produces an honest recovery message and preserves fields.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C43-T04",
+      "unit_id": "C43",
+      "source_page": 85,
+      "text": "Reduced-motion mode does not display an endlessly animated spinner.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C44-T01",
+      "unit_id": "C44",
+      "source_page": 86,
+      "text": "A simulated rejected server request never shows success.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C44-T02",
+      "unit_id": "C44",
+      "source_page": 86,
+      "text": "Success wording matches whether the backend accepted, queued or actually sent the enquiry.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C44-T03",
+      "unit_id": "C44",
+      "source_page": 86,
+      "text": "Focus and announcement communicate completion without requiring sight.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C44-T04",
+      "unit_id": "C44",
+      "source_page": 86,
+      "text": "No personal message content appears in URL, logs or telemetry.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C45-T01",
+      "unit_id": "C45",
+      "source_page": 87,
+      "text": "Simulate 400, 429, 500, offline and timeout responses and verify distinct truthful behavior.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C45-T02",
+      "unit_id": "C45",
+      "source_page": 87,
+      "text": "All typed content survives recoverable failures.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C45-T03",
+      "unit_id": "C45",
+      "source_page": 87,
+      "text": "Recovery does not duplicate an already accepted request.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C45-T04",
+      "unit_id": "C45",
+      "source_page": 87,
+      "text": "The fallback address is real, operational and consistently branded where approved.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C46-T01",
+      "unit_id": "C46",
+      "source_page": 88,
+      "text": "Image failure does not collapse the layout or remove the substantive explanation.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C46-T02",
+      "unit_id": "C46",
+      "source_page": 88,
+      "text": "Captions stay visually associated with their figures at all widths.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C46-T03",
+      "unit_id": "C46",
+      "source_page": 88,
+      "text": "All credits and permissions match the asset register.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C46-T04",
+      "unit_id": "C46",
+      "source_page": 88,
+      "text": "A screen-reader user receives the same essential information as a visual reader.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C47-T01",
+      "unit_id": "C47",
+      "source_page": 89,
+      "text": "The text equivalent contains the same sequence, relationships and values.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C47-T02",
+      "unit_id": "C47",
+      "source_page": 89,
+      "text": "Diagram remains legible at phone width without shrinking all labels.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C47-T03",
+      "unit_id": "C47",
+      "source_page": 89,
+      "text": "Color-blind and grayscale views preserve distinctions through labels/shapes.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C47-T04",
+      "unit_id": "C47",
+      "source_page": 89,
+      "text": "All displayed data is real and approved or explicitly synthetic.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C48-T01",
+      "unit_id": "C48",
+      "source_page": 90,
+      "text": "A screen reader associates values with the correct row/column headers.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C48-T02",
+      "unit_id": "C48",
+      "source_page": 90,
+      "text": "At 320 px the local scroll area is usable without causing page-wide horizontal scrolling.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C48-T03",
+      "unit_id": "C48",
+      "source_page": 90,
+      "text": "All figures have defined units and evidence.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C48-T04",
+      "unit_id": "C48",
+      "source_page": 90,
+      "text": "Printed output retains table meaning and column labels.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C49-T01",
+      "unit_id": "C49",
+      "source_page": 91,
+      "text": "Enter and Space operate the heading and its expanded state is announced.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C49-T02",
+      "unit_id": "C49",
+      "source_page": 91,
+      "text": "Links in a closed panel are not focusable; open links are reachable.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C49-T03",
+      "unit_id": "C49",
+      "source_page": 91,
+      "text": "Long answers and text-spacing overrides do not clip.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C49-T04",
+      "unit_id": "C49",
+      "source_page": 91,
+      "text": "Core contact/service information remains understandable without opening FAQs.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C50-T01",
+      "unit_id": "C50",
+      "source_page": 92,
+      "text": "A copied fragment URL lands on the correct visible heading.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C50-T02",
+      "unit_id": "C50",
+      "source_page": 92,
+      "text": "Keyboard activation moves to a logical reading position.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C50-T03",
+      "unit_id": "C50",
+      "source_page": 92,
+      "text": "Reduced-motion mode has no animated scrolling.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C50-T04",
+      "unit_id": "C50",
+      "source_page": 92,
+      "text": "The link never covers another control on phones.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C51-T01",
+      "unit_id": "C51",
+      "source_page": 93,
+      "text": "File opens/downloads correctly and the stated size, format and language match.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C51-T02",
+      "unit_id": "C51",
+      "source_page": 93,
+      "text": "Equivalent essential information remains available as HTML.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C51-T03",
+      "unit_id": "C51",
+      "source_page": 93,
+      "text": "The document has its own accessibility and content approval.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C52-T01",
+      "unit_id": "C52",
+      "source_page": 94,
+      "text": "Opening, keyboard cycling, Escape and close restoration match the modal contract.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C52-T02",
+      "unit_id": "C52",
+      "source_page": 94,
+      "text": "At 400% zoom the entire dialog remains reachable without losing its close control.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C52-T03",
+      "unit_id": "C52",
+      "source_page": 94,
+      "text": "A route transition while open removes backdrop, inert state and scroll lock.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C52-T04",
+      "unit_id": "C52",
+      "source_page": 94,
+      "text": "No modal appears unsolicited during the primary business journey.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C53-T01",
+      "unit_id": "C53",
+      "source_page": 95,
+      "text": "No essential information exists only in a disappearing notification.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C53-T02",
+      "unit_id": "C53",
+      "source_page": 95,
+      "text": "Screen-reader announcement is polite and does not interrupt typing.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C53-T03",
+      "unit_id": "C53",
+      "source_page": 95,
+      "text": "The notice never covers the video control or submit action on a phone.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C54-T01",
+      "unit_id": "C54",
+      "source_page": 96,
+      "text": "Empty and unavailable states have a clear recovery action.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C54-T02",
+      "unit_id": "C54",
+      "source_page": 96,
+      "text": "No fake content is inserted to satisfy a visual grid.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C54-T03",
+      "unit_id": "C54",
+      "source_page": 96,
+      "text": "Keyboard focus remains predictable after clearing filters.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C55-T01",
+      "unit_id": "C55",
+      "source_page": 97,
+      "text": "Slow network does not hide the primary proposition or Contact link.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C55-T02",
+      "unit_id": "C55",
+      "source_page": 97,
+      "text": "Asset failure resolves to a stable fallback rather than an endless skeleton.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C55-T03",
+      "unit_id": "C55",
+      "source_page": 97,
+      "text": "Measured layout shifts remain within the project budget.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C55-T04",
+      "unit_id": "C55",
+      "source_page": 97,
+      "text": "Reduced motion removes nonessential loading animation.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C56-T01",
+      "unit_id": "C56",
+      "source_page": 98,
+      "text": "A deliberately nonexistent URL returns 404 with the branded usable page.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C56-T02",
+      "unit_id": "C56",
+      "source_page": 98,
+      "text": "All recovery links work and preserve language.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C56-T03",
+      "unit_id": "C56",
+      "source_page": 98,
+      "text": "The page is keyboard-usable, readable in both themes and not indexed as normal content.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C57-T01",
+      "unit_id": "C57",
+      "source_page": 99,
+      "text": "Simulated server failure leaves an intelligible, accessible fallback.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C57-T02",
+      "unit_id": "C57",
+      "source_page": 99,
+      "text": "No sensitive system details appear in the response.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C57-T03",
+      "unit_id": "C57",
+      "source_page": 99,
+      "text": "Retry cannot create duplicate enquiry side effects.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C57-T04",
+      "unit_id": "C57",
+      "source_page": 99,
+      "text": "The fallback works when the main application bundle fails.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C58-T01",
+      "unit_id": "C58",
+      "source_page": 100,
+      "text": "Network loss during typing preserves the visible draft.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C58-T02",
+      "unit_id": "C58",
+      "source_page": 100,
+      "text": "Network loss during sending does not show false success.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C58-T03",
+      "unit_id": "C58",
+      "source_page": 100,
+      "text": "Reconnection does not silently duplicate a message or reveal stored personal data.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C59-T01",
+      "unit_id": "C59",
+      "source_page": 101,
+      "text": "Before an optional consent choice, network/storage inspection finds no optional tracker activity.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C59-T02",
+      "unit_id": "C59",
+      "source_page": 101,
+      "text": "Reject and withdrawal actually stop the corresponding processing.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C59-T03",
+      "unit_id": "C59",
+      "source_page": 101,
+      "text": "The interface is usable without deceptive button hierarchy.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C59-T04",
+      "unit_id": "C59",
+      "source_page": 101,
+      "text": "Privacy owner approves the deployed behavior and notice together.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C60-T01",
+      "unit_id": "C60",
+      "source_page": 102,
+      "text": "Each route family has a legible, localized preview rather than a duplicated generic card.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C60-T02",
+      "unit_id": "C60",
+      "source_page": 102,
+      "text": "Preview metadata URLs resolve publicly and use the canonical host.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C60-T03",
+      "unit_id": "C60",
+      "source_page": 102,
+      "text": "Text remains within safe areas under common preview crops.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C61-T01",
+      "unit_id": "C61",
+      "source_page": 103,
+      "text": "Tab, pinned shortcut and mobile touch icon render the approved brand mark.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C61-T02",
+      "unit_id": "C61",
+      "source_page": 103,
+      "text": "All route titles distinguish the actual page and language.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C61-T03",
+      "unit_id": "C61",
+      "source_page": 103,
+      "text": "No broken icon request or framework-default identity remains.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C62-T01",
+      "unit_id": "C62",
+      "source_page": 104,
+      "text": "A full-page overview shows a coherent surface rhythm without visual clutter.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C62-T02",
+      "unit_id": "C62",
+      "source_page": 104,
+      "text": "No section background undermines text or focus contrast.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C62-T03",
+      "unit_id": "C62",
+      "source_page": 104,
+      "text": "Breakpoints do not create unintended seams, gaps or clipped shadows.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C63-T01",
+      "unit_id": "C63",
+      "source_page": 105,
+      "text": "Home, service detail and privacy print previews preserve all essential meaning.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C63-T02",
+      "unit_id": "C63",
+      "source_page": 105,
+      "text": "No clipped text, white-on-white headings or overlapping fixed header appears.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C63-T03",
+      "unit_id": "C63",
+      "source_page": 105,
+      "text": "Printed examples retain their demonstration/client-work labels.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C64-T01",
+      "unit_id": "C64",
+      "source_page": 106,
+      "text": "Every public accessibility claim is supported by a current scoped review.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C64-T02",
+      "unit_id": "C64",
+      "source_page": 106,
+      "text": "The feedback route works without inaccessible prerequisites.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    },
+    {
+      "id": "C64-T03",
+      "unit_id": "C64",
+      "source_page": 106,
+      "text": "Known limitations are understandable and match the release issue register.",
+      "result": "NOT_TESTED",
+      "evidence": []
+    }
+  ]
+}

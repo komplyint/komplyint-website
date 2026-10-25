@@ -48,3 +48,7 @@ Added the versioned design token master `src/design/tokens.json` and generated m
 ## Appearance semantics — F10/C09
 
 Changed the first-time appearance choice from a forced dark theme to the handbook's **System** preference. Early inline prepaint code now resolves the operating-system preference unless the visitor explicitly selected light or dark. The footer/mobile appearance selector preserves the chosen mode in storage; browser checks cover both system settings, user override, persistence and restoration. Original green identity and full manual theme control are retained.
+
+## Component-by-component acceptance — C01-C64 / Q18
+
+Imported **all 225 explicitly numbered C01-T01 through C64-T03 style component tests** from pages 41–106 of the original PDF into `docs/handbook-component-acceptance.json`. Each test has its exact source wording, parent Cxx unit, page and initial **NOT_TESTED** result, linked back to the 170-unit register. `npm run build` checks count, unique IDs, parent references and status honesty. These 225 are not a substitute for the rest of the 1,517-item detailed acceptance/verification obligations.
