@@ -358,3 +358,13 @@ html:not(.dark) .kc-root :focus-visible{outline-color:#294DB5}
  .kc-service-tile .qh-service-icon{transition:none}
  .kc-service-tile:hover .qh-service-icon{transform:none}
 }
+
+/* Hero film recovery: Play/Pause is now a sibling of the hero text stacking context.
+   z-index on children of the lower video layer could not make them clickable above copy. */
+.kc-hero>.qh-video-controls{position:absolute;z-index:8;right:max(48px,calc((100vw - 1280px)/2));bottom:24px;pointer-events:auto}
+.kc-hero>.qh-video-controls button{position:relative;z-index:1;min-height:48px;background:rgba(7,21,15,.95);border:1px solid rgba(206,243,218,.78);color:#F6FAF6;box-shadow:0 7px 24px rgba(1,8,4,.35)}
+.kc-hero>.qh-video-controls button:hover{background:#214532}
+.kc-hero>.qh-video-controls button:focus-visible{outline:3px solid #F3B6BC;outline-offset:4px}
+@media(max-width:767px){
+ .kc-hero>.qh-video-controls{right:17px;bottom:18px}
+}
