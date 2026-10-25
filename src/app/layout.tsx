@@ -41,7 +41,7 @@ export default function RootLayout({
   const locale = headers().get('x-komplyint-locale') === 'en' ? 'en' : 'fi'
   return (
     <html lang={locale} className={`${displayFont.variable} ${bodyFont.variable} dark`} suppressHydrationWarning>
-      <head><script dangerouslySetInnerHTML={{__html:`(function(){try{var v=localStorage.getItem('komplyint-theme')||'dark';var d=v==='dark'||(v==='system'&&matchMedia('(prefers-color-scheme: dark)').matches);document.documentElement.classList.toggle('dark',d);document.documentElement.style.colorScheme=d?'dark':'light'}catch(e){}})();`}}/></head>
+      <head><script dangerouslySetInnerHTML={{__html:`(function(){try{var v=localStorage.getItem('komplyint-theme')||'system';var d=v==='dark'||(v==='system'&&matchMedia('(prefers-color-scheme: dark)').matches);document.documentElement.classList.toggle('dark',d);document.documentElement.style.colorScheme=d?'dark':'light'}catch(e){}})();`}}/></head>
       <body>
         <LangSetter />
         {children}

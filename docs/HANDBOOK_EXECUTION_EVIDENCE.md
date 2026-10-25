@@ -44,3 +44,7 @@ Moved `SectionIntro`, `ServiceExplorer` and the actual inquiry `ContactForm` out
 ## Color and depth tokens — F09/F10/F12/F13/E03
 
 Added the versioned design token master `src/design/tokens.json` and generated matching `--ki-*` definitions at the start of the already-loaded handbook stylesheet. The existing `--kc-*` consumer aliases now map to the approved light/dark semantic roles, preserving the existing pages. The featured work composition and service card shadows use the handbook E2/E3 elevation values. The specific crimson #C74C57 is an owner-requested extension, **not a claim that the original green handbook specified red**. The token master and CSS are compared by a production-build test. Remaining: migrate every component literal, perform dark/light contrast calculation and independent visual sign-off.
+
+## Appearance semantics — F10/C09
+
+Changed the first-time appearance choice from a forced dark theme to the handbook's **System** preference. Early inline prepaint code now resolves the operating-system preference unless the visitor explicitly selected light or dark. The footer/mobile appearance selector preserves the chosen mode in storage; browser checks cover both system settings, user override, persistence and restoration. Original green identity and full manual theme control are retained.

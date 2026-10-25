@@ -52,6 +52,7 @@ jobs:
           node tests/visual.smoke.mjs
           node tests/language-font.contract.mjs
           node tests/service-keyboard.contract.mjs
+          node tests/theme-preference.contract.mjs
           node tests/hero-media.contract.mjs
           node tests/layout-shift.diagnostics.mjs
           node tests/award-audit.mjs
