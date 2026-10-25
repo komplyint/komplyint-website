@@ -584,3 +584,51 @@ html:not(.dark){color-scheme:light;background:#F7F6F2}
    Retain a visible keyboard outline; account for the sticky header without JS. */
 .kc-root #main-content{scroll-margin-top:112px}
 @media(max-width:767px){.kc-root #main-content{scroll-margin-top:90px}}
+
+
+/* C20 exact service-card geometry, typography and explicit link anatomy.
+   Reuse existing one-anchor semantics; allow full vertical content growth at
+   200% text without fixed heights or stacked invisible actions. */
+.kc-service-tile{
+  min-height:300px;
+  padding:32px;
+  border-radius:16px;
+  display:flex;flex-direction:column;align-items:flex-start;
+  overflow-wrap:break-word;
+  box-shadow:var(--ki-shadow-e2);
+}
+.kc-service-tile .kc-tile-top{width:100%;margin-bottom:18px}
+.kc-service-tile h3{
+  margin:0 0 16px;
+  font-family:var(--font-lato),Lato,Arial,sans-serif;
+  font-size:26px;line-height:1.3;font-weight:700;letter-spacing:0;
+}
+.kc-service-tile p{
+  font-family:var(--font-lato),Lato,Arial,sans-serif;
+  font-size:18px;line-height:1.65;
+  margin:0 0 24px;
+}
+.kc-service-card-action{
+  display:inline-flex;align-items:center;gap:13px;
+  font-family:var(--font-lato),Lato,Arial,sans-serif;
+  color:var(--ki-color-action);
+  font-size:16px;line-height:1.5;font-weight:700;
+  margin-top:auto;
+}
+.kc-service-card-action .kc-arrow{font-size:20px}
+.kc-service-tile:focus-visible,.kc-service-tile:focus-within{
+  box-shadow:var(--ki-shadow-e3);border-color:var(--ki-color-accent)
+}
+.dark .kc-service-card-action{color:var(--ki-color-action)}
+@media (min-width:768px) and (max-width:1199px){
+  .kc-service-tile h3{font-size:24px;line-height:1.3}
+}
+@media (max-width:767px){
+  .kc-service-tile{min-height:300px;padding:24px}
+  .kc-service-tile h3{font-size:22px;line-height:1.3}
+  .kc-service-tile p{font-size:18px;line-height:1.65}
+}
+@media (prefers-reduced-motion:reduce){
+  .kc-service-tile:hover{transform:none}
+  .kc-service-tile:focus-visible{transition:none}
+}

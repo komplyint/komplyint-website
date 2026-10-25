@@ -38,3 +38,7 @@ Pending:
 6. Authorized production deployment on **existing** Vercel project and live release SHA match (Q20/Q21).
 
 **Critical environment blocker:** the repository deployment workflow fails because `VERCEL_TOKEN`, `VERCEL_ORG_ID` and `VERCEL_PROJECT_ID` are missing from GitHub Actions. Reconnect the original Vercel GitHub integration, or securely provide the three repository secrets. Never claim source QA is production publication.
+
+## C20 card precision correction (26 October 2026)
+
+The service-card implementation was reconciled with the explicit typography and component measurements on source handbook page 60. The same six service cards and dark/neutral design remain, but the content now grows from a 300px minimum, uses Lato 26/24/22px headings, 18px body and 16px localized destination label with one anchor. The card-specific browser matrix tests FI/EN/SV at mobile/tablet/desktop widths and synthetic 200% card text. Signed human sign-off remains pending.
