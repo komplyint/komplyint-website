@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict'
 import { pathToFileURL } from 'node:url'
+import { writeFile } from 'node:fs/promises'
 
 export const REQUIRED_PAGES = [
   ['/', ['Selkeyttä työhön.', 'Käytännöllistä digiapua', 'info@komplyint.fi']],
@@ -96,6 +97,7 @@ async function main(){
     console.error('Attempt '+i+'/'+attempts+' failed: '+result.problems.join(' | '))
     if(i<attempts)await new Promise(resolve=>setTimeout(resolve,6000))
   }
+  await writeFile('release-evidence.json',JSON.stringify({timestamp:new Date().toISOString(),expectedCommit,...result},null,2))
   console.log(JSON.stringify({
     result:result.pass?'PASS':'BLOCKED',
     origin:result.origin,
