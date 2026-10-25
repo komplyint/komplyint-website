@@ -30,6 +30,7 @@ assert.equal(await mobile.locator('.kc-hero-video').evaluate(el=>getComputedStyl
 await mobile.locator('.kc-mobile-toggle').click()
 assert.equal(await mobile.locator('nav.kc-nav').isVisible(),true)
 assert.equal(await mobile.locator('nav.kc-nav').getAttribute('role'),'dialog')
+assert.equal(await mobile.locator('.kc-actions').evaluate(el=>getComputedStyle(el).visibility),'hidden','Underlying header utilities must not bleed through the modal')
 assert.equal(await mobile.locator('#main-content').getAttribute('inert'),'')
 assert.equal(await mobile.evaluate(()=>document.activeElement?.classList.contains('qh-menu-close')),true)
 await mobile.screenshot({path:out+'/mobile-menu-fi.png',fullPage:false,animations:'disabled'})
