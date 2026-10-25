@@ -4,6 +4,14 @@ import './commercial.css'
 import LangSetter from './LangSetter'
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://komplyint.fi'),
+  openGraph: {
+    title: 'Komplyint Oy | Data, automation and software solutions',
+    description: 'Practical Excel, Power BI, Microsoft 365 workflow, software and website services for Finnish businesses.',
+    url: 'https://komplyint.fi',
+    siteName: 'Komplyint Oy',
+    type: 'website',
+  },
   verification: {
     google: 'GI4h7VfvcOLD5ypU8bsuOOS5ayP6HyE04klUIoLIPFY',
   },
