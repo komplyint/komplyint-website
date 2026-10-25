@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
+import Image from 'next/image'
 
 import { navPages, services, content, serviceSlugs, contactEmail, duns, type Page, type Lang } from '@/lib/commercial'
 import ServiceDetail from '@/components/ServiceDetail'
@@ -240,7 +241,7 @@ function VideoHero({lang}:{lang:Lang}){
     try{await el.play();setState('playing')}catch{setState('blocked')}
   }
   return <div className="qh-film-layer">
-    <div className="kc-hero-poster" aria-hidden="true"/>
+    <Image className="kc-hero-poster" src="/media/hero.webp" alt="" fill priority sizes="100vw" aria-hidden="true" />
     <video className={'kc-hero-video'+(userPlay?' qh-user-play':'')} ref={video} autoPlay muted loop playsInline preload="metadata" poster="/media/hero.webp" aria-hidden="true"
       onPlaying={()=>setState('playing')} onPause={()=>setState('paused')} onError={()=>setState('error')}>
       <source src="/media/hero-optimized.mp4" type="video/mp4" /><source src="/media/hero.mp4" type="video/mp4" />
