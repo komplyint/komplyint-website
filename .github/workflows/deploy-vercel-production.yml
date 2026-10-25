@@ -1,5 +1,7 @@
 name: Deploy Komplyint production to existing Vercel project
 on:
+  pull_request:
+    branches: [main]
   push:
     branches: [main]
   workflow_dispatch:
@@ -9,7 +11,26 @@ concurrency:
   group: komplyint-production
   cancel-in-progress: false
 jobs:
+  credential-preflight:
+    runs-on: ubuntu-latest
+    env:
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+    steps:
+      - name: Report integration readiness without exposing credentials
+        shell: bash
+        run: |
+          missing=0
+          for name in VERCEL_TOKEN VERCEL_ORG_ID VERCEL_PROJECT_ID; do
+            if [ -z "${!name:-}" ]; then
+              echo "::warning::Vercel production deployment is blocked until repository secret $name is configured."
+              missing=1
+            fi
+          done
+          if [ "$missing" -eq 0 ]; then echo "Vercel CLI credentials available."; fi
   production:
+    if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     timeout-minutes: 20
     env:
