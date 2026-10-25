@@ -34,5 +34,11 @@ Company landing, information and contact pages **never require login**. Product/
 
 ## Company details
 - Website: https://komplyint.fi
-- Email currently published in the source: gliavex@gliavex.fi
+- Email currently published: info@komplyint.fi
 - Business ID: 3588595-3
+
+
+## 2026 Handbook redesign
+The current implementation is being reviewed in PR #4: https://github.com/komplyint/komplyint-website/pull/4.
+The previous static preview in preview/ is an archived prior iteration, not the reviewed handbook design.
+Public service document downloads are hosted at /downloads/Komplyint_Service_Documents.zip after deployment.

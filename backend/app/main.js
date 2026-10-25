@@ -114,7 +114,7 @@ Website origin: KOMPLYINT OY website
 
     await transporter.sendMail({
       from: process.env.SMTP_USER,
-      to: process.env.CONTACT_TO_EMAIL || process.env.SMTP_USER,
+      to: 'info@komplyint.fi',
       replyTo: trimmedEmail,
       subject: 'Website contact message',
       text: emailBody

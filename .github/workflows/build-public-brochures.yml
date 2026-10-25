@@ -1,0 +1,40 @@
+name: Build reviewed public service PDFs and ZIP
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  brochures:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: feature/handbook-quiet-precision-20261025
+          persist-credentials: true
+      - name: Build professional bilingual PDFs
+        run: |
+          python3 -m pip install --break-system-packages --quiet reportlab pypdf
+          python3 scripts/generate_public_portfolio.py
+      - name: Verify archive and 6-page brochures
+        run: |
+          python3 - <<'PY'
+          from pypdf import PdfReader
+          from pathlib import Path
+          import zipfile
+          d=Path('public/downloads')
+          for n in ['Komplyint_Palveluesite_FI.pdf','Komplyint_Service_Portfolio_EN.pdf']:
+            p=d/n
+            r=PdfReader(str(p))
+            assert len(r.pages)==6,(n,len(r.pages))
+            assert 'info@komplyint.fi' in ''.join(x.extract_text() or '' for x in r.pages), n
+          with zipfile.ZipFile(d/'Komplyint_Service_Documents.zip') as z:
+            assert z.testzip() is None
+            assert len([x for x in z.namelist() if x.endswith('.pdf')])==2
+          PY
+      - name: Commit downloadable public documents
+        run: |
+          git config user.name 'komplyint-delivery[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add public/downloads/
+          if ! git diff --cached --quiet; then git commit -m 'asset(downloads): publish verified FI and EN PDF brochures with ZIP'; git push origin HEAD:feature/handbook-quiet-precision-20261025; fi

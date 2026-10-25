@@ -4,6 +4,7 @@ const path = require('path');
 const app = express();
 app.use(express.json({ limit: '16kb' }));
 app.use('/modern.css', express.static(path.join(__dirname, 'src', 'modern.css')));
+app.use('/handbook.css', express.static(path.join(__dirname, 'src', 'handbook.css')));
 app.use('/modern.js', express.static(path.join(__dirname, 'src', 'modern.js')));
 
 // Keep browser enquiries same-origin; forward on the server to the existing backend.

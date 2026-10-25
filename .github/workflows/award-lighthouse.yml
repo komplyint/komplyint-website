@@ -1,0 +1,38 @@
+name: Awwwards Webby performance and SEO evidence
+on:
+  pull_request:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  lighthouse:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Build the site
+        run: |
+          npm install --no-audit --no-fund
+          npm run build
+      - name: Start local release build
+        run: |
+          mkdir -p .next/standalone/.next
+          cp -r .next/static .next/standalone/.next/static
+          cp -r public .next/standalone/public
+          HOSTNAME=127.0.0.1 PORT=3000 node .next/standalone/server.js >/tmp/komplyint-lighthouse.log 2>&1 &
+          for i in $(seq 1 50); do if curl -fsS http://127.0.0.1:3000/ >/dev/null; then break; fi; sleep 2; done
+      - name: Collect Lighthouse website evidence
+        run: |
+          npm install --no-save @lhci/cli --no-audit --no-fund
+          mkdir -p site-preview/lighthouse
+          npx lhci autorun
+      - name: Upload scored evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: komplyint-award-lighthouse-reports
+          path: site-preview/lighthouse/
+          if-no-files-found: ignore
