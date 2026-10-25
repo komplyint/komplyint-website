@@ -26,3 +26,23 @@ jobs:
         run: npm install --no-audit --no-fund
       - name: Test public routes and build production Next.js
         run: npm run build
+
+      - name: Install Chromium and visual test harness
+        run: |
+          npm install --no-save playwright --no-audit --no-fund
+          npx playwright install --with-deps chromium
+      - name: Browser smoke tests with screenshots
+        run: |
+          mkdir -p .next/standalone/.next
+          cp -r .next/static .next/standalone/.next/static
+          cp -r public .next/standalone/public
+          HOSTNAME=127.0.0.1 PORT=3000 node .next/standalone/server.js > /tmp/komplyint-website.log 2>&1 &
+          for i in $(seq 1 40); do if curl -fsS http://127.0.0.1:3000/ > /dev/null; then break; fi; sleep 2; done
+          node tests/visual.smoke.mjs
+      - name: Attach review screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: komplyint-site-review-screenshots
+          path: site-preview/
+          if-no-files-found: ignore
