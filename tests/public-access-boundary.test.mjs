@@ -30,7 +30,7 @@ test('public bilingual site has its intended navigation and contact route', () =
   for (const p of ['home', 'services', 'software', 'work', 'about', 'contact', 'privacy','accessibility']) {
     assert.ok(home.includes("'"+p+"'"), 'missing public route '+p)
   }
-  assert.match(home,/className=\{menuOpen \? 'main-nav kc-nav is-open'/)
+  assert.match(home,/className=\{menuOpen \? 'kc-nav is-open'/)
   assert.match(home,/navPages\.map/)
   assert.match(home,/\/api\/contact/)
   assert.match(home,/pageFromPath/)
