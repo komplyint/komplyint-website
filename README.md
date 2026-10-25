@@ -1,53 +1,38 @@
-# KOMPLYINT OY Website
+# Komplyint Oy - Public digital services website
 
-Independent public website for KOMPLYINT OY.
+Public Finnish and English website for Komplyint Oy, Business ID 3588595-3.
 
-This repository is completely separate from Todiscope and any related platforms.
+## Commercial direction
+Komplyint focuses on practical B2B services: Excel, data and Power BI reporting; Microsoft 365 workflows and automation; websites and maintenance; small software and API integrations; software testing and QA; and limited office-document support.
 
-## Structure
+Compliance consulting is **not currently part of the public offer**. We do not claim regulatory certification, legal advisory authority, enterprise-scale capacity or 24/7 support.
 
-```
-komplyint-website/
-├── frontend/          # Frontend website (port 3600)
-│   ├── src/
-│   ├── public/
-│   └── server.js
-└── backend/           # Minimal backend API (port 8600)
-    └── app/
-```
+## Implementations
+- Next.js 14 in the repository root: Finnish and English pages for home, services, software, contact and privacy.
+- Express/static legacy site in frontend/: one-page bilingual presentation using the same commercial content and styling.
+- Legacy contact backend in backend/: same-origin frontend proxy forwards to its contact endpoint. The Next.js implementation uses its own API route.
 
-## Frontend
+The original public logo.svg, media/hero.mp4 and media/hero.webp assets are unchanged. The new site keeps the moving video on desktop and mobile; users requesting reduced motion see the poster.
 
-Simple static website with Express server.
+## Local validation
+1. Run npm install in the repository root.
+2. Run npm run build (public access regression checks and Next production build).
+3. Run node --check frontend/src/modern.js and node --check frontend/server.js.
+4. For the old static server, run npm install and npm run dev in frontend/; run the legacy backend separately when testing mail delivery.
+5. Verify the form using actual SMTP settings with synthetic data. The frontend displays an error when mail delivery is not configured.
 
-```bash
-cd frontend
-npm install
-npm run dev
-```
+The repository also includes a .woodpecker.yml QA-only pipeline for the authorised ObumDelivery workflow. It does not deploy production.
 
-Runs on http://localhost:3600
+## Preview and publication
+The new redesign is staged on feature/digital-services-redesign-20261025 for owner review.
+The standalone review HTML at preview/komplyint-review.html has its form disabled.
 
-## Backend
+Before merging or deploying: build/test, verify responsive UI, confirm hero-video playback and consent-based motion fallback, check contact mail configuration, obtain visual approval, and retain a rollback route.
 
-Minimal backend for contact form handling.
+## Security and public access
+Company landing, information and contact pages **never require login**. Product/admin functions use independent protected application identities; see PUBLIC_ACCESS_BOUNDARY.md. Avoid sending confidential business data through the initial contact form.
 
-```bash
-cd backend
-npm install
-npm run dev
-```
-
-Runs on http://localhost:8600
-
-## License
-
-Copyright KOMPLYINT OY
-
-
-
-## Public corporate website and private app access
-
-This website deliberately has **no Login / Continue with Google button** and imposes **no authentication** on its home, software, privacy or contact pages. Komplyint's centralized ZITADEL login at `auth.komplyint.fi` is for protected administration and actual product functionality, not the corporate landing page.
-
-See [PUBLIC_ACCESS_BOUNDARY.md](PUBLIC_ACCESS_BOUNDARY.md). `npm run build` runs the source guard `npm run test:public-access` before building the public site.
+## Company details
+- Website: https://komplyint.fi
+- Email currently published in the source: gliavex@gliavex.fi
+- Business ID: 3588595-3

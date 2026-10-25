@@ -66,7 +66,7 @@ app.post('/contact', async (req, res) => {
       });
     }
 
-    const trimmedEmail = email.trim();
+    const trimmedEmail = email.trim().slice(0, 200);
     if (!isValidEmail(trimmedEmail)) {
       return res.status(400).json({
         ok: false
@@ -81,14 +81,14 @@ app.post('/contact', async (req, res) => {
     }
 
     const trimmedMessage = message.trim();
-    if (trimmedMessage.length === 0) {
+    if (trimmedMessage.length === 0 || trimmedMessage.length > 5000) {
       return res.status(400).json({
         ok: false
       });
     }
 
     // Sanitize name (optional)
-    const trimmedName = name && typeof name === 'string' ? name.trim() : null;
+    const trimmedName = name && typeof name === 'string' ? name.trim().slice(0, 120) : null;
 
     // Send email
     const transporter = createTransporter();
@@ -113,8 +113,8 @@ Website origin: KOMPLYINT OY website
 ---`;
 
     await transporter.sendMail({
-      from: 'KOMPLYINT OY <komplyint@komplyint.com>',
-      to: 'komplyint@komplyint.com',
+      from: process.env.SMTP_USER,
+      to: process.env.CONTACT_TO_EMAIL || process.env.SMTP_USER,
       replyTo: trimmedEmail,
       subject: 'Website contact message',
       text: emailBody

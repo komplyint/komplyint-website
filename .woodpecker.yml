@@ -1,0 +1,10 @@
+# ObumDelivery / Woodpecker QA pipeline. No deployment in this job.
+steps:
+  - name: site-validation
+    image: node:22-bookworm
+    commands:
+      - node --check frontend/src/modern.js
+      - node --check frontend/server.js
+      - node --check backend/app/main.js
+      - npm install --no-audit --no-fund
+      - npm run build
