@@ -197,6 +197,16 @@ a:hover .kc-arrow{transform:translate(3px,-3px)}
 
 /* Do not create a scrolling ancestor around the sticky navigation. */
 .kc-root{overflow-x:clip;overflow-y:visible}
+
+
+/* Catalogue detail page has its introduction in the hero already. */
+.kc-services-detail{padding-top:72px}
+@media(max-width:570px){
+  .kc-services-detail{padding-top:45px}
+  .kc-step{min-height:0;padding:23px 23px 25px}
+  .kc-step-no{margin-bottom:15px}
+  .kc-step h3{margin-bottom:8px}
+}
 </style><style>.kc-review-banner{position:fixed;bottom:0;z-index:1000;left:0;right:0;text-align:center;background:#fff6d2;color:#4f3c14;border-top:1px solid #e8c85f;font:600 13px system-ui;padding:10px}.kc-root{padding-bottom:35px}</style></head><body><div id="site" class="kc-root"></div><div class="kc-review-banner">WEBSITE REDESIGN REVIEW - Not the production website. Contact form is disabled here.</div><script>const services = {
   fi: [
     { title: 'Excel, data ja raportointi', intro: 'Selkeämpää tietoa vähemmällä manuaalisella työllä.', examples: ['Excel-tiedostojen korjaus, kaavat ja Power Query', 'Tietojen yhdistäminen, puhdistaminen ja laadun tarkistus', 'Power BI -raportit ja toistuvan raportoinnin kehittäminen'], deliverable: 'Toimiva tiedosto tai raportti, sovitut tarkistukset ja käyttöohje.', boundaries: 'Lähdetietojen laatu, käyttöoikeudet ja mahdolliset lisenssit tarkistetaan ennen toteutusta.', tools: 'Excel · Power Query · Power BI · CSV' },
