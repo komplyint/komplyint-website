@@ -7,6 +7,7 @@ import { navPages, services, content, serviceSlugs, contactEmail, duns, type Pag
 import ServiceDetail from '@/components/ServiceDetail'
 import Arrow from '@/components/Arrow'
 import FeaturedWork from '@/components/FeaturedWork'
+import WorkExampleArt from '@/components/WorkExampleArt'
 import PublicBrochures from '@/components/PublicBrochures'
 import ServiceCard from '@/components/ServiceCard'
 import SectionIntro from '@/components/SectionIntro'
@@ -188,7 +189,7 @@ function Home({lang}:{lang:Lang}) {
 
 function Examples({lang}:{lang:Lang}) {
   const t=content[lang].impact
-  return <section className="kc-section kc-examples"><div className="kc-shell"><SectionIntro eyebrow={t.eyebrow} title={t.title} text={t.disclaimer}/><div className="kc-example-grid">{t.cases.map(c=><article key={c.num} className="kc-example"><span className="kc-example-num">{c.num}</span><h3>{c.title}</h3><div className="kc-example-line"><span>{lang === 'fi'?'LÄHTÖTILANNE':'BEFORE'}</span><p>{c.before}</p></div><div className="kc-example-line"><span>{lang === 'fi'?'TAVOITE':'AFTER'}</span><p>{c.after}</p></div></article>)}</div></div></section>
+  return <section className="kc-section kc-examples"><div className="kc-shell"><SectionIntro eyebrow={t.eyebrow} title={t.title} text={t.disclaimer}/><div className="kc-example-grid">{t.cases.map((c,i)=><article key={c.num} className="kc-example"><span className="kc-example-num">{c.num}</span><h3>{c.title}</h3><WorkExampleArt index={i}/><div className="kc-example-line"><span>{lang === 'fi'?'LÄHTÖTILANNE':'BEFORE'}</span><p>{c.before}</p></div><div className="kc-example-line"><span>{lang === 'fi'?'TAVOITE':'AFTER'}</span><p>{c.after}</p></div></article>)}</div></div></section>
 }
 function Process({lang}:{lang:Lang}) {
   const t=content[lang].process

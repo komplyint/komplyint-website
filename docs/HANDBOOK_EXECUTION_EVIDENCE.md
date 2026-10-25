@@ -56,3 +56,7 @@ Imported **all 225 explicitly numbered C01-T01 through C64-T03 style component t
 ## Public release media and locale attestation — F20/F22/Q11/Q21
 
 Extended the existing `scripts/verify-public-release.mjs` production verifier to require the actual original vector graphics in both languages, valid optimized/mobile MP4 headers, the responsive WebP poster and the correct initial FI/EN HTML language alongside the existing release commit, routes and brochure signatures. The Node contract includes broken-media, missing-art and incorrect-language failure cases. This is a byte/availability gate; real video decoding and interaction remain separately covered by Playwright and actual production browser review.
+
+## Work page illustration family — F19/F20/C23
+
+Added three original, editable SVG-in-React compositions for the existing honest demonstration scenarios: Excel reporting, request workflow automation, and website functional review. They share the established green/charcoal/crimson art direction, remain decorative to assistive technology, carry no fabricated client values, and sit under the already-present demonstration disclaimer. The browser quality workflow now asserts all three visuals render and captures a dedicated work-gallery screenshot.
