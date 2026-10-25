@@ -103,7 +103,7 @@ export default function KomplyintWebsite() {
           <span>{t.footer}</span>
         </div>
       </div>
-      <header className="kc-header">
+      <header className={menuOpen ? "kc-header qh-menu-open" : "kc-header"}>
         <div className="kc-shell kc-header-row">
           <a href={pathFor(lang, 'home')} className="kc-logo-link" aria-label="Komplyint Oy">
             <img src="/logo.svg" className="kc-logo" alt="Komplyint Oy" />
