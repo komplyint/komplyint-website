@@ -1,20 +1,15 @@
 name: Optimize protected hero film into web delivery derivative
 on:
-  pull_request:
-    branches: [main]
-    paths:
-      - '.github/workflows/optimize-hero.yml'
-      - 'public/media/hero.mp4'
+  workflow_dispatch:
 permissions:
   contents: write
 jobs:
   transcode:
-    if: github.head_ref == 'feature/handbook-quiet-precision-20261025'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: ${{ github.head_ref }}
+          ref: feature/handbook-quiet-precision-20261025
           persist-credentials: true
       - name: Generate browser-compatible compressed motion derivative
         shell: bash
