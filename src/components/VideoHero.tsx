@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react'
 import type { Lang } from '@/lib/commercial'
+import { ui } from '@/lib/i18n-ui'
 
 export default function VideoHero({lang}:{lang:Lang}){
   type FilmState='poster'|'loading'|'playing'|'paused'|'blocked'|'error'
@@ -121,10 +122,10 @@ export default function VideoHero({lang}:{lang:Lang}){
     </div>
     <div className="qh-video-controls">
       <button type="button" onClick={toggle}
-        aria-label={state==='playing'?(lang==='fi'?'Pysäytä taustavideo':'Pause background video'):(lang==='fi'?'Toista taustavideo':'Play background video')}>
-        <span aria-hidden="true">{state==='playing'?'Ⅱ':'▶'}</span> {state==='playing'?(lang==='fi'?'Pysäytä':'Pause'):(lang==='fi'?'Toista':'Play')}
+        aria-label={state==='playing'?ui[lang].video.pause:ui[lang].video.play}>
+        <span aria-hidden="true">{state==='playing'?'Ⅱ':'▶'}</span> {state==='playing'?ui[lang].video.pauseShort:ui[lang].video.playShort}
       </button>
-      {(state==='blocked'||state==='error')&&<span className="qh-film-note" role="status">{lang==='fi'?'Automaattinen toisto on estetty. Käynnistä video painikkeesta.':'Autoplay is blocked. Use Play to start the film.'}</span>}
+      {(state==='blocked'||state==='error')&&<span className="qh-film-note" role="status">{ui[lang].video.blocked}</span>}
     </div>
   </>
 }

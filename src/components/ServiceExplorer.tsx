@@ -6,6 +6,7 @@ import { content, services, serviceSlugs, type Lang } from '@/lib/commercial'
 import SectionIntro from '@/components/SectionIntro'
 import Arrow from '@/components/Arrow'
 import { pathFor } from '@/lib/site-route'
+import { ui } from '@/lib/i18n-ui'
 
 export default function ServiceExplorer({lang, showIntro=true}:{lang:Lang;showIntro?:boolean}) {
   const [selected, setSelected] = useState(0)
@@ -34,7 +35,7 @@ export default function ServiceExplorer({lang, showIntro=true}:{lang:Lang;showIn
       </div>
       <div className="kc-detail" role="tabpanel" id="service-detail" aria-labelledby={"service-tab-"+selected} tabIndex={0}><span className="kc-detail-index">{String(selected+1).padStart(2,'0')} / 06</span><h3>{s.title}</h3><p className="kc-detail-lead">{s.intro}</p>
         <div className="kc-detail-grid"><div><h4>{t.examples}</h4><ul>{s.examples.map(ex=><li key={ex}>{ex}</li>)}</ul></div><div className="kc-detail-side"><div><h4>{t.delivered}</h4><p>{s.deliverable}</p></div><div><h4>{t.boundaries}</h4><p>{s.boundaries}</p></div></div></div>
-        <div className="kc-detail-bottom"><div><small>{t.tools}</small><p>{s.tools}</p></div><div className="qh-detail-actions"><a className="kc-text-link" href={pathFor(lang,'services')+'/'+serviceSlugs[selected]}>{lang==='fi'?'Lue lisää palvelusta':'View service detail'}<Arrow /></a><a className="kc-text-link" href={pathFor(lang,'contact')+'?service='+serviceSlugs[selected]}>{t.help}<Arrow /></a></div></div>
+        <div className="kc-detail-bottom"><div><small>{t.tools}</small><p>{s.tools}</p></div><div className="qh-detail-actions"><a className="kc-text-link" href={pathFor(lang,'services')+'/'+serviceSlugs[selected]}>{ui[lang].serviceDetailLink}<Arrow /></a><a className="kc-text-link" href={pathFor(lang,'contact')+'?service='+serviceSlugs[selected]}>{t.help}<Arrow /></a></div></div>
       </div>
     </div>
   </>

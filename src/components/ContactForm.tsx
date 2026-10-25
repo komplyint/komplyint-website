@@ -4,6 +4,7 @@ import { useEffect, useRef, useState, type FormEvent } from 'react'
 import { content, services, serviceSlugs, type Lang } from '@/lib/commercial'
 import { pathFor } from '@/lib/site-route'
 import Arrow from '@/components/Arrow'
+import { ui } from '@/lib/i18n-ui'
 
 type SubmitState='idle'|'sending'|'sent'|'invalid'|'rate_limited'|'error'|'unknown'
 export default function ContactForm({lang}:{lang:Lang}) {
@@ -46,12 +47,12 @@ export default function ContactForm({lang}:{lang:Lang}) {
       setStatus(error instanceof Error&&error.name==='AbortError'?'unknown':'error')
     }finally{clearTimeout(timeout)}
   }
-  const fi=lang==='fi'
+  const f=ui[lang].form
   return (
     <form className="kc-form" ref={formRef} onSubmit={submit}>
       <div className="kc-form-two">
-        <label>{t.formName}<input type="text" value={name} onChange={e=>{setName(e.target.value);resetStatus()}} maxLength={120} autoComplete="name" placeholder={fi?'Nimesi':'Your name'} aria-invalid={!!fieldErrors.name}/></label>
-        <label>{fi?'Yritys (valinnainen)':'Company (optional)'}<input type="text" value={company} onChange={e=>{setCompany(e.target.value);resetStatus()}} maxLength={140} autoComplete="organization" placeholder={fi?'Yrityksen nimi':'Company name'} aria-invalid={!!fieldErrors.company}/></label>
+        <label>{t.formName}<input type="text" value={name} onChange={e=>{setName(e.target.value);resetStatus()}} maxLength={120} autoComplete="name" placeholder={f.nameHint} aria-invalid={!!fieldErrors.name}/></label>
+        <label>{f.company}<input type="text" value={company} onChange={e=>{setCompany(e.target.value);resetStatus()}} maxLength={140} autoComplete="organization" placeholder={f.companyHint} aria-invalid={!!fieldErrors.company}/></label>
         <label>{t.formEmail}<input type="email" value={email} onChange={e=>{setEmail(e.target.value);resetStatus()}} required maxLength={254} autoComplete="email" placeholder="name@company.fi" aria-invalid={!!fieldErrors.email}/></label>
       </div>
       <label>{t.formService}
@@ -61,12 +62,12 @@ export default function ContactForm({lang}:{lang:Lang}) {
           <option value="other">{t.other}</option>
         </select>
       </label>
-      <label>{t.formMessage}<textarea rows={6} maxLength={4500} minLength={10} required value={message} onChange={e=>{setMessage(e.target.value);resetStatus()}} placeholder={fi?'Kerro lyhyesti ongelma ja toivottu lopputulos.':'Describe the problem and desired outcome.'} aria-invalid={!!fieldErrors.message}/></label>
+      <label>{t.formMessage}<textarea rows={6} maxLength={4500} minLength={10} required value={message} onChange={e=>{setMessage(e.target.value);resetStatus()}} placeholder={f.messageHint} aria-invalid={!!fieldErrors.message}/></label>
       <label className="kc-honeypot" aria-hidden="true">Website <input tabIndex={-1} autoComplete="off" value={trap} onChange={e=>setTrap(e.target.value)}/></label>
       <p className="kc-form-privacy">{t.privacy} <a href={pathFor(lang,'privacy')}>{content[lang].navigation.privacy}.</a></p>
-      {status==='invalid'&&<div role="alert" className="kc-form-error" tabIndex={-1}>{fi?'Tarkista lomakkeen tiedot ja korjaa merkityt kentät.':'Please check the marked fields and correct your details.'}</div>}
-      {status==='rate_limited'&&<p role="alert" className="kc-form-error">{fi?'Liikaa lähetysyrityksiä. Yritä myöhemmin tai lähetä sähköpostia osoitteeseen':'Too many requests. Please try later or email'} <a href="mailto:info@komplyint.fi">info@komplyint.fi</a></p>}
-      {status==='unknown'&&<p role="alert" className="kc-form-error">{fi?'Viestin tilaa ei voitu vahvistaa. Älä lähetä samaa viestiä uudelleen ilman tarkistusta. Voit ottaa yhteyttä osoitteeseen':'The request status is uncertain. Do not resubmit the same message without checking. You can contact'} <a href="mailto:info@komplyint.fi">info@komplyint.fi</a></p>}
+      {status==='invalid'&&<div role="alert" className="kc-form-error" tabIndex={-1}>{f.invalid}</div>}
+      {status==='rate_limited'&&<p role="alert" className="kc-form-error">{f.rateLimited} <a href="mailto:info@komplyint.fi">info@komplyint.fi</a></p>}
+      {status==='unknown'&&<p role="alert" className="kc-form-error">{f.unknown} <a href="mailto:info@komplyint.fi">info@komplyint.fi</a></p>}
       {status==='sent'&&<p role="status" className="kc-form-success">{t.sent}</p>}
       {status==='error'&&<p role="alert" className="kc-form-error">{t.fail} <a href="mailto:info@komplyint.fi">info@komplyint.fi</a></p>}
       <button className="kc-button kc-button-primary" disabled={status==='sending'||status==='unknown'} type="submit">{status==='sending'?t.sending:t.send}<Arrow /></button>

@@ -7,16 +7,16 @@ import test from 'node:test'
 const root = join(dirname(fileURLToPath(import.meta.url)), '..')
 const source = path => readFileSync(join(root, path), 'utf8')
 const publicFiles = [
-  'src/app/page.tsx','src/app/layout.tsx','src/app/en/page.tsx',
-  'src/app/services/page.tsx','src/app/en/services/page.tsx',
-  'src/app/software/page.tsx','src/app/en/software/page.tsx',
-  'src/app/contact/page.tsx','src/app/en/contact/page.tsx',
-  'src/app/privacy/page.tsx','src/app/en/privacy/page.tsx',
+  'src/app/page.tsx','src/app/layout.tsx','src/app/en/page.tsx','src/app/sv/page.tsx',
+  'src/app/services/page.tsx','src/app/en/services/page.tsx','src/app/sv/services/page.tsx',
+  'src/app/software/page.tsx','src/app/en/software/page.tsx','src/app/sv/software/page.tsx',
+  'src/app/contact/page.tsx','src/app/en/contact/page.tsx','src/app/sv/contact/page.tsx',
+  'src/app/privacy/page.tsx','src/app/en/privacy/page.tsx','src/app/sv/privacy/page.tsx',
   'frontend/src/index.html','frontend/src/app.js',
-  'src/app/work/page.tsx','src/app/en/work/page.tsx',
-  'src/app/about/page.tsx','src/app/en/about/page.tsx',
-  'src/app/accessibility/page.tsx','src/app/en/accessibility/page.tsx',
-  'src/app/services/[slug]/page.tsx','src/app/en/services/[slug]/page.tsx',
+  'src/app/work/page.tsx','src/app/en/work/page.tsx','src/app/sv/work/page.tsx',
+  'src/app/about/page.tsx','src/app/en/about/page.tsx','src/app/sv/about/page.tsx',
+  'src/app/accessibility/page.tsx','src/app/en/accessibility/page.tsx','src/app/sv/accessibility/page.tsx',
+  'src/app/services/[slug]/page.tsx','src/app/en/services/[slug]/page.tsx','src/app/sv/services/[slug]/page.tsx',
 ]
 const forbidden = [
   [/auth\.komplyint\.fi/i, 'central identity provider'],
@@ -25,7 +25,7 @@ const forbidden = [
   [/\b(?:signIn|useSession|redirectToSignIn|requireAuth|withAuth|authGuard)\b/, 'client authentication gate'],
   [/(?:<form[^>]+(?:password|login)|<input[^>]+type\s*=\s*['"]password['"])/i, 'password form'],
 ]
-test('public bilingual site has its intended navigation and contact route', () => {
+test('public trilingual site has its intended navigation and contact route', () => {
   const home = source('src/app/page.tsx') + source('src/lib/commercial.ts') + source('src/components/ContactForm.tsx')
   for (const p of ['home', 'services', 'software', 'work', 'about', 'contact', 'privacy','accessibility']) {
     assert.ok(home.includes("'"+p+"'"), 'missing public route '+p)

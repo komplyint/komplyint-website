@@ -66,3 +66,9 @@ Added three original, editable SVG-in-React compositions for the existing honest
 The existing Next.js contact API now reads request bodies with an actual 32KB bound before JSON parsing; normalizes Unicode input, validates email, six stable service keys and FI/EN locale, enforces message code-point limits and returns structured 422 field failures. The email recipient remains server-controlled. The existing SMTP acceptance requirement, escaping and honeypot are preserved. The form now sends independent service/locale fields, surfaces 422/429/unknown statuses and preserves drafts on failures. Browser tests intercept the endpoint and use fictional data only.
 
 The process-local idempotency key cache is explicitly best-effort; **distributed durable idempotency, anti-abuse coordination across instances and real inbox delivery remain operational NOT_TESTED gates**, not claimed complete.
+
+## Trilingual internationalization (F07/T12, E12/Q11)
+
+Added complete Swedish (Finland) site content under explicit `/sv` routes alongside the existing Finnish default and English `/en` routes, all backed by one typed locale table. Added a three-language, flag-and-native-name selector to desktop and mobile navigation. Preserved deep links, query/hash and contact-draft protection. Reused the existing Next.js route templates, editorial content, original film and two existing downloadable brochure PDFs; only the Swedish UI dictionary, Swedish illustrations, locale paths and tests were built new. Added server `lang=sv`, Swedish canonical/OpenGraph metadata, three-language `hreflang` and sitemap. See `docs/I18N_SWEDISH_IMPLEMENTATION.md`.
+
+**Acceptance state:** code and tests awaiting GitHub CI. Production requires an authorized deploy to the existing Vercel project; no live release is claimed.

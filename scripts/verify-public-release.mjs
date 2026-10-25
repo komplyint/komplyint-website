@@ -5,6 +5,13 @@ import { writeFile } from 'node:fs/promises'
 export const REQUIRED_PAGES = [
   ['/', ['Selkeyttä työhön.', 'Käytännöllistä digiapua', 'info@komplyint.fi']],
   ['/en', ['Clarity for your work.', 'Explore services']],
+  ['/sv', ['Mer klarhet i arbetet.', 'Utforska tjänster']],
+  ['/sv/services', ['Rätt lösning. Tydlig omfattning.']],
+  ['/sv/services/data-reporting', ['Excel, data och rapportering', 'Vad vi kan göra']],
+  ['/sv/work', ['Så här kan en lösning fungera.']],
+  ['/sv/contact', ['Berätta vad som behöver fungera bättre.']],
+  ['/sv/privacy', ['Integritetsinformation']],
+  ['/sv/accessibility', ['Tillgänglighetsinformation']],
   ['/services', ['Oikea ratkaisu.', 'Komplyint']],
   ['/services/data-reporting', ['Excel, data ja raportointi', 'Mitä voimme tehdä']],
   ['/en/services/m365-automation', ['Microsoft 365', 'Our process']],
@@ -21,6 +28,7 @@ export const REQUIRED_DOWNLOADS = [
 export const REQUIRED_MEDIA = [
   ['/media/featured-reporting-art.svg', 'svg', 'CONCEPT EXAMPLE'],
   ['/media/featured-reporting-art-fi.svg', 'svg', 'ESIMERKKIKUVA'],
+  ['/media/featured-reporting-art-sv.svg', 'svg', 'EXEMPEL — INGA KUNDUPPGIFTER'],
   ['/media/hero-optimized.mp4', 'mp4'],
   ['/media/hero-mobile.mp4', 'mp4'],
   ['/media/hero-mobile.webp', 'webp'],
@@ -73,7 +81,7 @@ export async function verifyPublicRelease({
     await checked('page '+path,path,async response=>{
       const html=await response.text()
       for(const phrase of phrases)assert.ok(html.includes(phrase),'missing content: '+phrase)
-      const expectedLang=path==='/en'||path.startsWith('/en/')?'en':'fi'
+      const expectedLang=path==='/en'||path.startsWith('/en/')?'en':path==='/sv'||path.startsWith('/sv/')?'sv':'fi'
       assert.match(html,new RegExp('<html[^>]*\\blang="'+expectedLang+'"'),'incorrect SSR document language: '+path)
       if(path==='/'){
         assert.ok(!html.includes('Teknologiaa, joka helpottaa oikeaa työtä.'),

@@ -5,7 +5,7 @@ const origin=process.env.SITE_URL||'http://127.0.0.1:3000'
 const browser=await chromium.launch({headless:true,args:['--no-sandbox']})
 try{
   const page=await browser.newPage({viewport:{width:1440,height:900}})
-  for(const route of ['/services','/en/services']){
+  for(const route of ['/services','/en/services','/sv/services']){
     const response=await page.goto(origin+route,{waitUntil:'domcontentloaded'})
     assert.equal(response?.status(),200)
     const tabs=page.locator('.kc-explorer-tabs [role="tab"]')
@@ -24,7 +24,7 @@ try{
     await page.keyboard.press('ArrowRight')
     assert.equal(await tabs.nth(0).getAttribute('aria-selected'),'true',route+' arrows wrap')
     await page.keyboard.press('End')
-    const contact=route.startsWith('/en')?'/en/contact?service=document-support':'/contact?service=document-support'
+    const contact=route.startsWith('/en')?'/en/contact?service=document-support':route.startsWith('/sv')?'/sv/contact?service=document-support':'/contact?service=document-support'
     assert.ok((await panel.locator('a[href*="contact?service="]').getAttribute('href'))?.endsWith(contact))
   }
   console.log('Accessible FI/EN service keyboard interaction PASS')

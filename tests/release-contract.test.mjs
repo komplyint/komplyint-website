@@ -27,14 +27,14 @@ function fakeResponse(path,{commit='abc123',stale=false,missing=[],badDownload=f
   }
   const phrases=REQUIRED_PAGES.find(row=>row[0]===path)?.[1]||[]
   const body=phrases.join(' / ')+(stale&&path==='/'?' Teknologiaa, joka helpottaa oikeaa työtä.':'')
-  const lang=path.startsWith('/en')&&!badLocale?'en':'fi'
+  const lang=path.startsWith('/en')&&!badLocale?'en':path.startsWith('/sv')&&!badLocale?'sv':'fi'
   return new Response('<html lang="'+lang+'"><body>'+body+'</body></html>',{status:200,headers:{'Content-Type':'text/html; charset=utf-8'}})
 }
 function fetcher(options={}) {
   return async url=>fakeResponse(new URL(url).pathname,options)
 }
 
-test('all current bilingual pages and real download signatures satisfy the release contract',async()=>{
+test('all current trilingual pages and real download signatures satisfy the release contract',async()=>{
   const result=await verifyPublicRelease({fetcher:fetcher(),origin:'https://www.komplyint.fi',expectedCommit:'abc123'})
   assert.equal(result.pass,true)
   assert.equal(result.commitVerified,true)
@@ -78,4 +78,11 @@ test('the production verifier rejects an English page served with Finnish initia
   const result=await verifyPublicRelease({fetcher:fetcher({badLocale:true})})
   assert.equal(result.pass,false)
   assert.ok(result.problems.some(x=>x.includes('incorrect SSR document language')))
+})
+
+test('a missing Swedish service page or Swedish featured graphic blocks publication',async()=>{
+  const result=await verifyPublicRelease({fetcher:fetcher({missing:['/sv/services/data-reporting','/media/featured-reporting-art-sv.svg']})})
+  assert.equal(result.pass,false)
+  assert.equal(result.problems.length,2)
+  assert.match(result.problems.join(' '),/featured-reporting-art-sv/)
 })

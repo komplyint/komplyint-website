@@ -8,9 +8,9 @@ const browser = await chromium.launch({ headless: true, args: ['--no-sandbox'] }
 try {
   const page = await browser.newPage({ viewport: { width: 1440, height: 900 } })
   for (const [route, expectedLocale] of [
-    ['/', 'fi'], ['/en', 'en'],
-    ['/services', 'fi'], ['/en/services', 'en'],
-    ['/contact', 'fi'], ['/en/contact', 'en'],
+    ['/', 'fi'], ['/en', 'en'], ['/sv', 'sv'],
+    ['/services', 'fi'], ['/en/services', 'en'], ['/sv/services', 'sv'],
+    ['/contact', 'fi'], ['/en/contact', 'en'], ['/sv/contact', 'sv'],
   ]) {
     const response = await page.goto(origin + route, { waitUntil: 'domcontentloaded' })
     assert.equal(response?.status(), 200, route + ': expected HTTP 200')
@@ -18,7 +18,7 @@ try {
     assert.match(raw, new RegExp('<html[^>]*\\blang="' + expectedLocale + '"'), route + ': server HTML must declare the proper locale')
     assert.equal(await page.locator('html').getAttribute('lang'), expectedLocale, route + ': runtime locale')
     assert.equal(await page.locator('h1').count(), 1, route + ': a single primary heading is required')
-    if (route === '/' || route === '/en') {
+    if (route === '/' || route === '/en' || route === '/sv') {
       const proof = await page.evaluate(async () => {
         await document.fonts.ready
         const title = getComputedStyle(document.querySelector('h1')).fontFamily
@@ -32,7 +32,7 @@ try {
       assert.ok(proof.faces.some(f => /__Lato_/.test(f.family) && f.status === 'loaded'), route + ': real Lato downloaded')
     }
   }
-  console.log('FI/EN initial HTML locales and self-hosted font loading PASS')
+  console.log('FI/EN/SV initial HTML locales and self-hosted font loading PASS')
 } finally {
   await browser.close()
 }

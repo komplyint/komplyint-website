@@ -76,7 +76,7 @@ export async function POST(request:NextRequest){
     if(typeof data.email!=='string'||!validEmail(email))fields.email='Valid email is required'
     if(typeof data.message!=='string'||countCodePoints(message)<10||countCodePoints(message)>4500)fields.message='Message must contain 10 to 4500 characters'
     if(data.service!==undefined&&(typeof data.service!=='string'||(service!==''&&service!=='other'&&!serviceSlugs.some(slug=>slug===service))))fields.service='Unknown service'
-    if(data.locale!==undefined&&(typeof data.locale!=='string'||!['fi','en'].includes(locale)))fields.locale='Unknown language'
+    if(data.locale!==undefined&&(typeof data.locale!=='string'||!['fi','en','sv'].includes(locale)))fields.locale='Unknown language'
     const requestKey=normalized(data.idempotencyKey)
     if(data.idempotencyKey!==undefined&&(typeof data.idempotencyKey!=='string'||!/^[0-9a-f-]{20,64}$/i.test(requestKey)))fields.idempotencyKey='Invalid request identifier'
     if(Object.keys(fields).length)return reply('Validation failed',422,fields)

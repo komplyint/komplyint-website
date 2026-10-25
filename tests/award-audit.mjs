@@ -6,7 +6,7 @@ const base=process.env.SITE_URL||'http://127.0.0.1:3000'
 const build=process.env.GITHUB_SHA||'local'
 await mkdir('site-preview',{recursive:true})
 const report={build,criteria:['Awwwards Design','Awwwards Usability','Awwwards Creativity','Awwwards Content','Webby Content','Webby Navigation','Webby Visual Design','Webby Functionality','Webby Interactivity','Webby Innovation','Webby Overall Experience'],automated:[],humanReviews:{artDirection:'NOT REVIEWED',accessibility:'NOT REVIEWED',owner:'NOT APPROVED'},competitionSubmission:'NOT SUBMITTED'}
-const pages=['/','/en','/services','/en/services','/work','/en/work','/about','/en/about','/contact','/en/contact','/privacy','/en/privacy','/accessibility','/en/accessibility','/services/data-reporting','/en/services/m365-automation','/services/websites-maintenance','/en/services/software-integrations','/services/testing-qa','/en/services/document-support']
+const pages=['/','/en','/sv','/services','/en/services','/sv/services','/work','/en/work','/sv/work','/about','/en/about','/sv/about','/contact','/en/contact','/sv/contact','/privacy','/en/privacy','/sv/privacy','/accessibility','/en/accessibility','/sv/accessibility','/services/data-reporting','/en/services/m365-automation','/sv/services/data-reporting','/services/websites-maintenance','/en/services/software-integrations','/services/testing-qa','/en/services/document-support']
 const browser=await chromium.launch({headless:true,args:['--no-sandbox']})
 let blocking=0
 for(const theme of ['dark','light']){
