@@ -74,7 +74,7 @@ export async function verifyPublicRelease({
       const html=await response.text()
       for(const phrase of phrases)assert.ok(html.includes(phrase),'missing content: '+phrase)
       const expectedLang=path==='/en'||path.startsWith('/en/')?'en':'fi'
-      assert.match(html,new RegExp('<html[^>]*\\\\blang="'+expectedLang+'"'),'incorrect SSR document language: '+path)
+      assert.match(html,new RegExp('<html[^>]*\\blang="'+expectedLang+'"'),'incorrect SSR document language: '+path)
       if(path==='/'){
         assert.ok(!html.includes('Teknologiaa, joka helpottaa oikeaa työtä.'),
           'stale pre-handbook homepage still deployed')
@@ -98,7 +98,7 @@ export async function verifyPublicRelease({
       assert.ok(bytes.length>=200,'missing or placeholder media')
       if(kind==='svg'){
         const source=bytes.toString('utf8')
-        assert.match(source,/<svg\\b/)
+        assert.match(source,/<svg\b/)
         assert.ok(source.includes(marker),'missing localized illustration label')
       }else if(kind==='mp4'){
         assert.ok(bytes.length>=1000,'empty hero film')
