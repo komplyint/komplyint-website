@@ -162,8 +162,6 @@ function Home({lang}:{lang:Lang}) {
   const t = content[lang]
   return <>
     <section className="kc-hero">
-      <VideoHero lang={lang}/>
-      <div className="kc-hero-shade" />
       <div className="kc-shell kc-hero-layout">
         <div className="kc-hero-copy">
           <p className="kc-hero-tag">{t.hero.label}</p>
@@ -173,6 +171,8 @@ function Home({lang}:{lang:Lang}) {
         </div>
         <div className="kc-hero-side"><div className="kc-side-marker">K / 01</div><div className="kc-hero-side-label">{lang === 'fi' ? 'TYÖN PERIAATTEET' : 'DELIVERY PRINCIPLES'}</div><span>{t.hero.point1}</span><span>{t.hero.point2}</span><span>{t.hero.point3}</span></div>
       </div>
+      <VideoHero lang={lang}/>
+      <div className="kc-hero-shade" />
       <div className="kc-hero-edge" />
     </section>
 
