@@ -193,6 +193,10 @@ a:hover .kc-arrow{transform:translate(3px,-3px)}
 .kc-mobile-toggle span{background:#f3ffff}
 @media(max-width:860px){.kc-nav{background:#092d36;border-bottom-color:#244952}}
 @media(max-width:570px){.kc-header-row{min-height:79px}.kc-logo-link{min-width:102px}.kc-logo{width:105px;height:68px}}
+
+
+/* Do not create a scrolling ancestor around the sticky navigation. */
+.kc-root{overflow-x:clip;overflow-y:visible}
 </style><style>.kc-review-banner{position:fixed;bottom:0;z-index:1000;left:0;right:0;text-align:center;background:#fff6d2;color:#4f3c14;border-top:1px solid #e8c85f;font:600 13px system-ui;padding:10px}.kc-root{padding-bottom:35px}</style></head><body><div id="site" class="kc-root"></div><div class="kc-review-banner">WEBSITE REDESIGN REVIEW - Not the production website. Contact form is disabled here.</div><script>const services = {
   fi: [
     { title: 'Excel, data ja raportointi', intro: 'Selkeämpää tietoa vähemmällä manuaalisella työllä.', examples: ['Excel-tiedostojen korjaus, kaavat ja Power Query', 'Tietojen yhdistäminen, puhdistaminen ja laadun tarkistus', 'Power BI -raportit ja toistuvan raportoinnin kehittäminen'], deliverable: 'Toimiva tiedosto tai raportti, sovitut tarkistukset ja käyttöohje.', boundaries: 'Lähdetietojen laatu, käyttöoikeudet ja mahdolliset lisenssit tarkistetaan ennen toteutusta.', tools: 'Excel · Power Query · Power BI · CSV' },
@@ -330,7 +334,7 @@ const content = {
         <div class="kc-shell kc-hero-layout"><div class="kc-hero-copy"><p class="kc-hero-tag">${t.hero.label}</p><h1>${t.hero.title}</h1><p class="kc-hero-lead">${t.hero.text}</p><div class="kc-hero-buttons"><a class="kc-button kc-button-primary" href="#contact">${t.contactButton}${arrow}</a><a class="kc-button kc-button-ghost" href="#services">${t.explore}<span>↓</span></a></div></div>
         <div class="kc-hero-side"><div class="kc-side-marker">K / 01</div><div class="kc-hero-side-label">${lang==='fi'?'TYÖN PERIAATTEET':'DELIVERY PRINCIPLES'}</div><span>${t.hero.point1}</span><span>${t.hero.point2}</span><span>${t.hero.point3}</span></div></div><div class="kc-hero-edge"></div></section>
       <section class="kc-section kc-section-intro" id="services"><div class="kc-shell">${intro(t.intro)}
-        <div class="kc-service-grid">${sv.slice(0,4).map((s,i)=>`<a class="kc-service-tile" href="#service-explorer"><div class="kc-tile-top"><span>${String(i+1).padStart(2,'0')}</span>${arrow}</div><h3>${s.title}</h3><p>${s.intro}</p></a>`).join('')}</div>
+        <div class="kc-service-grid">${sv.slice(0,4).map((s,i)=>`<a class="kc-service-tile" href="#service-explorer" data-open-service="${i}"><div class="kc-tile-top"><span>${String(i+1).padStart(2,'0')}</span>${arrow}</div><h3>${s.title}</h3><p>${s.intro}</p></a>`).join('')}</div>
         <div class="kc-moreline"><span>${lang==='fi'?'Lisäksi: ohjelmistotestaus, laadunvarmistus ja digitaalinen toimistotuki.':'Also available: software testing, quality assurance and digital office support.'}</span><a href="#service-explorer">${t.explore} ${arrow}</a></div></div></section>
       <section class="kc-section kc-muted-section" id="service-explorer"><div class="kc-shell">${intro(t.area)}<div class="kc-explorer">
         <div class="kc-explorer-tabs" role="tablist" aria-label="${t.area.title}">${sv.map((s,i)=>`<button class="kc-explorer-tab ${selected===i?'active':''}" type="button" role="tab" aria-selected="${selected===i}" data-service="${i}"><span>${String(i+1).padStart(2,'0')}</span><strong>${s.title}</strong><b>↗</b></button>`).join('')}</div>
@@ -352,6 +356,7 @@ const content = {
     document.getElementById('toggle-theme').onclick=()=>{const n=!document.documentElement.classList.contains('dark');document.documentElement.classList.toggle('dark',n);localStorage.setItem('komplyint-theme',n?'dark':'light')};
     document.getElementById('toggle-menu').onclick=()=>{const el=document.getElementById('static-nav');el.classList.toggle('is-open');document.getElementById('toggle-menu').setAttribute('aria-expanded',el.classList.contains('is-open')?'true':'false')};
     document.querySelectorAll('[data-service]').forEach(el=>el.addEventListener('click',()=>{selected=Number(el.getAttribute('data-service'));document.getElementById('service-detail').innerHTML=detailMarkup();document.querySelectorAll('[data-service]').forEach(b=>{const a=Number(b.getAttribute('data-service'))===selected;b.classList.toggle('active',a);b.setAttribute('aria-selected',a?'true':'false')})}));
+    document.querySelectorAll('[data-open-service]').forEach(el=>el.addEventListener('click',()=>{const i=Number(el.getAttribute('data-open-service'));document.querySelector('[data-service="'+i+'"]')?.click()}));
     document.getElementById('contact-form').onsubmit=async event=>{
       event.preventDefault();const form=event.currentTarget, f=new FormData(form), status=document.getElementById('contact-status'), btn=form.querySelector('button[type=submit]');
       if(f.get('website'))return;
