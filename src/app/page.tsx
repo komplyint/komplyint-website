@@ -89,7 +89,7 @@ export default function KomplyintWebsite() {
       <footer className="kc-footer">
         <div className="kc-shell kc-footer-top">
           <div className="kc-footer-brand"><img src="/logo.svg" alt="Komplyint Oy" /><p>{t.about.text}</p></div>
-          <div className="kc-footer-links"><strong>{lang === 'fi' ? 'Sivusto' : 'Explore'}</strong>{[...navPages,'software' as Page,'privacy' as Page,'accessibility' as Page].map(item=><a key={item} href={pathFor(lang,item)}>{t.navigation[item]}</a>)}</div>
+          <div className="kc-footer-links"><strong>{lang === 'fi' ? 'Sivusto' : 'Explore'}</strong>{[...navPages,'software' as Page,'privacy' as Page,'accessibility' as Page].map(item=><a key={item} href={pathFor(lang,item)}>{t.navigation[item]}</a>)}<a href="/downloads/Komplyint_Service_Documents.zip" download>{lang==='fi'?'Lataa palveluesitteet (ZIP)':'Download service brochures (ZIP)'}</a></div>
           <div className="kc-footer-links"><strong>{lang === 'fi' ? 'Yhteys' : 'Get in touch'}</strong><a href="mailto:info@komplyint.fi">info@komplyint.fi</a><a href={pathFor(lang,'contact')}>{t.contactButton}</a><span>Finland · EU</span><span>D‑U‑N‑S® {duns}</span><label className="qh-appearance"><span>{lang==='fi'?'Ulkoasu':'Appearance'}</span><select aria-label={lang==='fi'?'Ulkoasu':'Appearance'} value={appearance} onChange={e=>setTheme(e.target.value as 'dark'|'light'|'system')}><option value="dark">{lang==='fi'?'Tumma':'Dark'}</option><option value="light">{lang==='fi'?'Vaalea':'Light'}</option><option value="system">{lang==='fi'?'Järjestelmä':'System'}</option></select></label></div>
         </div>
         <div className="kc-shell kc-footer-bottom"><span>© {new Date().getFullYear()} {t.footer}</span><span>{t.footerNote}</span></div>
@@ -174,7 +174,7 @@ function CTA({lang}:{lang:Lang}) {const c=content[lang].cta;return <section clas
 
 function ServicesPage({lang}:{lang:Lang}) {
   const t=content[lang]
-  return <><div className="kc-page-top"><div className="kc-shell"><p className="kc-eyebrow">{t.area.eyebrow}</p><h1>{t.area.title}</h1><p>{t.area.text}</p></div></div><section className="kc-section kc-muted-section kc-services-detail" id="service-explorer"><div className="kc-shell"><ServiceExplorer lang={lang} showIntro={false}/></div></section><Process lang={lang}/><Trust lang={lang}/><CTA lang={lang}/></>
+  return <><div className="kc-page-top"><div className="kc-shell"><p className="kc-eyebrow">{t.area.eyebrow}</p><h1>{t.area.title}</h1><p>{t.area.text}</p></div></div><section className="kc-section kc-muted-section kc-services-detail" id="service-explorer"><div className="kc-shell"><ServiceExplorer lang={lang} showIntro={false}/></div></section><Process lang={lang}/><Trust lang={lang}/><PublicBrochures lang={lang}/><CTA lang={lang}/></>
 }
 function SoftwarePage({lang}:{lang:Lang}) {
   const t=content[lang].software
@@ -293,4 +293,16 @@ function AccessibilityPage({lang}:{lang:Lang}){
       <h2>{fi?'Palaute ja vaihtoehtoinen tapa':'Feedback and alternative contact'}</h2><p>{fi?'Jos huomaat esteen tai tarvitset tietoa toisessa muodossa, kirjoita meille osoitteeseen':'If you encounter a barrier or need information in another format, contact'} <a href={'mailto:'+contactEmail}>{contactEmail}</a>.</p>
       <h2>{fi?'Arvioinnin tila':'Review status'}</h2><p>{fi?'Laaja WCAG 2.2 AA -arviointi on työn alla. Emme väitä virallista sertifiointia ennen asianmukaista tarkistusta.':'A full WCAG 2.2 AA review is in progress. We do not claim certification without the necessary independent review.'}</p>
     </div></section></>
+}
+
+function PublicBrochures({lang}:{lang:Lang}){
+  const fi=lang==='fi'
+  return <section className="kc-section qh-downloads"><div className="kc-shell qh-downloads-grid">
+    <div><p className="kc-eyebrow">${fi?' 'LADATTAVAT PALVELUESITTEET':'DOWNLOAD SERVICE INFORMATION'}</p><h2>{fi?'Tutustu palveluihimme omassa tahdissasi.':'Explore our services in your own time.'}</h2><p>{fi?'Lataa suomen- tai englanninkielinen esite. Molemmat ovat saatavilla myös yhtenä ZIP-pakettina.':'Download a Finnish or English brochure, or get both in one ZIP package.'}</p></div>
+    <div className="qh-download-links">
+      <a href="/downloads/Komplyint_Palveluesite_FI.pdf" download><span>PDF · FI</span><strong>Komplyint Palveluesite</strong><span aria-hidden="true">↓</span></a>
+      <a href="/downloads/Komplyint_Service_Portfolio_EN.pdf" download><span>PDF · EN</span><strong>Komplyint Service Portfolio</strong><span aria-hidden="true">↓</span></a>
+      <a href="/downloads/Komplyint_Service_Documents.zip" download><span>ZIP</span><strong>{fi?'Molemmat esitteet':'Both brochures'}</strong><span aria-hidden="true">↓</span></a>
+    </div>
+  </div></section>
 }
