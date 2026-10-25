@@ -1,603 +1,314 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
-import { translations, type Language } from '@/lib/translations'
 
-type PageType = 'home' | 'software' | 'privacy' | 'contact'
-type SiteTranslations = (typeof translations)[Language]
-
-function getLanguageFromPath(pathname: string): Language {
-  return pathname.startsWith('/en') ? 'en' : 'fi'
+type Lang = 'fi' | 'en'
+type Page = 'home' | 'services' | 'software' | 'contact' | 'privacy'
+type Service = { title: string; intro: string; examples: string[]; deliverable: string; boundaries: string; tools: string }
+const navPages: Page[] = ['home', 'services', 'software', 'contact']
+const services: Record<Lang, Service[]> = {
+  fi: [
+    { title: 'Excel, data ja raportointi', intro: 'Selkeämpää tietoa vähemmällä manuaalisella työllä.', examples: ['Excel-tiedostojen korjaus, kaavat ja Power Query', 'Tietojen yhdistäminen, puhdistaminen ja laadun tarkistus', 'Power BI -raportit ja toistuvan raportoinnin kehittäminen'], deliverable: 'Toimiva tiedosto tai raportti, sovitut tarkistukset ja käyttöohje.', boundaries: 'Lähdetietojen laatu, käyttöoikeudet ja mahdolliset lisenssit tarkistetaan ennen toteutusta.', tools: 'Excel · Power Query · Power BI · CSV' },
+    { title: 'Microsoft 365 ja automaatio', intro: 'Toistuvien vaiheiden virtaviivaistamista olemassa olevilla työkaluilla.', examples: ['Forms-, Lists- ja SharePoint-pohjaiset työvaiheet', 'Power Automate -ilmoitukset ja hyväksyntäkierrot', 'Teams-, Outlook- ja OneDrive-työnkulkujen selkeyttäminen'], deliverable: 'Rajattu automaatio, testattu työnkulku ja selkeä ylläpito-ohje.', boundaries: 'Automaatio tehdään vain käytettävissä olevilla oikeuksilla ja soveltuvilla lisensseillä.', tools: 'Forms · Lists · SharePoint · Teams · Outlook · Power Automate' },
+    { title: 'Verkkosivut ja ylläpito', intro: 'Olemassa olevat sivustot siistiksi, toimiviksi ja helpommin ylläpidettäviksi.', examples: ['Sisältö-, ulkoasu- ja mobiilikäytettävyyskorjaukset', 'Yhteydenottolomakkeiden ja sivupolkujen testaus', 'Pienet sivustouudistukset ja sovitut päivitykset'], deliverable: 'Rajatut muutokset, toimivuuden tarkistus ja kirjallinen luovutus.', boundaries: 'Palvelin-, tietoturva- ja käyttökatkovastuut sovitaan erikseen; jatkuvaa päivystystä ei luvata.', tools: 'HTML · CSS · JavaScript · WordPress / muut soveltuvat alustat' },
+    { title: 'Pienet ohjelmistot ja integraatiot', intro: 'Kevyitä työkaluja oikeaan työongelmaan, ei tarpeettoman suuria hankkeita.', examples: ['Sisäiset seuranta-, lomake- ja laskurityökalut', 'Rajatut verkkosovellukset ja käyttöliittymämuutokset', 'Tietojen siirto järjestelmien välillä tarjolla olevien rajapintojen avulla'], deliverable: 'Sovitut toiminnallisuudet, testaus, lähdekoodi ja käyttöönottotiedot sopimuksen mukaan.', boundaries: 'Laajat alustat, kriittiset integraatiot ja ympärivuorokautinen tuotantotuki arvioidaan erillisinä toimeksiantoina.', tools: 'Web-sovellukset · API:t · Python · JavaScript / TypeScript' },
+    { title: 'Ohjelmistotestaus ja laadunvarmistus', intro: 'Käytännön testaus ennen julkaisua tai seuraavaa kehitysvaihetta.', examples: ['Verkkosivujen ja lomakkeiden toiminnallinen testaus', 'Virheiden toistaminen, dokumentointi ja korjausten tarkistus', 'Sovitut selain- ja mobiilinäkymien tarkistukset'], deliverable: 'Testausyhteenveto, priorisoitu virheluettelo ja toistettavat havainnot.', boundaries: 'Testaus ei ole tietoturva-auditointi, sertifiointi eikä lupaus virheettömyydestä.', tools: 'Manuaalitestaus · Playwright · Testitapaukset · Bugiraportit' },
+    { title: 'Digitaalinen toimistotuki', intro: 'Pieniä, tarkasti määriteltyjä asiakirja- ja tiedonhallintatehtäviä.', examples: ['PowerPoint-esitysten ja Word-pohjien viimeistely', 'Tiedostojen järjestäminen ja taulukkopohjien rakentaminen', 'Yksinkertaiset raportointi-, dokumentointi- ja ohjemateriaalit'], deliverable: 'Sovitut muokattavat tiedostot ja lyhyt luovutusohje.', boundaries: 'Asiakaspalvelu, henkilötietojen käsittely ja jatkuva assistenttityö vain erikseen sovittuna.', tools: 'PowerPoint · Word · OneDrive · SharePoint · Excel' }
+  ],
+  en: [
+    { title: 'Excel, data & reporting', intro: 'Clearer information with less manual work.', examples: ['Excel fixes, formulas and Power Query improvements', 'Data consolidation, cleaning and quality checks', 'Power BI dashboards and repeatable reporting'], deliverable: 'A working file or report, agreed checks and a user handover.', boundaries: 'Input data quality, access permissions and licensing are reviewed before work begins.', tools: 'Excel · Power Query · Power BI · CSV' },
+    { title: 'Microsoft 365 & automation', intro: 'Streamline repetitive steps using tools your team already has.', examples: ['Forms, Lists and SharePoint-based workflows', 'Power Automate notifications and approval flows', 'Simplifying Teams, Outlook and OneDrive processes'], deliverable: 'A scoped automation, tested workflow and maintenance notes.', boundaries: 'Automations depend on available permissions and appropriate licences.', tools: 'Forms · Lists · SharePoint · Teams · Outlook · Power Automate' },
+    { title: 'Websites & maintenance', intro: 'Make existing websites clearer, more useful and easier to maintain.', examples: ['Content, layout and mobile usability improvements', 'Contact-form and page-flow testing', 'Small site refreshes and agreed updates'], deliverable: 'Defined changes, functional verification and written handover.', boundaries: 'Hosting, security and downtime responsibilities require separate agreement; no 24/7 promise.', tools: 'HTML · CSS · JavaScript · WordPress / suitable platforms' },
+    { title: 'Small software & integrations', intro: 'Focused tools for real operational needs, without unnecessary complexity.', examples: ['Internal trackers, forms and calculators', 'Small web applications and interface improvements', 'Connecting systems through available supported APIs'], deliverable: 'Agreed features, tests, source code and deployment notes as contracted.', boundaries: 'Large platforms, critical integrations and around-the-clock support need separate assessment.', tools: 'Web apps · APIs · Python · JavaScript / TypeScript' },
+    { title: 'Software testing & QA', intro: 'Practical checks before release or your next development stage.', examples: ['Functional testing for websites and forms', 'Reproducing bugs, documenting issues and verifying fixes', 'Agreed browser and mobile-layout checks'], deliverable: 'Test summary, prioritised issue list and reproducible findings.', boundaries: 'This is not a security audit, certification or guarantee of defect-free software.', tools: 'Manual QA · Playwright · Test cases · Bug reports' },
+    { title: 'Digital office support', intro: 'Small, well-defined document and information management tasks.', examples: ['PowerPoint presentations and Word templates', 'File organisation and spreadsheet templates', 'Simple reporting, documentation and instruction materials'], deliverable: 'Agreed editable files and short handover notes.', boundaries: 'Customer service, personal data handling and ongoing assistance are separately scoped.', tools: 'PowerPoint · Word · OneDrive · SharePoint · Excel' }
+  ]
+}
+const content = {
+  fi: {
+    navigation: { home: 'Etusivu', services: 'Palvelut', software: 'Ohjelmistokehitys', contact: 'Yhteystiedot', privacy: 'Tietosuoja', menu: 'Avaa valikko' },
+    tagline: 'SUOMALAINEN DIGITAALISTEN RATKAISUJEN YRITYS',
+    contactButton: 'Kerro tarpeestasi', explore: 'Tutustu palveluihin', email: 'Sähköposti',
+    hero: { label: 'DATA · AUTOMAATIO · OHJELMISTOT', title: 'Teknologiaa, joka helpottaa oikeaa työtä.', text: 'Autamme yrityksiä selkeyttämään tietoa, vähentämään toistuvaa käsityötä ja kehittämään toimivia digitaalisia ratkaisuja. Aloitamme pienestä, sovimme rajat ja rakennamme tarpeeseen.', point1: 'Selkeä rajaus', point2: 'Sovitut toimitukset', point3: 'Testattu luovutus' },
+    intro: { eyebrow: 'MITÄ TEEMME', title: 'Käytännöllistä digiapua. Selkeillä toimituksilla.', text: 'Excel-ongelmasta ohjelmiston pieneen jatkokehitykseen: tarjoamme konkreettista apua silloin, kun oma aika tai tekninen osaaminen ei riitä.' },
+    area: { eyebrow: 'PALVELUKOKONAISUUDET', title: 'Löydä sopiva ratkaisu', text: 'Valitse palvelu vasemmalta nähdäksesi esimerkkejä, tyypilliset toimitukset ja työn rajaukset.', examples: 'Tyypillisiä tehtäviä', delivered: 'Mitä toimitamme', boundaries: 'Mitä sovimme etukäteen', tools: 'Soveltuvat työkalut', help: 'Kysy tästä palvelusta' },
+    impact: { eyebrow: 'KÄYTÄNNÖN ESIMERKKEJÄ', title: 'Miltä työ voi näyttää käytännössä?', disclaimer: 'Havainnollistavia esimerkkejä, eivät julkaistuja asiakastapauksia.', cases: [
+      { num: '01', title: 'Excel-raportin korjaus', before: 'Useita tiedostoja ja virheherkkä kuukausiraportti.', after: 'Yksi selkeä päivitettävä pohja ja käyttöohje.' },
+      { num: '02', title: 'Pyyntöjen käsittelyn automatisointi', before: 'Pyynnöt saapuvat sähköpostiin ja hukkuvat ketjuihin.', after: 'Lomake, vastuuhenkilö ja automaattinen ilmoitus.' },
+      { num: '03', title: 'Verkkosivujen toimivuustarkistus', before: 'Mobiiliongelmia ja epävarmuutta lomakkeen toiminnasta.', after: 'Korjauslista, sovitut muutokset ja tarkistettu käyttökokemus.' }
+    ] },
+    process: { eyebrow: 'TAPA TOIMIA', title: 'Ensin ymmärrämme. Sitten toteutamme.', steps: [
+      {title:'Kartoitus',body:'Kerro, mikä vie aikaa tai ei toimi.'},
+      {title:'Rajaus ja tarjous',body:'Määrittelemme sisällön, vastuut, hinnan ja aikataulun.'},
+      {title:'Toteutus ja testaus',body:'Hyödynnämme olemassa olevia työkaluja ja tarkistamme sovitun lopputuloksen.'},
+      {title:'Luovutus',body:'Saat tulokset, ohjeet ja tiedon mahdollisesta jatkotuesta.'}
+    ] },
+    trust: {eyebrow:'TOIMINTAPERIAATTEET', title:'Selkeys on osa laatua.', items: [
+      {title:'Ei turhaa uudelleenrakentamista',body:'Hyödynnämme ensin asiakkaan olemassa olevia työkaluja ja ratkaisuja.'},
+      {title:'Ei epämääräisiä lupauksia',body:'Sovimme etukäteen toimituksen, rajaukset ja muutospyynnöt.'},
+      {title:'Tietojen käsittely harkiten',body:'Käyttöoikeudet, tietojen tarve ja säilytys käsitellään ennen toteutusta.'},
+      {title:'Ei keksittyjä referenssejä',body:'Näytämme demot demoina ja asiakastyöt vain luvan kanssa.'}
+    ]},
+    cta:{eyebrow:'ALOITETAAN SOPIVAN KOKOISESTI',title:'Mikä työvaihe yrityksessäsi kaipaa helpotusta?',text:'Lähetä lyhyt kuvaus. Kerromme, sopiiko tehtävä palveluihimme ja mitä tarvitaan tarjousta varten.',button:'Ota yhteyttä'},
+    software: {eyebrow:'OHJELMISTOKEHITYS JA YLLÄPITO',title:'Pieniä ohjelmistoratkaisuja. Hallittua jatkokehitystä.',lead:'Rakennamme rajattuja digitaalisia työkaluja ja kehitämme olemassa olevia verkkosovelluksia. Työn laajuus, käyttöönotto ja ylläpitovastuut sovitaan aina erikseen.', items:[
+      {title:'Sisäiset työkalut',body:'Seurantalistat, lomakkeet, laskurit ja kevyet tiedonhallintaratkaisut.'},
+      {title:'Korjaukset ja jatkokehitys',body:'Pienet ominaisuudet, käyttöliittymämuutokset, bugikorjaukset ja testaus.'},
+      {title:'Rajatut integraatiot',body:'Tietojen siirto soveltuvien järjestelmien välillä dokumentoitujen rajapintojen avulla.'}
+    ], productTitle:'Omat tuotekehityshankkeet',productText:'Kehitämme myös omia digitaalisia tuotteita. Tuotekehitys ja asiakkaille tarjottavat palvelut pidetään erillisinä, jotta toimeksiantojen sisältö pysyy selkeänä.',productLink:'Tutustu Floentlyyn', limitTitle:'Mitä emme lupaa automaattisesti?', limit:'Emme lupaa rajatonta kehitystä, tietoturvasertifiointia, kriittisten järjestelmien ylläpitoa tai jatkuvaa päivystystä ilman erillistä arviota ja sopimusta.'},
+    contactPage:{eyebrow:'YHTEYDENOTTO',title:'Kerro meille ongelma. Aloitetaan ratkaisusta.',lead:'Kuvaile esimerkiksi käytössä olevat työkalut, ongelma ja toivottu lopputulos. Voit pyytää arviota myös pienestä yksittäisestä tehtävästä.', formName:'Nimi',formEmail:'Sähköpostiosoite',formService:'Aihe',formMessage:'Miten voimme auttaa?',send:'Lähetä viesti',sending:'Lähetetään...',sent:'Kiitos. Viestisi on lähetetty.',fail:'Viestiä ei voitu lähettää. Käytä alla olevaa sähköpostiosoitetta.',privacy:'Käsittelemme lähettämiäsi tietoja vain yhteydenottoon vastaamiseksi. Lue tietosuojaseloste.',select:'Valitse aihe',other:'En ole varma / muu', note:'Lähetäthän aluksi vain tehtävän kuvaamiseen tarvittavat tiedot, et arkaluonteisia asiakastietoja.', action:'Yritystiedot' },
+    privacyPage:{eyebrow:'TIETOSUOJA',title:'Tietosuojaseloste',lead:'Tietoa siitä, miten käsittelemme verkkosivuston yhteydenottoihin liittyviä henkilötietoja.',sections:[
+      {title:'Rekisterinpitäjä',body:'Komplyint Oy, Y-tunnus 3588595-3. Yhteydenotot: gliavex@gliavex.fi.'},
+      {title:'Käsiteltävät tiedot',body:'Yhteydenottolomakkeesta voidaan käsitellä nimeä, sähköpostiosoitetta, viestin sisältöä ja lähettämiseen tarvittavia teknisiä tietoja.'},
+      {title:'Tarkoitus ja oikeusperuste',body:'Tietoja käytetään yhteydenottoihin vastaamiseen, asiakasviestintään ja mahdollisen sopimuksen valmisteluun. Oikeusperusteena on oikeutettu etu tai sopimusta edeltävät toimet soveltuvin osin.'},
+      {title:'Säilytys ja palveluntarjoajat',body:'Tietoja säilytetään vain tarpeellinen aika viestintään, asiakkuuden hoitoon tai lakisääteisiin velvoitteisiin. Sähköposti- ja hostingpalveluntarjoajat voivat käsitellä tietoja puolestamme asianmukaisin järjestelyin.'},
+      {title:'Oikeutesi',body:'Sinulla voi olla oikeus saada pääsy tietoihisi, pyytää niiden oikaisua tai poistamista, rajoittaa käsittelyä ja vastustaa sitä. Voit olla yhteydessä tietosuojavaltuutettuun.'},
+      {title:'Evästeet ja teema-asetus',body:'Sivusto voi tallentaa selaimeen kieli- ja ulkoasuasetuksen. Mahdolliset tulevat analytiikka- ja markkinointiratkaisut edellyttävät selosteen tarkistamista.'},
+      {title:'Muut tuotteet',body:'Erillisten ohjelmistotuotteiden tietosuojakäytännöt kerrotaan niiden omissa palveluissa.'}
+    ]},
+    about:{title:'Itsenäinen suomalainen yritys',text:'Komplyint Oy keskittyy tällä hetkellä dataan, automaatioon, pieniin ohjelmistoratkaisuihin ja sovittuun tekniseen tukeen. Vaatimustenmukaisuuteen liittyvien palveluiden kehittäminen on pidemmän aikavälin tavoite; emme tällä hetkellä tarjoa vaatimustenmukaisuuskonsultointia.'},
+    footer:'Komplyint Oy · Y-tunnus 3588595-3', footerNote:'Palvelut toteutetaan aina erikseen sovitussa laajuudessa. Ei oikeudellista neuvontaa, sertifiointia eikä viranomaishyväksyntöjä.'
+  },
+  en: {
+    navigation: { home: 'Home', services: 'Services', software: 'Software', contact: 'Contact', privacy: 'Privacy', menu: 'Open menu' },
+    tagline: 'FINNISH DIGITAL SOLUTIONS COMPANY',
+    contactButton: 'Discuss a project', explore: 'Explore services', email: 'Email',
+    hero: {label:'DATA · AUTOMATION · SOFTWARE',title:'Technology that makes real work easier.',text:'We help businesses bring clarity to information, reduce repetitive manual work and build useful digital solutions. We start with the need, agree on a clear scope and keep delivery practical.',point1:'Defined scope',point2:'Agreed deliverables',point3:'Tested handover'},
+    intro:{eyebrow:'WHAT WE DO',title:'Practical digital help. Clear deliverables.',text:'From a broken Excel workflow to a small software enhancement: focused support when your team needs an extra pair of technical hands.'},
+    area:{eyebrow:'SERVICE AREAS',title:'Find the right solution',text:'Select a service on the left to see examples, deliverables and what we agree before work begins.',examples:'Typical requests',delivered:'What you receive',boundaries:'Before we start',tools:'Suitable tools',help:'Ask about this service'},
+    impact:{eyebrow:'PRACTICAL EXAMPLES',title:'What could a project look like?',disclaimer:'Illustrative scenarios, not claims about completed client projects.',cases:[
+      {num:'01',title:'Repair a monthly Excel report',before:'Multiple files and an error-prone reporting routine.',after:'A maintainable template with clear update instructions.'},
+      {num:'02',title:'Automate incoming requests',before:'Requests get lost in long email threads.',after:'A form, assigned owner and automatic notification.'},
+      {num:'03',title:'Check a business website',before:'Mobile layout problems and an unreliable contact form.',after:'A prioritised fix list, agreed changes and verified user flow.'}
+    ]},
+    process:{eyebrow:'HOW WE WORK',title:'Understand first. Build second.',steps:[
+      {title:'Discover',body:'Tell us what is slow, confusing or not working.'},
+      {title:'Scope & quote',body:'We agree on deliverables, responsibilities, price and timing.'},
+      {title:'Build & verify',body:'We reuse suitable tools and test the agreed outcome.'},
+      {title:'Handover',body:'You receive the deliverables, instructions and any agreed support options.'}
+    ]},
+    trust:{eyebrow:'HOW WE EARN TRUST',title:'Clarity is part of quality.',items:[
+      {title:'Reuse before rebuild',body:'We look at your existing tools and workflows before proposing new software.'},
+      {title:'No vague promises',body:'Scope, limits and change requests are discussed before work starts.'},
+      {title:'Responsible data handling',body:'We clarify access, data minimisation and handling requirements before delivery.'},
+      {title:'No invented client stories',body:'Demonstrations are identified as demonstrations; client work is shared only with permission.'}
+    ]},
+    cta:{eyebrow:'START WITH SOMETHING MANAGEABLE',title:'What could your business make easier?',text:'Send a short description. We will tell you whether the task fits and what we need to prepare a quote.',button:'Get in touch'},
+    software:{eyebrow:'SOFTWARE DEVELOPMENT & MAINTENANCE',title:'Small software solutions. Thoughtful improvements.',lead:'We develop clearly scoped internal tools and improve existing web software. Scope, deployment and maintenance responsibilities are agreed separately for each engagement.',items:[
+      {title:'Internal tools',body:'Trackers, forms, calculators and lightweight information management tools.'},
+      {title:'Fixes & enhancements',body:'Small features, interface changes, bug fixes and functional verification.'},
+      {title:'Scoped integrations',body:'Moving data between suitable systems through documented APIs.'}
+    ],productTitle:'Our own product work',productText:'We also develop digital products. Product development stays separate from client services so commercial scope and responsibilities remain clear.',productLink:'Explore Floently',limitTitle:'What we do not promise by default',limit:'Unlimited development, security certification, critical-system maintenance and 24/7 response require separate assessment and explicit agreement.'},
+    contactPage:{eyebrow:'CONTACT',title:'Tell us the problem. Start with a solution.',lead:'Share the current tools, the issue and your desired result. Small one-off tasks are welcome.',formName:'Name',formEmail:'Email address',formService:'Topic',formMessage:'How can we help?',send:'Send enquiry',sending:'Sending...',sent:'Thank you. Your message has been sent.',fail:'The message could not be sent. Please use the email address below.',privacy:'We use these details only to respond to your enquiry. Read the privacy notice.',select:'Select a topic',other:'Not sure / something else',note:'Please send only the information needed to describe the request, not sensitive customer data.',action:'Company details'},
+    privacyPage:{eyebrow:'PRIVACY',title:'Privacy notice',lead:'How we process personal data sent through this website.',sections:[
+      {title:'Controller',body:'Komplyint Oy, Finnish Business ID 3588595-3. Contact: gliavex@gliavex.fi.'},
+      {title:'Data collected',body:'For website enquiries, we may process your name, email address, message content and technical information necessary to deliver and secure the message.'},
+      {title:'Purpose and lawful basis',body:'We process information to respond to enquiries, communicate about services and take steps before a potential agreement. Depending on the context, the basis is legitimate interests or pre-contractual steps.'},
+      {title:'Retention and providers',body:'We retain enquiries only as long as necessary for communication, services or legal obligations. Email and hosting providers may process information for us under appropriate arrangements.'},
+      {title:'Your rights',body:'Depending on applicable law, you may ask to access, correct, erase, restrict or object to processing of personal data. You may contact the Finnish Data Protection Ombudsman.'},
+      {title:'Cookies and preferences',body:'This site may save your display preference locally in your browser. New analytics or marketing services would require an update to this notice and applicable choices.'},
+      {title:'Other products',body:'Separate software products provide their own privacy information where required.'}
+    ]},
+    about:{title:'An independent Finnish company',text:'Komplyint Oy currently focuses on data, automation, small software solutions and agreed technical support. Compliance-related capabilities remain a longer-term development direction; we do not currently offer compliance consulting.'},
+    footer:'Komplyint Oy · Business ID 3588595-3',footerNote:'All work is subject to an agreed scope. No legal advice, certification or regulatory approval is provided.'
+  }
 }
 
-function getPageType(pathname: string): PageType {
-  if (pathname.endsWith('/software') || pathname.includes('/software/')) return 'software'
-  if (pathname.endsWith('/privacy') || pathname.includes('/privacy/')) return 'privacy'
-  if (pathname.endsWith('/contact') || pathname.includes('/contact/')) return 'contact'
-  return 'home'
-}
-
-function localizedPath(page: PageType, lang: Language) {
+function pathFor(lang: Lang, page: Page): string {
   const prefix = lang === 'en' ? '/en' : ''
-  if (page === 'home') return prefix || '/'
-  return `${prefix}/${page}`
+  return page === 'home' ? (prefix || '/') : prefix + '/' + page
 }
 
-export default function Home() {
-  const pathname = usePathname()
+function pageFromPath(path: string): Page {
+  const part = path.replace(/^\/en(?=\/|$)/, '').split('/').filter(Boolean)[0]
+  return part === 'services' || part === 'software' || part === 'contact' || part === 'privacy' ? part : 'home'
+}
+
+function Arrow({ light = false }: { light?: boolean }) {
+  return <span className={light ? 'kc-arrow light' : 'kc-arrow'} aria-hidden="true">↗</span>
+}
+
+export default function KomplyintWebsite() {
+  const pathname = usePathname() || '/'
   const router = useRouter()
-  const [lang, setLang] = useState<Language>(getLanguageFromPath(pathname))
-  const [theme, setTheme] = useState<'light' | 'dark'>('light')
-  const [mounted, setMounted] = useState(false)
+  const lang: Lang = pathname.startsWith('/en') ? 'en' : 'fi'
+  const page = pageFromPath(pathname)
+  const t = content[lang]
+  const [menuOpen, setMenuOpen] = useState(false)
+  const [dark, setDark] = useState(false)
 
   useEffect(() => {
-    setMounted(true)
-    setLang(getLanguageFromPath(pathname))
+    const saved = window.localStorage.getItem('komplyint-theme')
+    setDark(saved === 'dark')
+    document.documentElement.classList.toggle('dark', saved === 'dark')
+  }, [])
+  useEffect(() => { setMenuOpen(false) }, [pathname])
+  useEffect(() => { document.documentElement.classList.toggle('dark', dark) }, [dark])
 
-    const savedTheme = localStorage.getItem('theme') as 'light' | 'dark' | null
-    if (savedTheme === 'dark' || savedTheme === 'light') {
-      setTheme(savedTheme)
-    } else {
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
-      setTheme(prefersDark ? 'dark' : 'light')
-    }
-  }, [pathname])
-
-  useEffect(() => {
-    if (mounted) {
-      document.documentElement.classList.toggle('dark', theme === 'dark')
-    }
-  }, [theme, mounted])
-
-  useEffect(() => {
-    const elements = Array.from(document.querySelectorAll('.reveal-on-scroll'))
-    if (elements.length === 0) return
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible')
-            observer.unobserve(entry.target)
-          }
-        })
-      },
-      { threshold: 0.2 }
-    )
-
-    elements.forEach((element) => observer.observe(element))
-    return () => observer.disconnect()
-  }, [pathname])
-
-  useEffect(() => {
-    if (mounted && getPageType(pathname) === 'home') {
-      const video = document.querySelector('.hero-video') as HTMLVideoElement
-      if (video) {
-        video.play().catch((err) => {
-          console.log('Video autoplay prevented:', err)
-        })
-      }
-    }
-  }, [mounted, pathname])
-
-  const currentLang: Language = mounted ? lang : getLanguageFromPath(pathname)
-  const pageType = getPageType(pathname)
-  const t = translations[currentLang]
-
-  const handleLangToggle = () => {
-    const nextLang: Language = currentLang === 'fi' ? 'en' : 'fi'
-    router.push(localizedPath(pageType, nextLang))
-  }
-
-  const handleThemeToggle = () => {
-    const newTheme = theme === 'light' ? 'dark' : 'light'
-    setTheme(newTheme)
-    if (mounted) {
-      localStorage.setItem('theme', newTheme)
-    }
+  function toggleTheme() {
+    const next = !dark
+    setDark(next)
+    try { window.localStorage.setItem('komplyint-theme', next ? 'dark' : 'light') } catch {}
   }
 
   return (
-    <div style={{ width: '100%', overflowX: 'hidden' }}>
-      <SiteHeader
-        t={t}
-        currentLang={currentLang}
-        pageType={pageType}
-        onLangToggle={handleLangToggle}
-        onThemeToggle={handleThemeToggle}
-      />
-
-      {pageType === 'home' && <HomePage t={t} currentLang={currentLang} />}
-      {pageType === 'software' && <SoftwarePage t={t} />}
-      {pageType === 'privacy' && <PrivacyPage t={t} />}
-      {pageType === 'contact' && <ContactPage t={t} />}
-
-      <SiteFooter t={t} />
-    </div>
-  )
-}
-
-function SiteHeader({
-  t,
-  currentLang,
-  pageType,
-  onLangToggle,
-  onThemeToggle,
-}: {
-  t: SiteTranslations
-  currentLang: Language
-  pageType: PageType
-  onLangToggle: () => void
-  onThemeToggle: () => void
-}) {
-  return (
-    <header className="header">
-      <div className="container">
-        <div className="header-content">
-          <a href={localizedPath('home', currentLang)} className="logo" aria-label="Komplyint Oy home">
-            <img src="/logo.svg" alt="KOMPLYINT OY" className="logo-img" />
+    <div className="kc-root">
+      <a href="#main-content" className="kc-skip">{lang === 'fi' ? 'Siirry sisältöön' : 'Skip to content'}</a>
+      <div className="kc-topbar">
+        <div className="kc-shell kc-topbar-inner">
+          <span><span className="kc-small-dot" /> {t.tagline}</span>
+          <span>{t.footer}</span>
+        </div>
+      </div>
+      <header className="kc-header">
+        <div className="kc-shell kc-header-row">
+          <a href={pathFor(lang, 'home')} className="kc-logo-link" aria-label="Komplyint Oy">
+            <img src="/logo.svg" className="kc-logo" alt="Komplyint Oy" />
           </a>
-          <nav className="main-nav" aria-label={t.nav.ariaLabel}>
-            <a className={pageType === 'home' ? 'active' : ''} href={localizedPath('home', currentLang)}>
-              {t.nav.home}
-            </a>
-            <a className={pageType === 'software' ? 'active' : ''} href={localizedPath('software', currentLang)}>
-              {t.nav.software}
-            </a>
-            <a className={pageType === 'contact' ? 'active' : ''} href={localizedPath('contact', currentLang)}>
-              {t.nav.contact}
-            </a>
+          <nav className={menuOpen ? 'main-nav kc-nav is-open' : 'main-nav kc-nav'} aria-label={lang === 'fi' ? 'Päänavigaatio' : 'Main navigation'}>
+            {navPages.map((item) => <a href={pathFor(lang, item)} className={page === item ? 'is-current' : ''} key={item} aria-current={page === item ? 'page' : undefined}>{t.navigation[item]}</a>)}
           </nav>
-          <div className="header-controls">
-            <button
-              onClick={onLangToggle}
-              className={`lang-toggle ${currentLang === 'fi' ? 'active' : ''}`}
-              aria-label={t.nav.switchLanguage}
-            >
-              <span>{currentLang === 'fi' ? 'FI' : 'EN'}</span>
-            </button>
-            <button
-              onClick={onThemeToggle}
-              className="theme-toggle"
-              aria-label={t.nav.toggleTheme}
-            >
-              <span className="theme-icon theme-icon-moon">🌙</span>
-              <span className="theme-icon theme-icon-sun">☀️</span>
-            </button>
+          <div className="kc-actions">
+            <button className="kc-language" type="button" onClick={() => router.push(pathFor(lang === 'en' ? 'fi' : 'en', page))} aria-label={lang === 'fi' ? 'Switch to English' : 'Vaihda suomeksi'}>{lang === 'fi' ? 'EN' : 'FI'}</button>
+            <button className="kc-theme" type="button" onClick={toggleTheme} aria-label={dark ? 'Light theme' : 'Dark theme'} title={dark ? 'Light theme' : 'Dark theme'}>{dark ? '☀' : '◐'}</button>
+            <a href={pathFor(lang,'contact')} className="kc-header-cta">{t.contactButton}<Arrow /></a>
+            <button className="kc-mobile-toggle" type="button" onClick={() => setMenuOpen(!menuOpen)} aria-expanded={menuOpen} aria-label={t.navigation.menu}><span /><span /><span /></button>
           </div>
         </div>
-      </div>
-    </header>
-  )
-}
+      </header>
 
-function HomePage({ t, currentLang }: { t: SiteTranslations; currentLang: Language }) {
-  return (
-    <>
-      <section className="hero">
-        <video
-          className="hero-video"
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="auto"
-          aria-hidden="true"
-        >
-          <source src="/media/hero.mp4" type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
-        <div className="hero-image">
-          <img src="/media/hero.webp" alt="" aria-hidden="true" />
+      <main id="main-content">
+        {page === 'home' && <Home lang={lang} />}
+        {page === 'services' && <ServicesPage lang={lang} />}
+        {page === 'software' && <SoftwarePage lang={lang} />}
+        {page === 'contact' && <ContactPage lang={lang} />}
+        {page === 'privacy' && <PrivacyPage lang={lang} />}
+      </main>
+      <footer className="kc-footer">
+        <div className="kc-shell kc-footer-top">
+          <div className="kc-footer-brand"><img src="/logo.svg" alt="Komplyint Oy" /><p>{t.about.text}</p></div>
+          <div className="kc-footer-links"><strong>{lang === 'fi' ? 'Sivusto' : 'Explore'}</strong>{[...navPages,'privacy' as Page].map(item=><a key={item} href={pathFor(lang,item)}>{t.navigation[item]}</a>)}</div>
+          <div className="kc-footer-links"><strong>{lang === 'fi' ? 'Yhteys' : 'Get in touch'}</strong><a href="mailto:gliavex@gliavex.fi">gliavex@gliavex.fi</a><a href={pathFor(lang,'contact')}>{t.contactButton}</a><span>Finland · EU</span></div>
         </div>
-        <div className="hero-overlay" aria-hidden="true"></div>
-        <div className="container">
-          <div className="hero-content hero-reveal">
-            <h1 className="hero-title">{t.hero.title}</h1>
-            <h2 className="hero-subtitle">{t.hero.subtitle}</h2>
-            <p className="hero-text">{t.hero.text}</p>
-            <blockquote className="hero-disclaimer">{t.hero.disclaimer}</blockquote>
-            <a href="#contact" className="btn-contact">{t.hero.contactBtn}</a>
-          </div>
-        </div>
-      </section>
-
-      <section className="process-flow-section" aria-label={t.process.ariaLabel}>
-        <div className="container">
-          <div className="process-flow reveal-on-scroll">
-            <span className="process-item">{t.process.step1}</span>
-            <span className="process-arrow"> → </span>
-            <span className="process-item">{t.process.step2}</span>
-            <span className="process-arrow"> → </span>
-            <span className="process-item">{t.process.step3}</span>
-          </div>
-        </div>
-      </section>
-
-      <section className="mid-page-image-section">
-        <div className="container">
-          <div className="mid-page-image-wrapper">
-            <img 
-              src="/media/section.jpg" 
-              alt="" 
-              className="mid-page-image"
-              onError={(e) => {
-                const target = e.target as HTMLImageElement
-                target.style.display = 'none'
-                const wrapper = target.closest('.mid-page-image-wrapper')
-                if (wrapper) {
-                  (wrapper as HTMLElement).style.display = 'none'
-                }
-              }}
-            />
-          </div>
-        </div>
-      </section>
-
-      <section className="services bg-blue">
-        <div className="container">
-          <h2 className="section-title">{t.services.title}</h2>
-          <div className="cards">
-            <InfoCard variant="green" title={t.services.card1.title} text={t.services.card1.text} />
-            <InfoCard variant="blue" title={t.services.card2.title} text={t.services.card2.text} />
-            <InfoCard variant="green" title={t.services.card3.title} text={t.services.card3.text} />
-            <InfoCard variant="blue" title={t.services.card4.title} text={t.services.card4.text} />
-          </div>
-          <blockquote
-            className="services-disclaimer"
-            dangerouslySetInnerHTML={{ __html: t.services.disclaimer }}
-          />
-        </div>
-      </section>
-
-      <section className="software-teaser bg-green">
-        <div className="container">
-          <div className="feature-panel reveal-on-scroll">
-            <p className="eyebrow">{t.softwareTeaser.eyebrow}</p>
-            <h2>{t.softwareTeaser.title}</h2>
-            <p>{t.softwareTeaser.text}</p>
-            <a href={localizedPath('software', currentLang)} className="btn-secondary">
-              {t.softwareTeaser.link}
-            </a>
-          </div>
-        </div>
-      </section>
-
-      <section className="howwework bg-green">
-        <div className="container">
-          <h2 className="section-title">{t.howwework.title}</h2>
-          <ul className="approach-list">
-            <li>{t.howwework.item1}</li>
-            <li>{t.howwework.item2}</li>
-            <li>{t.howwework.item3}</li>
-          </ul>
-        </div>
-      </section>
-
-      <section className="approach bg-green">
-        <div className="container">
-          <h2 className="section-title">{t.approach.title}</h2>
-          <ul className="approach-list">
-            <li>{t.approach.item1}</li>
-            <li>{t.approach.item2}</li>
-            <li>{t.approach.item3}</li>
-            <li>{t.approach.item4}</li>
-          </ul>
-        </div>
-      </section>
-
-      <section className="about bg-blue">
-        <div className="container">
-          <h2 className="section-title">{t.about.title}</h2>
-          <div className="about-content">
-            <p className="about-text">{t.about.text1}</p>
-            <p
-              className="about-text"
-              dangerouslySetInnerHTML={{ __html: t.about.text2 }}
-            />
-          </div>
-        </div>
-      </section>
-
-      <ContactSection t={t} />
-    </>
-  )
-}
-
-function SoftwarePage({ t }: { t: SiteTranslations }) {
-  return (
-    <>
-      <section className="page-hero bg-blue">
-        <div className="container narrow">
-          <p className="eyebrow">{t.softwarePage.eyebrow}</p>
-          <h1>{t.softwarePage.title}</h1>
-          <p className="lead">{t.softwarePage.lead}</p>
-        </div>
-      </section>
-
-      <section className="bg-primary-soft">
-        <div className="container">
-          <h2 className="section-title">{t.softwarePage.whatWeBuild.title}</h2>
-          <div className="cards software-cards">
-            {t.softwarePage.whatWeBuild.items.map((item, index) => (
-              <InfoCard
-                key={item.title}
-                variant={index % 2 === 0 ? 'green' : 'blue'}
-                title={item.title}
-                text={item.text}
-              />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="product-section bg-green">
-        <div className="container">
-          <div className="product-panel reveal-on-scroll">
-            <p className="eyebrow">{t.softwarePage.floently.eyebrow}</p>
-            <h2>{t.softwarePage.floently.title}</h2>
-            <p>{t.softwarePage.floently.text1}</p>
-            <p>{t.softwarePage.floently.text2}</p>
-            <a
-              href={t.softwarePage.floently.url}
-              className="btn-secondary external-link"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {t.softwarePage.floently.cta}
-            </a>
-            <div className="product-grid">
-              {t.softwarePage.floently.points.map((point) => (
-                <div className="product-point" key={point.title}>
-                  <h3>{point.title}</h3>
-                  <p>{point.text}</p>
-                </div>
-              ))}
-            </div>
-            <blockquote className="services-disclaimer product-disclaimer">
-              {t.softwarePage.floently.disclaimer}
-            </blockquote>
-          </div>
-        </div>
-      </section>
-
-      <section className="bg-blue">
-        <div className="container narrow">
-          <h2 className="section-title">{t.softwarePage.working.title}</h2>
-          <ul className="approach-list strong-list">
-            {t.softwarePage.working.items.map((item) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ul>
-        </div>
-      </section>
-
-      <section className="bg-green">
-        <div className="container narrow">
-          <h2 className="section-title">{t.softwarePage.company.title}</h2>
-          <div className="company-box">
-            {t.softwarePage.company.items.map((item) => (
-              <p key={item.label}>
-                <strong>{item.label}</strong> {item.value}
-              </p>
-            ))}
-          </div>
-          <p className="legal-note">{t.softwarePage.company.note}</p>
-        </div>
-      </section>
-
-      <ContactSection t={t} />
-    </>
-  )
-}
-
-function PrivacyPage({ t }: { t: SiteTranslations }) {
-  return (
-    <>
-      <section className="page-hero bg-blue">
-        <div className="container narrow">
-          <p className="eyebrow">{t.privacyPage.eyebrow}</p>
-          <h1>{t.privacyPage.title}</h1>
-          <p className="lead">{t.privacyPage.lead}</p>
-        </div>
-      </section>
-      <section className="bg-primary-soft">
-        <div className="container narrow legal-content">
-          {t.privacyPage.sections.map((section) => (
-            <div className="legal-section" key={section.title}>
-              <h2>{section.title}</h2>
-              {section.paragraphs.map((paragraph) => (
-                <p key={paragraph}>{paragraph}</p>
-              ))}
-            </div>
-          ))}
-        </div>
-      </section>
-    </>
-  )
-}
-
-function ContactPage({ t }: { t: SiteTranslations }) {
-  return (
-    <>
-      <section className="page-hero bg-blue">
-        <div className="container narrow">
-          <p className="eyebrow">{t.contactPage.eyebrow}</p>
-          <h1>{t.contactPage.title}</h1>
-          <p className="lead">{t.contactPage.lead}</p>
-        </div>
-      </section>
-
-      <section className="bg-primary-soft">
-        <div className="container narrow">
-          <div className="company-box contact-details-box">
-            {t.contactPage.details.map((item) => (
-              <p key={item.label}>
-                <strong>{item.label}</strong>{' '}
-                {item.href ? (
-                  <a href={item.href}>{item.value}</a>
-                ) : (
-                  item.value
-                )}
-              </p>
-            ))}
-          </div>
-          <p className="legal-note">{t.contactPage.note}</p>
-        </div>
-      </section>
-
-      <ContactSection t={t} />
-    </>
-  )
-}
-
-function ContactSection({ t }: { t: SiteTranslations }) {
-  return (
-    <section id="contact" className="contact bg-green">
-      <div className="container">
-        <h2 className="section-title">{t.contact.title}</h2>
-        <div className="contact-content">
-          <ContactForm t={t.contact} />
-          <blockquote className="contact-disclaimer">{t.contact.disclaimer}</blockquote>
-        </div>
-      </div>
-    </section>
-  )
-}
-
-function SiteFooter({ t }: { t: SiteTranslations }) {
-  return (
-    <>
-      <div className="footer-divider" aria-hidden="true" />
-      <footer className="footer">
-        <div className="container">
-          <div className="footer-links">
-            <a href={localizedPath('software', t.lang)}>{t.nav.software}</a>
-            <a href={localizedPath('contact', t.lang)}>{t.nav.contact}</a>
-            <a href={localizedPath('privacy', t.lang)}>{t.nav.privacy}</a>
-            <a href="https://floently.com/learn" target="_blank" rel="noopener noreferrer">Floently</a>
-          </div>
-          <div className="footer-company" aria-label={t.footer.companyAriaLabel}>
-            {t.footer.companyInfo.map((item) => (
-              <p key={item.label}>
-                <strong>{item.label}</strong>{' '}
-                {item.href ? <a href={item.href}>{item.value}</a> : item.value}
-              </p>
-            ))}
-          </div>
-          <p
-            className="footer-text"
-            dangerouslySetInnerHTML={{ __html: t.footer.text1 }}
-          />
-          <p
-            className="footer-text footer-independence"
-            dangerouslySetInnerHTML={{ __html: t.footer.text2 }}
-          />
-        </div>
+        <div className="kc-shell kc-footer-bottom"><span>© {new Date().getFullYear()} {t.footer}</span><span>{t.footerNote}</span></div>
       </footer>
-    </>
-  )
-}
-
-function InfoCard({ variant, title, text }: { variant: 'green' | 'blue'; title: string; text: string }) {
-  return (
-    <div className={`card ${variant === 'green' ? 'bg-green-card' : 'bg-blue-card'} reveal-on-scroll`}>
-      <h3 className="card-title">{title}</h3>
-      <p className="card-text">{text}</p>
     </div>
   )
 }
 
-function ContactForm({ t }: { t: SiteTranslations['contact'] }) {
-  const [name, setName] = useState('')
-  const [email, setEmail] = useState('')
-  const [message, setMessage] = useState('')
-  const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle')
-  const [errorMessage, setErrorMessage] = useState('')
+function SectionIntro({ eyebrow, title, text }: {eyebrow:string;title:string;text?:string}) {
+  return <div className="kc-intro"><p className="kc-eyebrow">{eyebrow}</p><h2>{title}</h2>{text && <p className="kc-lead">{text}</p>}</div>
+}
 
-  const handleSubmit = async (e: React.FormEvent) => {
+function Home({lang}:{lang:Lang}) {
+  const t = content[lang]
+  const video = useRef<HTMLVideoElement>(null)
+  useEffect(() => { video.current?.play().catch(() => {}) }, [])
+  return <>
+    <section className="kc-hero">
+      <div className="kc-hero-poster" aria-hidden="true" />
+      <video className="kc-hero-video" ref={video} autoPlay muted loop playsInline preload="auto" poster="/media/hero.webp" aria-hidden="true">
+        <source src="/media/hero.mp4" type="video/mp4" />
+      </video>
+      <div className="kc-hero-shade" />
+      <div className="kc-shell kc-hero-layout">
+        <div className="kc-hero-copy">
+          <p className="kc-hero-tag">{t.hero.label}</p>
+          <h1>{t.hero.title}</h1>
+          <p className="kc-hero-lead">{t.hero.text}</p>
+          <div className="kc-hero-buttons"><a className="kc-button kc-button-primary" href={pathFor(lang,'contact')}>{t.contactButton}<Arrow /></a><a className="kc-button kc-button-ghost" href={pathFor(lang,'services')}>{t.explore}<span aria-hidden="true">↓</span></a></div>
+        </div>
+        <div className="kc-hero-side"><div className="kc-side-marker">K / 01</div><div className="kc-hero-side-label">{lang === 'fi' ? 'TYÖN PERIAATTEET' : 'DELIVERY PRINCIPLES'}</div><span>{t.hero.point1}</span><span>{t.hero.point2}</span><span>{t.hero.point3}</span></div>
+      </div>
+      <div className="kc-hero-edge" />
+    </section>
+
+    <section className="kc-section kc-section-intro"><div className="kc-shell">
+      <SectionIntro {...t.intro} />
+      <div className="kc-service-grid">{services[lang].slice(0,4).map((s,i)=><a className="kc-service-tile" key={s.title} href={pathFor(lang,'services') + '#service-explorer'}><div className="kc-tile-top"><span>{String(i+1).padStart(2,'0')}</span><Arrow /></div><h3>{s.title}</h3><p>{s.intro}</p></a>)}</div>
+      <div className="kc-moreline"><span>{lang === 'fi' ? 'Lisäksi: ohjelmistotestaus, laadunvarmistus ja digitaalinen toimistotuki.' : 'Also available: software testing, quality assurance and digital office support.'}</span><a href={pathFor(lang,'services')}>{t.explore} <Arrow /></a></div>
+    </div></section>
+
+    <section className="kc-section kc-muted-section" id="service-explorer"><div className="kc-shell"><ServiceExplorer lang={lang} /></div></section>
+    <Examples lang={lang}/>
+    <Process lang={lang}/>
+    <Trust lang={lang}/>
+    <About lang={lang}/>
+    <CTA lang={lang}/>
+  </>
+}
+
+function ServiceExplorer({lang}:{lang:Lang}) {
+  const [selected, setSelected] = useState(0)
+  const t = content[lang].area
+  const s = services[lang][selected]
+  return <>
+    <SectionIntro {...t} />
+    <div className="kc-explorer">
+      <div className="kc-explorer-tabs" role="tablist" aria-label={t.title}>
+        {services[lang].map((item, i)=><button key={item.title} role="tab" type="button" aria-selected={selected === i} aria-controls="service-detail" className={selected === i ? 'kc-explorer-tab active' : 'kc-explorer-tab'} onClick={()=>setSelected(i)}><span>{String(i+1).padStart(2,'0')}</span><strong>{item.title}</strong><b aria-hidden="true">↗</b></button>)}
+      </div>
+      <div className="kc-detail" role="tabpanel" id="service-detail"><span className="kc-detail-index">{String(selected+1).padStart(2,'0')} / 06</span><h3>{s.title}</h3><p className="kc-detail-lead">{s.intro}</p>
+        <div className="kc-detail-grid"><div><h4>{t.examples}</h4><ul>{s.examples.map(ex=><li key={ex}>{ex}</li>)}</ul></div><div className="kc-detail-side"><div><h4>{t.delivered}</h4><p>{s.deliverable}</p></div><div><h4>{t.boundaries}</h4><p>{s.boundaries}</p></div></div></div>
+        <div className="kc-detail-bottom"><div><small>{t.tools}</small><p>{s.tools}</p></div><a className="kc-text-link" href={pathFor(lang,'contact')}>{t.help}<Arrow /></a></div>
+      </div>
+    </div>
+  </>
+}
+
+function Examples({lang}:{lang:Lang}) {
+  const t=content[lang].impact
+  return <section className="kc-section kc-examples"><div className="kc-shell"><SectionIntro eyebrow={t.eyebrow} title={t.title} text={t.disclaimer}/><div className="kc-example-grid">{t.cases.map(c=><article key={c.num} className="kc-example"><span className="kc-example-num">{c.num}</span><h3>{c.title}</h3><div className="kc-example-line"><span>{lang === 'fi'?'LÄHTÖTILANNE':'BEFORE'}</span><p>{c.before}</p></div><div className="kc-example-line"><span>{lang === 'fi'?'TAVOITE':'AFTER'}</span><p>{c.after}</p></div></article>)}</div></div></section>
+}
+function Process({lang}:{lang:Lang}) {
+  const t=content[lang].process
+  return <section className="kc-section kc-process"><div className="kc-shell"><SectionIntro eyebrow={t.eyebrow} title={t.title}/><div className="kc-steps">{t.steps.map((s,i)=><div className="kc-step" key={s.title}><div className="kc-step-no">{String(i+1).padStart(2,'0')}</div><h3>{s.title}</h3><p>{s.body}</p></div>)}</div></div></section>
+}
+function Trust({lang}:{lang:Lang}) {
+  const t=content[lang].trust
+  return <section className="kc-section kc-muted-section"><div className="kc-shell kc-values"><SectionIntro eyebrow={t.eyebrow} title={t.title}/><div className="kc-values-grid">{t.items.map((s,i)=><div className="kc-value" key={s.title}><span>0{i+1}</span><div><h3>{s.title}</h3><p>{s.body}</p></div></div>)}</div></div></section>
+}
+function About({lang}:{lang:Lang}) {const a=content[lang].about;return <section className="kc-section kc-about"><div className="kc-shell kc-about-layout"><div><p className="kc-eyebrow">{lang==='fi'?'YRITYKSESTÄ':'ABOUT OUR COMPANY'}</p><h2>{a.title}</h2></div><p>{a.text}</p></div></section>}
+function CTA({lang}:{lang:Lang}) {const c=content[lang].cta;return <section className="kc-cta"><div className="kc-shell kc-cta-inner"><div><p className="kc-eyebrow">{c.eyebrow}</p><h2>{c.title}</h2><p>{c.text}</p></div><a className="kc-button kc-button-light" href={pathFor(lang,'contact')}>{c.button}<Arrow /></a></div></section>}
+
+function ServicesPage({lang}:{lang:Lang}) {
+  const t=content[lang]
+  return <><div className="kc-page-top"><div className="kc-shell"><p className="kc-eyebrow">{t.area.eyebrow}</p><h1>{t.area.title}</h1><p>{t.area.text}</p></div></div><section className="kc-section kc-muted-section" id="service-explorer"><div className="kc-shell"><ServiceExplorer lang={lang}/></div></section><Process lang={lang}/><Trust lang={lang}/><CTA lang={lang}/></>
+}
+function SoftwarePage({lang}:{lang:Lang}) {
+  const t=content[lang].software
+  return <><div className="kc-page-top"><div className="kc-shell"><p className="kc-eyebrow">{t.eyebrow}</p><h1>{t.title}</h1><p>{t.lead}</p><a className="kc-button kc-button-primary" href={pathFor(lang,'contact')}>{content[lang].contactButton}<Arrow /></a></div></div>
+    <section className="kc-section"><div className="kc-shell"><div className="kc-software-grid">{t.items.map((s,i)=><article key={s.title} className="kc-software-card"><span>{String(i+1).padStart(2,'0')}</span><h2>{s.title}</h2><p>{s.body}</p></article>)}</div><div className="kc-limit"><h3>{t.limitTitle}</h3><p>{t.limit}</p></div></div></section>
+    <section className="kc-section kc-muted-section"><div className="kc-shell kc-product"><div><p className="kc-eyebrow">{lang==='fi'?'TUOTEKEHITYS':'PRODUCT DEVELOPMENT'}</p><h2>{t.productTitle}</h2><p>{t.productText}</p></div><a href="https://floently.com/learn" target="_blank" rel="noopener noreferrer" className="kc-text-link">{t.productLink}<Arrow /></a></div></section><CTA lang={lang}/></>
+}
+function ContactPage({lang}:{lang:Lang}) {
+  const t=content[lang].contactPage
+  const [name,setName]=useState(''), [email,setEmail]=useState(''), [message,setMessage]=useState(''), [topic,setTopic]=useState('')
+  const [status,setStatus]=useState<'idle'|'sending'|'sent'|'error'>('idle')
+  const [trap,setTrap]=useState('')
+  async function submit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
+    if(trap) return
     setStatus('sending')
-    setErrorMessage('')
-
     try {
-      const res = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, message }),
-      })
-
-      if (!res.ok) {
-        throw new Error('Failed to send message')
-      }
-
-      setStatus('success')
-      setName('')
-      setEmail('')
-      setMessage('')
-    } catch (err) {
-      setStatus('error')
-      setErrorMessage(t.form.error)
-    }
+      const payload = {name,email,message:((topic ? (lang==='fi'?'Aihe: ':'Topic: ')+topic+'\n\n' : '')+message)}
+      const r = await fetch('/api/contact',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)})
+      if(!r.ok) throw new Error('send failed')
+      setName('');setEmail('');setMessage('');setTopic('');setStatus('sent')
+    } catch {setStatus('error')}
   }
-
-  return (
-    <>
-      <form className="contact-form" onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="name">{t.form.name}</label>
-          <input
-            type="text"
-            id="name"
-            className="form-input"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            placeholder={t.form.namePlaceholder}
-            maxLength={120}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="email">
-            {t.form.email} <span className="required">*</span>
-          </label>
-          <input
-            type="email"
-            id="email"
-            className="form-input"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder={t.form.emailPlaceholder}
-            required
-            maxLength={200}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="message">
-            {t.form.message} <span className="required">*</span>
-          </label>
-          <textarea
-            id="message"
-            className="form-textarea"
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-            placeholder={t.form.messagePlaceholder}
-            required
-            rows={6}
-            maxLength={5000}
-          />
-        </div>
-        <p className="privacy-note" dangerouslySetInnerHTML={{ __html: t.form.privacyNote }} />
-        {status === 'success' && (
-          <div className="form-message success">{t.form.success}</div>
-        )}
-        {status === 'error' && (
-          <div className="form-message error">{errorMessage || t.form.error}</div>
-        )}
-        <button type="submit" className="btn-submit" disabled={status === 'sending'}>
-          {status === 'sending' ? t.form.sending : t.form.submit}
-        </button>
-      </form>
-    </>
-  )
+  return <><div className="kc-page-top"><div className="kc-shell"><p className="kc-eyebrow">{t.eyebrow}</p><h1>{t.title}</h1><p>{t.lead}</p></div></div>
+    <section className="kc-section"><div className="kc-shell kc-contact-grid"><div className="kc-contact-side"><p className="kc-eyebrow">{t.action}</p><h2>Komplyint Oy</h2><p>{content[lang].footer}</p><p>Finland · European Union</p><a className="kc-text-link" href="mailto:gliavex@gliavex.fi">gliavex@gliavex.fi<Arrow /></a><div className="kc-contact-note">{t.note}</div></div>
+    <form className="kc-form" onSubmit={submit}><div className="kc-form-two"><label>{t.formName}<input type="text" value={name} onChange={e=>setName(e.target.value)} maxLength={120} autoComplete="name" placeholder={lang==='fi'?'Nimesi':'Your name'}/></label><label>{t.formEmail}<input type="email" value={email} onChange={e=>setEmail(e.target.value)} required maxLength={200} autoComplete="email" placeholder="name@company.fi"/></label></div>
+    <label>{t.formService}<select value={topic} onChange={e=>setTopic(e.target.value)}><option value="">{t.select}</option>{services[lang].map(s=><option key={s.title} value={s.title}>{s.title}</option>)}<option value="Other">{t.other}</option></select></label>
+    <label>{t.formMessage}<textarea rows={6} maxLength={4500} required value={message} onChange={e=>setMessage(e.target.value)} placeholder={lang==='fi'?'Kerro lyhyesti ongelma ja toivottu lopputulos.':'Describe the problem and desired outcome.'}/></label>
+    <label className="kc-honeypot" aria-hidden="true">Website <input tabIndex={-1} autoComplete="off" value={trap} onChange={e=>setTrap(e.target.value)}/></label>
+    <p className="kc-form-privacy">{t.privacy} <a href={pathFor(lang,'privacy')}>{content[lang].navigation.privacy}.</a></p>
+    {status==='sent' && <p role="status" className="kc-form-success">{t.sent}</p>}
+    {status==='error' && <p role="alert" className="kc-form-error">{t.fail} <a href="mailto:gliavex@gliavex.fi">gliavex@gliavex.fi</a></p>}
+    <button className="kc-button kc-button-primary" disabled={status==='sending'} type="submit">{status==='sending'?t.sending:t.send}<Arrow /></button></form></div></section></>
+}
+function PrivacyPage({lang}:{lang:Lang}) {
+  const t=content[lang].privacyPage
+  return <><div className="kc-page-top"><div className="kc-shell"><p className="kc-eyebrow">{t.eyebrow}</p><h1>{t.title}</h1><p>{t.lead}</p></div></div><section className="kc-section"><div className="kc-shell kc-privacy-list">{t.sections.map((s,i)=><article key={s.title}><span>{String(i+1).padStart(2,'0')}</span><div><h2>{s.title}</h2><p>{s.body}</p></div></article>)}</div></section></>
 }
