@@ -11,6 +11,8 @@ try{
   await page.locator('.kc-hero-poster').evaluate(img=>img.decode())
   const mobilePoster=await page.locator('.kc-hero-poster').evaluate(img=>img.currentSrc)
   assert.match(mobilePoster,/hero-mobile\.webp$/,'Mobile must load small poster rather than original 300KB poster')
+  const sourceOrder=await page.locator('.kc-hero').evaluate(section=>[...section.children].map(node=>node.className))
+  assert.ok(sourceOrder.findIndex(cls=>cls.includes('kc-hero-layout'))<sourceOrder.findIndex(cls=>cls.includes('qh-film-layer')),'Hero DOM must present text before film; CSS-only order can shift on cold load')
   const copy=await page.locator('.kc-hero-layout').boundingBox()
   const film=await page.locator('.qh-film-layer').boundingBox()
   assert.ok(copy&&film,'Hero copy and film should have dimensions')
