@@ -89,6 +89,7 @@ assert.equal(release.status(),200,'The deployed site must expose its release con
 const releaseInfo=await release.json()
 assert.equal(releaseInfo.contract,'komplyint-handbook-2026-10-25')
 assert.equal(releaseInfo.site,'Komplyint Oy')
+assert.equal(releaseInfo.design,'charcoal-precision-v1.2.0','production artifact must identify the revised visual system')
 const badContact=await desktop.request.post(base+'/api/contact',{
   data:{name:'Automated Test',email:'invalid-email',message:'invalid'},
   headers:{'Content-Type':'application/json'}

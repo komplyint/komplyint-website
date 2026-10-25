@@ -12,6 +12,7 @@ export function GET() {
   return NextResponse.json({
     site: 'Komplyint Oy',
     contract: RELEASE_CONTRACT,
+    design: 'charcoal-precision-v1.2.0',
     commit,
     production: process.env.VERCEL_ENV === 'production',
   }, {

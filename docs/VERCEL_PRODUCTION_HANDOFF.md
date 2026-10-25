@@ -42,3 +42,7 @@ After Vercel deployment, GET /api/release must return site Komplyint Oy and cont
 - Record actual deployed commit and live Vercel deployment identity.
 
 Never mark production Done based on source merge or GitHub CI alone.
+
+## Charcoal Precision v1.2.0 release attestation (26 October 2026)
+
+The public release API now reports `design: charcoal-precision-v1.2.0` in addition to the exact commit SHA and established release contract. The existing public-release verifier checks this field and the actual FI/EN/SV routes, brochures and hero assets. A stale legacy-green deployment cannot pass merely by having an unchanged `contract` value. The field is not a user-facing badge or a substitute for visual/independent signoff; deployment is only accepted after an authorized Vercel release and fresh production checks. No Vercel secrets are in source control.

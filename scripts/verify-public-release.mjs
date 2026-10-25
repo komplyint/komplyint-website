@@ -72,6 +72,8 @@ export async function verifyPublicRelease({
     assert.equal(info.site,'Komplyint Oy')
     assert.equal(info.contract,RELEASE_CONTRACT,
       'wrong or outdated site release contract')
+    assert.equal(info.design,'charcoal-precision-v1.2.0',
+      'outdated green design is still deployed; charcoal design release attestation missing')
     releaseCommit=typeof info.commit==='string'?info.commit:null
     if(expectedCommit && releaseCommit){
       assert.equal(releaseCommit,expectedCommit,'deployed commit differs from main')

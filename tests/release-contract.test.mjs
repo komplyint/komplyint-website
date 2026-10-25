@@ -4,10 +4,11 @@ import {
   verifyPublicRelease, REQUIRED_DOWNLOADS, REQUIRED_PAGES, REQUIRED_MEDIA,
 } from '../scripts/verify-public-release.mjs'
 
-function fakeResponse(path,{commit='abc123',stale=false,missing=[],badDownload=false,badMedia=false,badLocale=false}={}){
+function fakeResponse(path,{commit='abc123',stale=false,missing=[],badDownload=false,badMedia=false,badLocale=false,badDesign=false}={}){
   if(missing.includes(path))return new Response('Not Found',{status:404})
   if(path==='/api/release')return Response.json({
     site:'Komplyint Oy',contract:'komplyint-handbook-2026-10-25',commit,
+    design:badDesign?'legacy-forest-green':'charcoal-precision-v1.2.0',
   })
   const download=REQUIRED_DOWNLOADS.find(row=>row[0]===path)
   if(download){
@@ -85,4 +86,10 @@ test('a missing Swedish service page or Swedish featured graphic blocks publicat
   assert.equal(result.pass,false)
   assert.equal(result.problems.length,2)
   assert.match(result.problems.join(' '),/featured-reporting-art-sv/)
+})
+
+test('stale green design cannot pass production attestation even when its copy and routes match',async()=>{
+  const result=await verifyPublicRelease({fetcher:fetcher({badDesign:true})})
+  assert.equal(result.pass,false)
+  assert.match(result.problems.join(' '),/outdated green design/)
 })
