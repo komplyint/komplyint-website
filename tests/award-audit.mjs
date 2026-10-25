@@ -21,7 +21,7 @@ for(const theme of ['dark','light']){
       const links=await page.locator('nav.kc-nav a').count()
       const overflow=await page.evaluate(()=>document.documentElement.scrollWidth-window.innerWidth)
       const axe=await new AxeBuilder({page}).withTags(['wcag2a','wcag2aa','wcag21a','wcag21aa','wcag22aa']).analyze()
-      const critical=axe.violations.filter(v=>v.impact==='critical'||v.impact==='serious').map(v=>({id:v.id,impact:v.impact,nodes:v.nodes.length,help:v.help}))
+      const critical=axe.violations.filter(v=>v.impact==='critical'||v.impact==='serious').map(v=>({id:v.id,impact:v.impact,nodes:v.nodes.length,help:v.help,examples:v.nodes.slice(0,2).map(n=>({target:n.target,html:n.html?.slice(0,380),summary:n.failureSummary?.slice(0,430)}))}))
       const ok=status===200&&h1===1&&links>=4&&overflow<=4&&critical.length===0
       if(!ok)blocking++
       report.automated.push({route,theme,status,h1,navLinks:links,horizontalOverflow:overflow,violations:critical,otherIssues:axe.violations.filter(v=>!critical.some(c=>c.id===v.id)).map(v=>({id:v.id,impact:v.impact})),result:ok?'PASS':'FAIL'})
