@@ -69,15 +69,27 @@ export default function KomplyintWebsite() {
     }
   },[menuOpen])
   useEffect(() => {
-    const dark=appearance==='dark'||(appearance==='system'&&window.matchMedia('(prefers-color-scheme: dark)').matches)
-    document.documentElement.classList.toggle('dark',dark)
-    document.documentElement.style.colorScheme=dark?'dark':'light'
+    const media=window.matchMedia('(prefers-color-scheme: dark)')
+    function apply(){
+      const dark=appearance==='dark'||(appearance==='system'&&media.matches)
+      document.documentElement.classList.toggle('dark',dark)
+      document.documentElement.style.colorScheme=dark?'dark':'light'
+    }
+    apply()
+    media.addEventListener('change',apply)
+    return()=>media.removeEventListener('change',apply)
   },[appearance])
   function setTheme(next:'dark'|'light'|'system'){
     setAppearance(next)
     try{window.localStorage.setItem('komplyint-theme',next)}catch{}
   }
   function switchLanguage(){
+    if(page==='contact'){
+      const form=document.querySelector<HTMLFormElement>('form.kc-form')
+      const hasDraft=!!form&&Array.from(form.querySelectorAll<HTMLInputElement|HTMLTextAreaElement>('input:not([type=hidden]),textarea'))
+        .some(field=>field.value.trim().length>0)
+      if(hasDraft&&!window.confirm(lang==='fi'?'Lomakkeen keskeneräiset tiedot voivat hävitä. Vaihdetaanko kieli?':'Your unsent form fields may be lost. Switch language?'))return
+    }
     const target=(lang==='fi'?'/en'+pathname:pathname.replace(/^\/en(?=\/|$)/,''))||'/'
     router.push(target+(typeof window!=='undefined'?window.location.search:''))
   }
@@ -117,6 +129,7 @@ export default function KomplyintWebsite() {
             <button className="kc-mobile-toggle" ref={menuTrigger} type="button" onClick={() => setMenuOpen(!menuOpen)} aria-expanded={menuOpen} aria-controls="komplyint-primary-navigation" aria-label={t.navigation.menu}><span /><span /><span /></button>
           </div>
         </div>
+        <noscript><nav className="qh-nojs-nav" aria-label={lang==='fi'?'Päänavigaatio ilman JavaScriptiä':'Navigation without JavaScript'}>{navPages.map(item=><a href={pathFor(lang,item)} key={item}>{t.navigation[item]}</a>)}<a href={pathFor(lang,'services')}>{t.explore}</a></nav></noscript>
       </header>
 
       <main id="main-content">
