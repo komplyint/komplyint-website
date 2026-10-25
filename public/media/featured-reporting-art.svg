@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="600" viewBox="0 0 960 600" role="img" aria-labelledby="title desc">
+<title id="title">From scattered reporting to a clear business dashboard</title>
+<desc id="desc">Original abstract green and black business-data illustration with a restrained red accent, showing disordered source lines becoming an organized chart.</desc>
+<defs>
+ <linearGradient id="ground" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#104B35"/><stop offset=".52" stop-color="#08271F"/><stop offset="1" stop-color="#061510"/></linearGradient>
+ <linearGradient id="left" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#142A22"/><stop offset="1" stop-color="#090F0C"/></linearGradient>
+ <linearGradient id="right" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#1B4B3C"/><stop offset=".88" stop-color="#071713"/></linearGradient>
+ <linearGradient id="line" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#7CBF9B"/><stop offset="1" stop-color="#B7F4C9"/></linearGradient>
+ <radialGradient id="redGlow" cx="0" cy="0" r="1" gradientTransform="translate(803 485) rotate(-125) scale(310 250)"><stop stop-color="#D14551" stop-opacity=".28"/><stop offset="1" stop-color="#D14551" stop-opacity="0"/></radialGradient>
+ <filter id="shadow" x="-40%" y="-50%" width="180%" height="210%"><feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#010604" flood-opacity=".48"/></filter>
+ <filter id="pointGlow"><feGaussianBlur stdDeviation="7"/></filter>
+ <clipPath id="rounded"><rect width="960" height="600" rx="28"/></clipPath>
+</defs>
+<g clip-path="url(#rounded)">
+ <rect width="960" height="600" fill="url(#ground)"/>
+ <rect width="960" height="600" fill="url(#redGlow)"/>
+ <g opacity=".26" stroke="#488568" stroke-width=".7">
+  <path d="M0 87H960M0 164H960M0 241H960M0 318H960M0 395H960M0 472H960M0 549H960"/>
+  <path d="M80 0V600M170 0V600M260 0V600M350 0V600M440 0V600M530 0V600M620 0V600M710 0V600M800 0V600M890 0V600"/>
+ </g>
+ <path d="M-70 256L570 -27L800 600L350 600Z" fill="#2D7553" opacity=".12"/>
+ <path d="M570 -30L1050 260L915 590Z" fill="#5FD1A2" opacity=".065"/>
+ <path d="M744 -20L960 116V318L840 210Z" fill="#E0555C" opacity=".065"/>
+ <rect x="36" y="34" width="142" height="34" rx="17" stroke="#9FDFBA" stroke-opacity=".38" fill="#09231A" fill-opacity=".88"/>
+ <circle cx="58" cy="51" r="4" fill="#D95864"/>
+ <text x="74" y="56" font-size="14" font-family="Arial, sans-serif" font-weight="700" letter-spacing="2.5" fill="#D5F7E0">K / 001</text>
+ <text x="924" y="57" font-family="Arial,sans-serif" font-size="12" letter-spacing="2.5" text-anchor="end" fill="#A9D3B8" opacity=".7">ILLUSTRATIVE FLOW</text>
+
+ <g filter="url(#shadow)">
+  <rect x="86" y="128" width="362" height="310" rx="18" fill="url(#left)" stroke="#5EA182" stroke-opacity=".52" stroke-width="1.3"/>
+  <path d="M86 176H448" stroke="#315443" stroke-width="1"/>
+  <circle cx="117" cy="152" r="5" fill="#D15C64"/>
+  <circle cx="136" cy="152" r="5" fill="#688875"/>
+  <circle cx="155" cy="152" r="5" fill="#688875"/>
+  <rect x="117" y="214" width="126" height="8" rx="4" fill="#8BD5AD" opacity=".84"/>
+  <rect x="117" y="239" width="240" height="12" rx="6" fill="#29493C"/>
+  <rect x="117" y="264" width="288" height="12" rx="6" fill="#2E5140"/>
+  <rect x="117" y="289" width="214" height="12" rx="6" fill="#2A4B3C"/>
+  <rect x="117" y="314" width="263" height="12" rx="6" fill="#2E5140"/>
+  <path d="M117 361H402" stroke="#345344" stroke-dasharray="4 8"/>
+  <rect x="117" y="380" width="62" height="22" rx="4" fill="#1B4D39" stroke="#3F8061"/>
+  <rect x="190" y="380" width="62" height="22" rx="4" fill="#1B4D39" stroke="#3F8061"/>
+  <rect x="263" y="380" width="62" height="22" rx="4" fill="#1B4D39" stroke="#3F8061"/>
+  <rect x="336" y="380" width="62" height="22" rx="4" fill="#5D2026" stroke="#BB4A56"/>
+  <circle cx="398" cy="219" r="12" fill="#3A1B1D" stroke="#D65A63"/>
+  <path d="M398 213V220M398 225V227" stroke="#FFC3C3" stroke-width="2.4" stroke-linecap="round"/>
+ </g>
+ <g opacity=".85">
+  <path d="M445 310C487 310 489 349 529 349C562 349 562 318 607 318" stroke="#8DCEAB" stroke-width="2.5" stroke-dasharray="5 9" fill="none"/>
+  <circle cx="517" cy="345" r="18" fill="#143B2C" stroke="#8DCEAB" stroke-opacity=".6"/>
+  <path d="M511 345H525M519 339L525 345L519 351" stroke="#C1F0D0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+ </g>
+ <g filter="url(#shadow)">
+  <rect x="528" y="178" width="358" height="302" rx="21" fill="url(#right)" stroke="#90D9AE" stroke-opacity=".72" stroke-width="1.5"/>
+  <rect x="553" y="202" width="308" height="43" rx="10" fill="#0C231B" stroke="#416E53"/>
+  <rect x="570" y="215" width="83" height="8" rx="4" fill="#C3F4D4" opacity=".84"/>
+  <rect x="570" y="231" width="132" height="4" rx="2" fill="#4F9170" opacity=".8"/>
+  <circle cx="834" cy="224" r="9" fill="#155437" stroke="#70D39F"/>
+  <path d="M830 224L833 227L839 220" stroke="#D0FBE0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M569 392H839M569 347H839M569 302H839" stroke="#345746" stroke-opacity=".9" stroke-dasharray="3 6"/>
+  <path d="M578 391V363Q578 358 583 358H621Q626 358 626 363V391Z" fill="#3A8A61"/>
+  <path d="M644 391V332Q644 327 649 327H686Q691 327 691 332V391Z" fill="#64B98C"/>
+  <path d="M707 391V344Q707 339 712 339H752Q757 339 757 344V391Z" fill="#75CEA0"/>
+  <path d="M774 391V294Q774 289 779 289H820Q825 289 825 294V391Z" fill="#C74C57"/>
+  <path d="M571 341C617 351 652 307 686 312C722 317 739 275 782 262C803 254 820 271 843 254" stroke="url(#line)" stroke-width="3" stroke-linecap="round" fill="none"/>
+  <circle cx="782" cy="262" r="6" fill="#C3F7D3"/>
+  <circle cx="782" cy="262" r="14" fill="#C3F7D3" opacity=".19" filter="url(#pointGlow)"/>
+  <rect x="558" y="417" width="176" height="31" rx="15.5" fill="#0D3B29" stroke="#459A68" stroke-opacity=".64"/>
+  <circle cx="577" cy="432.5" r="4.5" fill="#A8E7C0"/>
+  <text x="590" y="437.5" font-family="Arial, sans-serif" font-size="13" fill="#C6EBD5" letter-spacing=".4">VERIFIED OUTPUT</text>
+ </g>
+ <path d="M37 551H923" stroke="#9BD3B1" stroke-opacity=".26"/>
+ <text x="37" y="579" font-family="Arial, sans-serif" font-size="13" letter-spacing=".7" fill="#BED7C6" opacity=".85">CONCEPT EXAMPLE — NOT CUSTOMER DATA</text>
+ <path d="M908 547L924 547L924 531" stroke="#D65D65" stroke-width="2" fill="none"/>
+</g>
+</svg>
