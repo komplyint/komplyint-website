@@ -76,3 +76,7 @@ Added complete Swedish (Finland) site content under explicit `/sv` routes alongs
 ## Error-state locale parity (F07/Q11)
 
 Localized both 404 and runtime-error recovery screens using the same typed FI/EN/SV dictionary, keeping the current-language homepage return route. The trilingual browser test now checks a real Swedish 404 response; no duplicate error handling runtime was introduced.
+
+## CI runner reliability — F21/F22, Q11 (25 Oct 2026)
+
+The previous `25eaaf7` full QA job was cancelled after the 22-minute budget because a routine `sudo apt-get update && sudo apt-get install ffmpeg` held the runner for approximately 20 minutes. The build, 66 source tests, Swedish initial `lang`/fonts, locale switcher, contact form and hero-media browser tests all passed before the timeout; the final award/accessibility audit did not finish. Reuse the existing system `ffprobe` when available, but always enforce MP4 header and minimum source size without invoking APT. The separate existing real browser media checks remain mandatory. This fix reduces network-dependency risk without weakening functional playback tests.
