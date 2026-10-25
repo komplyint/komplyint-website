@@ -31,7 +31,7 @@ jobs:
               missing=1
             fi
           done
-          if [ "$missing" -eq 0 ]; then echo "Vercel CLI credentials available."; echo "ready=true" >> "$GITHUB_OUTPUT"; else echo "ready=false" >> "$GITHUB_OUTPUT"; fi
+          if [ "$missing" -eq 0 ]; then echo "Vercel CLI credentials available."; echo "ready=true" >> "$GITHUB_OUTPUT"; else echo "ready=false" >> "$GITHUB_OUTPUT"; echo "## Production deploy BLOCKED: Vercel authorization missing" >> "$GITHUB_STEP_SUMMARY"; echo "Either reconnect the existing Vercel project to the main branch or configure the three repository secrets. No new Vercel project is needed." >> "$GITHUB_STEP_SUMMARY"; fi
   production:
     needs: credential-preflight
     if: github.event_name != 'pull_request' && needs.credential-preflight.outputs.ready == 'true'
@@ -60,36 +60,26 @@ jobs:
       - name: Install Vercel CLI
         run: npm install --global vercel@latest
       - name: Load existing project's production settings
-        run: vercel pull --yes --environment=production
+        run: vercel pull --yes --environment=production --token="$VERCEL_TOKEN"
       - name: Build production from verified main
-        run: vercel build --prod
+        run: vercel build --prod --token="$VERCEL_TOKEN"
       - name: Deploy prebuilt artifact to existing production project
         run: |
           set -euo pipefail
-          vercel deploy --prebuilt --prod > /tmp/komplyint-vercel-deployment-url.txt
+          vercel deploy --prebuilt --prod --token="$VERCEL_TOKEN" --env "KOMPLYINT_DEPLOY_COMMIT=${GITHUB_SHA}" > /tmp/komplyint-vercel-deployment-url.txt
           echo "Vercel production deployment submitted."
+          echo "Deployment URL: $(cat /tmp/komplyint-vercel-deployment-url.txt)" >> "$GITHUB_STEP_SUMMARY"
       - name: Verify live handbook design and brochure delivery
-        shell: bash
-        run: |
-          set -euo pipefail
-          ok=0
-          for attempt in 1 2 3 4 5 6 7 8 9 10; do
-            page="$(curl -fsSL --max-time 18 -H 'Cache-Control: no-cache' "https://www.komplyint.fi/?verify=${GITHUB_SHA}" 2>/dev/null || true)"
-            if printf '%s' "$page" | grep -q 'Selkeyttä työhön'; then
-              ok=1
-              break
-            fi
-            sleep 6
-          done
-          if [ "$ok" -ne 1 ]; then
-            echo "::error::www.komplyint.fi is not yet serving the new design. Check Vercel domain assignment and Git project mapping."
-            exit 1
-          fi
-          for path in /services/data-reporting /about /downloads/Komplyint_Service_Documents.zip; do
-            http="$(curl -LsS --max-time 20 -o /dev/null -w '${http_code}' "https://www.komplyint.fi$path")"
-            if [ "$http" != 200 ]; then
-              echo "::error::Production route $path returned $http"
-              exit 1
-            fi
-          done
-          echo "Production deployment and critical routes verified."
+        env:
+          PUBLIC_SITE_URL: https://www.komplyint.fi
+          RELEASE_VERIFY_ATTEMPTS: 10
+        run: node scripts/verify-public-release.mjs
+      - name: Upload publication evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: komplyint-vercel-publication-evidence
+          path: |
+            release-evidence.json
+            /tmp/komplyint-vercel-deployment-url.txt
+          if-no-files-found: ignore
