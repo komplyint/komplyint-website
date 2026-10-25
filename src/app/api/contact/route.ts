@@ -51,8 +51,8 @@ export async function POST(request:NextRequest){
   }
   const ip=(request.headers.get('x-forwarded-for')||'unknown').split(',')[0].trim().slice(0,100)
   const now=Date.now()
-  if(limit.size>1200)for(const [key,slot] of limit)if(now-slot.start>WINDOW)limit.delete(key)
-  if(accepted.size>1200)for(const [key,at] of accepted)if(now-at>MAX_AGE)accepted.delete(key)
+  if(limit.size>1200)limit.forEach((slot,key)=>{if(now-slot.start>WINDOW)limit.delete(key)})
+  if(accepted.size>1200)accepted.forEach((at,key)=>{if(now-at>MAX_AGE)accepted.delete(key)})
   const slot=limit.get(ip)
   if(slot && now-slot.start<WINDOW && slot.count>=MAX_REQUESTS){
     return NextResponse.json({ok:false,error:'Rate limited'},{status:429,headers:{'Retry-After':String(Math.max(1,Math.ceil((WINDOW-(now-slot.start))/1000))),...noStore}})
