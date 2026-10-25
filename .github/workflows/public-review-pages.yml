@@ -1,0 +1,48 @@
+name: Komplyint public website review backup
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: komplyint-public-preview
+  cancel-in-progress: true
+jobs:
+  pages:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: \${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Package bilingual site for the GitHub Pages subpath
+        shell: bash
+        run: |
+          mkdir -p preview-site
+          cp -r frontend/public/. preview-site/
+          cp frontend/src/modern.js frontend/src/modern.css frontend/src/index.html preview-site/
+          node - <<'NODE'
+          const fs=require('fs')
+          for(const name of ['index.html','modern.js','modern.css']){
+            const p='preview-site/'+name
+            const src=fs.readFileSync(p,'utf8')
+            fs.writeFileSync(p,src.replace(/\/(?=(?:media\/|logo\.svg|favicon\.svg|modern\.js|modern\.css))/g,'./'))
+          }
+          const path='preview-site/index.html'
+          let src=fs.readFileSync(path,'utf8')
+          src=src.replace('</body>', '<div style="position:fixed;bottom:0;left:0;right:0;z-index:999;background:#fff5d8;color:#6a5016;padding:8px;text-align:center;font:600 12px Arial">Review copy - contact form disabled; production remains komplyint.fi</div><script>document.addEventListener("submit",e=>{e.preventDefault();e.stopImmediatePropagation();alert("Preview only. Contact gliavex@gliavex.fi");},true)</script></body>')
+          fs.writeFileSync(path,src)
+          NODE
+          touch preview-site/.nojekyll
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+      - name: Upload preview artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: preview-site
+      - name: Publish review site
+        id: deployment
+        uses: actions/deploy-pages@v4
