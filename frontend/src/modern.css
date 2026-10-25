@@ -193,3 +193,7 @@ a:hover .kc-arrow{transform:translate(3px,-3px)}
 .kc-mobile-toggle span{background:#f3ffff}
 @media(max-width:860px){.kc-nav{background:#092d36;border-bottom-color:#244952}}
 @media(max-width:570px){.kc-header-row{min-height:79px}.kc-logo-link{min-width:102px}.kc-logo{width:105px;height:68px}}
+
+
+/* Do not create a scrolling ancestor around the sticky navigation. */
+.kc-root{overflow-x:clip;overflow-y:visible}
