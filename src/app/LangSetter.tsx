@@ -8,7 +8,7 @@ export default function LangSetter() {
 
   useEffect(() => {
     // Update HTML lang attribute based on route
-    const lang = pathname === '/en' ? 'en' : 'fi'
+    const lang = pathname.startsWith('/en') ? 'en' : 'fi'
     document.documentElement.lang = lang
   }, [pathname])
 
