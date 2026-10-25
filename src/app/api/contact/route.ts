@@ -44,7 +44,7 @@ export async function POST(request:NextRequest) {
       text:'Name: '+(name||'Not provided')+'\nEmail: '+email+'\n\nMessage:\n'+message,
       html:'<p><b>Name:</b> '+escapeHtml(name||'Not provided')+'</p><p><b>Email:</b> '+escapeHtml(email)+'</p><p><b>Message:</b></p><p>'+escapeHtml(message).replace(/\n/g,'<br>')+'</p>'
     })
-    if(!(result.accepted||[]).some(x=>x.toLowerCase()===RECIPIENT))return json('Recipient was not accepted by mail service',502)
+    if(!(result.accepted||[]).some(x=>(typeof x==='string'?x:x.address).toLowerCase()===RECIPIENT))return json('Recipient was not accepted by mail service',502)
     return NextResponse.json({ok:true,accepted:true,status:'queued'}, {status:202,headers:{'Cache-Control':'no-store'}})
   }catch(e){console.error('Contact request was not accepted:',e instanceof Error?e.message:'unknown');return json('Unable to confirm delivery service acceptance',503)}
 }
