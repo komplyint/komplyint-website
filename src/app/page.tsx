@@ -225,7 +225,7 @@ function Home({lang}:{lang:Lang}) {
 
     <section className="kc-section kc-section-intro"><div className="kc-shell">
       <SectionIntro {...t.intro} />
-      <div className="kc-service-grid">{services[lang].slice(0,4).map((s,i)=><a className="kc-service-tile" key={s.title} href={pathFor(lang,'services') + '#service-explorer'}><div className="kc-tile-top"><span>{String(i+1).padStart(2,'0')}</span><Arrow /></div><h3>{s.title}</h3><p>{s.intro}</p></a>)}</div>
+      <div className="kc-service-grid">{services[lang].slice(0,4).map((s,i)=><a className="kc-service-tile" key={s.title} href={pathFor(lang,'services') + '?service=' + i + '#service-explorer'}><div className="kc-tile-top"><span>{String(i+1).padStart(2,'0')}</span><Arrow /></div><h3>{s.title}</h3><p>{s.intro}</p></a>)}</div>
       <div className="kc-moreline"><span>{lang === 'fi' ? 'Lisäksi: ohjelmistotestaus, laadunvarmistus ja digitaalinen toimistotuki.' : 'Also available: software testing, quality assurance and digital office support.'}</span><a href={pathFor(lang,'services')}>{t.explore} <Arrow /></a></div>
     </div></section>
 
@@ -240,6 +240,11 @@ function Home({lang}:{lang:Lang}) {
 
 function ServiceExplorer({lang}:{lang:Lang}) {
   const [selected, setSelected] = useState(0)
+  useEffect(() => {
+    const value = new URLSearchParams(window.location.search).get('service')
+    const idx = value === null ? 0 : Number(value)
+    if (Number.isInteger(idx) && idx >= 0 && idx < 6) setSelected(idx)
+  }, [])
   const t = content[lang].area
   const s = services[lang][selected]
   return <>
