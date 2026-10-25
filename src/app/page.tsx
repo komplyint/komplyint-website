@@ -243,7 +243,7 @@ function VideoHero({lang}:{lang:Lang}){
     <div className="kc-hero-poster" aria-hidden="true"/>
     <video className={'kc-hero-video'+(userPlay?' qh-user-play':'')} ref={video} autoPlay muted loop playsInline preload="metadata" poster="/media/hero.webp" aria-hidden="true"
       onPlaying={()=>setState('playing')} onPause={()=>setState('paused')} onError={()=>setState('error')}>
-      <source src="/media/hero.mp4" type="video/mp4" />
+      <source src="/media/hero-optimized.mp4" type="video/mp4" /><source src="/media/hero.mp4" type="video/mp4" />
     </video>
     <div className="qh-video-controls">
       <button type="button" onClick={toggle} aria-label={state==='playing'?(lang==='fi'?'Pysäytä video':'Pause video'):(lang==='fi'?'Toista video':'Play video')}>
