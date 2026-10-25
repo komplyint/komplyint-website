@@ -332,3 +332,6 @@ html:not(.dark) .kc-root :focus-visible{outline-color:#294DB5}
   .kc-header.qh-menu-open .kc-logo-link,.kc-header.qh-menu-open .kc-actions{visibility:hidden;pointer-events:none}
   .kc-header.qh-menu-open .kc-nav.is-open{visibility:visible;pointer-events:auto}
 }
+
+/* The protected hero image is rendered as an actual responsive img; avoid also fetching its old CSS background. */
+.kc-hero-poster{background-image:none!important}
