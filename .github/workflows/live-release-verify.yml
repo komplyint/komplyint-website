@@ -5,32 +5,27 @@ on:
   workflow_dispatch:
 permissions:
   contents: read
+concurrency:
+  group: komplyint-public-domain-verification
+  cancel-in-progress: true
 jobs:
   verify:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 7
     steps:
-      - name: Verify public site content and downloads
-        shell: bash
-        run: |
-          set -euo pipefail
-          for url in "https://www.komplyint.fi/" "https://www.komplyint.fi/en" "https://www.komplyint.fi/services" "https://www.komplyint.fi/about"; do
-            echo "Checking $url"
-            curl --fail --silent --show-error --location --max-time 20 -H "Cache-Control: no-cache" "$url?ci_verify=${GITHUB_SHA}" -o /tmp/komplyint-live-page.html
-            if grep -q -E 'Selkeyttä työhön|Clarity for your work|Oikea ratkaisu|Pienet ongelmat' /tmp/komplyint-live-page.html; then
-              echo "NEW SITE CONTENT: PASS"
-            elif grep -q 'Compliance readiness' /tmp/komplyint-live-page.html; then
-              echo "::error::Old compliance homepage still live. Vercel project is not publishing current GitHub main."
-              exit 2
-            else
-              echo "::error::Unexpected public page content"
-              exit 3
-            fi
-          done
-          for name in Komplyint_Palveluesite_FI.pdf Komplyint_Service_Portfolio_EN.pdf Komplyint_Service_Documents.zip; do
-            url="https://www.komplyint.fi/downloads/$name?ci_verify=${GITHUB_SHA}"
-            echo "Checking download $url"
-            code=$(curl -LsS --max-time 20 -o /tmp/komplyint-download -w '%{http_code}' "$url")
-            test "$code" = "200"
-            test "$(wc -c </tmp/komplyint-download)" -gt 1000
-          done
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Verify actual public handbook release (not merely a CI build)
+        env:
+          PUBLIC_SITE_URL: https://www.komplyint.fi
+          RELEASE_VERIFY_ATTEMPTS: 6
+        run: node scripts/verify-public-release.mjs
+      - name: Keep real domain evidence even when a hosting connection is blocked
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: komplyint-public-release-evidence
+          path: release-evidence.json
+          if-no-files-found: ignore

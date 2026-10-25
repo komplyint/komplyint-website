@@ -89,7 +89,7 @@ The full 1,517-entry register remains in the downloadable handoff archive, with 
 - No fake badges, no cloaking or judge-specific content
 
 ### Current state
-Development branch, not production verified. Full human review and real-contact inbox receipt are **not complete**.
+The engineering redesign and responsive/video/navigation tests have been merged to main. As of 25 October 2026, the public domain still served the older design and the new service/document URLs returned 404; the hosting link is unresolved. Independent jury-style human reviews, owner approval, actual email inbox receipt and any award submission are **not complete**. Use the public /api/release contract and release-evidence.json before changing any production status to Done.
 
 ### Next review
 Open the rendered public preview, review at 390px/768px/1440px for both languages, test the film moving (currentTime must increase), check service discoverability with actual users, then decide release or correction.

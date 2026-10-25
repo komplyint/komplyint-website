@@ -1,44 +1,42 @@
-# Komplyint Oy - Public digital services website
+# Komplyint Oy — Public digital services website
 
-Public Finnish and English website for Komplyint Oy, Business ID 3588595-3.
+The production source is the root Next.js 14 / React application. The Finnish and English commercial offer covers Excel, data, Power BI, Microsoft 365 automation, websites, scoped software, QA, and document support. Compliance consulting is not offered at this stage.
 
-## Commercial direction
-Komplyint focuses on practical B2B services: Excel, data and Power BI reporting; Microsoft 365 workflows and automation; websites and maintenance; small software and API integrations; software testing and QA; and limited office-document support.
+## Reused code and protected original media
 
-Compliance consulting is **not currently part of the public offer**. We do not claim regulatory certification, legal advisory authority, enterprise-scale capacity or 24/7 support.
+- Reuse the existing application and shared bilingual catalogue in src/lib/commercial.ts. Do not create another standalone website as a substitute.
+- Keep public/logo.svg, public/media/hero.mp4, and public/media/hero.webp unchanged. Hero-mobile and hero-optimized are smaller delivery versions of the same video.
+- The legacy static frontend and Express mail backend remain for compatibility; the root Next.js app is the intended Vercel production target.
 
-## Implementations
-- Next.js 14 in the repository root: Finnish and English pages for home, services, software, contact and privacy.
-- Express/static legacy site in frontend/: one-page bilingual presentation using the same commercial content and styling.
-- Legacy contact backend in backend/: same-origin frontend proxy forwards to its contact endpoint. The Next.js implementation uses its own API route.
+## Public journeys
 
-The original public logo.svg, media/hero.mp4 and media/hero.webp assets are unchanged. The new site keeps the moving video on desktop and mobile; users requesting reduced motion see the poster.
+- Home: / and /en
+- Services: /services and /en/services, with six /services/{slug} detail routes in each language.
+- Work, About, Software, Contact, Privacy and Accessibility have bilingual pages.
+- Documents: /downloads/Komplyint_Palveluesite_FI.pdf, /downloads/Komplyint_Service_Portfolio_EN.pdf and /downloads/Komplyint_Service_Documents.zip.
+- Release attestation: /api/release with site name, handbook contract and available commit.
+- Public contact: /api/contact, where SMTP must be configured to route enquiries to info@komplyint.fi.
 
-## Local validation
-1. Run npm install in the repository root.
-2. Run npm run build (public access regression checks and Next production build).
-3. Run node --check frontend/src/modern.js and node --check frontend/server.js.
-4. For the old static server, run npm install and npm run dev in frontend/; run the legacy backend separately when testing mail delivery.
-5. Verify the form using actual SMTP settings with synthetic data. The frontend displays an error when mail delivery is not configured.
+Company: Komplyint Oy · Business ID 3588595-3 · D-U-N-S 369283279.
 
-The repository also includes a .woodpecker.yml QA-only pipeline for the authorised ObumDelivery workflow. It does not deploy production.
+## Validation
 
-## Preview and publication
-The new redesign is staged on feature/digital-services-redesign-20261025 for owner review.
-The standalone review HTML at preview/komplyint-review.html has its form disabled.
+Run npm ci && npm run build. The build runs public-access and release-contract unit tests. The site-preview-check GitHub workflow runs browser, accessibility, motion and document checks. Lighthouse and visual brochure review are separate workflows.
 
-Before merging or deploying: build/test, verify responsive UI, confirm hero-video playback and consent-based motion fallback, check contact mail configuration, obtain visual approval, and retain a rollback route.
+For the live host, run node scripts/verify-public-release.mjs. Environment variables PUBLIC_SITE_URL and RELEASE_VERIFY_ATTEMPTS can override the domain and retry count. This verifier tests the release endpoint, content of nine routes, all three downloadable files and their real file signatures, and writes release-evidence.json.
 
-## Security and public access
-Company landing, information and contact pages **never require login**. Product/admin functions use independent protected application identities; see PUBLIC_ACCESS_BOUNDARY.md. Avoid sending confidential business data through the initial contact form.
+Only independent live-site evidence proves production deployment, not a merged branch or successful Next.js build. A successful HTTP response from the contact API also does not prove inbox receipt; separately verify the mailbox.
 
-## Company details
-- Website: https://komplyint.fi
-- Email currently published: info@komplyint.fi
-- Business ID: 3588595-3
+## Production deployment: existing Vercel project only
 
+Use the Komplyint Oy Vercel project named komplyint-website with www.komplyint.fi. The preferred connection is the GitHub repository komplyint/komplyint-website with Production tracking main. The fallback GitHub Actions workflow deploy-vercel-production.yml requires three GitHub secrets: VERCEL_TOKEN, VERCEL_ORG_ID and VERCEL_PROJECT_ID referring to that same project.
 
-## 2026 Handbook redesign
-The current implementation is being reviewed in PR #4: https://github.com/komplyint/komplyint-website/pull/4.
-The previous static preview in preview/ is an archived prior iteration, not the reviewed handbook design.
-Public service document downloads are hosted at /downloads/Komplyint_Service_Documents.zip after deployment.
+The live-release-verify.yml workflow executes on each main push and can be run manually. It must fail while the live site serves the old design or lacks new service/download routes. See docs/VERCEL_PRODUCTION_HANDOFF.md for exact steps.
+
+**As of 25 October 2026, the source redesign was merged but public-domain verification still showed the previous site.** This is a hosting-connection blocker, not evidence that the engineering design is absent.
+
+## Scope and privacy
+
+All marketing and contact pages remain public and login-free; protected product/admin applications use independent auth. Ask customers not to send sensitive data in initial contact. We do not claim regulatory certification, enterprise-scale support or 24/7 service without a separate agreement.
+
+The competition-oriented review process is documented in AWARD_READINESS_Q16_Q21.md. Independent human review, owner acceptance and competition submission are separate from automated test results.
