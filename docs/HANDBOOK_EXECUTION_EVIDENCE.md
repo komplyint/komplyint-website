@@ -26,3 +26,7 @@ Reused: actual Next.js production routes, `src/lib/commercial.ts`, bilingual pat
 The existing public client facade now delegates `VideoHero`, `FeaturedWork`, `PublicBrochures`, `ServiceCard` and `Arrow` to shared components, and `pathFor` to a shared route helper. This is a code extraction and reorganization, not a second site. The original hero/video, bilingual content, links, analytics graphic and contact functionality remain unchanged. A new source-architecture contract is part of the production build's Node tests. Browser-level parity still requires the quality workflow.
 
 Remaining E02: extract the form and service explorer, consolidate the legacy stylesheet cascade and review static rendering boundaries.
+
+## Full handbook inventory — F01-R06 / R02-Q18
+
+The actual 191-page PDF table of contents has been normalized into `docs/handbook-specification-units.json`: 24 F, 64 C, 18 P, 20 T, 16 E, 22 Q and 6 R units. Each unit includes its exact printed title and source page, validation initially **NOT_TESTED**, plus selected pointers to existing implementation files where verified by file location. The 1,517 detailed acceptance entries are **not** the same as the 170 top-level units and remain to be imported, individually checked and signed off. Run `npm run report:handbook` for an honest completion tally; `npm run build` validates IDs and evidence paths.

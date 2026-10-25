@@ -1,0 +1,1409 @@
+{
+  "schema_version": "komplyint-handbook-units-v1",
+  "source_title": "Komplyint Redesign Handbook — Quiet Precision",
+  "specification_version": "1.0",
+  "specification_date": "2026-10-25",
+  "reference_pages": 191,
+  "declared_specification_units": 170,
+  "declared_acceptance_entries": 1517,
+  "granularity": "170 first-level F/C/P/T/E/Q/R specification units. The separate 1,517-entry detailed acceptance ledger has NOT been imported or executed.",
+  "evidence_rule": "Source code and a passing build do NOT by themselves mark any unit PASS. Each unit needs applicable sub-acceptance checks with immutable build, method, result, context and reviewer.",
+  "units": [
+    {
+      "id": "F01",
+      "title": "The redesign contract",
+      "page": 12,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "F02",
+      "title": "Reading, ownership and evidence",
+      "page": 13,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "F03",
+      "title": "A controlled baseline, not a guessed deployment",
+      "page": 14,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "F04",
+      "title": "Competition criteria translated into work",
+      "page": 15,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "F05",
+      "title": "The creative direction: Quiet precision",
+      "page": 16,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "F06",
+      "title": "Audience and task architecture",
+      "page": 17,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "F07",
+      "title": "Information architecture and route policy",
+      "page": 18,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [
+        "src/middleware.ts",
+        "src/app/layout.tsx",
+        "tests/language-font.contract.mjs"
+      ],
+      "implementation_note": "Relevant code or test exists. Full handbook acceptance is not established."
+    },
+    {
+      "id": "F08",
+      "title": "Preserve the logo; design its environment",
+      "page": 19,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "F09",
+      "title": "Color system: light surfaces",
+      "page": 20,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "F10",
+      "title": "Color system: dark and semantic states",
+      "page": 22,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "F11",
+      "title": "Contrast register and overlay discipline",
+      "page": 23,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "F12",
+      "title": "Depth, light and shadow",
+      "page": 24,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "F13",
+      "title": "Geometry, spacing and optical correction",
+      "page": 26,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "F14",
+      "title": "Responsive grid and exact anchors",
+      "page": 27,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "F15",
+      "title": "Typography: the selected families",
+      "page": 29,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [
+        "src/app/layout.tsx",
+        "src/app/handbook.css",
+        "tests/language-font.contract.mjs"
+      ],
+      "implementation_note": "Relevant code or test exists. Full handbook acceptance is not established."
+    },
+    {
+      "id": "F16",
+      "title": "Type scale and responsive behavior",
+      "page": 30,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "F17",
+      "title": "Microtypography: every visible character matters",
+      "page": 32,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "F18",
+      "title": "Font delivery, fallback and provenance",
+      "page": 33,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [
+        "src/app/layout.tsx",
+        "tests/language-font.contract.mjs"
+      ],
+      "implementation_note": "Relevant code or test exists. Full handbook acceptance is not established."
+    },
+    {
+      "id": "F19",
+      "title": "Iconography and the folded-plane motif",
+      "page": 34,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "F20",
+      "title": "Imagery and demonstrations",
+      "page": 35,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "F21",
+      "title": "Hero composition and video position",
+      "page": 36,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "F22",
+      "title": "Video playback and resource state machine",
+      "page": 38,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "F23",
+      "title": "Motion choreography",
+      "page": 39,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "F24",
+      "title": "The universal component state contract",
+      "page": 40,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "C01",
+      "title": "Page shell and landmarks",
+      "page": 41,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "C02",
+      "title": "Logo link and company identification",
+      "page": 42,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "C03",
+      "title": "Skip-to-content control",
+      "page": 43,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "C04",
+      "title": "Desktop header",
+      "page": 44,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "C05",
+      "title": "Primary navigation item",
+      "page": 45,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "C06",
+      "title": "Mobile menu trigger",
+      "page": 46,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "C07",
+      "title": "Mobile navigation sheet",
+      "page": 47,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "C08",
+      "title": "Language switch",
+      "page": 48,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "C09",
+      "title": "Appearance preference control",
+      "page": 49,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "C10",
+      "title": "Breadcrumb trail",
+      "page": 50,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "C11",
+      "title": "Hero reading panel and headline",
+      "page": 51,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [
+        "src/app/page.tsx",
+        "src/app/handbook.css"
+      ],
+      "implementation_note": "Relevant code or test exists. Full handbook acceptance is not established."
+    },
+    {
+      "id": "C12",
+      "title": "Hero video field and poster",
+      "page": 52,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [
+        "src/components/VideoHero.tsx",
+        "tests/hero-media.contract.mjs"
+      ],
+      "implementation_note": "Relevant code or test exists. Full handbook acceptance is not established."
+    },
+    {
+      "id": "C13",
+      "title": "Background video play and pause",
+      "page": 53,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [
+        "src/components/VideoHero.tsx",
+        "tests/hero-media.contract.mjs"
+      ],
+      "implementation_note": "Relevant code or test exists. Full handbook acceptance is not established."
+    },
+    {
+      "id": "C14",
+      "title": "Hero action group",
+      "page": 54,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "C15",
+      "title": "Primary button",
+      "page": 55,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "C16",
+      "title": "Secondary and quiet button",
+      "page": 56,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "C17",
+      "title": "Inline and standalone text links",
+      "page": 57,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "C18",
+      "title": "Icon-only utility button",
+      "page": 58,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "C19",
+      "title": "Section introduction",
+      "page": 59,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "C20",
+      "title": "Service card",
+      "page": 60,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [
+        "src/components/ServiceCard.tsx",
+        "tests/source-architecture.contract.test.mjs"
+      ],
+      "implementation_note": "Relevant code or test exists. Full handbook acceptance is not established."
+    },
+    {
+      "id": "C21",
+      "title": "Service icon and index pair",
+      "page": 62,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "C22",
+      "title": "Featured demonstration composition",
+      "page": 63,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "C23",
+      "title": "Evidence and content-type label",
+      "page": 65,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "C24",
+      "title": "Measured result or factual statistic",
+      "page": 66,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "C25",
+      "title": "Work-index card",
+      "page": 67,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "C26",
+      "title": "Service selector tabs",
+      "page": 68,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "C27",
+      "title": "Service detail panel",
+      "page": 69,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "C28",
+      "title": "Process step sequence",
+      "page": 70,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "C29",
+      "title": "Scope and boundary notice",
+      "page": 71,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "C30",
+      "title": "Testimonial or endorsement",
+      "page": 72,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "C31",
+      "title": "Company introduction",
+      "page": 73,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "C32",
+      "title": "Portrait and human profile",
+      "page": 74,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "C33",
+      "title": "Final contact invitation",
+      "page": 75,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "C34",
+      "title": "Footer",
+      "page": 76,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "C35",
+      "title": "Contact form shell",
+      "page": 77,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "C36",
+      "title": "Name input",
+      "page": 78,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "C37",
+      "title": "Email input",
+      "page": 79,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "C38",
+      "title": "Service selector field",
+      "page": 80,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "C39",
+      "title": "Message textarea",
+      "page": 81,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "C40",
+      "title": "Form privacy and expectation note",
+      "page": 82,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "C41",
+      "title": "Form error summary",
+      "page": 83,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "C42",
+      "title": "Inline field error and helper",
+      "page": 84,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "C43",
+      "title": "Submission in progress",
+      "page": 85,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "C44",
+      "title": "Submission acknowledgement",
+      "page": 86,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "C45",
+      "title": "Submission failure and uncertain outcome",
+      "page": 87,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "C46",
+      "title": "Figure, image and caption",
+      "page": 88,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "C47",
+      "title": "Business diagram and demonstration chart",
+      "page": 89,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "C48",
+      "title": "Comparison or data table",
+      "page": 90,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "C49",
+      "title": "FAQ accordion",
+      "page": 91,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "C50",
+      "title": "In-page anchor and return-to-top link",
+      "page": 92,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "C51",
+      "title": "Download link and file metadata",
+      "page": 93,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "C52",
+      "title": "Modal dialog",
+      "page": 94,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "C53",
+      "title": "Noncritical status notice",
+      "page": 95,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "C54",
+      "title": "Empty result or unavailable content",
+      "page": 96,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "C55",
+      "title": "Loading and asset fallback",
+      "page": 97,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "C56",
+      "title": "Not-found page",
+      "page": 98,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "C57",
+      "title": "Server-error page",
+      "page": 99,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "C58",
+      "title": "Offline and connection-loss feedback",
+      "page": 100,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "C59",
+      "title": "Cookie and tracking preference panel",
+      "page": 101,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "C60",
+      "title": "Social-sharing preview card",
+      "page": 102,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "C61",
+      "title": "Favicon and browser identity",
+      "page": 103,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "C62",
+      "title": "Section background and separator",
+      "page": 104,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "C63",
+      "title": "Print and saved-page layout",
+      "page": 105,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "C64",
+      "title": "Accessibility information and feedback",
+      "page": 106,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "P01",
+      "title": "Homepage: the complete narrative",
+      "page": 107,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "P02",
+      "title": "Homepage: precise placement and visual rhythm",
+      "page": 108,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "P03",
+      "title": "Services overview: compare, then explore",
+      "page": 110,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "P04",
+      "title": "Excel, data & reporting: detail page",
+      "page": 111,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "P05",
+      "title": "Microsoft 365 & automation: detail page",
+      "page": 112,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "P06",
+      "title": "Websites & maintenance: detail page",
+      "page": 113,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "P07",
+      "title": "Small software & integrations: detail page",
+      "page": 114,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "P08",
+      "title": "Software testing & QA: detail page",
+      "page": 115,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "P09",
+      "title": "Digital document support: detail page",
+      "page": 116,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "P10",
+      "title": "Software: client services and product work",
+      "page": 117,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "P11",
+      "title": "Work index: evidence before spectacle",
+      "page": 118,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "P12",
+      "title": "Work detail: a case-study structure without false claims",
+      "page": 119,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "P13",
+      "title": "About: a human identity, accurately represented",
+      "page": 120,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "P14",
+      "title": "Contact: the complete enquiry journey",
+      "page": 121,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "P15",
+      "title": "Privacy: precise, readable and operationally true",
+      "page": 122,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "P16",
+      "title": "Supporting pages and exceptional journeys",
+      "page": 123,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "P17",
+      "title": "Page metadata and language contract",
+      "page": 124,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "P18",
+      "title": "Whole-site responsive composition review",
+      "page": 125,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "T01",
+      "title": "Letter-by-letter review: A to I",
+      "page": 126,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "T02",
+      "title": "Letter-by-letter review: J to R",
+      "page": 127,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "T03",
+      "title": "Letter-by-letter review: S to Z",
+      "page": 128,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "T04",
+      "title": "Finnish letters, accents and Unicode",
+      "page": 129,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "T05",
+      "title": "Every digit: clarity and numeric alignment",
+      "page": 131,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "T06",
+      "title": "Punctuation, symbols and letter spacing",
+      "page": 132,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "T07",
+      "title": "Headline setting and optical alignment",
+      "page": 133,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "T08",
+      "title": "Homepage and principal page copy",
+      "page": 134,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "T09",
+      "title": "Navigation, language and appearance",
+      "page": 135,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "T10",
+      "title": "Video, services and evidence labels",
+      "page": 136,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "T11",
+      "title": "Contact fields and sending states",
+      "page": 137,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "T12",
+      "title": "Contact errors and recovery",
+      "page": 138,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "T13",
+      "title": "Process and exceptional pages",
+      "page": 139,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "T14",
+      "title": "Excel, data & reporting: bilingual service copy",
+      "page": 140,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "T15",
+      "title": "Microsoft 365 & automation: bilingual service copy",
+      "page": 141,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "T16",
+      "title": "Websites & maintenance: bilingual service copy",
+      "page": 142,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "T17",
+      "title": "Small software & integrations: bilingual service copy",
+      "page": 143,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "T18",
+      "title": "Software testing & QA: bilingual service copy",
+      "page": 144,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "T19",
+      "title": "Digital document support: bilingual service copy",
+      "page": 145,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "T20",
+      "title": "Translation and content release contract",
+      "page": 146,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "E01",
+      "title": "Technology: freedom without unnecessary complexity",
+      "page": 147,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "E02",
+      "title": "Repository migration and reuse map",
+      "page": 148,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [
+        "src/app/page.tsx",
+        "src/components/VideoHero.tsx",
+        "src/components/FeaturedWork.tsx",
+        "tests/source-architecture.contract.test.mjs"
+      ],
+      "implementation_note": "Relevant code or test exists. Full handbook acceptance is not established."
+    },
+    {
+      "id": "E03",
+      "title": "Tokens, components and design-source structure",
+      "page": 149,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "E04",
+      "title": "Page-weight and responsiveness budgets",
+      "page": 150,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "E05",
+      "title": "Performance acceptance: field and laboratory",
+      "page": 151,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "E06",
+      "title": "Font and media delivery pipeline",
+      "page": 152,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "E07",
+      "title": "Routes, rendering and progressive enhancement",
+      "page": 153,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "E08",
+      "title": "Contact API: exact request and validation contract",
+      "page": 154,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "E09",
+      "title": "Contact state machine and delivery truth",
+      "page": 155,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "E10",
+      "title": "Privacy and data minimisation by design",
+      "page": 157,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "E11",
+      "title": "Security controls for a public business website",
+      "page": 158,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "E12",
+      "title": "Route metadata ledger 1",
+      "page": 159,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "E13",
+      "title": "Route metadata ledger 2",
+      "page": 160,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "E14",
+      "title": "Build, deploy and rollback contract",
+      "page": 161,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "E15",
+      "title": "Operational monitoring and maintenance",
+      "page": 162,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "E16",
+      "title": "Asset and source-file handover",
+      "page": 163,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "Q01",
+      "title": "Accessibility scope and evidence policy",
+      "page": 164,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "Q02",
+      "title": "Accessibility criterion mapping 1",
+      "page": 165,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "Q03",
+      "title": "Accessibility criterion mapping 2",
+      "page": 166,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "Q04",
+      "title": "Accessibility criterion mapping 3",
+      "page": 167,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "Q05",
+      "title": "Accessibility criterion mapping 4",
+      "page": 168,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "Q06",
+      "title": "Accessibility criterion mapping 5",
+      "page": 169,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "Q07",
+      "title": "Accessibility criterion mapping 6",
+      "page": 170,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "Q08",
+      "title": "Accessibility criterion mapping 7",
+      "page": 171,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "Q09",
+      "title": "Reference environment and screenshot baseline",
+      "page": 172,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "Q10",
+      "title": "Browser, device and preference matrix",
+      "page": 173,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "Q11",
+      "title": "Functional journey test scripts",
+      "page": 174,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [
+        "tests/language-font.contract.mjs",
+        "tests/visual.smoke.mjs"
+      ],
+      "implementation_note": "Relevant code or test exists. Full handbook acceptance is not established."
+    },
+    {
+      "id": "Q12",
+      "title": "Shared component-state acceptance",
+      "page": 175,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "Q13",
+      "title": "Visual inspection: color, shade and material",
+      "page": 176,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "Q14",
+      "title": "Visual inspection: typography and editorial finish",
+      "page": 177,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "Q15",
+      "title": "Human usability review protocol",
+      "page": 178,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "Q16",
+      "title": "Independent design and jury rehearsal",
+      "page": 179,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "Q17",
+      "title": "Severity, acceptance and release decision",
+      "page": 180,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "Q18",
+      "title": "Evidence record and traceability schema",
+      "page": 181,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [
+        "docs/HANDBOOK_EXECUTION_EVIDENCE.md",
+        "tests/award-audit.mjs"
+      ],
+      "implementation_note": "Relevant code or test exists. Full handbook acceptance is not established."
+    },
+    {
+      "id": "Q19",
+      "title": "Originality and human-authorship evidence",
+      "page": 182,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "Q20",
+      "title": "Delivery phases and completion gates",
+      "page": 183,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "Q21",
+      "title": "Competition submission package",
+      "page": 184,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "Q22",
+      "title": "Open operational decisions and hard exclusions",
+      "page": 185,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "R01",
+      "title": "Requirement crosswalk: the original ambition",
+      "page": 186,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "R02",
+      "title": "Handover index and artifact naming",
+      "page": 187,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [
+        "docs/HANDBOOK_EXECUTION_EVIDENCE.md"
+      ],
+      "implementation_note": "Relevant code or test exists. Full handbook acceptance is not established."
+    },
+    {
+      "id": "R03",
+      "title": "Design sign-off sheet",
+      "page": 188,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "R04",
+      "title": "Sources and standards 1",
+      "page": 189,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "R05",
+      "title": "Sources and standards 2",
+      "page": 190,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    },
+    {
+      "id": "R06",
+      "title": "Sources and standards 3",
+      "page": 191,
+      "verification": "NOT_TESTED",
+      "implementation_evidence": [],
+      "implementation_note": "Awaiting detailed requirement-to-code evidence mapping."
+    }
+  ]
+}
