@@ -56,6 +56,15 @@ assert.match((await desktop.locator('h1').first().textContent())||'',/Microsoft 
 await desktop.goto(base+'/contact',{waitUntil:'domcontentloaded'})
 assert.equal(await desktop.locator('form.kc-form input[type=email]').count(),1)
 assert.equal(await desktop.locator('form.kc-form button[type=submit]').count(),1)
+await desktop.locator('form.kc-form input[type=email]').fill('draft@example.org')
+desktop.once('dialog',async dialog=>{assert.match(dialog.message(),/Lomakkeen/);await dialog.dismiss()})
+await desktop.locator('.kc-language').click()
+assert.equal(new URL(desktop.url()).pathname,'/contact','Cancelling language switch preserves the contact draft')
+const nojs=await browser.newContext({javaScriptEnabled:false,viewport:{width:390,height:844}})
+const nojsPage=await nojs.newPage()
+await nojsPage.goto(base+'/',{waitUntil:'domcontentloaded'})
+assert.ok(await nojsPage.locator('.qh-nojs-nav a').count()>=4,'Public navigation must be available without JavaScript')
+await nojs.close()
 const files=[
   ['/downloads/Komplyint_Palveluesite_FI.pdf','%PDF'],
   ['/downloads/Komplyint_Service_Portfolio_EN.pdf','%PDF'],
