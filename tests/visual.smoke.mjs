@@ -30,6 +30,8 @@ assert.equal(await mobile.locator('.kc-hero-video').evaluate(el=>getComputedStyl
 await mobile.locator('.kc-mobile-toggle').click()
 assert.equal(await mobile.locator('nav.kc-nav').isVisible(),true)
 assert.equal(await mobile.locator('nav.kc-nav').getAttribute('role'),'dialog')
+const sheetBounds=await mobile.locator('nav.kc-nav').boundingBox()
+assert.ok(sheetBounds&&sheetBounds.x<=1&&sheetBounds.width>=389,'Mobile navigation sheet must cover the full 390px viewport without leaking background controls')
 assert.equal(await mobile.locator('.kc-actions').evaluate(el=>getComputedStyle(el).visibility),'hidden','Underlying header utilities must not bleed through the modal')
 assert.equal(await mobile.locator('#main-content').getAttribute('inert'),'')
 assert.equal(await mobile.evaluate(()=>document.activeElement?.classList.contains('qh-menu-close')),true)
