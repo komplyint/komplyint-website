@@ -1,7 +1,7 @@
 /* Komplyint Quiet Precision — handbook v1.0
    Reuses existing Next.js components and accessible shadcn/Radix tab conventions.
    Original logo and hero film remain unmodified. All art is original vector/CSS. */
-@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500&family=Lato:wght@400;700&display=swap');
+/* Keep first-paint layout deterministic. Do not block the critical mobile hero rules on an external font stylesheet. The EB Garamond/Lato declarations retain system-serif/sans fallbacks. */
 :root{color-scheme:dark}
 html{scroll-behavior:smooth}
 html.dark{color-scheme:dark;background:#0D1E17}
@@ -332,3 +332,6 @@ html:not(.dark) .kc-root :focus-visible{outline-color:#294DB5}
   .kc-header.qh-menu-open .kc-logo-link,.kc-header.qh-menu-open .kc-actions{visibility:hidden;pointer-events:none}
   .kc-header.qh-menu-open .kc-nav.is-open{visibility:visible;pointer-events:auto}
 }
+
+/* The protected hero image is rendered as an actual responsive img; avoid also fetching its old CSS background. */
+.kc-hero-poster{background-image:none!important}
