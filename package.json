@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "npm run test:public-access && next build",
     "start": "next start",
-    "test:public-access": "node --test tests/public-access-boundary.test.mjs tests/release-contract.test.mjs tests/source-architecture.contract.test.mjs tests/handbook-register.contract.test.mjs tests/css-boundary.contract.test.mjs",
+    "test:public-access": "node --test tests/public-access-boundary.test.mjs tests/release-contract.test.mjs tests/source-architecture.contract.test.mjs tests/handbook-register.contract.test.mjs tests/css-boundary.contract.test.mjs tests/design-tokens.contract.test.mjs",
     "report:handbook": "node scripts/handbook-progress.mjs"
   },
   "dependencies": {

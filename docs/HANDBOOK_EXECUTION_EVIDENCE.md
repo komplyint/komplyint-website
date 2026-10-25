@@ -40,3 +40,7 @@ GitHub quality CI now cancels superseded runs on the same ref so the latest main
 ## Service and contact component extraction — C20/C27/C35 / E02
 
 Moved `SectionIntro`, `ServiceExplorer` and the actual inquiry `ContactForm` out of the public routing monolith while retaining the existing service catalogue and `/api/contact` backend. Added keyboard-operable service tabs (Arrow keys, Home, End, roving Tab order and labelled active panel) and both-locale browser regression evidence. Contact form validation, submitted data, labels, error states, anti-spam field and links are reused verbatim; live inbox delivery still requires independent end-to-end proof.
+
+## Color and depth tokens — F09/F10/F12/F13/E03
+
+Added the versioned design token master `src/design/tokens.json` and generated matching `--ki-*` definitions at the start of the already-loaded handbook stylesheet. The existing `--kc-*` consumer aliases now map to the approved light/dark semantic roles, preserving the existing pages. The featured work composition and service card shadows use the handbook E2/E3 elevation values. The specific crimson #C74C57 is an owner-requested extension, **not a claim that the original green handbook specified red**. The token master and CSS are compared by a production-build test. Remaining: migrate every component literal, perform dark/light contrast calculation and independent visual sign-off.

@@ -1,3 +1,65 @@
+/* BEGIN F09/F10/F12/F13/E03 DESIGN TOKENS v1.1.0 — synchronized with src/design/tokens.json */
+.kc-root{
+--ki-color-page:#F7F8F4;
+--ki-color-surface:#FFFFFF;
+--ki-color-panel:#EAF0E9;
+--ki-color-ink:#14291F;
+--ki-color-muted:#526257;
+--ki-color-border:#D9E1D8;
+--ki-color-action:#124C35;
+--ki-color-deep:#124C35;
+--ki-color-accent:#6EA78A;
+--ki-color-focus:#294DB5;
+--ki-color-control:#6C7E70;
+--ki-color-red:#C74C57;
+--ki-color-white:#FFFFFF;
+--ki-color-forestHover:#0B3C29;
+--ki-color-slate:#6B7896;
+--ki-color-lime:#6FE06B;
+--ki-shadow-e0:none;
+--ki-shadow-e1:0 1px 2px rgba(20,41,31,.05), 0 6px 16px -8px rgba(20,41,31,.12);
+--ki-shadow-e2:0 2px 4px rgba(20,41,31,.05), 0 12px 28px -10px rgba(20,41,31,.14);
+--ki-shadow-e3:0 3px 6px rgba(20,41,31,.06), 0 24px 48px -16px rgba(20,41,31,.20);
+--ki-shadow-e4:0 8px 16px rgba(20,41,31,.08), 0 32px 64px -20px rgba(20,41,31,.24);
+--ki-space-1:4px;
+--ki-space-2:8px;
+--ki-space-3:12px;
+--ki-space-4:16px;
+--ki-space-5:20px;
+--ki-space-6:24px;
+--ki-space-7:32px;
+--ki-space-8:40px;
+--ki-space-9:48px;
+--ki-space-10:64px;
+--ki-space-11:80px;
+--ki-space-12:96px;
+--ki-space-13:120px;
+--ki-space-14:144px;
+--ki-radius-control:8px;
+--ki-radius-card:16px;
+--ki-radius-feature:24px;
+}
+.dark .kc-root{
+--ki-color-page:#0D1E17;
+--ki-color-surface:#20392B;
+--ki-color-panel:#172B21;
+--ki-color-ink:#F3F6EE;
+--ki-color-muted:#BACBBC;
+--ki-color-border:#385343;
+--ki-color-action:#B6E8B9;
+--ki-color-deep:#0D1E17;
+--ki-color-accent:#9FCFA8;
+--ki-color-focus:#B2C5FF;
+--ki-color-control:#789481;
+--ki-color-red:#C74C57;
+--ki-color-white:#FFFFFF;
+--ki-color-forestHover:#C9F0CA;
+--ki-color-slate:#6B7896;
+--ki-color-lime:#6FE06B;
+--ki-shadow-e2:0 2px 12px rgba(0,0,0,.12);
+--ki-shadow-e3:0 14px 36px rgba(0,0,0,.17);
+}
+/* END F09/F10/F12/F13/E03 DESIGN TOKENS */
 /* Komplyint Quiet Precision — handbook v1.0
    Reuses existing Next.js components and accessible shadcn/Radix tab conventions.
    Original logo and hero film remain unmodified. All art is original vector/CSS. */
@@ -6,8 +68,8 @@
 html{scroll-behavior:smooth}
 html.dark{color-scheme:dark;background:#0D1E17}
 html:not(.dark){color-scheme:light;background:#F7F8F4}
-.kc-root{--kc-bg:#F7F8F4;--kc-surface:#EAF0E9;--kc-ink:#14291F;--kc-muted:#526257;--kc-border:#D9E1D8;--kc-teal:#124C35;--kc-deep:#124C35;--kc-accent:#6EA78A;--kc-white:#fff;background:var(--kc-bg);color:var(--kc-ink);font-family:var(--font-lato),Lato,Arial,sans-serif;font-size:18px;line-height:1.65}
-.dark .kc-root{--kc-bg:#0D1E17;--kc-surface:#172B21;--kc-ink:#F3F6EE;--kc-muted:#BACBBC;--kc-border:#385343;--kc-teal:#B6E8B9;--kc-deep:#0D1E17;--kc-accent:#9FCFA8;background:var(--kc-bg);color:var(--kc-ink)}
+.kc-root{--kc-bg:var(--ki-color-page);--kc-surface:var(--ki-color-panel);--kc-ink:var(--ki-color-ink);--kc-muted:var(--ki-color-muted);--kc-border:var(--ki-color-border);--kc-teal:var(--ki-color-action);--kc-deep:var(--ki-color-deep);--kc-accent:var(--ki-color-accent);--kc-white:var(--ki-color-white);background:var(--kc-bg);color:var(--kc-ink);font-family:var(--font-lato),Lato,Arial,sans-serif;font-size:18px;line-height:1.65}
+.dark .kc-root{--kc-bg:var(--ki-color-page);--kc-surface:var(--ki-color-panel);--kc-ink:var(--ki-color-ink);--kc-muted:var(--ki-color-muted);--kc-border:var(--ki-color-border);--kc-teal:var(--ki-color-action);--kc-deep:var(--ki-color-deep);--kc-accent:var(--ki-color-accent);background:var(--kc-bg);color:var(--kc-ink)}
 .kc-root h1,.kc-root h2,.kc-root .kc-intro h2,.kc-root .kc-cta h2,.kc-root .kc-about h2,.kc-root .kc-page-top h1,.kc-root .qh-service-page h1{font-family:var(--font-eb-garamond),"EB Garamond",Georgia,serif;font-weight:400;letter-spacing:-.012em;line-height:1.1}
 .kc-root h3,.kc-root h4{font-family:Lato,Arial,sans-serif;letter-spacing:0;line-height:1.32}
 .kc-root p{line-height:1.66}
@@ -62,8 +124,8 @@ html:not(.dark){color-scheme:light;background:#F7F8F4}
 .qh-video-controls button{padding:8px 15px;min-height:44px;border:1px solid rgba(221,251,227,.72);border-radius:8px;background:rgba(13,30,23,.88);color:#F3F6EE;font-size:14px;font-weight:700;backdrop-filter:blur(8px)}
 .qh-film-note{padding:7px 10px;background:rgba(13,30,23,.8);color:#F3F6EE;font-size:12px;border-radius:6px}
 .kc-service-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
-.kc-service-tile{border-radius:16px;padding:32px;min-height:258px;background:var(--kc-bg);border-color:var(--kc-border);box-shadow:0 2px 4px rgba(20,41,31,.05)}
-.kc-service-tile:hover{transform:translateY(-3px);box-shadow:0 12px 28px -10px rgba(20,41,31,.15)}
+.kc-service-tile{border-radius:16px;padding:32px;min-height:258px;background:var(--kc-bg);border-color:var(--kc-border);box-shadow:var(--ki-shadow-e2)}
+.kc-service-tile:hover{transform:translateY(-3px);box-shadow:var(--ki-shadow-e3)}
 .kc-tile-top{font-size:13px;margin-bottom:35px}
 .kc-service-tile h3{font-size:24px}
 .kc-service-tile p{font-size:16px}
@@ -168,8 +230,8 @@ html:not(.dark){color-scheme:light;background:#F7F8F4}
 .qh-accessibility-text{max-width:850px}.qh-accessibility-text h2{font-size:38px;margin:40px 0 20px}
 .qh-accessibility-text p{color:var(--kc-muted);font-size:20px}
 .qh-accessibility-text a{text-decoration:underline}
-.kc-root :focus-visible{outline:3px solid #B2C5FF;outline-offset:3px}
-html:not(.dark) .kc-root :focus-visible{outline-color:#294DB5}
+.kc-root :focus-visible{outline:3px solid var(--ki-color-focus);outline-offset:3px}
+
 @media(max-width:1199px){
   .kc-shell{width:calc(100% - 64px)}
   .kc-header-row{min-height:84px}
@@ -341,7 +403,7 @@ html:not(.dark) .kc-root :focus-visible{outline-color:#294DB5}
 .qh-featured-work{position:relative}
 .qh-featured-work .kc-eyebrow::before{content:"";display:inline-block;vertical-align:middle;width:8px;height:8px;border-radius:50%;background:#C74C57;margin-right:12px;box-shadow:0 0 0 4px rgba(199,76,87,.11)}
 .qh-featured-work .kc-text-link:hover{color:#D47780}
-.qh-work-art{aspect-ratio:8/5;min-height:0;padding:0;background:#09251A;border:1px solid #508267;border-radius:24px;overflow:hidden;box-shadow:0 22px 55px rgba(2,14,8,.17)}
+.qh-work-art{aspect-ratio:8/5;min-height:0;padding:0;background:#09251A;border:1px solid #508267;border-radius:24px;overflow:hidden;box-shadow:var(--ki-shadow-e3)}
 .qh-work-art-image{display:block;width:100%;height:100%;object-fit:cover;object-position:center}
 .kc-service-tile{position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:0;overflow:hidden}
 .kc-service-tile .kc-tile-top{display:flex;justify-content:space-between;align-items:center;width:100%;margin-bottom:18px}
