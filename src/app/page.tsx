@@ -319,27 +319,31 @@ function VideoHero({lang}:{lang:Lang}){
   const allowPlayback=(visible||(manualPlay&&inViewport))&&!hidden&&!userPaused&&(!reducedMotion&&!saveData||manualPlay)
   useEffect(()=>{
     if(allowPlayback&&!sourceReady)setSourceReady(true)
-  },[allowPlayback,sourceReady,mobileViewport])
+  },[allowPlayback,sourceReady])
   useEffect(()=>{
-    if(sourceReady)video.current?.load()
+    const el=video.current
+    if(sourceReady&&el&&!el.hasAttribute('src'))el.load()
   },[sourceReady,mobileViewport])
   useEffect(()=>{
     const el=video.current
     if(!el)return
-    if(!allowPlayback){el.pause();return}
+    if(!allowPlayback){
+      el.pause()
+      return
+    }
     if(!sourceReady)return
-    setState('loading')
+    // Play must be muted and inline. Some browsers require a direct user gesture;
+    // when autoplay is rejected, the visible Play control always remains usable.
     el.muted=true
-    el.play().then(()=>setState('playing')).catch(()=>{
-      if(!el.paused)return
-      setState('blocked')
+    void el.play().then(()=>setState('playing')).catch(()=>{
+      if(el.paused)setState('blocked')
     })
   },[allowPlayback,sourceReady])
 
-  function toggle(){
+  async function toggle(){
     const el=video.current
     if(!el)return
-    if(!el.paused&&state==='playing'){
+    if(!el.paused){
       setUserPaused(true)
       setManualPlay(false)
       try{window.sessionStorage.setItem('komplyint-video-paused','1')}catch{}
@@ -347,33 +351,52 @@ function VideoHero({lang}:{lang:Lang}){
       setState('paused')
       return
     }
+    try{window.sessionStorage.removeItem('komplyint-video-paused')}catch{}
     setUserPaused(false)
     setManualPlay(true)
     setState('loading')
-    try{window.sessionStorage.removeItem('komplyint-video-paused')}catch{}
-    setSourceReady(true)
-    if(sourceReady){
-      el.muted=true
-      el.play().then(()=>setState('playing')).catch(()=>setState('blocked'))
+    el.muted=true
+    // Desktop Safari/Chrome autoplay policies may reject effect-driven play.
+    // Supply media and call play() SYNCHRONOUSLY inside the user's click gesture.
+    if(!sourceReady){
+      el.src=window.matchMedia('(max-width: 767px)').matches?'/media/hero-mobile.mp4':'/media/hero-optimized.mp4'
+      el.load()
+      setSourceReady(true)
+    }
+    try{
+      await el.play()
+      setState('playing')
+    }catch{
+      // Retain the original 4K source as an explicit recovery fallback.
+      if(el.getAttribute('src')!=='/media/hero.mp4'){
+        el.src='/media/hero.mp4'
+        el.load()
+        try{await el.play();setState('playing');return}catch{}
+      }
+      setState('error')
     }
   }
 
-  return <div className="qh-film-layer" ref={frame}>
-    <img className="kc-hero-poster" src="/media/hero.webp" srcSet="/media/hero-mobile.webp 800w, /media/hero.webp 1920w" sizes="100vw" alt="" width={1920} height={1080} fetchPriority="high" decoding="sync" aria-hidden="true" />
-    <video className={'kc-hero-video'+(manualPlay?' qh-user-play':'')+(state==='error'?' qh-failed':'')}
-      ref={video} muted loop playsInline preload="none" aria-hidden="true"
-      onPlaying={()=>setState('playing')}
-      onPause={()=>setState(previous=>previous==='error'?'error':'paused')}
-      onError={()=>setState('error')}>
-      {sourceReady&&<><source src={mobileViewport?'/media/hero-mobile.mp4':'/media/hero-optimized.mp4'} type="video/mp4" /><source src="/media/hero.mp4" type="video/mp4" /></>}
-    </video>
+  return <>
+    <div className="qh-film-layer" ref={frame}>
+      <img className="kc-hero-poster" src="/media/hero.webp" srcSet="/media/hero-mobile.webp 800w, /media/hero.webp 1920w" sizes="100vw" alt="" width={1920} height={1080} fetchPriority="high" decoding="sync" aria-hidden="true" />
+      <video className={'kc-hero-video'+(manualPlay?' qh-user-play':'')+(state==='error'?' qh-failed':'')}
+        ref={video} muted loop playsInline preload="none" autoPlay={allowPlayback} aria-hidden="true"
+        onPlaying={()=>setState('playing')}
+        onPause={()=>setState(previous=>previous==='error'?'error':'paused')}
+        onWaiting={()=>setState(previous=>previous==='playing'?'loading':previous)}
+        onError={()=>setState('error')}>
+        {sourceReady&&<><source src={mobileViewport?'/media/hero-mobile.mp4':'/media/hero-optimized.mp4'} type="video/mp4" /><source src="/media/hero.mp4" type="video/mp4" /></>}
+      </video>
+    </div>
     <div className="qh-video-controls">
-      <button type="button" onClick={toggle} aria-label={state==='playing'?(lang==='fi'?'Pysäytä taustavideo':'Pause background video'):(lang==='fi'?'Toista taustavideo':'Play background video')}>
+      <button type="button" onClick={toggle}
+        aria-label={state==='playing'?(lang==='fi'?'Pysäytä taustavideo':'Pause background video'):(lang==='fi'?'Toista taustavideo':'Play background video')}>
         <span aria-hidden="true">{state==='playing'?'Ⅱ':'▶'}</span> {state==='playing'?(lang==='fi'?'Pysäytä':'Pause'):(lang==='fi'?'Toista':'Play')}
       </button>
-      {(state==='blocked'||state==='error')&&<span className="qh-film-note" role="status">{lang==='fi'?'Voit käynnistää videon painikkeesta.':'Use Play to start the film.'}</span>}
+      {(state==='blocked'||state==='error')&&<span className="qh-film-note" role="status">{lang==='fi'?'Automaattinen toisto on estetty. Käynnistä video painikkeesta.':'Autoplay is blocked. Use Play to start the film.'}</span>}
     </div>
-  </div>
+  </>
 }
 
 function FeaturedWork({lang}:{lang:Lang}){
