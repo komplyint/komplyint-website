@@ -10,7 +10,8 @@ const pages=['/','/en','/services','/en/services','/work','/en/work','/about','/
 const browser=await chromium.launch({headless:true,args:['--no-sandbox']})
 let blocking=0
 for(const theme of ['dark','light']){
-  const page=await browser.newPage({viewport:{width:1440,height:900},reducedMotion:'reduce'})
+  const context=await browser.newContext({viewport:{width:1440,height:900},reducedMotion:'reduce'})
+  const page=await context.newPage()
   await page.addInitScript(v=>{localStorage.setItem('komplyint-theme',v)},theme)
   for(const route of pages){
     try {
@@ -27,7 +28,7 @@ for(const theme of ['dark','light']){
     }catch(e){blocking++;report.automated.push({route,theme,result:'ERROR',message:String(e).slice(0,300)})}
   }
   if(theme==='dark')await page.screenshot({path:'site-preview/award-desktop-dark.png',fullPage:true,animations:'disabled'})
-  await page.close()
+  await context.close()
 }
 const mobile=await browser.newPage({viewport:{width:390,height:844},isMobile:true,hasTouch:true,reducedMotion:'reduce'})
 await mobile.goto(base+'/',{waitUntil:'domcontentloaded'})
