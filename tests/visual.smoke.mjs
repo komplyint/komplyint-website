@@ -68,6 +68,16 @@ const nojsPage=await nojs.newPage()
 await nojsPage.goto(base+'/',{waitUntil:'domcontentloaded'})
 assert.ok(await nojsPage.locator('.qh-nojs-nav a').count()>=4,'Public navigation must be available without JavaScript')
 await nojs.close()
+const release=await desktop.request.get(base+'/api/release')
+assert.equal(release.status(),200,'The deployed site must expose its release contract')
+const releaseInfo=await release.json()
+assert.equal(releaseInfo.contract,'komplyint-handbook-2026-10-25')
+assert.equal(releaseInfo.site,'Komplyint Oy')
+const badContact=await desktop.request.post(base+'/api/contact',{
+  data:{name:'Automated Test',email:'invalid-email',message:'invalid'},
+  headers:{'Content-Type':'application/json'}
+})
+assert.equal(badContact.status(),422,'The public enquiry endpoint must reject malformed or too-short messages')
 const files=[
   ['/downloads/Komplyint_Palveluesite_FI.pdf','%PDF'],
   ['/downloads/Komplyint_Service_Portfolio_EN.pdf','%PDF'],
