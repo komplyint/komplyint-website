@@ -238,7 +238,7 @@ function Home({lang}:{lang:Lang}) {
   </>
 }
 
-function ServiceExplorer({lang}:{lang:Lang}) {
+function ServiceExplorer({lang, showIntro=true}:{lang:Lang;showIntro?:boolean}) {
   const [selected, setSelected] = useState(0)
   useEffect(() => {
     const value = new URLSearchParams(window.location.search).get('service')
@@ -248,7 +248,7 @@ function ServiceExplorer({lang}:{lang:Lang}) {
   const t = content[lang].area
   const s = services[lang][selected]
   return <>
-    <SectionIntro {...t} />
+    {showIntro && <SectionIntro {...t} />}
     <div className="kc-explorer">
       <div className="kc-explorer-tabs" role="tablist" aria-label={t.title}>
         {services[lang].map((item, i)=><button key={item.title} role="tab" type="button" aria-selected={selected === i} aria-controls="service-detail" className={selected === i ? 'kc-explorer-tab active' : 'kc-explorer-tab'} onClick={()=>setSelected(i)}><span>{String(i+1).padStart(2,'0')}</span><strong>{item.title}</strong><b aria-hidden="true">↗</b></button>)}
@@ -278,7 +278,7 @@ function CTA({lang}:{lang:Lang}) {const c=content[lang].cta;return <section clas
 
 function ServicesPage({lang}:{lang:Lang}) {
   const t=content[lang]
-  return <><div className="kc-page-top"><div className="kc-shell"><p className="kc-eyebrow">{t.area.eyebrow}</p><h1>{t.area.title}</h1><p>{t.area.text}</p></div></div><section className="kc-section kc-muted-section" id="service-explorer"><div className="kc-shell"><ServiceExplorer lang={lang}/></div></section><Process lang={lang}/><Trust lang={lang}/><CTA lang={lang}/></>
+  return <><div className="kc-page-top"><div className="kc-shell"><p className="kc-eyebrow">{t.area.eyebrow}</p><h1>{t.area.title}</h1><p>{t.area.text}</p></div></div><section className="kc-section kc-muted-section kc-services-detail" id="service-explorer"><div className="kc-shell"><ServiceExplorer lang={lang} showIntro={false}/></div></section><Process lang={lang}/><Trust lang={lang}/><CTA lang={lang}/></>
 }
 function SoftwarePage({lang}:{lang:Lang}) {
   const t=content[lang].software
