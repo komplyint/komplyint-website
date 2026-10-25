@@ -1,0 +1,36 @@
+name: Komplyint public production release verification
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Verify public site content and downloads
+        shell: bash
+        run: |
+          set -euo pipefail
+          for url in "https://www.komplyint.fi/" "https://www.komplyint.fi/en" "https://www.komplyint.fi/services" "https://www.komplyint.fi/about"; do
+            echo "Checking $url"
+            curl --fail --silent --show-error --location --max-time 20 -H "Cache-Control: no-cache" "$url?ci_verify=${GITHUB_SHA}" -o /tmp/komplyint-live-page.html
+            if grep -q -E 'Selkeyttä työhön|Clarity for your work|Oikea ratkaisu|Pienet ongelmat' /tmp/komplyint-live-page.html; then
+              echo "NEW SITE CONTENT: PASS"
+            elif grep -q 'Compliance readiness' /tmp/komplyint-live-page.html; then
+              echo "::error::Old compliance homepage still live. Vercel project is not publishing current GitHub main."
+              exit 2
+            else
+              echo "::error::Unexpected public page content"
+              exit 3
+            fi
+          done
+          for name in Komplyint_Palveluesite_FI.pdf Komplyint_Service_Portfolio_EN.pdf Komplyint_Service_Documents.zip; do
+            url="https://www.komplyint.fi/downloads/$name?ci_verify=${GITHUB_SHA}"
+            echo "Checking download $url"
+            code=$(curl -LsS --max-time 20 -o /tmp/komplyint-download -w '%{http_code}' "$url")
+            test "$code" = "200"
+            test "$(wc -c </tmp/komplyint-download)" -gt 1000
+          done
