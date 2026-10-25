@@ -61,7 +61,7 @@ try{
   const brochures=page.locator('.qh-download-links a')
   assert.equal(await brochures.count(),4,'Three individual PDFs and one shared ZIP')
   for(const asset of ['Komplyint_Palveluesite_FI.pdf','Komplyint_Service_Portfolio_EN.pdf','Komplyint_Tjanstebroschyr_SV.pdf']){
-    const link=brochures.locator('a[href$="'+asset+'"]')
+    const link=page.locator('.qh-download-links a[href$="'+asset+'"]')
     assert.equal(await link.count(),1,'Missing public '+asset+' link')
     const pdf=await page.request.get(base+'/downloads/'+asset)
     assert.equal(pdf.status(),200,'Local download must exist: '+asset)
