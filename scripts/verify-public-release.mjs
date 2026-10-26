@@ -2,24 +2,31 @@ import assert from 'node:assert/strict'
 import { pathToFileURL } from 'node:url'
 import { writeFile } from 'node:fs/promises'
 
+// These rendered-page checks are exercised against the real Next.js build in CI.
+// Mock fixtures alone cannot detect copy that has drifted from the website.
 export const REQUIRED_PAGES = [
-  ['/', ['Selkeyttä työhön.', 'Käytännöllistä digiapua', 'info@komplyint.fi']],
-  ['/en', ['Clarity for your work.', 'Explore services']],
-  ['/sv', ['Mer klarhet i arbetet.', 'Utforska tjänster']],
-  ['/sv/services', ['Rätt lösning. Tydlig omfattning.']],
-  ['/sv/services/data-reporting', ['Excel, data och rapportering', 'Vad vi kan göra']],
-  ['/sv/work', ['Så här kan en lösning fungera.']],
-  ['/sv/contact', ['Berätta vad som behöver fungera bättre.']],
-  ['/sv/privacy', ['Integritetsinformation']],
+  ['/', ['Kun työkalut toimivat, työ sujuu.', 'Apua dataan, automaatioon ja ohjelmistoihin.', 'info@komplyint.fi']],
+  ['/en', ['Digital tools that make everyday work easier.', 'Explore services']],
+  ['/sv', ['Digitala verktyg som förenklar arbetsdagen.', 'Se våra tjänster']],
+  ['/sv/services', ['Hitta en tjänst som passar ert behov.']],
+  ['/sv/services/data-reporting', ['Excel, data och rapportering', 'Vad som ingår']],
+  ['/sv/work', ['Exempel på hur vi kan hjälpa till.']],
+  ['/sv/contact', ['Hur kan vi hjälpa er?']],
+  ['/sv/privacy', ['Dataskyddsbeskrivning']],
   ['/sv/accessibility', ['Tillgänglighetsinformation']],
-  ['/services', ['Oikea ratkaisu.', 'Komplyint']],
-  ['/services/data-reporting', ['Excel, data ja raportointi', 'Mitä voimme tehdä']],
-  ['/en/services/m365-automation', ['Microsoft 365', 'Our process']],
-  ['/work', ['Näin ratkaisu voi toimia.']],
-  ['/about', ['Pienet ongelmat ansaitsevat hyvän ratkaisun.', '369283279']],
+  ['/services', ['Valitse palvelu tarpeesi mukaan.', 'Komplyint']],
+  ['/services/data-reporting', ['Excel, data ja raportointi', 'Mitä palveluun kuuluu']],
+  ['/en/services/m365-automation', ['Microsoft 365', 'How the work progresses']],
+  ['/work', ['Esimerkkejä mahdollisista ratkaisuista.']],
+  ['/about', ['Apua yrityksen arjen digitehtäviin.', '369283279']],
   ['/contact', ['info@komplyint.fi']],
   ['/accessibility', ['Saavutettavuustiedot']],
 ]
+export const REJECTED_HOME_COPY = {
+  '/': ['ALOITETAAN SOPIVAN KOKOISESTI', 'Selkeyttä työhön. Varmuutta toteutukseen.'],
+  '/en': ['START WITH SOMETHING MANAGEABLE', 'Clarity for your work. Care in every delivery.'],
+  '/sv': ['BÖRJA I LAGOM SKALA', 'Mer klarhet i arbetet. Trygghet i leveransen.'],
+}
 export const REQUIRED_DOWNLOADS = [
   ['/downloads/Komplyint_Palveluesite_FI.pdf', '%PDF'],
   ['/downloads/Komplyint_Service_Portfolio_EN.pdf', '%PDF'],
@@ -66,12 +73,10 @@ export async function verifyPublicRelease({
       checks.push({label,path,pass:false,error:issue})
     }
   }
-
   await checked('release signature','/api/release',async response=>{
     const info=await response.json()
     assert.equal(info.site,'Komplyint Oy')
-    assert.equal(info.contract,RELEASE_CONTRACT,
-      'wrong or outdated site release contract')
+    assert.equal(info.contract,RELEASE_CONTRACT,'wrong or outdated site release contract')
     assert.equal(info.design,'charcoal-precision-v1.2.0',
       'outdated green design is still deployed; charcoal design release attestation missing')
     releaseCommit=typeof info.commit==='string'?info.commit:null
@@ -79,20 +84,16 @@ export async function verifyPublicRelease({
       assert.equal(releaseCommit,expectedCommit,'deployed commit differs from main')
     }
   })
-
   for(const [path,phrases] of REQUIRED_PAGES){
     await checked('page '+path,path,async response=>{
       const html=await response.text()
       for(const phrase of phrases)assert.ok(html.includes(phrase),'missing content: '+phrase)
+      for(const phrase of REJECTED_HOME_COPY[path]||[])assert.ok(!html.includes(phrase),'outdated pre-editorial copy: '+phrase)
       const expectedLang=path==='/en'||path.startsWith('/en/')?'en':path==='/sv'||path.startsWith('/sv/')?'sv':'fi'
       assert.match(html,new RegExp('<html[^>]*\\blang="'+expectedLang+'"'),'incorrect SSR document language: '+path)
-      if(path==='/'){
-        assert.ok(!html.includes('Teknologiaa, joka helpottaa oikeaa työtä.'),
-          'stale pre-handbook homepage still deployed')
-      }
+      if(path==='/')assert.ok(!html.includes('Teknologiaa, joka helpottaa oikeaa työtä.'),'stale pre-handbook homepage still deployed')
     })
   }
-
   for(const [path,signature] of REQUIRED_DOWNLOADS){
     await checked('download '+path,path,async response=>{
       const buffer=new Uint8Array(await response.arrayBuffer())
@@ -101,8 +102,6 @@ export async function verifyPublicRelease({
       assert.equal(prefix,signature,'download is not the expected file type')
     })
   }
-  // F20/F22/Q11: the public release must actually serve custom artwork and
-  // both original-derived hero media formats. A commit hash alone is insufficient.
   for(const [path,kind,marker] of REQUIRED_MEDIA){
     await checked('media '+path,path,async response=>{
       const bytes=Buffer.from(await response.arrayBuffer())
@@ -121,8 +120,7 @@ export async function verifyPublicRelease({
     })
   }
   return {pass:problems.length===0,origin,releaseCommit,
-    commitVerified:!!expectedCommit&&releaseCommit===expectedCommit,
-    checks,problems}
+    commitVerified:!!expectedCommit&&releaseCommit===expectedCommit,checks,problems}
 }
 
 async function main(){
@@ -137,17 +135,9 @@ async function main(){
     if(i<attempts)await new Promise(resolve=>setTimeout(resolve,6000))
   }
   await writeFile('release-evidence.json',JSON.stringify({timestamp:new Date().toISOString(),expectedCommit,...result},null,2))
-  console.log(JSON.stringify({
-    result:result.pass?'PASS':'BLOCKED',
-    origin:result.origin,
-    releaseCommit:result.releaseCommit,
-    commitVerified:result.commitVerified,
-    total:result.checks.length,
-    passed:result.checks.filter(c=>c.pass).length,
-    problems:result.problems,
-  },null,2))
+  console.log(JSON.stringify({result:result.pass?'PASS':'BLOCKED',origin:result.origin,
+    releaseCommit:result.releaseCommit,commitVerified:result.commitVerified,
+    total:result.checks.length,passed:result.checks.filter(c=>c.pass).length,problems:result.problems},null,2))
   if(!result.pass)process.exitCode=1
 }
-if(process.argv[1] && import.meta.url===pathToFileURL(process.argv[1]).href){
-  await main()
-}
+if(process.argv[1] && import.meta.url===pathToFileURL(process.argv[1]).href){await main()}
