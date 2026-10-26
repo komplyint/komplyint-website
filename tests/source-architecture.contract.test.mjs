@@ -26,3 +26,12 @@ test('the preserved hero controls still stay in one source component',()=>{
   assert.match(hero,/hero\.mp4/)
   assert.match(hero,/komplyint-video-paused/)
 })
+
+test('E02 marketing sections are extracted without a second render engine',()=>{
+  const sections=readFileSync('src/components/MarketingSections.tsx','utf8')
+  assert.match(page,/import \{ Process, Trust, About, CTA \} from '@\/components\/MarketingSections'/)
+  for(const name of ['Process','Trust','About','CTA']){
+    assert.match(sections,new RegExp('export function '+name+'\\('))
+    assert.doesNotMatch(page,new RegExp('function '+name+'\\('))
+  }
+})

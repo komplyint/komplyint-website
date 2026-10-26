@@ -37,6 +37,16 @@ try{
     assert.match(await alert.textContent()||'',english?/Too many requests/:swedish?/För många försök/:/Liikaa lähetysyrityksiä/)
     assert.equal(await form.locator('textarea').inputValue(),'Synthetic request for a second safe test.')
     await page.unroute('**/api/contact')
+    await page.route('**/api/contact',async request=>request.fulfill({
+      status:422,contentType:'application/json',body:JSON.stringify({ok:false,error:'Validation failed',fields:{email:'Invalid email'}})
+    }))
+    await form.locator('button[type=submit]').click()
+    const emailError=form.locator('#kc-contact-email-error')
+    await emailError.waitFor({state:'visible'})
+    assert.equal(await form.locator('input[type=email]').getAttribute('aria-invalid'),'true')
+    assert.equal(await form.locator('input[type=email]').getAttribute('aria-describedby'),'kc-contact-email-error')
+    await page.waitForFunction(()=>document.activeElement?.getAttribute('type')==='email')
+    await page.unroute('**/api/contact')
   }
-  console.log('Bilingual contact submission, structured service, accepted and rate-limited states PASS')
+  console.log('Trilingual contact submission, rate limits, accessible validation focus and inline errors PASS')
 }finally{await browser.close()}

@@ -2,7 +2,7 @@ import type { Locale } from './i18n'
 
 type Phase = { title:string; description:string }
 type UI = {
-  skip:string; navigation:string; close:string; categories:string; chooseService:string; serviceAreas:string
+  logoHome:string; skip:string; navigation:string; close:string; categories:string; chooseService:string; serviceAreas:string
   languageSwitcher:string; noScriptNav:string; localeDraftWarning:string;serviceDetailLink:string
   appearance:string; dark:string; light:string; system:string; site:string; contact:string; downloadBrochures:string; locationName:string
   heroPrinciples:string; otherServices:string; before:string; after:string; aboutCompany:string; productDevelopment:string
@@ -11,13 +11,14 @@ type UI = {
   featured:{eyebrow:string;title:string;link:string;alt:string;imageAlt:string}
   video:{pause:string;play:string;pauseShort:string;playShort:string;blocked:string}
   brochures:{eyebrow:string;title:string;lead:string;both:string}
-  form:{company:string;nameHint:string;companyHint:string;messageHint:string;invalid:string;rateLimited:string;unknown:string}
+  form:{company:string;nameHint:string;companyHint:string;messageHint:string;invalid:string;rateLimited:string;unknown:string;nameError:string;companyError:string;emailError:string;serviceError:string;messageError:string}
   errors:{eyebrow:string;title:string;body:string;retry:string;home:string}
   notFound:{eyebrow:string;title:string;body:string;home:string}
   serviceDetail:{artTitles:string[];services:string;overview:string;deliver:string;limits:string;method:string;touch:string;next:string;home:string;breadcrumb:string;service:string;graphic:string;phases:Phase[]}
 }
 export const ui:Record<Locale,UI>={
  fi:{
+  logoHome:'Komplyint Oy – etusivu',
   skip:'Siirry sisältöön',navigation:'Päänavigaatio',close:'Sulje',categories:'Näytä palveluluokat',chooseService:'VALITSE PALVELU',serviceAreas:'Palvelualueet',
   languageSwitcher:'Valitse kieli',noScriptNav:'Päänavigaatio ilman JavaScriptiä',localeDraftWarning:'Lomakkeen keskeneräiset tiedot voivat hävitä. Vaihdetaanko kieli?',serviceDetailLink:'Lue lisää palvelusta',
   appearance:'Ulkoasu',dark:'Tumma',light:'Vaalea',system:'Järjestelmä',site:'Sivusto',contact:'Yhteys',downloadBrochures:'Lataa palveluesitteet (ZIP)',locationName:'Suomi · Euroopan unioni',
@@ -31,7 +32,7 @@ export const ui:Record<Locale,UI>={
   featured:{eyebrow:'HAVAINNOLLISTAVA DEMO',title:'Pienestä ongelmasta selkeään lopputulokseen.',link:'Tutustu esimerkkeihin',alt:'Alkuperäinen kuva tiedon jalostumisesta selkeäksi raportiksi, tumma vihreä, musta ja hillitty punainen',imageAlt:''},
   video:{pause:'Pysäytä taustavideo',play:'Toista taustavideo',pauseShort:'Pysäytä',playShort:'Toista',blocked:'Automaattinen toisto on estetty. Käynnistä video painikkeesta.'},
   brochures:{eyebrow:'LADATTAVAT PALVELUESITTEET',title:'Tutustu palveluihimme omassa tahdissasi.',lead:'Lataa suomen-, englannin- tai ruotsinkielinen esite. Kaikki kolme löytyvät myös yhtenä ZIP-pakettina.',both:'Kaikki kolme esitettä'},
-  form:{company:'Yritys (valinnainen)',nameHint:'Nimesi',companyHint:'Yrityksen nimi',messageHint:'Kerro lyhyesti ongelma ja toivottu lopputulos.',invalid:'Tarkista lomakkeen tiedot ja korjaa merkityt kentät.',rateLimited:'Liikaa lähetysyrityksiä. Yritä myöhemmin tai lähetä sähköpostia osoitteeseen',unknown:'Viestin tilaa ei voitu vahvistaa. Älä lähetä samaa viestiä uudelleen ilman tarkistusta. Voit ottaa yhteyttä osoitteeseen'},
+  form:{nameError:'Nimi on liian pitkä.',companyError:'Yrityksen nimi on liian pitkä.',emailError:'Tarkista sähköpostiosoite.',serviceError:'Valitse kelvollinen palvelu.',messageError:'Kirjoita 10–4500 merkkiä.',company:'Yritys (valinnainen)',nameHint:'Nimesi',companyHint:'Yrityksen nimi',messageHint:'Kerro lyhyesti ongelma ja toivottu lopputulos.',invalid:'Tarkista lomakkeen tiedot ja korjaa merkityt kentät.',rateLimited:'Liikaa lähetysyrityksiä. Yritä myöhemmin tai lähetä sähköpostia osoitteeseen',unknown:'Viestin tilaa ei voitu vahvistaa. Älä lähetä samaa viestiä uudelleen ilman tarkistusta. Voit ottaa yhteyttä osoitteeseen'},
   errors:{eyebrow:'ODOTTAMATON VIRHE',title:'Sivun näyttämisessä tapahtui virhe.',body:'Voit yrittää uudelleen tai palata etusivulle.',retry:'Yritä uudelleen',home:'Palaa etusivulle'},
   notFound:{eyebrow:'SIVUA EI LÖYDY',title:'Sivua ei löydy.',body:'Tutustu palveluihin tai palaa etusivulle.',home:'Etusivu'},
   serviceDetail:{artTitles:['Tietoa, johon voi luottaa','Työvaihe, joka etenee','Sivusto, jota on helppo käyttää','Työkalu juuri oikeaan tarpeeseen','Selkeä testihavainto','Viimeistelty ja käytettävä asiakirja'],
@@ -39,6 +40,7 @@ export const ui:Record<Locale,UI>={
    phases:[{title:'Kuvaile tehtävä',description:'Selvitämme nykytilan, käytössä olevat työkalut ja toivotun lopputuloksen.'},{title:'Rajataan työ',description:'Sovimme tarkasti sisällön, hinnan, vastuut ja tarkistettavan lopputuloksen.'},{title:'Toteutus ja tarkistus',description:'Hyödynnämme ensisijaisesti olemassa olevia ratkaisuja ja testaamme toimituksen.'},{title:'Luovutus',description:'Saat tulokset sekä tarvittavat ylläpito- ja käyttöohjeet.'}]}
  },
  en:{
+  logoHome:'Komplyint Oy – home',
   skip:'Skip to content',navigation:'Main navigation',close:'Close',categories:'Show service categories',chooseService:'CHOOSE A SERVICE',serviceAreas:'Service areas',
   languageSwitcher:'Select language',noScriptNav:'Navigation without JavaScript',localeDraftWarning:'Your unsent form fields may be lost. Switch language?',serviceDetailLink:'View service detail',
   appearance:'Appearance',dark:'Dark',light:'Light',system:'System',site:'Explore',contact:'Get in touch',downloadBrochures:'Download service brochures (ZIP)',locationName:'Finland · European Union',
@@ -51,7 +53,7 @@ export const ui:Record<Locale,UI>={
   featured:{eyebrow:'ILLUSTRATIVE DEMONSTRATION',title:'From a small problem to a clearer outcome.',link:'Explore examples',alt:'Original illustration of scattered report data becoming a clear dashboard, in deep forest green, black and restrained red',imageAlt:''},
   video:{pause:'Pause background video',play:'Play background video',pauseShort:'Pause',playShort:'Play',blocked:'Autoplay is blocked. Use Play to start the film.'},
   brochures:{eyebrow:'DOWNLOAD SERVICE INFORMATION',title:'Explore our services in your own time.',lead:'Download a Finnish, English or Swedish brochure, or get all three in one ZIP package.',both:'All three brochures'},
-  form:{company:'Company (optional)',nameHint:'Your name',companyHint:'Company name',messageHint:'Describe the problem and desired outcome.',invalid:'Please check the marked fields and correct your details.',rateLimited:'Too many requests. Please try later or email',unknown:'The request status is uncertain. Do not resubmit the same message without checking. You can contact'},
+  form:{nameError:'Name is too long.',companyError:'Company name is too long.',emailError:'Enter a valid email address.',serviceError:'Choose a valid service.',messageError:'Enter 10–4500 characters.',company:'Company (optional)',nameHint:'Your name',companyHint:'Company name',messageHint:'Describe the problem and desired outcome.',invalid:'Please check the marked fields and correct your details.',rateLimited:'Too many requests. Please try later or email',unknown:'The request status is uncertain. Do not resubmit the same message without checking. You can contact'},
   errors:{eyebrow:'SOMETHING WENT WRONG',title:'This page could not be shown.',body:'You can retry or return to the homepage.',retry:'Retry',home:'Go home'},
   notFound:{eyebrow:'PAGE NOT FOUND',title:'Page not found.',body:'Explore services or return to the homepage.',home:'Home'},
   serviceDetail:{artTitles:['Information you can rely on','A workflow that moves forward','A website that is easier to use','A tool for the specific task','Clear testing evidence','A document ready for real work'],
@@ -59,6 +61,7 @@ export const ui:Record<Locale,UI>={
    phases:[{title:'Describe the task',description:'We review the current process, available tools and desired outcome.'},{title:'Agree a scope',description:'We agree on what will be delivered, the price, responsibilities and acceptance.'},{title:'Build and verify',description:'We reuse suitable existing solutions and test the agreed work.'},{title:'Handover',description:'You receive deliverables with practical usage and maintenance notes.'}]}
  },
  sv:{
+  logoHome:'Komplyint Oy – startsida',
   skip:'Hoppa till innehållet',navigation:'Huvudnavigation',close:'Stäng',categories:'Visa tjänstekategorier',chooseService:'VÄLJ EN TJÄNST',serviceAreas:'Tjänsteområden',
   languageSwitcher:'Välj språk',noScriptNav:'Navigation utan JavaScript',localeDraftWarning:'Uppgifter som du ännu inte har skickat kan gå förlorade. Vill du byta språk?',serviceDetailLink:'Läs mer om tjänsten',
   appearance:'Utseende',dark:'Mörkt',light:'Ljust',system:'Systeminställning',site:'Webbplatsen',contact:'Kontakt',downloadBrochures:'Ladda ner tjänstebroschyrer (ZIP)',locationName:'Finland · Europeiska unionen',
@@ -71,7 +74,7 @@ export const ui:Record<Locale,UI>={
   featured:{eyebrow:'ILLUSTRATIV DEMONSTRATION',title:'Från ett litet problem till ett tydligare resultat.',link:'Se exempel',alt:'Originalillustration där spridda rapportuppgifter blir en tydlig översikt, i mörkgrönt, svart och dämpat rött',imageAlt:''},
   video:{pause:'Pausa bakgrundsvideon',play:'Spela upp bakgrundsvideon',pauseShort:'Pausa',playShort:'Spela upp',blocked:'Automatisk uppspelning är blockerad. Starta videon med knappen.'},
   brochures:{eyebrow:'LADDA NER TJÄNSTEINFORMATION',title:'Bekanta dig med våra tjänster i egen takt.',lead:'Ladda ner en broschyr på svenska, finska eller engelska. Alla tre finns också i ett ZIP-paket.',both:'Alla tre broschyrerna'},
-  form:{company:'Företag (frivilligt)',nameHint:'Ditt namn',companyHint:'Företagets namn',messageHint:'Beskriv kort problemet och vilket resultat du önskar.',invalid:'Kontrollera uppgifterna och rätta de markerade fälten.',rateLimited:'För många försök. Försök igen senare eller skriv till',unknown:'Vi kunde inte bekräfta förfrågans status. Skicka inte samma meddelande på nytt innan du har kontrollerat. Du kan kontakta'},
+  form:{nameError:'Namnet är för långt.',companyError:'Företagsnamnet är för långt.',emailError:'Kontrollera e-postadressen.',serviceError:'Välj en giltig tjänst.',messageError:'Skriv 10–4500 tecken.',company:'Företag (frivilligt)',nameHint:'Ditt namn',companyHint:'Företagets namn',messageHint:'Beskriv kort problemet och vilket resultat du önskar.',invalid:'Kontrollera uppgifterna och rätta de markerade fälten.',rateLimited:'För många försök. Försök igen senare eller skriv till',unknown:'Vi kunde inte bekräfta förfrågans status. Skicka inte samma meddelande på nytt innan du har kontrollerat. Du kan kontakta'},
   errors:{eyebrow:'ETT OVÄNTAT FEL',title:'Sidan kunde inte visas.',body:'Du kan försöka igen eller gå tillbaka till startsidan.',retry:'Försök igen',home:'Till startsidan'},
   notFound:{eyebrow:'SIDAN HITTADES INTE',title:'Sidan hittades inte.',body:'Utforska våra tjänster eller gå tillbaka till startsidan.',home:'Startsida'},
   serviceDetail:{artTitles:['Information du kan lita på','Ett arbetsflöde som går framåt','En webbplats som är lättare att använda','Ett verktyg för rätt behov','Tydliga testresultat','Ett färdigt och användbart dokument'],

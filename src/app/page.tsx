@@ -16,6 +16,7 @@ import ContactForm from '@/components/ContactForm'
 import VideoHero from '@/components/VideoHero'
 import LanguageSwitcher from '@/components/LanguageSwitcher'
 import { ui } from '@/lib/i18n-ui'
+import { Process, Trust, About, CTA } from '@/components/MarketingSections'
 import { getLocaleFromPath, stripLocale, localizedPath, languages } from '@/lib/i18n'
 import { pathFor } from '@/lib/site-route'
 
@@ -100,8 +101,8 @@ export default function KomplyintWebsite() {
       </div>
       <header className={menuOpen ? "kc-header qh-menu-open" : "kc-header"}>
         <div className="kc-shell kc-header-row">
-          <a href={pathFor(lang, 'home')} className="kc-logo-link" aria-label="Komplyint Oy">
-            <img src="/logo.svg" className="kc-logo" alt="Komplyint Oy" />
+          <a href={pathFor(lang, 'home')} className="kc-logo-link" aria-label={l.logoHome}>
+            <img src="/logo.svg" className="kc-logo" alt="" aria-hidden="true" />
           </a>
           {menuOpen&&<div className="qh-menu-backdrop" aria-hidden="true" onClick={()=>setMenuOpen(false)}/>}
           <nav id="komplyint-primary-navigation" ref={menuRef}
@@ -185,17 +186,6 @@ function Examples({lang}:{lang:Lang}) {
   const t=content[lang].impact
   return <section className="kc-section kc-examples"><div className="kc-shell"><SectionIntro eyebrow={t.eyebrow} title={t.title} text={t.disclaimer}/><div className="kc-example-grid">{t.cases.map((c,i)=><article key={c.num} className="kc-example"><span className="kc-example-num">{c.num}</span><h3>{c.title}</h3><WorkExampleArt index={i}/><div className="kc-example-line"><span>{ui[lang].before}</span><p>{c.before}</p></div><div className="kc-example-line"><span>{ui[lang].after}</span><p>{c.after}</p></div></article>)}</div></div></section>
 }
-function Process({lang}:{lang:Lang}) {
-  const t=content[lang].process
-  return <section className="kc-section kc-process"><div className="kc-shell"><SectionIntro eyebrow={t.eyebrow} title={t.title}/><div className="kc-steps">{t.steps.map((s,i)=><div className="kc-step" key={s.title}><div className="kc-step-no">{String(i+1).padStart(2,'0')}</div><h3>{s.title}</h3><p>{s.body}</p></div>)}</div></div></section>
-}
-function Trust({lang}:{lang:Lang}) {
-  const t=content[lang].trust
-  return <section className="kc-section kc-muted-section"><div className="kc-shell kc-values"><SectionIntro eyebrow={t.eyebrow} title={t.title}/><div className="kc-values-grid">{t.items.map((s,i)=><div className="kc-value" key={s.title}><span>0{i+1}</span><div><h3>{s.title}</h3><p>{s.body}</p></div></div>)}</div></div></section>
-}
-function About({lang}:{lang:Lang}) {const a=content[lang].about;return <section className="kc-section kc-about"><div className="kc-shell kc-about-layout"><div><p className="kc-eyebrow">{ui[lang].aboutCompany}</p><h2>{a.title}</h2></div><p>{a.text}</p></div></section>}
-function CTA({lang}:{lang:Lang}) {const c=content[lang].cta;return <section className="kc-cta"><div className="kc-shell kc-cta-inner"><div><p className="kc-eyebrow">{c.eyebrow}</p><h2>{c.title}</h2><p>{c.text}</p></div><a className="kc-button kc-button-light" href={pathFor(lang,'contact')}>{c.button}<Arrow /></a></div></section>}
-
 function ServicesPage({lang}:{lang:Lang}) {
   const t=content[lang]
   return <><div className="kc-page-top"><div className="kc-shell"><p className="kc-eyebrow">{t.area.eyebrow}</p><h1>{t.area.title}</h1><p>{t.area.text}</p></div></div><section className="kc-section kc-muted-section kc-services-detail" id="service-explorer"><div className="kc-shell"><ServiceExplorer lang={lang} showIntro={false}/></div></section><Process lang={lang}/><Trust lang={lang}/><PublicBrochures lang={lang}/><CTA lang={lang}/></>

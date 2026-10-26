@@ -641,3 +641,29 @@ html:not(.dark){color-scheme:light;background:#F7F6F2}
    any unusually long translated word may wrap rather than become clipped. */
 .kc-service-tile h3,.kc-service-tile p{min-width:0;max-width:100%;overflow-wrap:anywhere;hyphens:auto}
 .kc-service-card-action{min-width:0;max-width:100%;width:100%;flex-wrap:wrap;overflow-wrap:anywhere}
+
+
+/* F08 / C02: preserve the original stacked 1088x783 logo, at true aspect ratio.
+   Use the handbook's approved presentation sizes and no monochrome CSS filter. */
+@media (min-width:1200px) {
+  .kc-header-row{min-height:120px}
+  .kc-logo-link{min-width:124px;min-height:89.2px}
+  .kc-logo{width:124px;height:89.2px}
+}
+@media (min-width:768px) and (max-width:1199px) {
+  .kc-header-row{min-height:100px}
+  .kc-logo-link{min-width:104px}
+  .kc-logo{width:104px;height:74.8px}
+}
+@media (max-width:767px) {
+  .kc-header-row{min-height:92px}
+  .kc-logo-link{min-width:92px}
+  .kc-logo{width:92px;height:66.2px}
+  .kc-root #main-content{scroll-margin-top:110px}
+}
+.kc-logo,.kc-footer-brand img{filter:none;object-fit:contain;object-position:left center}
+.kc-footer-brand img{width:172px;height:123.8px;max-height:none}
+
+/* C35/Q12: field-level errors remain readable in both themes and at 200% text. */
+.kc-form .kc-field-error{display:block;color:#9E273B;font-size:14px;font-weight:700;line-height:1.5;overflow-wrap:anywhere}
+.dark .kc-form .kc-field-error{color:#FFBFC4}
