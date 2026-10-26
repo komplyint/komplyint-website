@@ -669,3 +669,19 @@ html:not(.dark){color-scheme:light;background:#F7F6F2}
 /* C35/Q12: field-level errors remain readable in both themes and at 200% text. */
 .kc-form .kc-field-error{display:block;color:#9E273B;font-size:14px;font-weight:700;line-height:1.5;overflow-wrap:anywhere}
 .dark .kc-form .kc-field-error{color:#FFBFC4}
+
+
+/* P03: 4/8 editorial desktop split; real native labelled selector replaces
+   six cramped mobile tab labels. Shared panel remains identical and keyboard
+   tab interaction stays available on desktop/tablet. */
+.kc-explorer-native{display:none}
+@media(min-width:861px){
+  .kc-explorer{grid-template-columns:minmax(0,1fr) minmax(0,2fr)}
+}
+@media(max-width:767px){
+  .kc-explorer .kc-explorer-tabs{display:none}
+  .kc-explorer .kc-explorer-native{display:grid;gap:10px;padding:22px 22px 6px;background:var(--ki-color-surface)}
+  .kc-explorer-native label{font-size:15px;font-weight:700;color:var(--ki-color-ink)}
+  .kc-explorer-native select{width:100%;max-width:100%;min-height:52px;padding:10px 14px;border:1px solid var(--ki-color-border);border-radius:8px;color:var(--ki-color-ink);background:var(--ki-color-panel);font-family:var(--font-lato),Lato,Arial,sans-serif;font-size:16px}
+  .kc-explorer-native select:focus-visible{outline:3px solid var(--ki-color-focus);outline-offset:2px}
+}

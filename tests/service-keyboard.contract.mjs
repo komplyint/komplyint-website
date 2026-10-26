@@ -27,5 +27,22 @@ try{
     const contact=route.startsWith('/en')?'/en/contact?service=document-support':route.startsWith('/sv')?'/sv/contact?service=document-support':'/contact?service=document-support'
     assert.ok((await panel.locator('a[href*="contact?service="]').getAttribute('href'))?.endsWith(contact))
   }
-  console.log('Accessible FI/EN service keyboard interaction PASS')
+  for (const locale of [{route:'/services',contact:'/contact',prefix:'fi'},{route:'/en/services',contact:'/en/contact',prefix:'en'},{route:'/sv/services',contact:'/sv/contact',prefix:'sv'}]) {
+    const mobile=await browser.newPage({viewport:{width:390,height:844},isMobile:true,hasTouch:true})
+    await mobile.goto(origin+locale.route+'?service=3',{waitUntil:'domcontentloaded'})
+    const picker=mobile.locator('#kc-service-native')
+    await picker.waitFor({state:'visible'})
+    assert.equal(await picker.inputValue(),'software-integrations',locale.prefix+' legacy integer entry')
+    assert.equal(await mobile.locator('.kc-explorer-tabs').isVisible(),false,locale.prefix+' hide cramped mobile tabs')
+    await picker.selectOption('document-support')
+    assert.equal(await picker.inputValue(),'document-support',locale.prefix+' mobile selection')
+    assert.match(mobile.url(),/service=document-support/,locale.prefix+' stable deep link')
+    assert.equal(await mobile.locator('#service-detail h3').textContent(),await picker.locator('option:checked').textContent(),locale.prefix+' selected service panel parity')
+    assert.ok((await mobile.locator('#service-detail a[href*="?service="]').getAttribute('href'))?.startsWith(locale.contact+'?service=document-support'))
+    await mobile.goBack({waitUntil:'domcontentloaded'})
+    await mobile.waitForFunction(()=>document.querySelector('#kc-service-native')?.value==='software-integrations')
+    assert.equal(await picker.inputValue(),'software-integrations',locale.prefix+' popstate restores visible selection')
+    await mobile.close()
+  }
+  console.log('Accessible FI/EN/SV keyboard tabs, native mobile selector, stable deep links and history PASS')
 }finally{await browser.close()}

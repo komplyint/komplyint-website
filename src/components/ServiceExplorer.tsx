@@ -12,17 +12,33 @@ export default function ServiceExplorer({lang, showIntro=true}:{lang:Lang;showIn
   const [selected, setSelected] = useState(0)
   const tabButtons = useRef<(HTMLButtonElement | null)[]>([])
   useEffect(() => {
-    const value = new URLSearchParams(window.location.search).get('service')
-    const idx = value === null ? 0 : Number(value)
-    if (Number.isInteger(idx) && idx >= 0 && idx < 6) setSelected(idx)
+    function fromHistory() {
+      const value = new URLSearchParams(window.location.search).get('service')
+      const stable = value === null ? -1 : serviceSlugs.indexOf(value)
+      const legacy = value !== null && /^[0-5]$/.test(value) ? Number(value) : -1
+      const next = stable >= 0 ? stable : legacy >= 0 ? legacy : 0
+      setSelected(next)
+    }
+    fromHistory()
+    window.addEventListener('popstate', fromHistory)
+    return () => window.removeEventListener('popstate', fromHistory)
   }, [])
+  function chooseService(next:number) {
+    if (!Number.isInteger(next) || next < 0 || next >= serviceSlugs.length) return
+    setSelected(next)
+    const url = new URL(window.location.href)
+    if (url.searchParams.get('service') !== serviceSlugs[next]) {
+      url.searchParams.set('service', serviceSlugs[next])
+      window.history.pushState(null, '', url.pathname + url.search + url.hash)
+    }
+  }
   function onTabKeyDown(event: React.KeyboardEvent<HTMLButtonElement>) {
     const keys=['ArrowDown','ArrowRight','ArrowUp','ArrowLeft','Home','End']
     if(!keys.includes(event.key))return
     event.preventDefault()
     const next=event.key==='Home'?0:event.key==='End'?5:
       (selected+(event.key==='ArrowDown'||event.key==='ArrowRight'?1:5))%6
-    setSelected(next)
+    chooseService(next)
     tabButtons.current[next]?.focus()
   }
   const t = content[lang].area
@@ -30,8 +46,14 @@ export default function ServiceExplorer({lang, showIntro=true}:{lang:Lang;showIn
   return <>
     {showIntro && <SectionIntro {...t} />}
     <div className="kc-explorer">
+      <div className="kc-explorer-native">
+        <label htmlFor="kc-service-native">{ui[lang].chooseService}</label>
+        <select id="kc-service-native" value={serviceSlugs[selected]} onChange={event=>chooseService(serviceSlugs.indexOf(event.currentTarget.value))}>
+          {services[lang].map((item,i)=><option key={serviceSlugs[i]} value={serviceSlugs[i]}>{item.title}</option>)}
+        </select>
+      </div>
       <div className="kc-explorer-tabs" role="tablist" aria-label={t.title}>
-        {services[lang].map((item, i)=><button key={item.title} role="tab" type="button" aria-selected={selected === i} aria-controls="service-detail" aria-labelledby={undefined} id={"service-tab-"+i} tabIndex={selected===i?0:-1} ref={el=>{tabButtons.current[i]=el}} onKeyDown={onTabKeyDown} className={selected === i ? 'kc-explorer-tab active' : 'kc-explorer-tab'} onClick={()=>setSelected(i)}><span>{String(i+1).padStart(2,'0')}</span><strong>{item.title}</strong><b aria-hidden="true">↗</b></button>)}
+        {services[lang].map((item, i)=><button key={item.title} role="tab" type="button" aria-selected={selected === i} aria-controls="service-detail" aria-labelledby={undefined} id={"service-tab-"+i} tabIndex={selected===i?0:-1} ref={el=>{tabButtons.current[i]=el}} onKeyDown={onTabKeyDown} className={selected === i ? 'kc-explorer-tab active' : 'kc-explorer-tab'} onClick={()=>chooseService(i)}><span>{String(i+1).padStart(2,'0')}</span><strong>{item.title}</strong><b aria-hidden="true">↗</b></button>)}
       </div>
       <div className="kc-detail" role="tabpanel" id="service-detail" aria-labelledby={"service-tab-"+selected} tabIndex={0}><span className="kc-detail-index">{String(selected+1).padStart(2,'0')} / 06</span><h3>{s.title}</h3><p className="kc-detail-lead">{s.intro}</p>
         <div className="kc-detail-grid"><div><h4>{t.examples}</h4><ul>{s.examples.map(ex=><li key={ex}>{ex}</li>)}</ul></div><div className="kc-detail-side"><div><h4>{t.delivered}</h4><p>{s.deliverable}</p></div><div><h4>{t.boundaries}</h4><p>{s.boundaries}</p></div></div></div>

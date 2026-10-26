@@ -153,3 +153,7 @@ The live Google Fonts CSS endpoint was unavailable to GitHub-hosted Next.js buil
 - EB Garamond source: https://github.com/google/fonts/tree/main/ofl/ebgaramond
 - Lato source: https://github.com/google/fonts/tree/main/ofl/lato
 - Runtime: existing Next.js site; font files are build-bundled, not fetched from those source URLs in production.
+
+## P03 exact service discovery — 26 October 2026
+
+The existing shared `ServiceExplorer` now uses the handbook's 4/8 desktop selector/panel grid, while widths below 768px use a real labelled native select instead of six cramped Finnish/Swedish horizontal or two-column tab labels. The actual service content, detail links and contact service keys remain unchanged and shared across FI/EN/SV. The existing keyboard-operable roving-tab desktop control is preserved, with browser history now storing stable service slugs, accepting the legacy `?service=0`…`5` entry points and restoring the visible selection on Back/Forward. Playwright explicitly tests all three locales on physical mobile viewport emulation and keyboard desktop journeys. Independent phone/assistive-technology usability approval remains outstanding.
