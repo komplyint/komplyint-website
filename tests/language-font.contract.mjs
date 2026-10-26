@@ -24,7 +24,7 @@ try {
         const title = getComputedStyle(document.querySelector('h1')).fontFamily
         const body = getComputedStyle(document.querySelector('.kc-root')).fontFamily
         const faces = Array.from(document.fonts, f => ({ family: f.family, status: f.status, weight: f.weight }))
-        const remoteFontRequests=performance.getEntriesByType('resource').filter(r => /fonts\\.(?:googleapis|gstatic)\\.com/.test(r.name)).map(r=>r.name)
+        const remoteFontRequests=performance.getEntriesByType('resource').filter(r => /fonts\.(?:googleapis|gstatic)\.com/.test(r.name)).map(r=>r.name)
         return { title, body, faces, remoteFontRequests }
       })
       assert.match(proof.title, /EB Garamond/, route + ': approved EB Garamond heading font')

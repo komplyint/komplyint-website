@@ -10,13 +10,13 @@ const css=readFileSync('src/app/handbook.css','utf8')
 test('human-designed typography is locally bundled and builds without Google Fonts API',()=>{
  assert.equal(pkg.dependencies['@fontsource/lato'],'5.3.0')
  assert.equal(pkg.dependencies['@fontsource/eb-garamond'],'5.3.0')
- assert.doesNotMatch(layout,/next\\/font\\/google/)
+ assert.doesNotMatch(layout,/next\/font\/google/)
  for(const family of ['lato','eb-garamond']){
   for(const subset of ['latin','latin-ext'])
    assert.ok(layout.includes(`@fontsource/${family}/${subset}-400.css`),`${family} ${subset} normal subset must be bundled`)
  }
- assert.match(layout,/@fontsource\\/lato\\/latin-700\\.css/)
- assert.match(layout,/@fontsource\\/lato\\/latin-ext-700\\.css/)
+ assert.match(layout,/@fontsource\/lato\/latin-700\.css/)
+ assert.match(layout,/@fontsource\/lato\/latin-ext-700\.css/)
  assert.match(css,/--font-eb-garamond:"EB Garamond"/)
  assert.match(css,/--font-lato:"Lato"/)
  assert.ok(!layout.includes('fonts.googleapis.com'))
