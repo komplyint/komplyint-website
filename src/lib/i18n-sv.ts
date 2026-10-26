@@ -126,12 +126,12 @@ export const svContent = {
   contactPage:{
     eyebrow:'KONTAKT',title:'Hur kan vi hjälpa er?',
     lead:'Berätta kort vad ni vill förbättra och vilka verktyg ni använder. Ni kan också fråga om ett mindre engångsuppdrag.',
-    formName:'Namn',formEmail:'E-postadress',formService:'Ämne',formMessage:'Hur kan vi hjälpa?',
+    formName:'Namn (frivilligt)',formEmail:'E-postadress',formService:'Tjänst eller ärende',formMessage:'Beskriv uppdraget',
     send:'Skicka meddelande',sending:'Skickar ...',
     sent:'Tack! Vi har tagit emot din förfrågan.',
     fail:'Meddelandet kunde inte skickas. Du kan också kontakta oss per e-post.',
     privacy:'Vi använder uppgifterna i formuläret för att besvara din förfrågan.',
-    select:'Välj ämne',other:'Annat ärende / vet inte',
+    select:'Välj tjänst eller ärende',other:'Annat ärende / vet inte',
     note:'Skriv inte in känsliga personuppgifter eller konfidentiell kundinformation i formuläret.',
     action:'Företagsuppgifter'
   },
@@ -150,7 +150,7 @@ export const svContent = {
   },
   about:{
     title:'Ett finländskt företag inom digitala tjänster',
-    text:'Komplyint Oy är ett finländskt företag som hjälper andra företag med rapportering, automatisering och mindre programprojekt. Vi utvecklar också egna digitala produkter. Vi erbjuder för närvarande inte rådgivning om regelefterlevnad.'
+    text:'Komplyint Oy hjälper företag med rapportering, automatisering och mindre programprojekt. Vi utvecklar också egna digitala produkter. Vi erbjuder för närvarande inte rådgivning om regelefterlevnad.'
   },
   footerDescription:'Praktisk hjälp med data, automatisering och mindre programprojekt.',
   footer:'Komplyint Oy · FO-nummer 3588595-3',

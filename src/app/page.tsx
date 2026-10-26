@@ -171,7 +171,7 @@ function Home({lang}:{lang:Lang}) {
     <section className="kc-section kc-section-intro"><div className="kc-shell">
       <SectionIntro {...t.intro} />
       <div className="kc-service-grid">{services[lang].map((service,i)=><ServiceCard key={service.title} lang={lang} service={service} index={i}/>)}</div>
-      <div className="kc-moreline"><span>{ui[lang].otherServices}</span><a href={pathFor(lang,'services')}>{t.explore} <Arrow /></a></div>
+      <div className="kc-moreline"><span>{ui[lang].otherServices}</span><a href={pathFor(lang,'contact')}>{t.contactButton} <Arrow /></a></div>
     </div></section>
 
     <FeaturedWork lang={lang}/>
