@@ -4,8 +4,14 @@ on:
   push:
     branches: [main]
     paths:
+      - src/lib/commercial.ts
+      - src/lib/i18n-sv.ts
+      - src/lib/i18n-ui.ts
+      - src/lib/i18n.ts
+      - scripts/export-public-portfolio.mjs
       - scripts/generate_public_portfolio.py
-      - scripts/portfolio_sv.json
+      - scripts/verify_public_brochures.py
+      - scripts/verify_portfolio_copy.py
       - .github/workflows/build-public-brochures.yml
 permissions:
   contents: write
@@ -22,62 +28,45 @@ jobs:
           ref: main
           fetch-depth: 0
           persist-credentials: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Reuse approved ReportLab brochure generator
+      - name: Export canonical website copy and reuse the six-page renderer
         run: |
+          set -euo pipefail
+          npm install --no-audit --no-fund
+          node scripts/export-public-portfolio.mjs
           python -m pip install --disable-pip-version-check --quiet reportlab pypdf pymupdf
           python scripts/generate_public_portfolio.py
-      - name: Verify all three languages, ZIP integrity and visual rendering
+      - name: Verify PDF copy parity, ZIP bytes and all 18 rendered pages
         run: |
-          mkdir -p document-preview
-          python - <<'PY'
-          from pathlib import Path
-          from pypdf import PdfReader
-          import fitz, zipfile
-
-          d=Path('public/downloads')
-          names={
-            'Komplyint_Palveluesite_FI.pdf':['Komplyint Oy','Excel','info@komplyint.fi'],
-            'Komplyint_Service_Portfolio_EN.pdf':['Komplyint Oy','Excel','info@komplyint.fi'],
-            'Komplyint_Tjanstebroschyr_SV.pdf':['Digitala tjänster','Microsoft 365','info@komplyint.fi'],
-          }
-          for filename,expected in names.items():
-            path=d/filename
-            assert path.stat().st_size>10000,(filename,'empty brochure')
-            reader=PdfReader(str(path))
-            assert len(reader.pages)==6,(filename,len(reader.pages))
-            text='\n'.join(page.extract_text() or '' for page in reader.pages)
-            for marker in expected:
-              assert marker in text,(filename,'missing',marker)
-            document=fitz.open(str(path))
-            for index,page in enumerate(document):
-              pix=page.get_pixmap(matrix=fitz.Matrix(1.1,1.1),alpha=False)
-              pix.save(f'document-preview/{path.stem}-{index+1:02d}.png')
-            document.close()
-          with zipfile.ZipFile(d/'Komplyint_Service_Documents.zip') as archive:
-            assert archive.testzip() is None
-            listed={name for name in archive.namelist() if name.endswith('.pdf')}
-            assert listed==set(names),(listed,names)
-            for name in names:
-              assert archive.read(name)==(d/name).read_bytes(),name
-          print('FI/EN/SV public PDF pages, text, visual renders and ZIP signatures PASS')
-          PY
-      - name: Publish documents to existing main branch
+          set -euo pipefail
+          python scripts/verify_public_brochures.py
+          python scripts/verify_portfolio_copy.py
+          cp .cache/public-portfolio.json document-preview/website-copy-snapshot.json
+          git rev-parse HEAD > document-preview/source-commit.txt
+      - name: Publish verified documents without overwriting concurrent work
         run: |
           set -euo pipefail
           git config user.name 'komplyint-delivery[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git fetch origin main
+          if [ "$(git rev-parse HEAD)" != "$(git rev-parse origin/main)" ]; then
+            echo "::error::main changed during generation. Rerun the job against the latest source; never force-push stale brochures."
+            exit 1
+          fi
           git add public/downloads/
           if git diff --cached --quiet; then
-            echo "Public brochures already match the reviewed generator."
+            echo "Public brochures already match the website copy."
           else
-            git commit -m 'asset(downloads): publish verified FI/EN/SV PDF brochures and three-language ZIP'
+            git commit -m 'asset(downloads): synchronize FI EN SV brochures with canonical website copy'
             git push origin HEAD:main
-            echo "All three verified brochures published to main." >> "$GITHUB_STEP_SUMMARY"
+            echo "Verified brochures committed. Live-domain publication remains separately verified." >> "$GITHUB_STEP_SUMMARY"
           fi
-      - name: Upload 18 rendered brochure pages and generated PDFs
+      - name: Upload generated PDFs, copy evidence and 18 page renders
         if: always()
         uses: actions/upload-artifact@v4
         with:
