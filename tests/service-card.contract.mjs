@@ -8,9 +8,9 @@ const base=process.env.SITE_URL||'http://127.0.0.1:3000'
 const browser=await chromium.launch({headless:true,args:['--no-sandbox']})
 await mkdir('site-preview',{recursive:true})
 const fixtures=[
- {locale:'fi',url:'/',action:'Lue lisää palvelusta'},
- {locale:'en',url:'/en',action:'View service detail'},
- {locale:'sv',url:'/sv',action:'Läs mer om tjänsten'}
+ {locale:'fi',url:'/',action:'Tutustu palveluun'},
+ {locale:'en',url:'/en',action:'View this service'},
+ {locale:'sv',url:'/sv',action:'Läs om tjänsten'}
 ]
 const sizes=[
  {name:'mobile',width:320,heading:'22px',padding:'24px',columns:1},
