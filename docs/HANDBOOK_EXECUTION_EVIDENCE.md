@@ -145,3 +145,11 @@ The first main-branch visual PDF job failed *before inspecting any brochure* bec
 ## Brochure manifest correction — C24 (26 October 2026)
 
 The isolated renderer successfully read and rendered the 18 brochure pages, then found that the existing ZIP intentionally includes the three exact PDF members **plus** `README.txt` (the fourth member is created by the established `generate_public_portfolio.py` generator). Preserve the README: it is part of the original delivery handover. The auditor now checks the real four-member manifest, UTF-8 README ownership/contact and exact brochure-byte equality, rather than erroneously rejecting the expected README.
+
+## Deterministic professional fonts — F15–F18/Q11 (26 October 2026)
+
+The live Google Fonts CSS endpoint was unavailable to GitHub-hosted Next.js builds. Reusing the exact same human-designed **EB Garamond** and **Lato** typography, this revision pins Fontsource 5.3.0 build packages and imports only upright EB Garamond 400 and Lato 400/700 as local WOFF2 Latin and Latin-ext subsets. The build bundles these under hashed Next.js static paths, removing `next/font/google` network fetch entirely. Normal web requests have no dependency on a font CDN. Fontsource's packages include the SIL Open Font License (OFL-1.1), with EB Garamond attributed to the EB Garamond Project Authors / Georg Duffner and Octavio Pardo, and Lato to Łukasz Dziedzic. The source tests enforce pinned provenance and available styles; actual browser tests enforce loaded faces and absence of Google Fonts network calls. Full human typography specimen comparison and independent visual acceptance remain NOT_TESTED.
+
+- EB Garamond source: https://github.com/google/fonts/tree/main/ofl/ebgaramond
+- Lato source: https://github.com/google/fonts/tree/main/ofl/lato
+- Runtime: existing Next.js site; font files are build-bundled, not fetched from those source URLs in production.

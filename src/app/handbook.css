@@ -63,8 +63,10 @@
 /* Komplyint Quiet Precision — handbook v1.0
    Reuses existing Next.js components and accessible shadcn/Radix tab conventions.
    Original logo and hero film remain unmodified. All art is original vector/CSS. */
-/* F15-F18: next/font/google downloads and self-hosts real EB Garamond and Lato files at build time. CSS fallback remains readable. */
-:root{color-scheme:dark}
+/* F15-F18: pinned, self-hosted Fontsource WOFF2 assets. The approved human-designed
+   EB Garamond + Lato font families are loaded from bundled static Next.js paths;
+   no build-time Google endpoint and no runtime CDN dependency. */
+:root{--font-eb-garamond:"EB Garamond";--font-lato:"Lato";color-scheme:dark}
 html{scroll-behavior:smooth}
 html.dark{color-scheme:dark;background:#101418}
 html:not(.dark){color-scheme:light;background:#F7F6F2}

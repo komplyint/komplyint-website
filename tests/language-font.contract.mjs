@@ -24,12 +24,14 @@ try {
         const title = getComputedStyle(document.querySelector('h1')).fontFamily
         const body = getComputedStyle(document.querySelector('.kc-root')).fontFamily
         const faces = Array.from(document.fonts, f => ({ family: f.family, status: f.status, weight: f.weight }))
-        return { title, body, faces }
+        const remoteFontRequests=performance.getEntriesByType('resource').filter(r => /fonts\\.(?:googleapis|gstatic)\\.com/.test(r.name)).map(r=>r.name)
+        return { title, body, faces, remoteFontRequests }
       })
-      assert.match(proof.title, /__EB_Garamond_/, route + ': first-class EB Garamond heading font')
-      assert.match(proof.body, /__Lato_/, route + ': first-class Lato body font')
-      assert.ok(proof.faces.some(f => /__EB_Garamond_/.test(f.family) && f.status === 'loaded'), route + ': real heading font downloaded')
-      assert.ok(proof.faces.some(f => /__Lato_/.test(f.family) && f.status === 'loaded'), route + ': real Lato downloaded')
+      assert.match(proof.title, /EB Garamond/, route + ': approved EB Garamond heading font')
+      assert.match(proof.body, /Lato/, route + ': approved Lato body font')
+      assert.ok(proof.faces.some(f => /EB Garamond/.test(f.family) && f.status === 'loaded'), route + ': approved heading face loaded locally')
+      assert.ok(proof.faces.some(f => /Lato/.test(f.family) && f.status === 'loaded'), route + ': approved body face loaded locally')
+      assert.deepEqual(proof.remoteFontRequests,[],route + ': public page must not require a remote font request')
     }
   }
   console.log('FI/EN/SV initial HTML locales and self-hosted font loading PASS')
