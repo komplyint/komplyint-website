@@ -5,12 +5,12 @@ const browser=await chromium.launch({headless:true,args:['--no-sandbox']})
 try{
   const page=await browser.newPage({viewport:{width:1440,height:900},reducedMotion:'reduce'})
   const expected=[
-    {path:'/',locale:'fi',heading:'Selkeyttä työhön.'},
-    {path:'/en',locale:'en',heading:'Clarity for your work.'},
-    {path:'/sv',locale:'sv',heading:'Mer klarhet i arbetet.'},
-    {path:'/sv/services',locale:'sv',heading:'Rätt lösning.'},
+    {path:'/',locale:'fi',heading:'Kun työkalut toimivat'},
+    {path:'/en',locale:'en',heading:'Digital tools that make everyday work easier'},
+    {path:'/sv',locale:'sv',heading:'Digitala verktyg som förenklar arbetsdagen'},
+    {path:'/sv/services',locale:'sv',heading:'Hitta en tjänst som passar ert behov'},
     {path:'/sv/services/data-reporting',locale:'sv',heading:'Excel, data och rapportering'},
-    {path:'/sv/privacy',locale:'sv',heading:'Integritetsinformation'},
+    {path:'/sv/privacy',locale:'sv',heading:'Dataskyddsbeskrivning'},
     {path:'/sv/accessibility',locale:'sv',heading:'Tillgänglighetsinformation'},
   ]
   for(const route of expected){

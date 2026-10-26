@@ -74,6 +74,7 @@ jobs:
           node tests/visual.smoke.mjs
           node tests/language-font.contract.mjs
           node tests/i18n-browser.contract.mjs
+          node tests/native-copy.browser.mjs
           node tests/service-keyboard.contract.mjs
           node tests/theme-preference.contract.mjs
           node tests/charcoal-theme.contract.mjs
