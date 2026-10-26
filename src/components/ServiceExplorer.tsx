@@ -14,7 +14,7 @@ export default function ServiceExplorer({lang, showIntro=true}:{lang:Lang;showIn
   useEffect(() => {
     function fromHistory() {
       const value = new URLSearchParams(window.location.search).get('service')
-      const stable = value === null ? -1 : serviceSlugs.indexOf(value)
+      const stable = value === null ? -1 : serviceSlugs.findIndex(slug => slug === value)
       const legacy = value !== null && /^[0-5]$/.test(value) ? Number(value) : -1
       const next = stable >= 0 ? stable : legacy >= 0 ? legacy : 0
       setSelected(next)
@@ -48,7 +48,7 @@ export default function ServiceExplorer({lang, showIntro=true}:{lang:Lang;showIn
     <div className="kc-explorer">
       <div className="kc-explorer-native">
         <label htmlFor="kc-service-native">{ui[lang].chooseService}</label>
-        <select id="kc-service-native" value={serviceSlugs[selected]} onChange={event=>chooseService(serviceSlugs.indexOf(event.currentTarget.value))}>
+        <select id="kc-service-native" value={serviceSlugs[selected]} onChange={event=>chooseService(serviceSlugs.findIndex(slug => slug === event.currentTarget.value))}>
           {services[lang].map((item,i)=><option key={serviceSlugs[i]} value={serviceSlugs[i]}>{item.title}</option>)}
         </select>
       </div>
