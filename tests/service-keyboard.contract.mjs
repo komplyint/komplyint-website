@@ -32,6 +32,9 @@ try{
     await mobile.goto(origin+locale.route+'?service=3',{waitUntil:'domcontentloaded'})
     const picker=mobile.locator('#kc-service-native')
     await picker.waitFor({state:'visible'})
+    // Next.js sends the pre-hydration default selection in SSR HTML;
+    // the URL-driven effect restores the legacy deep link after hydration.
+    await mobile.waitForFunction(()=>document.querySelector('#kc-service-native')?.value==='software-integrations')
     assert.equal(await picker.inputValue(),'software-integrations',locale.prefix+' legacy integer entry')
     assert.equal(await mobile.locator('.kc-explorer-tabs').isVisible(),false,locale.prefix+' hide cramped mobile tabs')
     await picker.selectOption('document-support')
