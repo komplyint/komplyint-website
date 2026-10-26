@@ -94,7 +94,7 @@ export const svContent = {
     ]
   },
   trust:{
-    eyebrow:'SÅ HÄR ARBETAR VI',title:'Tydliga överenskommelser från början till slut.',
+    eyebrow:'VÅRA PRINCIPER',title:'Tydliga överenskommelser från början till slut.',
     items:[
       {title:'Vi utgår från de verktyg ni har',body:'Vi undersöker först vad som går att göra med era nuvarande verktyg.'},
       {title:'Vi kommer överens om arbetet',body:'Vi kommer överens om arbetets innehåll och eventuella tillägg innan vi börjar.'},
@@ -136,7 +136,7 @@ export const svContent = {
     action:'Företagsuppgifter'
   },
   privacyPage:{
-    eyebrow:'INTEGRITET',title:'Dataskyddsbeskrivning',
+    eyebrow:'DATASKYDD',title:'Dataskyddsbeskrivning',
     lead:'Här berättar vi hur vi behandlar personuppgifter som kommer in via webbplatsen.',
     sections:[
       {title:'Personuppgiftsansvarig',body:'Komplyint Oy, FO-nummer 3588595-3. Kontakt: info@komplyint.fi.'},
