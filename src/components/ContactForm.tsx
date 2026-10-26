@@ -65,7 +65,7 @@ export default function ContactForm({lang}:{lang:Lang}) {
       </label>
       <label>{t.formMessage}<textarea rows={6} maxLength={4500} minLength={10} required value={message} onChange={e=>{setMessage(e.target.value);resetStatus()}} placeholder={f.messageHint} aria-invalid={!!fieldErrors.message} aria-describedby={fieldErrors.message?'kc-contact-message-error':undefined}/>{fieldErrors.message&&<span id="kc-contact-message-error" className="kc-field-error">{f.messageError}</span>}</label>
       <label className="kc-honeypot" aria-hidden="true">Website <input tabIndex={-1} autoComplete="off" value={trap} onChange={e=>setTrap(e.target.value)}/></label>
-      <p className="kc-form-privacy">{t.privacy} <a href={pathFor(lang,'privacy')}>{content[lang].navigation.privacy}.</a></p>
+      <p className="kc-form-privacy">{t.privacy} <a href={pathFor(lang,'privacy')}>{ui[lang].privacyLink}</a>.</p>
       {status==='invalid'&&<div role="alert" className="kc-form-error" tabIndex={-1}>{f.invalid}</div>}
       {status==='rate_limited'&&<p role="alert" className="kc-form-error">{f.rateLimited} <a href="mailto:info@komplyint.fi">info@komplyint.fi</a></p>}
       {status==='unknown'&&<p role="alert" className="kc-form-error">{f.unknown} <a href="mailto:info@komplyint.fi">info@komplyint.fi</a></p>}

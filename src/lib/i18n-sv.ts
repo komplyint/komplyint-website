@@ -55,7 +55,7 @@ export const svServices = [
 ]
 
 export const svContent = {
-  navigation:{home:'Startsida',services:'Tjänster',software:'Programvara',work:'Exempel',about:'Om oss',contact:'Kontakt',privacy:'Dataskydd',accessibility:'Tillgänglighet',menu:'Öppna menyn'},
+  navigation:{home:'Startsida',services:'Tjänster',software:'Programutveckling',work:'Exempel',about:'Om oss',contact:'Kontakt',privacy:'Dataskydd',accessibility:'Tillgänglighet',menu:'Öppna menyn'},
   tagline:'DIGITALA TJÄNSTER FRÅN FINLAND',
   contactButton:'Kontakta oss',explore:'Se våra tjänster',email:'E-post',
   hero:{

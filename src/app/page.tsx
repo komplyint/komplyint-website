@@ -140,7 +140,7 @@ export default function KomplyintWebsite() {
       </main>
       <footer className="kc-footer">
         <div className="kc-shell kc-footer-top">
-          <div className="kc-footer-brand"><img src="/logo.svg" alt="Komplyint Oy" /><p>{t.about.text}</p></div>
+          <div className="kc-footer-brand"><img src="/logo.svg" alt="Komplyint Oy" /><p>{t.footerDescription}</p></div>
           <div className="kc-footer-links"><strong>{l.site}</strong>{[...navPages,'software' as Page,'privacy' as Page,'accessibility' as Page].map(item=><a key={item} href={pathFor(lang,item)}>{t.navigation[item]}</a>)}<a href="/downloads/Komplyint_Service_Documents.zip" download>{l.downloadBrochures}</a></div>
           <div className="kc-footer-links"><strong>{l.contact}</strong><a href="mailto:info@komplyint.fi">info@komplyint.fi</a><a href={pathFor(lang,'contact')}>{t.contactButton}</a><span>{l.locationName}</span><span>D‑U‑N‑S® {duns}</span><label className="qh-appearance"><span>{l.appearance}</span><select aria-label={l.appearance} value={appearance} onChange={e=>setTheme(e.target.value as 'dark'|'light'|'system')}><option value="dark">{l.dark}</option><option value="light">{l.light}</option><option value="system">{l.system}</option></select></label></div>
         </div>
@@ -218,7 +218,7 @@ function AboutPage({lang}:{lang:Lang}){
   const l=ui[lang]
   return <><section className="kc-page-top qh-inner-landing"><div className="kc-shell"><p className="kc-eyebrow">{l.aboutPageLabel}</p><h1>{l.aboutPageTitle}</h1><p>{a.text}</p></div></section>
     <section className="kc-section"><div className="kc-shell qh-about-detail"><div><p className="kc-eyebrow">{l.whyUs}</p><h2>{a.title}</h2><p>{l.whyText}</p></div>
-    <div className="qh-company-facts"><h3>Komplyint Oy</h3><dl><div><dt>{l.businessId}</dt><dd>3588595-3</dd></div><div><dt>D‑U‑N‑S®</dt><dd>{duns}</dd></div><div><dt>{l.location}</dt><dd>Helsinki, Finland</dd></div><div><dt>{l.contactLabel}</dt><dd><a href={'mailto:'+contactEmail}>{contactEmail}</a></dd></div></dl></div>
+    <div className="qh-company-facts"><h3>Komplyint Oy</h3><dl><div><dt>{l.businessId}</dt><dd>3588595-3</dd></div><div><dt>D‑U‑N‑S®</dt><dd>{duns}</dd></div><div><dt>{l.location}</dt><dd>{l.locationValue}</dd></div><div><dt>{l.contactLabel}</dt><dd><a href={'mailto:'+contactEmail}>{contactEmail}</a></dd></div></dl></div>
     </div></section><Process lang={lang}/><CTA lang={lang}/></>
 }
 

@@ -70,7 +70,7 @@ export const content = {
     footer:'Komplyint Oy · Y-tunnus 3588595-3', footerNote:'Sovimme jokaisen toimeksiannon sisällöstä erikseen. Emme tarjoa oikeudellista neuvontaa, sertifiointia tai viranomaishyväksyntöjä.'
   },
   en: {
-    navigation: { home: 'Home', services: 'Services', software: 'Software', work: 'Work', about: 'About', contact: 'Contact', privacy: 'Privacy', accessibility: 'Accessibility', menu: 'Open menu' },
+    navigation: { home: 'Home', services: 'Services', software: 'Software development', work: 'Examples', about: 'About', contact: 'Contact', privacy: 'Privacy', accessibility: 'Accessibility', menu: 'Open menu' },
     tagline: 'DIGITAL SERVICES FROM FINLAND',
     contactButton: 'Contact us', explore: 'Explore services', email: 'Email',
     hero: {label:'DATA · AUTOMATION · SOFTWARE',title:'Digital tools that make everyday work easier.',text:'We help businesses improve reporting, automate repetitive tasks and build small software tools. We discuss your needs, agree on the scope and deliver the work as agreed.',point1:'Agreed scope',point2:'Clear deliverables',point3:'Checked before handover'},
