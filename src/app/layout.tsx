@@ -15,7 +15,7 @@ import { pageMetadata } from '@/lib/route-meta'
 import LangSetter from './LangSetter'
 
 // F15-F18: pinned SIL-OFL fontsource webfont assets are bundled locally at build time.
-// Unlike next/font/google, the production build never depends on a live Google CSS endpoint.
+// Build uses only local, licensed font assets and never fetches font CSS from a remote provider.
 
 export const metadata: Metadata = {
   ...pageMetadata('fi','home'),
