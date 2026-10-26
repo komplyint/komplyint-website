@@ -13,18 +13,15 @@ jobs:
     timeout-minutes: 8
     steps:
       - uses: actions/checkout@v4
-      - name: Validate public download formats and render page previews
+      - name: Set up isolated PDF rendering dependency
         shell: bash
         run: |
-          command -v pdfinfo >/dev/null && command -v pdftoppm >/dev/null && command -v unzip >/dev/null
-          mkdir -p document-preview
-          for name in Komplyint_Palveluesite_FI Komplyint_Service_Portfolio_EN Komplyint_Tjanstebroschyr_SV; do
-            pdfinfo "public/downloads/$name.pdf" | grep -E 'Pages:|Page size:|File size:'
-            pdftoppm -png -scale-to 950 "public/downloads/$name.pdf" "document-preview/$name" >/dev/null
-            test "$(pdfinfo "public/downloads/$name.pdf" | awk '/^Pages:/ {print $2}')" = "6"
-          done
-          unzip -t "public/downloads/Komplyint_Service_Documents.zip"
-          find document-preview -type f -name '*.png' | sort
+          python3 -m venv /tmp/komplyint-pdf-qa
+          /tmp/komplyint-pdf-qa/bin/python -m pip install --disable-pip-version-check --quiet 'PyMuPDF>=1.24,<2'
+      - name: Validate PDF and ZIP bytes and render all 18 pages
+        shell: bash
+        run: |
+          /tmp/komplyint-pdf-qa/bin/python scripts/verify_public_brochures.py
       - name: Upload all rendered brochure pages
         uses: actions/upload-artifact@v4
         with:
