@@ -6,152 +6,153 @@
 export const svServices = [
   {
     title:'Excel, data och rapportering',
-    intro:'Tydligare information med mindre manuellt arbete.',
-    examples:['Reparation av Excel-filer, formler och förbättringar i Power Query','Sammanställning, rensning och kvalitetskontroll av data','Power BI-rapporter och återkommande rapportering'],
-    deliverable:'En fungerande fil eller rapport, överenskomna kontroller och användarinstruktioner.',
-    boundaries:'Vi går igenom datakvalitet, åtkomsträttigheter och eventuella licenser innan arbetet börjar.',
+    intro:'Få ordning på Excel-filerna och gör rapporteringen enklare.',
+    examples:['Felsökning i Excel, formler och förbättringar i Power Query','Sammanställning, rensning och kontroll av data','Skapa och uppdatera rapporter i Power BI'],
+    deliverable:'En fungerande fil eller rapport med tydliga anvisningar.',
+    boundaries:'Vi kontrollerar underlaget, behörigheterna och vilka licenser som behövs innan vi börjar.',
     tools:'Excel · Power Query · Power BI · CSV',
   },
   {
     title:'Microsoft 365 och automatisering',
-    intro:'Effektivisera återkommande arbetsmoment med verktyg ni redan använder.',
-    examples:['Arbetsflöden med Forms, Lists och SharePoint','Meddelanden och godkännandeflöden i Power Automate','Tydligare processer i Teams, Outlook och OneDrive'],
-    deliverable:'En avgränsad automatisering, ett testat arbetsflöde och tydliga underhållsanvisningar.',
-    boundaries:'Automatiseringen förutsätter nödvändiga behörigheter och lämpliga licenser.',
+    intro:'Minska rutinarbetet med verktyg som redan finns i Microsoft 365.',
+    examples:['Utveckling av arbetssätt med Forms, Lists och SharePoint','Aviseringar och godkännanden med Power Automate','Smidigare arbetsflöden i Teams, Outlook och OneDrive'],
+    deliverable:'Den överenskomna automatiseringen, funktionskontroll och anvisningar för underhåll.',
+    boundaries:'För att genomföra arbetet behövs rätt behörigheter och licenser.',
     tools:'Forms · Lists · SharePoint · Teams · Outlook · Power Automate',
   },
   {
     title:'Webbplatser och underhåll',
-    intro:'Gör befintliga webbplatser tydligare, mer användbara och lättare att sköta.',
-    examples:['Förbättringar av innehåll, layout och mobilanvändbarhet','Testning av kontaktformulär och användarflöden','Mindre webbplatsförnyelser och överenskomna uppdateringar'],
-    deliverable:'Avgränsade ändringar, funktionskontroll och skriftlig överlämning.',
-    boundaries:'Ansvar för hosting, säkerhet och driftsavbrott avtalas separat; vi lovar inte jour dygnet runt.',
+    intro:'Förbättra befintliga webbplatser, formulär och innehåll utan att börja om från början.',
+    examples:['Förbättring av innehåll, layout och användning i mobilen','Testning av kontaktformulär och webbplatsens viktigaste funktioner','Mindre ändringar på webbplatsen och uppdatering av innehåll'],
+    deliverable:'Överenskomna ändringar, funktionskontroll och skriftliga anvisningar.',
+    boundaries:'Vi kommer separat överens om webbhotellet, säkerheten och eventuella driftavbrott. Jour dygnet runt ingår inte.',
     tools:'HTML · CSS · JavaScript · WordPress / lämpliga plattformar',
   },
   {
-    title:'Mindre programvaror och integrationer',
-    intro:'Ändamålsenliga verktyg för verkliga arbetsbehov utan onödig komplexitet.',
-    examples:['Interna uppföljningsverktyg, formulär och kalkylatorer','Små webbapplikationer och förbättringar av användargränssnitt','Dataöverföring mellan system via tillgängliga gränssnitt'],
-    deliverable:'Avtalade funktioner, tester, källkod och driftsättningsanvisningar enligt överenskommelse.',
-    boundaries:'Stora plattformar, kritiska integrationer och support dygnet runt kräver en separat bedömning.',
+    title:'Mindre programlösningar och integrationer',
+    intro:'Små program och integrationer för konkreta behov i företaget.',
+    examples:['Interna uppföljningsverktyg, formulär och räknare','Mindre webbapplikationer och förbättringar av användargränssnitt','Överföring av information mellan system via tillgängliga gränssnitt'],
+    deliverable:'De funktioner och tester vi kommit överens om samt anvisningar för eventuell källkod och driftsättning.',
+    boundaries:'Stora system, kritiska integrationer och support dygnet runt bedöms separat.',
     tools:'Webbappar · API:er · Python · JavaScript / TypeScript',
   },
   {
     title:'Programvarutestning och kvalitetssäkring',
-    intro:'Praktiska tester inför publicering eller nästa utvecklingssteg.',
-    examples:['Funktionell testning av webbplatser och formulär','Återskapande av fel, dokumentation och kontroll av rättelser','Överenskomna kontroller i webbläsare och mobilvyer'],
-    deliverable:'En testsammanfattning, en prioriterad fellista och reproducerbara iakttagelser.',
-    boundaries:'Testningen är ingen säkerhetsrevision eller certifiering och garanterar inte felfri programvara.',
+    intro:'Testning före publicering och efter ändringar.',
+    examples:['Funktionskontroll av webbplatser och formulär','Återskapande av fel, dokumentation och kontroll av åtgärder','Testning i överenskomna webbläsare och mobilvyer'],
+    deliverable:'En testrapport med prioriterade fel och anvisningar för att återskapa dem.',
+    boundaries:'Testningen ersätter inte en säkerhetsgranskning och garanterar inte att programvaran är helt felfri.',
     tools:'Manuell testning · Playwright · Testfall · Felrapporter',
   },
   {
-    title:'Digitalt kontorsstöd',
-    intro:'Små, tydligt avgränsade uppgifter inom dokument- och informationshantering.',
-    examples:['Finslipning av PowerPoint-presentationer och Word-mallar','Organisering av filer och framtagning av kalkylbladsmallar','Enkla rapporter, dokumentation och instruktionsmaterial'],
-    deliverable:'Överenskomna redigerbara filer och korta överlämningsanvisningar.',
-    boundaries:'Kundservice, behandling av personuppgifter och löpande hjälp avgränsas separat.',
+    title:'Dokument och kontorsstöd',
+    intro:'Hjälp med dokument, kalkylblad och att ordna upp filer.',
+    examples:['Färdigställande av PowerPoint-presentationer och Word-mallar','Ordna filer och skapa mallar i Excel','Korta rapporter, dokument och bruksanvisningar'],
+    deliverable:'Redigerbara filer med korta anvisningar enligt överenskommelse.',
+    boundaries:'Löpande kontorsarbete, kundservice och behandling av personuppgifter avtalas separat.',
     tools:'PowerPoint · Word · OneDrive · SharePoint · Excel',
   },
 ]
 
 export const svContent = {
-  navigation:{home:'Startsida',services:'Tjänster',software:'Programvara',work:'Exempel',about:'Om oss',contact:'Kontakt',privacy:'Integritet',accessibility:'Tillgänglighet',menu:'Öppna menyn'},
-  tagline:'FINLÄNDSKT FÖRETAG FÖR DIGITALA LÖSNINGAR',
-  contactButton:'Berätta om ditt behov',explore:'Utforska tjänster',email:'E-post',
+  navigation:{home:'Startsida',services:'Tjänster',software:'Programvara',work:'Exempel',about:'Om oss',contact:'Kontakt',privacy:'Dataskydd',accessibility:'Tillgänglighet',menu:'Öppna menyn'},
+  tagline:'DIGITALA TJÄNSTER FRÅN FINLAND',
+  contactButton:'Kontakta oss',explore:'Se våra tjänster',email:'E-post',
   hero:{
     label:'DATA · AUTOMATISERING · PROGRAMVARA',
-    title:'Mer klarhet i arbetet. Trygghet i leveransen.',
-    text:'Vi hjälper företag att få bättre ordning på information, minska repetitivt manuellt arbete och utveckla fungerande digitala lösningar. Vi börjar med behovet, avgränsar arbetet tydligt och levererar det som behövs.',
-    point1:'Tydlig omfattning',point2:'Avtalade leveranser',point3:'Testad överlämning'
+    title:'Digitala verktyg som förenklar arbetsdagen.',
+    text:'Vi hjälper företag att förbättra rapporteringen, automatisera återkommande arbetsuppgifter och utveckla mindre programlösningar. Vi går igenom behoven tillsammans, kommer överens om uppdragets omfattning och genomför det vi har avtalat.',
+    point1:'Tydligt avgränsat uppdrag',point2:'Överenskommet resultat',point3:'Test före överlämning'
   },
   intro:{
     eyebrow:'VAD VI GÖR',
-    title:'Praktisk digital hjälp. Tydliga leveranser.',
-    text:'Från problem i Excel till mindre förbättringar av programvara: konkret hjälp när den egna tiden eller tekniska kompetensen inte räcker till.'
+    title:'Praktisk hjälp med data, automatisering och programvara.',
+    text:'Vi rättar till Excel-rapporter, förbättrar arbetsflöden i Microsoft 365 och utvecklar webbplatser och mindre applikationer. Vi hjälper också till med enskilda, tydligt avgränsade uppdrag.'
   },
   area:{
-    eyebrow:'VÅRA TJÄNSTER',title:'Rätt lösning. Tydlig omfattning.',
-    text:'Välj en tjänst till vänster för att se exempel, vanliga leveranser och vad vi kommer överens om innan arbetet börjar.',
-    examples:'Typiska uppdrag',delivered:'Det här levererar vi',boundaries:'Det här avtalar vi i förväg',
-    tools:'Lämpliga verktyg',help:'Fråga om tjänsten'
+    eyebrow:'VÅRA TJÄNSTER',title:'Hitta en tjänst som passar ert behov.',
+    text:'Läs vad vi kan hjälpa till med, vad som ingår och vad vi kommer överens om innan arbetet börjar.',
+    examples:'Exempel på uppdrag',delivered:'Det här får ni',boundaries:'Det här kommer vi överens om',
+    tools:'Verktyg vi använder',help:'Fråga oss om tjänsten'
   },
   impact:{
-    eyebrow:'PRAKTISKA EXEMPEL',title:'Hur kan ett projekt se ut?',
-    disclaimer:'Illustrativa exempel, inte påståenden om utförda kunduppdrag.',
+    eyebrow:'EXEMPEL PÅ UPPDRAG',title:'Exempel på hur vi kan hjälpa till.',
+    disclaimer:'Exemplen är fiktiva och bygger inte på utförda kunduppdrag.',
     cases:[
-      {num:'01',title:'Förbättra en Excel-rapport',before:'Flera filer och en felkänslig månadsrapport.',after:'En tydlig mall som kan uppdateras med tillhörande instruktioner.'},
-      {num:'02',title:'Automatisera inkommande förfrågningar',before:'Förfrågningar försvinner i långa e-posttrådar.',after:'Ett formulär, en ansvarig person och automatiska meddelanden.'},
-      {num:'03',title:'Kontrollera en företagswebbplats',before:'Problem med mobilvyn och osäkerhet kring kontaktformuläret.',after:'En prioriterad åtgärdslista, avtalade ändringar och ett testat användarflöde.'}
+      {num:'01',title:'Göra en månadsrapport lättare att uppdatera',before:'Månadsrapporten sammanställs för hand från flera Excel-filer.',after:'En rapportmall som är lätt att uppdatera, med tydliga anvisningar.'},
+      {num:'02',title:'Förenkla hanteringen av förfrågningar',before:'Förfrågningarna kommer via e-post och är svåra att hålla reda på.',after:'Ett formulär samlar förfrågningarna och meddelar den ansvariga personen.'},
+      {num:'03',title:'Kontrollera att en webbplats fungerar',before:'Webbplatsen fungerar dåligt i mobilen och kontaktformuläret behöver kontrolleras.',after:'En tydlig lista över åtgärder, överenskomna ändringar och funktionskontroll.'}
     ]
   },
   process:{
-    eyebrow:'SÅ HÄR ARBETAR VI',title:'Först förstår vi. Sedan bygger vi.',
+    eyebrow:'SÅ HÄR ARBETAR VI',title:'Vi går igenom behovet innan arbetet börjar.',
     steps:[
-      {title:'Kartläggning',body:'Berätta vad som tar tid eller inte fungerar.'},
-      {title:'Avgränsning och offert',body:'Vi kommer överens om innehåll, ansvar, pris och tidplan.'},
-      {title:'Genomförande och testning',body:'Vi återanvänder lämpliga lösningar och testar det överenskomna resultatet.'},
-      {title:'Överlämning',body:'Du får resultatet, instruktioner och information om eventuellt fortsatt stöd.'}
+      {title:'Vi går igenom uppdraget',body:'Berätta vad som tar tid eller inte fungerar som det ska.'},
+      {title:'Uppdrag och offert',body:'Vi kommer överens om vad som ska göras, ansvar, pris och tidtabell.'},
+      {title:'Genomförande och testning',body:'Vi använder befintliga verktyg där det är möjligt och testar de överenskomna ändringarna.'},
+      {title:'Överlämning',body:'Ni får det färdiga arbetet, anvisningar och information om eventuell fortsatt hjälp.'}
     ]
   },
   trust:{
-    eyebrow:'VÅRA ARBETSPRINCIPER',title:'Tydlighet är en del av kvaliteten.',
+    eyebrow:'SÅ HÄR ARBETAR VI',title:'Tydliga överenskommelser från början till slut.',
     items:[
-      {title:'Återanvänd före nybygge',body:'Vi ser först över kundens befintliga verktyg och lösningar.'},
-      {title:'Inga vaga löften',body:'Vi avtalar om leverans, begränsningar och ändringar i förväg.'},
-      {title:'Ansvarsfull informationshantering',body:'Vi klarlägger åtkomst, databehov och lagring innan arbetet börjar.'},
-      {title:'Inga påhittade referenser',body:'Vi märker demonstrationer som demonstrationer och visar kundarbete endast med tillstånd.'}
+      {title:'Vi utgår från de verktyg ni har',body:'Vi undersöker först vad som går att göra med era nuvarande verktyg.'},
+      {title:'Vi kommer överens om arbetet',body:'Vi kommer överens om arbetets innehåll och eventuella tillägg innan vi börjar.'},
+      {title:'Vi hanterar uppgifter omsorgsfullt',body:'Vi går igenom vilka behörigheter som behövs och vilka uppgifter som ska hanteras och sparas.'},
+      {title:'Vi skiljer exempel från kunduppdrag',body:'Vi anger tydligt när något är ett fiktivt exempel. Verkliga kunduppdrag visar vi bara med tillstånd.'}
     ]
   },
   cta:{
-    eyebrow:'BÖRJA I LAGOM SKALA',
-    title:'Vilket arbetsmoment vill ditt företag förenkla?',
-    text:'Skicka en kort beskrivning. Vi berättar om uppdraget passar våra tjänster och vad som behövs för en offert.',
+    eyebrow:'KONTAKTA OSS',
+    title:'Berätta vad ni behöver hjälp med.',
+    text:'Beskriv uppdraget kort. Vi berättar om vi kan hjälpa till och vilka uppgifter vi behöver för att lämna en offert.',
     button:'Kontakta oss'
   },
   software:{
     eyebrow:'PROGRAMVARUUTVECKLING OCH UNDERHÅLL',
-    title:'Mindre programvarulösningar. Genomtänkta förbättringar.',
-    lead:'Vi bygger tydligt avgränsade digitala verktyg och vidareutvecklar befintliga webbapplikationer. Omfattning, driftsättning och ansvar för underhåll avtalas separat för varje uppdrag.',
+    title:'Små programlösningar för företagets behov.',
+    lead:'Vi utvecklar mindre digitala verktyg och förbättrar befintliga webbapplikationer. Vi kommer i förväg överens om vad som ska göras, hur lösningen tas i bruk och vem som ansvarar för underhållet.',
     items:[
-      {title:'Interna verktyg',body:'Uppföljningslistor, formulär, kalkylatorer och lätta informationshanteringsverktyg.'},
-      {title:'Rättelser och vidareutveckling',body:'Mindre funktioner, gränssnittsändringar, buggfixar och funktionskontroller.'},
-      {title:'Avgränsade integrationer',body:'Dataöverföring mellan lämpliga system via dokumenterade gränssnitt.'}
+      {title:'Interna verktyg',body:'Uppföljningsverktyg, formulär, räknare och enkla verktyg för informationshantering.'},
+      {title:'Rättelser och vidareutveckling',body:'Mindre funktioner, ändringar i användargränssnittet, felrättningar och testning.'},
+      {title:'Avgränsade integrationer',body:'Överföring av information mellan system via deras dokumenterade gränssnitt.'}
     ],
-    productTitle:'Våra egna produktprojekt',
-    productText:'Vi utvecklar även egna digitala produkter. Produktutvecklingen hålls åtskild från kundtjänsterna så att uppdragens omfattning och ansvar är tydliga.',
+    productTitle:'Våra egna programvaruprodukter',
+    productText:'Vi utvecklar också egna digitala produkter. Vi håller produktutvecklingen åtskild från kunduppdragen så att ansvar och tidtabeller är tydliga.',
     productLink:'Utforska Floently',
-    limitTitle:'Det här lovar vi inte automatiskt',
-    limit:'Obegränsad utveckling, säkerhetscertifiering, underhåll av kritiska system och jour dygnet runt kräver separat bedömning och uttryckligt avtal.'
+    limitTitle:'Det här ingår inte i ett vanligt uppdrag',
+    limit:'Löpande jour, underhåll av kritiska system och säkerhetscertifiering ingår inte i vanliga uppdrag. Sådana tjänster kräver en separat överenskommelse.'
   },
   contactPage:{
-    eyebrow:'KONTAKT',title:'Berätta vad som behöver fungera bättre.',
-    lead:'Beskriv till exempel vilka verktyg ni använder, vad som inte fungerar och vilket resultat ni önskar. Du kan även be om en uppskattning för ett litet engångsuppdrag.',
+    eyebrow:'KONTAKT',title:'Hur kan vi hjälpa er?',
+    lead:'Berätta kort vad ni vill förbättra och vilka verktyg ni använder. Ni kan också fråga om ett mindre engångsuppdrag.',
     formName:'Namn',formEmail:'E-postadress',formService:'Ämne',formMessage:'Hur kan vi hjälpa?',
-    send:'Skicka förfrågan',sending:'Skickar ...',
-    sent:'Tack! Din förfrågan har tagits emot för behandling.',
-    fail:'Meddelandet kunde inte skickas. Använd e-postadressen nedan.',
-    privacy:'Vi använder dessa uppgifter endast för att svara på din förfrågan. Läs integritetsinformationen.',
-    select:'Välj ämne',other:'Osäker / något annat',
-    note:'Skicka till att börja med endast den information som behövs för att beskriva uppdraget, inte känsliga kunduppgifter.',
+    send:'Skicka meddelande',sending:'Skickar ...',
+    sent:'Tack! Vi har tagit emot din förfrågan.',
+    fail:'Meddelandet kunde inte skickas. Du kan också kontakta oss per e-post.',
+    privacy:'Vi använder uppgifterna i formuläret för att besvara din förfrågan.',
+    select:'Välj ämne',other:'Annat ärende / vet inte',
+    note:'Skriv inte in känsliga personuppgifter eller konfidentiell kundinformation i formuläret.',
     action:'Företagsuppgifter'
   },
   privacyPage:{
-    eyebrow:'INTEGRITET',title:'Integritetsinformation',
-    lead:'Så behandlar vi personuppgifter som skickas via webbplatsen.',
+    eyebrow:'INTEGRITET',title:'Dataskyddsbeskrivning',
+    lead:'Här berättar vi hur vi behandlar personuppgifter som kommer in via webbplatsen.',
     sections:[
       {title:'Personuppgiftsansvarig',body:'Komplyint Oy, FO-nummer 3588595-3. Kontakt: info@komplyint.fi.'},
-      {title:'Uppgifter som behandlas',body:'Vid förfrågningar via webbplatsen kan vi behandla namn, e-postadress, meddelandets innehåll och de tekniska uppgifter som behövs för att skicka och skydda meddelandet.'},
-      {title:'Syfte och rättslig grund',body:'Uppgifterna används för att svara på förfrågningar, kommunicera om tjänster och förbereda eventuella avtal. Beroende på situationen stöder sig behandlingen på berättigat intresse eller åtgärder före avtal.'},
-      {title:'Lagring och tjänsteleverantörer',body:'Uppgifterna sparas endast så länge de behövs för kommunikation, kundrelationen eller lagstadgade skyldigheter. E-post- och hostingleverantörer kan behandla uppgifter för vår räkning enligt lämpliga arrangemang.'},
-      {title:'Dina rättigheter',body:'Beroende på tillämplig lagstiftning kan du begära tillgång, rättelse eller radering av uppgifter, begränsning av behandlingen eller invända mot den. Du kan kontakta Dataombudsmannens byrå i Finland.'},
-      {title:'Kakor och inställningar',body:'Webbplatsen kan spara språk- och utseendeinställningar lokalt i din webbläsare. Om vi senare tar i bruk analys- eller marknadsföringstjänster uppdaterar vi denna information och tillämpliga val.'},
-      {title:'Andra produkter',body:'Separata programvaruprodukter har egen integritetsinformation där det behövs.'}
+      {title:'Vilka uppgifter behandlar vi?',body:'Vi kan behandla ditt namn, din e-postadress, ditt meddelande och tekniska uppgifter som behövs för att skicka meddelandet på ett säkert sätt.'},
+      {title:'Varför behandlar vi uppgifterna?',body:'Vi använder uppgifterna för att besvara förfrågningar och diskutera eventuella uppdrag. Beroende på situationen grundar sig behandlingen på berättigat intresse eller åtgärder innan ett avtal ingås.'},
+      {title:'Hur länge sparas uppgifterna?',body:'Vi sparar uppgifter bara så länge kontakten, kundrelationen eller lagstadgade skyldigheter kräver. Våra e-post- och webbhotellsleverantörer kan behandla uppgifter för vår räkning enligt avtal.'},
+      {title:'Dina rättigheter',body:'Du kan ha rätt att ta del av, rätta eller få dina uppgifter raderade samt begära begränsning av eller invända mot behandlingen. Du kan också kontakta Dataombudsmannens byrå i Finland.'},
+      {title:'Kakor och inställningar',body:'Webbplatsen kan spara ditt val av utseende i webbläsaren. Om vi börjar använda analysverktyg eller marknadsföringskakor uppdaterar vi den här beskrivningen och erbjuder de val som krävs.'},
+      {title:'Andra produkter',body:'Våra andra programvaruprodukter kan ha egna dataskyddsbeskrivningar.'}
     ]
   },
   about:{
-    title:'Ett självständigt finländskt företag',
-    text:'Komplyint Oy fokuserar för närvarande på data, automatisering, mindre programvarulösningar och överenskommet tekniskt stöd. Tjänster inom regelefterlevnad är ett mer långsiktigt utvecklingsområde; vi erbjuder för närvarande inte rådgivning om regelefterlevnad.'
+    title:'Ett finländskt företag inom digitala tjänster',
+    text:'Komplyint Oy är ett finländskt företag som hjälper andra företag med rapportering, automatisering och mindre programprojekt. Vi utvecklar också egna digitala produkter. Vi erbjuder för närvarande inte rådgivning om regelefterlevnad.'
   },
+  footerDescription:'Praktisk hjälp med data, automatisering och mindre programprojekt.',
   footer:'Komplyint Oy · FO-nummer 3588595-3',
-  footerNote:'Alla uppdrag har en separat överenskommen omfattning. Ingen juridisk rådgivning, certifiering eller myndighetsgodkännande erbjuds.'
+  footerNote:'Vi kommer överens om varje uppdrags omfattning separat. Vi erbjuder inte juridisk rådgivning, certifiering eller myndighetsgodkännanden.'
 }
