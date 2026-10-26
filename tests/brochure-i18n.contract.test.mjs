@@ -18,9 +18,9 @@ test('the original reviewed ReportLab renderer covers all six Swedish service ar
 })
 test('website always links all three PDF formats and a shared ZIP',()=>{
   for(const name of ['Komplyint_Palveluesite_FI.pdf','Komplyint_Service_Portfolio_EN.pdf','Komplyint_Tjanstebroschyr_SV.pdf','Komplyint_Service_Documents.zip'])assert.ok(brochure.includes(name),name)
-  assert.match(translations,/Alla tre broschyrerna/)
-  assert.match(translations,/All three brochures/)
-  assert.match(translations,/Kaikki kolme esitettä/)
+  assert.match(translations,/Alla tjänstebroschyrer/)
+  assert.match(translations,/All service brochures/)
+  assert.match(translations,/Kaikki palveluesitteet/)
 })
 test('download builder uses main and a verifiable ZIP, never the retired feature branch',()=>{
   assert.match(workflow,/branches: \[main\]/)

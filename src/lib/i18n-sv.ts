@@ -61,7 +61,7 @@ export const svContent = {
   hero:{
     label:'DATA · AUTOMATISERING · PROGRAMVARA',
     title:'Digitala verktyg som förenklar arbetsdagen.',
-    text:'Vi hjälper företag att förbättra rapporteringen, automatisera återkommande arbetsuppgifter och utveckla mindre programlösningar. Vi går igenom behoven tillsammans, kommer överens om uppdragets omfattning och genomför det vi har avtalat.',
+    text:'Vi hjälper företag att förbättra rapporteringen, automatisera återkommande arbetsuppgifter och utveckla mindre programlösningar. Vi går igenom behoven tillsammans och kommer överens om arbetets omfattning innan vi börjar.',
     point1:'Tydligt avgränsat uppdrag',point2:'Överenskommet resultat',point3:'Test före överlämning'
   },
   intro:{
