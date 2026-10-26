@@ -141,3 +141,7 @@ Automated runs are evidence candidates only. Reviewers must still reconcile the 
 ## Brochure CI runtime fix — C24/Q11 (26 October 2026)
 
 The first main-branch visual PDF job failed *before inspecting any brochure* because the GitHub runner does not ship `pdfinfo`. The fix reuses the real three committed six-page brochure PDFs and ZIP bytes, with isolated PyMuPDF page rendering in an ephemeral workflow virtualenv instead of relying on system Poppler/apt. Each document gets six image previews and selectable-text checks; the ZIP membership and byte identity are verified. The report records 18 generated images, hashes and manual-review NOT_TESTED. **No change** to customer-facing brochures, fonts, original artwork, or Next.js production dependencies.
+
+## Brochure manifest correction — C24 (26 October 2026)
+
+The isolated renderer successfully read and rendered the 18 brochure pages, then found that the existing ZIP intentionally includes the three exact PDF members **plus** `README.txt` (the fourth member is created by the established `generate_public_portfolio.py` generator). Preserve the README: it is part of the original delivery handover. The auditor now checks the real four-member manifest, UTF-8 README ownership/contact and exact brochure-byte equality, rather than erroneously rejecting the expected README.

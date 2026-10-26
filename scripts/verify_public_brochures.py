@@ -50,8 +50,13 @@ def main():
     OUT.mkdir(parents=True, exist_ok=True)
     summary = [inspect_portfolio(name) for name in FILES]
     with ZipFile(ARCHIVE) as archive:
-        if sorted(archive.namelist()) != sorted(FILES):
-            raise AssertionError("ZIP does not contain exactly the FI, EN and SV brochures")
+        # The existing portfolio builder also packages a human-readable README.txt.
+        expected = sorted([*FILES, "README.txt"])
+        if sorted(archive.namelist()) != expected:
+            raise AssertionError(f"ZIP members differ from approved manifest: {archive.namelist()}")
+        instructions = archive.read("README.txt").decode("utf-8")
+        if "Komplyint Oy" not in instructions or "info@komplyint.fi" not in instructions:
+            raise AssertionError("Missing or incorrect ZIP handover instructions")
         bad = archive.testzip()
         if bad is not None:
             raise AssertionError(f"ZIP corruption in {bad}")
