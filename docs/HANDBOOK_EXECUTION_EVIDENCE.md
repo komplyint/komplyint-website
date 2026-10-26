@@ -129,3 +129,11 @@ The existing `src/app/handbook.css` now implements the precise responsive geomet
 - **C35 contact validation:** server 422 validation issues now reveal localized field-level explanations with programmatically linked `aria-describedby`, and the invalid input receives keyboard focus after React has committed the error state. The existing form, SMTP API, honeypot, service choices and anti-duplicate request key are preserved; real email delivery and cross-instance exactly-once semantics are **NOT VERIFIED**.
 - **E02 component architecture:** the actual Process, Trust, About and CTA marketing components have been moved unchanged into a shared, stateless component module. The Next.js runtime, content sources and public routing are reused, with no new framework or duplicated marketing site.
 - **Evidence policy:** automated source assertions and the added F08/C35 browser checks must pass on immutable CI commits before the respective scoped controls can be classified as tested; formal handbook signoff and designer approval remain separate gates.
+
+## Main-branch competition quality gates — Q10/Q11/Q16–Q21 (26 October 2026)
+
+Reused the existing Next.js standalone build, public route contracts, Playwright scripts, PDF source brochures and Lighthouse CI configuration. The previously PR-only Lighthouse and brochure-visual workflows now also run on `main` and via explicit workflow dispatch. Lighthouse includes the real Swedish homepage as an additional route.
+
+A separate Chromium, Firefox and WebKit browser workflow verifies nine meaningful FI/EN/SV pages at 390px and 1440px, one semantic main/H1, server locale, no horizontal overflow, company-home labeling and functional mobile navigation. Each run writes an immutable JSON artifact, and no per-user or customer submission is made. It does **not** pretend that Linux emulation equals Safari on real iOS, actual 400% browser zoom, keyboard screen-reader use or a named independent accessibility review.
+
+Automated runs are evidence candidates only. Reviewers must still reconcile the 35 source obligations, review all 1,517 formal requirement results, verify SMTP inbox receipt, evaluate actual physical devices, approve original graphics and sign off the competition release. These obligations remain **OPEN / NOT_TESTED** without suitable independent evidence.

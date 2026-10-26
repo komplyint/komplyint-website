@@ -4,6 +4,7 @@
       "url": [
         "http://127.0.0.1:3000/",
         "http://127.0.0.1:3000/en/services",
+        "http://127.0.0.1:3000/sv",
         "http://127.0.0.1:3000/contact"
       ],
       "numberOfRuns": 2,

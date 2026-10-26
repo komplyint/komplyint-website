@@ -1,0 +1,45 @@
+name: Komplyint independent cross-browser matrix
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+concurrency:
+  group: komplyint-cross-engine-${{ github.ref }}
+  cancel-in-progress: true
+permissions:
+  contents: read
+jobs:
+  browser-matrix:
+    runs-on: ubuntu-latest
+    timeout-minutes: 22
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Build existing production app
+        run: |
+          npm install --no-audit --no-fund
+          npm run build
+      - name: Install real browser engines
+        run: |
+          npm install --no-save playwright --no-audit --no-fund
+          npx playwright install --with-deps chromium firefox webkit
+      - name: Exercise FI EN SV site and responsive navigation in all three engines
+        run: |
+          set -euo pipefail
+          mkdir -p .next/standalone/.next
+          cp -r .next/static .next/standalone/.next/static
+          cp -r public .next/standalone/public
+          HOSTNAME=127.0.0.1 PORT=3000 node .next/standalone/server.js >/tmp/komplyint-matrix.log 2>&1 &
+          for i in $(seq 1 45); do if curl -fsS http://127.0.0.1:3000/ >/dev/null; then break; fi; sleep 2; done
+          node tests/cross-browser.contract.mjs
+      - name: Preserve cross-engine evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: komplyint-cross-browser-evidence
+          path: site-preview/cross-browser-evidence.json
+          if-no-files-found: ignore
