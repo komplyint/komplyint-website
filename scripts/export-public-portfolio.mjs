@@ -45,7 +45,7 @@ try {
       tasks:t.area.examples, deliverable:t.area.delivered, limit:t.area.boundaries,
       approach:t.process.eyebrow,
       steps:t.process.steps.map((step,i)=>[String(i+1).padStart(2,'0')+' / '+step.title,step.body]),
-      contacts:t.cta.title, contactcopy:t.contactPage.note, note:t.footerNote,
+      contacts:t.cta.title, contactcopy:t.cta.text, note:t.footerNote,
       deliveryLabel:u.serviceDetail.method, email:contactEmail,
       serviceUrls:serviceSlugs.map(slug=>'https://www.komplyint.fi'+(lang==='fi'?'':'/'+lang)+'/services/'+slug),
       services:services[lang].map(s=>[s.title,s.intro,s.examples,s.deliverable,s.boundaries]),

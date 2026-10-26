@@ -46,6 +46,8 @@ test('the original six-page renderer rejects stale copy and has no parallel Swed
   assert.match(generator,/invariant=1/)
   assert.match(exporter,/services\[lang\]\.map/)
   assert.match(exporter,/t\.process\.steps\.map/)
+  assert.match(exporter,/contactcopy:t\.cta\.text/)
+  assert.doesNotMatch(exporter,/contactcopy:t\.contactPage\.note/)
 })
 
 test('website always links all three PDF formats and a shared ZIP',()=>{
