@@ -19,6 +19,10 @@ The production source is the root Next.js 14 / React application. The Finnish an
 
 Company: Komplyint Oy · Business ID 3588595-3 · D-U-N-S 369283279.
 
+## Komplyint business email accounts
+
+The Zoho Mail Free admin screenshot dated 28 October 2026 shows one mailbox (`komplyint@komplyint.fi`) and 15 aliases. The complete record, channel ownership and still-pending delivery checks are in [docs/EMAIL_ADDRESSES_2026-10-28.md](docs/EMAIL_ADDRESSES_2026-10-28.md). The canonical application register is [src/lib/contact-addresses.ts](src/lib/contact-addresses.ts), and the contact page reuses the existing FI/EN/SV site and form to list relevant department addresses. Creation of an alias is **not** proof of live delivery.
+
 ## Validation
 
 Run npm ci && npm run build. The build runs public-access and release-contract unit tests. The site-preview-check GitHub workflow runs browser, accessibility, motion and document checks. Lighthouse and visual brochure review are separate workflows.

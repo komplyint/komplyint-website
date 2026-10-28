@@ -13,6 +13,7 @@ import ServiceCard from '@/components/ServiceCard'
 import SectionIntro from '@/components/SectionIntro'
 import ServiceExplorer from '@/components/ServiceExplorer'
 import ContactForm from '@/components/ContactForm'
+import ContactAddressLinks from '@/components/ContactAddressLinks'
 import VideoHero from '@/components/VideoHero'
 import LanguageSwitcher from '@/components/LanguageSwitcher'
 import { ui } from '@/lib/i18n-ui'
@@ -199,7 +200,7 @@ function SoftwarePage({lang}:{lang:Lang}) {
 function ContactPage({lang}:{lang:Lang}) {
   const t=content[lang].contactPage
   return <><div className="kc-page-top"><div className="kc-shell"><p className="kc-eyebrow">{t.eyebrow}</p><h1>{t.title}</h1><p>{t.lead}</p></div></div>
-    <section className="kc-section"><div className="kc-shell kc-contact-grid"><div className="kc-contact-side"><p className="kc-eyebrow">{t.action}</p><h2>Komplyint Oy</h2><p>{content[lang].footer}</p><p>{ui[lang].locationName}</p><a className="kc-text-link" href="mailto:info@komplyint.fi">info@komplyint.fi<Arrow /></a><div className="kc-contact-note">{t.note}</div></div>
+    <section className="kc-section"><div className="kc-shell kc-contact-grid"><div className="kc-contact-side"><p className="kc-eyebrow">{t.action}</p><h2>Komplyint Oy</h2><p>{content[lang].footer}</p><p>{ui[lang].locationName}</p><a className="kc-text-link" href="mailto:info@komplyint.fi">info@komplyint.fi<Arrow /></a><ContactAddressLinks lang={lang}/><div className="kc-contact-note">{t.note}</div></div>
     <ContactForm lang={lang}/></div></section></>
 }
 
