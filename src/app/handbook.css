@@ -685,3 +685,52 @@ html:not(.dark){color-scheme:light;background:#F7F6F2}
   .kc-explorer-native select{width:100%;max-width:100%;min-height:52px;padding:10px 14px;border:1px solid var(--ki-color-border);border-radius:8px;color:var(--ki-color-ink);background:var(--ki-color-panel);font-family:var(--font-lato),Lato,Arial,sans-serif;font-size:16px}
   .kc-explorer-native select:focus-visible{outline:3px solid var(--ki-color-focus);outline-offset:2px}
 }
+
+
+/* CONTACT / 2026-10-28: prevent the address panel from looking cropped.
+   The existing form has inset space, but the adjacent detail panel had none.
+   Keep the original dark-mode palette and responsive page grid. */
+.kc-contact-grid{
+  grid-template-columns:minmax(0,5fr) minmax(0,7fr);
+  align-items:start;
+  gap:24px;
+}
+.kc-contact-grid > .kc-contact-side,
+.kc-contact-grid > .kc-form{
+  min-width:0;
+  max-width:100%;
+  width:100%;
+}
+.kc-contact-grid > .kc-contact-side{
+  padding:clamp(24px,3vw,44px);
+  border:1px solid var(--ki-color-border,var(--kc-border));
+  border-radius:16px;
+  overflow-wrap:anywhere;
+}
+.kc-contact-side h2{font-size:clamp(28px,2.8vw,35px)}
+.kc-contact-side .kc-text-link{max-width:100%;overflow-wrap:anywhere}
+.kc-contact-side .kc-mail-channels{min-width:0;max-width:100%;margin-top:28px}
+.kc-contact-side .kc-mail-channel{min-width:0}
+.kc-contact-side .kc-mail-channel dd,
+.kc-contact-side .kc-mail-channel dd a{
+  max-width:100%;
+  overflow-wrap:anywhere;
+  word-break:normal;
+}
+.kc-contact-side .kc-contact-note{margin-top:28px;overflow-wrap:anywhere}
+.kc-contact-grid .kc-form label,
+.kc-contact-grid .kc-form input,
+.kc-contact-grid .kc-form select,
+.kc-contact-grid .kc-form textarea{min-width:0;max-width:100%}
+
+/* The handbook's base two-column rule previously overrode the earlier
+   860px mobile breakpoint. At tablet/reflow widths, explicitly stack both
+   complete panels, prioritizing the enquiry form. */
+@media(max-width:1023px){
+  .kc-contact-grid{grid-template-columns:minmax(0,1fr);gap:24px}
+  .kc-contact-grid > .kc-form{order:0}
+  .kc-contact-grid > .kc-contact-side{order:1;padding:28px}
+}
+@media(max-width:570px){
+  .kc-contact-grid > .kc-contact-side{padding:22px}
+}
