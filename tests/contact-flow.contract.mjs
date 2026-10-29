@@ -12,7 +12,7 @@ try{
     assert.equal(await form.locator('input[type=email]').count(),1)
     await form.locator('input[type=email]').fill('synthetic@example.invalid')
     await form.locator('textarea').fill('Synthetic request for a small reporting task.')
-    await form.locator('select').selectOption('data-reporting')
+    await form.locator('select').first().selectOption('data-reporting')
     let observed=null
     await page.route('**/api/contact',async request=>{
       observed=request.request().postDataJSON()
@@ -21,6 +21,8 @@ try{
     await form.locator('button[type=submit]').click()
     await form.locator('.kc-form-success[role="status"]').waitFor({state:'visible'})
     assert.equal(observed.service,'data-reporting')
+    assert.equal(observed.engagementType,'project')
+    assert.equal(observed.workLanguage,'flexible')
     assert.equal(observed.locale,english?'en':swedish?'sv':'fi')
     assert.equal(observed.email,'synthetic@example.invalid')
     assert.match(observed.idempotencyKey,/^[0-9a-f-]{20,64}$/)
