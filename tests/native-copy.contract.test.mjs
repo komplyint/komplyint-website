@@ -14,9 +14,9 @@ const rejected={
  sv:['BÖRJA I LAGOM SKALA','Mer klarhet i arbetet. Trygghet i leveransen.','Även små problem förtjänar en bra lösning.','Inga påhittade referenser','Ett arbetsflöde som går framåt','Integritetsinformation']
 }
 const approved={
- fi:['Ohjelmistokehitystä, dataa ja automaatiota yrityksille.','Ohjelmistokehitys, data ja digipalvelut samasta paikasta.','OTA YHTEYTTÄ','Kerro, missä tarvitset apua.','Esimerkit ovat kuvitteellisia','Lue tietosuojaseloste','Helsinki, Suomi'],
- en:['Software, data and automation expertise for business.','Software delivery, analytics and digital services.','GET IN TOUCH','Tell us what you need help with.','These examples are fictional','Read our privacy notice','Helsinki, Finland'],
- sv:['Programutveckling, data och automatisering för företag.','Programutveckling, analys och digitala tjänster.','KONTAKTA OSS','Berätta vad ni behöver hjälp med.','Exemplen är fiktiva','Läs vår dataskyddsbeskrivning','Helsingfors, Finland']
+ fi:['Ohjelmistokehitystä, testausta ja toimivia integraatioita.','Ohjelmistokehitys, data ja digipalvelut samasta paikasta.','OTA YHTEYTTÄ','Kerro, missä tarvitset apua.','Esimerkit ovat kuvitteellisia','Lue tietosuojaseloste','Helsinki, Suomi'],
+ en:['Software development, testing and reliable integrations.','Software delivery, analytics and digital services.','GET IN TOUCH','Tell us what you need help with.','These examples are fictional','Read our privacy notice','Helsinki, Finland'],
+ sv:['Programutveckling, testning och fungerande integrationer.','Programutveckling, analys och digitala tjänster.','KONTAKTA OSS','Berätta vad ni behöver hjälp med.','Exemplen är fiktiva','Läs vår dataskyddsbeskrivning','Helsingfors, Finland']
 }
 for(const locale of ['fi','en','sv']){
  test(locale+': literal translationese cannot return',()=>{
