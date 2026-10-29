@@ -33,7 +33,7 @@ export const svServices = [
     intro:'Webbapplikationer, API:er och vidareutveckling av befintliga system.',
     examples:['Interna uppföljningsverktyg, formulär och räknare','Gränssnitt i React, Angular och Vue samt förbättringar av befintliga applikationer','Överföring av information mellan system via tillgängliga gränssnitt'],
     deliverable:'De funktioner och tester vi kommit överens om samt anvisningar för eventuell källkod och driftsättning.',
-    boundaries:'Stora system, kritiska integrationer och support dygnet runt bedöms separat.',
+    boundaries:'Avancerad fullstackutveckling sker på engelska med en bekräftad specialist. Finskspråkig kundkontakt kan avtalas separat.',
     tools:'TypeScript · Node.js · React · Angular · Vue · C#/.NET · API:er',
   },
   {
@@ -61,13 +61,13 @@ export const svContent = {
   hero:{
     label:'PROGRAMUTVECKLING · DATA · AUTOMATISERING · IT-KONSULTER',
     title:'Programutveckling, data och automatisering för företag.',
-    text:'Vi hjälper företag att förbättra rapporteringen, automatisera återkommande arbetsuppgifter och utveckla mindre programlösningar. Vi går igenom behoven tillsammans och kommer överens om arbetets omfattning innan vi börjar.',
+    text:'Vi hjälper företag och IT-partner med programutveckling, Power BI-rapportering, automatisering och kvalitetssäkring. Vi tar emot avgränsade projekt och diskuterar längre konsultuppdrag.',
     point1:'Tydligt avgränsat uppdrag',point2:'Överenskommet resultat',point3:'Test före överlämning'
   },
   intro:{
     eyebrow:'VAD VI GÖR',
     title:'Programutveckling, analys och digitala tjänster.',
-    text:'Vi rättar till Excel-rapporter, förbättrar arbetsflöden i Microsoft 365 och utvecklar webbplatser och mindre applikationer. Vi hjälper också till med enskilda, tydligt avgränsade uppdrag.'
+    text:'Från API:er och webbutveckling till Power BI, Microsoft 365 och programvarutestning. Även mindre uppdrag är välkomna.'
   },
   area:{
     eyebrow:'VÅRA TJÄNSTER',title:'Hitta en tjänst som passar ert behov.',
@@ -111,7 +111,7 @@ export const svContent = {
   software:{
     eyebrow:'PROGRAMVARUUTVECKLING OCH UNDERHÅLL',
     title:'Programutveckling och integrationer för företag.',
-    lead:'Vi utvecklar mindre digitala verktyg och förbättrar befintliga webbapplikationer. Vi kommer i förväg överens om vad som ska göras, hur lösningen tas i bruk och vem som ansvarar för underhållet.',
+    lead:'Vi utvecklar webbapplikationer och API:er. HTML, CSS och mindre JavaScript-ändringar kan utföras på finska. Avancerad fullstackutveckling sker på engelska.',
     items:[
       {title:'Interna verktyg',body:'Uppföljningsverktyg, formulär, räknare och enkla verktyg för informationshantering.'},
       {title:'Rättelser och vidareutveckling',body:'Mindre funktioner, ändringar i användargränssnittet, felrättningar och testning.'},
@@ -125,7 +125,7 @@ export const svContent = {
   },
   contactPage:{
     eyebrow:'KONTAKT',title:'Hur kan vi hjälpa er?',
-    lead:'Berätta kort vad ni vill förbättra och vilka verktyg ni använder. Ni kan också fråga om ett mindre engångsuppdrag.',
+    lead:'Berätta om ni behöver ett projekt genomfört, en specialist för ett uppdrag eller hjälp med en mindre uppgift.',
     formName:'Namn (frivilligt)',formEmail:'E-postadress',formService:'Tjänst eller ärende',formMessage:'Beskriv uppdraget',
     send:'Skicka meddelande',sending:'Skickar ...',
     sent:'Tack! Vi har tagit emot din förfrågan.',
@@ -150,9 +150,9 @@ export const svContent = {
   },
   about:{
     title:'Ett finländskt företag inom digitala tjänster',
-    text:'Komplyint Oy hjälper företag med rapportering, automatisering och mindre programprojekt. Vi utvecklar också egna digitala produkter. Vi erbjuder för närvarande inte rådgivning om regelefterlevnad.'
+    text:'Komplyint Oy hjälper företag och IT-partner med programutveckling, data, Microsoft 365 och programvarutestning. Arbetsspråk och specialist avtalas per uppdrag. Vi ger inte juridisk rådgivning eller certifieringar.'
   },
-  footerDescription:'Praktisk hjälp med data, automatisering och mindre programprojekt.',
+  footerDescription:'Programutveckling, Power BI-rapportering, automatisering och kvalitetssäkring.',
   footer:'Komplyint Oy · FO-nummer 3588595-3',
   footerNote:'Vi kommer överens om varje uppdrags omfattning separat. Vi erbjuder inte juridisk rådgivning, certifiering eller myndighetsgodkännanden.'
 }
