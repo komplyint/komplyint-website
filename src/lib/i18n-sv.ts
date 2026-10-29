@@ -82,6 +82,14 @@ export const svContent = {
       {num:'01',title:'Göra en månadsrapport lättare att uppdatera',before:'Månadsrapporten sammanställs för hand från flera Excel-filer.',after:'En rapportmall som är lätt att uppdatera, med tydliga anvisningar.'},
       {num:'02',title:'Förenkla hanteringen av förfrågningar',before:'Förfrågningarna kommer via e-post och är svåra att hålla reda på.',after:'Ett formulär samlar förfrågningarna och meddelar den ansvariga personen.'},
       {num:'03',title:'Kontrollera att en webbplats fungerar',before:'Webbplatsen fungerar dåligt i mobilen och kontaktformuläret behöver kontrolleras.',after:'En tydlig lista över åtgärder, överenskomna ändringar och funktionskontroll.'}
+    ],
+    softwareEyebrow:'PROGRAMUTVECKLING',
+    softwareTitle:'Exempel på uppdrag inom programutveckling.',
+    softwareLead:'Fiktiva exempel på hur vi kan hjälpa till med vidareutveckling, systemintegrationer och testning inför publicering. Det här är inte genomförda kundprojekt.',
+    softwareCases:[
+      {num:'04',title:'Rätta fel och vidareutveckla en applikation',before:'Återkommande fel gör applikationen svår att ändra och nya funktioner tar lång tid att utveckla.',after:'Vi utreder orsaken, genomför en överenskommen förbättring och testar ändringarna.'},
+      {num:'05',title:'Få en systemintegration att fungera bättre',before:'Två system utbyter inte uppdateringar pålitligt och information måste matas in manuellt.',after:'Vi förbättrar dataöverföring och felhantering i API:et och testar integrationen.'},
+      {num:'06',title:'Testa programvaran före en ny version',before:'Ändringar orsakar återkommande fel och det är oklart vad som har testats.',after:'Vi testar viktiga användarflöden, rapporterar fel och automatiserar överenskomna kontroller.'}
     ]
   },
   process:{
