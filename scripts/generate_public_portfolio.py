@@ -1,4 +1,4 @@
-"""Reuse the seven-page ReportLab portfolio with the website's FI/EN/SV copy.
+"""Reuse the eight-page ReportLab portfolio with the website's FI/EN/SV copy.
 
 First run: node scripts/export-public-portfolio.mjs
 The source fingerprints are checked before any public output is replaced.
@@ -51,6 +51,8 @@ def load_copy(path: Path) -> dict:
     for lang, value in data.items():
         if len(value['services']) != 6 or len(value['steps']) != 4:
             raise ValueError('Incomplete service catalogue: ' + lang)
+        if len(value.get('capabilities',{}).get('stack',[])) != 12:
+            raise ValueError('Missing featured full-stack engineer skills: '+lang)
         for key in ['title','kicker','overview','serviceLabel','strapline','businessIdLine','subject','deliveryLabel','email']:
             if not isinstance(value.get(key), str) or not value[key].strip():
                 raise ValueError('Missing translated label: ' + lang + '/' + key)
@@ -72,7 +74,7 @@ def top(c, number, t):
     c.setFillColor(ACCENT); c.setFont('KRegular',8); c.drawRightString(W-51,H-46,t['strapline'])
     c.setStrokeColor(RULE); c.line(53,49,W-53,49)
     c.setFillColor(MUTED); c.setFont('KRegular',8); c.drawString(53,30,t['businessIdLine'])
-    c.drawRightString(W-53,30,f'{number:02d} / 07')
+    c.drawRightString(W-53,30,f'{number:02d} / 08')
     c.setFillColor(GREEN); c.setFont('KBold',9); c.drawString(54,H-126,t['kicker'])
 
 
@@ -83,8 +85,10 @@ def cover(c, t):
     y = para(c,t['title'],54,H-215,W-108,32,WHITE,40,font='KSerif')
     y = para(c,t['subtitle'],54,y-28,W-110,19,ACCENT,27)
     y = para(c,t['lead'],54,y-30,W-120,12,WHITE,19)
-    if y < 252:
-        raise RuntimeError('Cover copy exceeds reserved space')
+    if y < 305:
+        raise RuntimeError('Cover copy exceeds reserved space for full-stack highlight')
+    feature=t['capabilities']
+    para(c,feature['fullstackTitle']+'  /  '+feature['heroYears'],54,min(y-21,300),W-108,13,ACCENT,19,True)
     c.setStrokeColor(colors.HexColor('#456957'))
     for i in range(4):
         x = 54+i*125
@@ -153,9 +157,47 @@ def detailed(c, t, start, page):
 
 
 
+
+def engineering_page(c, t):
+    """A dedicated bold technical capability page across FI, EN and SV."""
+    top(c,6,t)
+    v=t['capabilities']
+    y=para(c,v['title'],54,H-155,W-108,27,INK,33,font='KSerif')
+    y=para(c,v['lead'],54,y-12,W-108,9.7,MUTED,15)
+    panel_top=min(y-20,H-284)
+    panel_height=294
+    bottom=panel_top-panel_height
+    if bottom < 215:
+        raise RuntimeError('Engineer summary is too long for an eight-page portfolio')
+    c.setFillColor(DEEP);c.roundRect(54,bottom,W-108,panel_height,12,fill=1,stroke=0)
+    c.setFillColor(colors.HexColor('#C74C57'));c.roundRect(54,panel_top-5,59,5,2,fill=1,stroke=0)
+    text_y=para(c,v['fullstackTitle'],74,panel_top-27,W-148,19,WHITE,26,True)
+    text_y=para(c,v['fullstackSubtitle'],74,text_y-5,W-148,11,ACCENT,17,True)
+    text_y=para(c,v['fullstackDescription'],74,text_y-10,W-148,8.5,WHITE,13)
+    if text_y < panel_top-167:
+        raise RuntimeError('Engineering overview is too long for its panel')
+    columns=4
+    width=(W-108-40-3*7)/columns
+    for n,tag in enumerate(v['stack']):
+        col=n%columns;row=n//columns
+        x=74+col*(width+7)
+        top_y=panel_top-168-row*36
+        c.setFillColor(colors.HexColor('#26362F'))
+        c.setStrokeColor(colors.HexColor('#507C64'))
+        c.roundRect(x,top_y-29,width,29,5,fill=1,stroke=1)
+        para(c,tag,x+8,top_y-7,width-15,8.5,WHITE,11,True)
+    y=para(c,v['fullstackLanguage'],54,bottom-19,W-108,9.8,GREEN,15,True)
+    y=para(c,v['dataTitle']+'  /  '+v['dataSubtitle'],54,y-17,W-108,12.2,INK,18,True)
+    y=para(c,v['dataDescription'],54,y-9,W-108,9,MUTED,14)
+    y=para(c,v['dataLanguage'],54,y-9,W-108,8.5,MUTED,13)
+    if y < 61:
+        raise RuntimeError('Technical skills page overruns its footer')
+    c.showPage()
+
+
 def consulting_page(c, t):
     """Dedicated specialist/engagement page; all descriptions come from localized website content."""
-    top(c,6,t)
+    top(c,7,t)
     e=t['consulting']
     y=para(c,e['title'],54,H-151,W-108,26,INK,33,font='KSerif')
     y=para(c,e['lead'],54,y-12,W-108,10,MUTED,16)
@@ -191,7 +233,7 @@ def consulting_page(c, t):
 
 
 def finish(c, t):
-    top(c,7,t)
+    top(c,8,t)
     para(c,t['approach'],54,H-151,W-108,27,INK,33,font='KSerif')
     for i,(name,description) in enumerate(t['steps']):
         y = H-210-i*83
@@ -220,6 +262,7 @@ def build(lang, t, path):
     cover(cv,t); overview(cv,t)
     for page,start in [(3,0),(4,2),(5,4)]:
         detailed(cv,t,start,page)
+    engineering_page(cv,t)
     consulting_page(cv,t)
     finish(cv,t); cv.save()
 
@@ -239,7 +282,7 @@ def main():
     with ZipFile(archive_path) as archive:
         assert archive.testzip() is None
         assert len([name for name in archive.namelist() if name.endswith('.pdf')]) == 3
-    print(json.dumps({'result':'PASS','languages':list(NAMES),'pages':18,'copy':'canonical website dictionaries'},ensure_ascii=False))
+    print(json.dumps({'result':'PASS','languages':list(NAMES),'pages':24,'copy':'canonical website dictionaries'},ensure_ascii=False))
 
 
 if __name__ == '__main__':
