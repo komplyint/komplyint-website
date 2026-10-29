@@ -757,3 +757,53 @@ html:not(.dark){color-scheme:light;background:#F7F6F2}
 .kc-contact-specialist-fields label{min-width:0}
 @media(max-width:780px){.kc-engagement-grid,.kc-engagement-notes,.kc-contact-specialist-fields{grid-template-columns:1fr}.kc-engagement-card{min-height:0;padding:26px}.kc-engagement-notes{padding:22px}.kc-engagement-lead{margin-bottom:26px}}
 @media(prefers-reduced-motion:reduce){.kc-engagement-card{scroll-behavior:auto}}
+
+
+/* Full-stack capability showcase - same approved Charcoal Precision colors and
+   editorial fonts, no palette or brand-master substitutions. */
+.kc-hero-engineering{display:flex;flex-direction:column;gap:11px;padding:22px 16px;border:1px solid rgba(245,243,238,.38);border-left:3px solid var(--ki-color-red);border-radius:12px;background:rgba(16,20,24,.76);box-shadow:0 15px 45px rgba(0,0,0,.18)}
+.kc-hero-engineering .kc-hero-engineering-label{color:#C9F0CA;font-family:Lato,Arial,sans-serif;font-size:11px;font-weight:700;line-height:1.45;letter-spacing:.08em;overflow-wrap:anywhere}
+.kc-hero-engineering-years{display:block;color:#FFF;font-family:"EB Garamond",Georgia,serif;font-size:clamp(25px,2.8vw,42px);font-weight:400;line-height:1}
+.kc-hero-engineering-experience{color:#F5F3EE;font-size:13px;line-height:1.5}
+.kc-hero-engineering-stack{padding-top:11px;border-top:1px solid rgba(245,243,238,.28);color:#C9F0CA;font-size:13px;font-weight:700;line-height:1.65}
+.kc-hero-buttons .kc-hero-download{border-color:rgba(245,243,238,.5);background:rgba(16,20,24,.53);color:#F5F3EE}
+.kc-hero-buttons .kc-hero-download:hover{background:#25322B}
+.kc-expertise{padding:clamp(64px,7vw,112px) 0 72px;background:var(--ki-color-page);color:var(--ki-color-ink)}
+.kc-expertise-intro{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(280px,.9fr);column-gap:7%;align-items:end;margin-bottom:38px}
+.kc-expertise-intro .kc-eyebrow{grid-column:1/-1;color:var(--ki-color-action);margin-bottom:15px}
+.kc-expertise-intro h2{max-width:18ch;font-family:"EB Garamond",Georgia,serif;font-size:clamp(2.6rem,5vw,4.65rem);line-height:1.045;font-weight:400;letter-spacing:-.035em}
+.kc-expertise-intro>p:last-child{max-width:53ch;font-size:clamp(1rem,1.5vw,1.18rem);line-height:1.72;color:var(--ki-color-muted);padding-bottom:5px}
+.kc-expertise-grid{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:24px;align-items:stretch}
+.kc-expertise-grid>article{min-width:0;display:flex;flex-direction:column;align-items:flex-start;padding:clamp(26px,3.2vw,44px);border-radius:18px;box-shadow:var(--ki-shadow-e2);overflow:hidden}
+.kc-expertise-feature{position:relative;background:#101418;color:#F5F3EE;border:1px solid #3E4A4E}
+.kc-expertise-feature:before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#C74C57 0 11%,#8FBFA6 11% 68%,transparent 68%)}
+.kc-expertise-secondary{background:var(--ki-color-surface);color:var(--ki-color-ink);border:1px solid var(--ki-color-border)}
+.kc-expertise-heading{width:100%;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.kc-expertise-highlight{display:inline-flex;padding:9px 12px;border-radius:6px;background:rgba(164,221,186,.14);border:1px solid rgba(164,221,186,.46);color:#C9F0CA;font-size:.8rem;line-height:1.35;font-weight:700;letter-spacing:.015em}
+.kc-expertise-highlight-secondary{background:var(--ki-color-panel);border:1px solid var(--ki-color-border);color:var(--ki-color-ink)}
+.kc-expertise-symbol{color:#C74C57;font-family:monospace;font-size:36px;font-weight:600;letter-spacing:-.09em;white-space:nowrap}
+.kc-expertise-grid h3{margin:30px 0 14px;font-family:"EB Garamond",Georgia,serif;font-size:clamp(2.3rem,3.3vw,3.5rem);font-weight:400;line-height:1.08;letter-spacing:-.02em}
+.kc-expertise-grid article>p:not(.kc-expertise-language){font-size:1.03rem;line-height:1.68;max-width:59ch;opacity:.9}
+.kc-expertise-tech{display:flex;flex-wrap:wrap;gap:9px;margin:28px 0 0;max-width:100%}
+.kc-expertise-tech span{display:inline-flex;align-items:center;min-height:36px;padding:7px 12px;border-radius:7px;background:#1D2529;border:1px solid #3E4A4E;color:#F5F3EE;font-size:.85rem;line-height:1.4;font-weight:700;white-space:normal}
+.kc-expertise-tech span:nth-child(-n+6){background:#2A3B34;border-color:#507C64;color:#D4F1DE}
+.kc-expertise-tech-secondary span,.kc-expertise-tech-secondary span:nth-child(-n+6){background:var(--ki-color-panel);border-color:var(--ki-color-border);color:var(--ki-color-ink)}
+.kc-expertise-language{margin-top:auto;padding:28px 0 0;color:#C9F0CA;font-size:.92rem;line-height:1.55;font-weight:700}
+.kc-expertise-secondary .kc-expertise-language{color:var(--ki-color-muted)}
+.kc-expertise-primary,.kc-expertise-secondary-link{display:inline-flex;align-items:center;gap:16px;min-height:46px;margin-top:24px;padding:12px 18px;text-decoration:none;border-radius:8px;font-size:.92rem;font-weight:700}
+.kc-expertise-primary{background:#A4DDBA;color:#101418}
+.kc-expertise-primary:hover{background:#C9F0CA}
+.kc-expertise-secondary-link{background:var(--ki-color-action);color:var(--ki-color-page)}
+.kc-expertise-secondary-link:hover{opacity:.9}
+.kc-expertise a:focus-visible{outline:3px solid var(--ki-color-focus);outline-offset:4px}
+.kc-expertise-scope{max-width:100ch;margin:16px 0 0;color:var(--ki-color-muted);font-size:.84rem;line-height:1.6}
+.kc-expertise-downloads{display:flex;align-items:center;justify-content:space-between;gap:26px;margin-top:40px;padding:28px 32px;border-radius:16px;background:#171B1F;color:#F5F3EE;border:1px solid #3E4A4E}
+.kc-expertise-downloads>div:first-child{flex:1 1 380px;min-width:0}
+.kc-expertise-downloads strong{display:block;font-family:"EB Garamond",Georgia,serif;font-size:clamp(1.35rem,2.2vw,2rem);font-weight:400}
+.kc-expertise-downloads p{max-width:68ch;color:#B9C1C2;font-size:.9rem;line-height:1.55;margin-top:7px}
+.kc-expertise-download-actions{display:flex;flex-direction:column;gap:10px;flex:0 0 300px}
+.kc-expertise-download{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:46px;padding:10px 15px;border:1px solid #A4DDBA;border-radius:8px;color:#101418;background:#A4DDBA;text-decoration:none;font-weight:700;font-size:.91rem}
+.kc-expertise-download-all{border-color:#86938D;background:transparent;color:#F5F3EE}
+.kc-expertise-download:hover{opacity:.88}
+@media(max-width:980px){.kc-expertise-intro{grid-template-columns:1fr;gap:15px}.kc-expertise-intro h2{max-width:22ch}.kc-expertise-grid{grid-template-columns:1fr}.kc-expertise-downloads{align-items:stretch;flex-direction:column}.kc-expertise-download-actions{flex-basis:auto;width:min(100%,440px)}.kc-hero-engineering{display:none}}
+@media(max-width:600px){.kc-expertise{padding:52px 0 48px}.kc-expertise-grid{gap:16px}.kc-expertise-grid>article{padding:25px 20px}.kc-expertise-grid h3{font-size:2.45rem;margin:23px 0 12px}.kc-expertise-tech{gap:7px;margin-top:24px}.kc-expertise-tech span{min-height:32px;padding:5px 9px;font-size:.78rem}.kc-expertise-downloads{padding:22px 18px}.kc-expertise-download-actions{width:100%}}
