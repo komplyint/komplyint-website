@@ -13,12 +13,12 @@ export default function ConsultingEngagement({lang}:{lang:Lang}){
       <p className="kc-engagement-lead">{t.lead}</p>
       <div className="kc-engagement-grid">
         <article className="kc-engagement-card">
-          <span aria-hidden="true" className="kc-engagement-number">01 / PROJECT</span>
+          <span aria-hidden="true" className="kc-engagement-number">01</span>
           <h3>{t.projectHeading}</h3><p>{t.projectText}</p>
           <a className="kc-text-link" href={contact+'?engagement=project'}>{t.ctaProject}<Arrow/></a>
         </article>
         <article className="kc-engagement-card">
-          <span aria-hidden="true" className="kc-engagement-number">02 / CONSULTING</span>
+          <span aria-hidden="true" className="kc-engagement-number">02</span>
           <h3>{t.consultantHeading}</h3><p>{t.consultantText}</p>
           <a className="kc-text-link" href={contact+'?engagement=consultant'}>{t.ctaConsultant}<Arrow/></a>
         </article>
