@@ -50,11 +50,12 @@ export const content = {
       {title:'Esimerkit merkitään selkeästi',body:'Kerromme, mitkä esimerkit ovat kuvitteellisia. Todellisia asiakastöitä esittelemme vain luvalla.'}
     ]},
     cta:{eyebrow:'OTA YHTEYTTÄ',title:'Kerro, missä tarvitset apua.',text:'Kuvaile tehtävä lyhyesti. Kerromme, voimmeko auttaa ja mitä tietoja tarvitsemme tarjousta varten.',button:'Ota yhteyttä'},
-    software: {eyebrow:'OHJELMISTOKEHITYS JA YLLÄPITO',title:'Ohjelmistokehitystä ja järjestelmien jatkokehitystä.',lead:'Toteutamme verkkosovelluksia, API-rajapintoja ja jatkokehitystä. HTML-, CSS- ja rajatut JavaScript-muutokset onnistuvat suomeksi; laajempi full-stack-kehitys tehdään englanniksi nimetyn asiantuntijan kanssa.', items:[
-      {title:'Sisäiset työkalut',body:'Seurantatyökalut, lomakkeet, laskurit ja yksinkertaiset tiedonhallintaratkaisut.'},
-      {title:'Korjaukset ja jatkokehitys',body:'Pienet ominaisuudet, käyttöliittymän muutokset, virheiden korjaaminen ja testaus.'},
-      {title:'Rajatut integraatiot',body:'Tietojen siirtäminen järjestelmien välillä niiden tarjoamien rajapintojen avulla.'}
-    ], productTitle:'Omat ohjelmistotuotteemme',productText:'Kehitämme myös omia digitaalisia tuotteita. Asiakastyöt ja omien tuotteiden kehittäminen pidetään erillään, jotta vastuut ja aikataulut ovat selkeät.',productLink:'Tutustu Floentlyyn', limitTitle:'Mitä palveluun ei kuulu?', limit:'Jatkuva päivystys, kriittisten järjestelmien ylläpito ja tietoturvasertifiointi eivät kuulu tavalliseen toimeksiantoon. Niistä on sovittava erikseen.'},
+    software: {eyebrow:'OHJELMISTOKEHITYS · RAJAPINNAT · TESTAUS',title:'Jatkokehitystä ja korjauksia olemassa oleviin sovelluksiin.',lead:'Autamme, kun sovelluksen muutokset ovat hitaita, rajapinnat eivät toimi tai kehitystehtävät kasaantuvat. Sovimme ensin tavoitteesta ja toteutamme sovitut muutokset vaiheittain. Full-stack-kehityksen tekninen työ tehdään englanniksi; suomenkielinen asiakasviestintä voidaan järjestää.', items:[
+      {title:'Sovelluksen ylläpidettävyys',body:'Nykyisen koodin selvittäminen, virheiden paikantaminen ja sovittu jatkokehitys ilman tarpeetonta kokonaisuudistusta.'},
+      {title:'API:t ja integraatiot',body:'Tietojen siirron, rajapintojen ja taustapalvelujen kehittäminen sekä virhetilanteiden käsittely ja testaus.'},
+      {title:'Käyttöliittymien ja ominaisuuksien kehitys',body:'Sovittujen frontend- ja backend-tehtävien toteutus asiakkaan kehitysjonon ja katselmointikäytäntöjen mukaisesti.'},
+      {title:'Testaus osana kehitystä',body:'Toiminnallinen testaus, testitapaukset, rajapintojen tarkistukset ja soveltuva testiautomaatio ennen julkaisua.'}
+    ], productTitle:'Omat ohjelmistotuotteemme',productText:'Kehitämme myös omia digitaalisia tuotteita. Asiakastyöt ja omien tuotteiden kehittäminen pidetään erillään, jotta vastuut ja aikataulut ovat selkeät.',productLink:'Tutustu Floentlyyn',limitTitle:'Sovitaan työ ennen aloitusta',limit:'Asiantuntija, työskentelykieli, rajaukset, testaus ja ylläpitovastuut vahvistetaan ennen toimeksiantoa. Kriittisten järjestelmien päivystys tai tietoturvasertifiointi eivät sisälly peruspalveluun.'},
     contactPage:{eyebrow:'YHTEYDENOTTO',title:'Miten voimme auttaa?',lead:'Kerro, tarvitsetko projektin toteutuksen, asiantuntijan toimeksiantoon vai apua yksittäisessä tehtävässä.', formName:'Nimi (vapaaehtoinen)',formEmail:'Sähköpostiosoite',formService:'Palvelu tai aihe',formMessage:'Kuvaile tehtävää',send:'Lähetä viesti',sending:'Lähetetään...',sent:'Kiitos! Olemme vastaanottaneet yhteydenottosi.',fail:'Viestin lähettäminen ei onnistunut. Voit ottaa yhteyttä myös sähköpostitse.',privacy:'Käytämme lomakkeella antamiasi tietoja yhteydenottoosi vastaamiseen.',select:'Valitse palvelu tai aihe',other:'Muu asia tai en ole varma', note:'Älä lähetä lomakkeella arkaluonteisia henkilötietoja tai asiakkaidesi luottamuksellisia tietoja.', action:'Yritystiedot' },
     privacyPage:{eyebrow:'TIETOSUOJA',title:'Tietosuojaseloste',lead:'Tässä kerromme, miten käsittelemme verkkosivuston kautta saamiamme henkilötietoja.',sections:[
       {title:'Rekisterinpitäjä',body:'Komplyint Oy, Y-tunnus 3588595-3. Yhteydenotot: info@komplyint.fi.'},
@@ -94,11 +95,12 @@ export const content = {
       {title:'Examples are clearly labelled',body:'We identify fictional examples as such and share real client work only with permission.'}
     ]},
     cta:{eyebrow:'GET IN TOUCH',title:'Tell us what you need help with.',text:'Briefly describe the task. We will let you know whether we can help and what information we need to prepare a quote.',button:'Get in touch'},
-    software:{eyebrow:'SOFTWARE DEVELOPMENT & MAINTENANCE',title:'Software development and integrations for business.',lead:'We develop web applications, APIs and enhancements to existing systems. HTML, CSS and limited JavaScript work can be delivered in Finnish; advanced full-stack development is performed in English.',items:[
-      {title:'Internal tools',body:'Tracking tools, forms, calculators and simple information-management systems.'},
-      {title:'Fixes & enhancements',body:'Small features, interface changes, bug fixes and testing.'},
-      {title:'Scoped integrations',body:'Moving data between systems using their documented APIs.'}
-    ],productTitle:'Our software products',productText:'We also develop our own digital products. We keep that work separate from client projects so responsibilities and timelines are clear.',productLink:'Explore Floently',limitTitle:'What is not included in a standard project?',limit:'Ongoing support, maintenance of critical systems and security certification are not included in standard projects. They require a separate agreement.'},
+    software:{eyebrow:'SOFTWARE ENGINEERING · APIs · QUALITY',title:'Maintain, extend and integrate your existing applications.',lead:'We help when software changes take too long, integrations fail or feature backlogs build up. We agree the problem and acceptance criteria, then deliver improvements in manageable steps. Technical software engineering is in English, with Finnish-speaking client coordination by agreement.',items:[
+      {title:'Maintainable applications',body:'Understand existing code, diagnose recurring bugs and implement agreed enhancements without an unnecessary complete rewrite.'},
+      {title:'APIs and system integrations',body:'Improve data exchange, backend services, error handling, testing and integration documentation.'},
+      {title:'Frontend and backend features',body:'Deliver defined tasks in the client’s backlog, following their reviews and engineering practices.'},
+      {title:'Testing within development',body:'Functional QA, test cases, API and regression checks, and suitable automation before release.'}
+    ],productTitle:'Our software products',productText:'We also develop our own digital products. We keep this work separate from client projects so responsibilities and timelines remain clear.',productLink:'Explore Floently',limitTitle:'Agree delivery responsibilities first',limit:'The specialist, technical language, scope, testing and support responsibilities are confirmed before engagement. Critical-system standby and security certification are outside the standard service.'},
     contactPage:{eyebrow:'CONTACT',title:'How can we help?',lead:'Tell us whether you need a project delivered, a specialist for an assignment or help with a smaller task.',formName:'Name (optional)',formEmail:'Email address',formService:'Service or topic',formMessage:'Tell us about the task',send:'Send message',sending:'Sending...',sent:'Thank you. We have received your enquiry.',fail:'Your message could not be sent. You can also contact us by email.',privacy:'We use the details you provide to respond to your enquiry.',select:'Select a service or topic',other:'Something else / not sure',note:'Please do not include sensitive personal data or confidential customer information in this form.',action:'Company details'},
     privacyPage:{eyebrow:'PRIVACY',title:'Privacy notice',lead:'This notice explains how we handle personal data received through the website.',sections:[
       {title:'Controller',body:'Komplyint Oy, Finnish Business ID 3588595-3. Contact: info@komplyint.fi.'},
@@ -127,7 +129,7 @@ export const workingLanguages: Record<Lang, string[]> = {
   "fi": [
     "Suomi ja englanti",
     "Suomi ja englanti",
-    "Suomi: HTML, CSS ja pienet JavaScript-muutokset; laajempi kehitys englanniksi",
+    "Verkkokehityksen tekninen toteutus englanniksi; asiakasviestintä suomeksi sovittaessa",
     "Englanti (tekninen kehitys); asiakasviestintä suomeksi sopimuksen mukaan",
     "Suomi ja englanti",
     "Suomi ja englanti"
@@ -135,7 +137,7 @@ export const workingLanguages: Record<Lang, string[]> = {
   "en": [
     "Finnish and English",
     "Finnish and English",
-    "Finnish for HTML, CSS and limited JavaScript; English for advanced development",
+    "Website engineering in English; Finnish client coordination by agreement",
     "English technical delivery; Finnish client coordination by agreement",
     "Finnish and English",
     "Finnish and English"
@@ -143,7 +145,7 @@ export const workingLanguages: Record<Lang, string[]> = {
   "sv": [
     "Finska och engelska",
     "Finska och engelska",
-    "Finska för HTML, CSS och mindre JavaScript-ändringar; engelska för avancerad utveckling",
+    "Webbutveckling på engelska; kundkontakt på finska enligt överenskommelse",
     "Engelska i tekniskt arbete; finskspråkig kundkontakt enligt överenskommelse",
     "Finska och engelska",
     "Finska och engelska"
@@ -160,7 +162,7 @@ export const consultingCopy = {
     "consultantHeading": "Tarvitsemme asiantuntijan",
     "consultantText": "Voimme ehdottaa englanninkielistä full-stack-kehittäjää tai suomeksi ja englanniksi työskentelevää data-, Microsoft 365- tai QA-osaamista. Pidemmät toimeksiannot sovitaan erikseen.",
     "languageHeading": "Työskentelykieli on palvelukohtainen",
-    "languageLead": "Data, Power BI, Microsoft 365, testaus, projektiseuranta ja dokumentointi: suomi ja englanti. Myös HTML-, CSS- ja pienet JavaScript-muutokset suomeksi. Vaativa full-stack-kehitys englanniksi.",
+    "languageLead": "Data, Power BI, Microsoft 365, testaus, projektiseuranta ja dokumentointi: suomi ja englanti. Ohjelmisto- ja verkkokehitys: englanti, suomenkielinen asiakasviestintä sopimuksen mukaan.",
     "languageNote": "Suomenkielinen asiakasviestintä voidaan yhdistää englanninkieliseen tekniseen toteutukseen, jos asiakkaalle sopii. Ruotsinkielinen sivusto ei tarkoita ruotsinkielistä asiantuntijatyötä.",
     "trainingHeading": "Osaamisen kehittäminen",
     "trainingText": "AWS:n ja Udacityn no-code- ja tekoälyavusteisen BI:n opinnot ovat käynnissä. Koulutusta ei esitetä suoritettuna sertifiointina.",
@@ -191,7 +193,7 @@ export const consultingCopy = {
     "consultantHeading": "Find an IT specialist",
     "consultantText": "We can propose an English-speaking full-stack engineer or Finnish- and English-speaking data, Microsoft 365 and QA expertise. Longer assignments are agreed individually.",
     "languageHeading": "Working language depends on the service",
-    "languageLead": "Data, Power BI, Microsoft 365, QA, project tracking and documentation: Finnish and English. HTML, CSS and limited JavaScript changes also available in Finnish. Advanced full-stack delivery: English.",
+    "languageLead": "Data, Power BI, Microsoft 365, QA, project tracking and documentation: Finnish and English. Software and website engineering: English, with Finnish-speaking client coordination by agreement.",
     "languageNote": "Finnish-speaking customer coordination can accompany English-speaking technical delivery by agreement. A Swedish-language website does not imply Swedish-speaking consultant availability.",
     "trainingHeading": "Professional development",
     "trainingText": "AWS/Udacity no-code and AI-assisted business intelligence studies are in progress. These are not presented as completed certification.",
@@ -222,7 +224,7 @@ export const consultingCopy = {
     "consultantHeading": "Vi behöver en specialist",
     "consultantText": "Vi kan föreslå en engelskspråkig fullstackutvecklare eller data-, Microsoft 365- och testkompetens på finska och engelska. Längre uppdrag avtalas separat.",
     "languageHeading": "Arbetsspråk enligt tjänst",
-    "languageLead": "Data, Power BI, Microsoft 365, testning, projektuppföljning och dokumentation: finska och engelska. HTML-, CSS- och mindre JavaScript-ändringar också på finska. Avancerad fullstackutveckling: engelska.",
+    "languageLead": "Data, Power BI, Microsoft 365, testning, projektuppföljning och dokumentation: finska och engelska. Program- och webbutveckling sker på engelska; finskspråkig kundkontakt enligt överenskommelse.",
     "languageNote": "Finskspråkig kundkontakt kan kombineras med engelskspråkigt tekniskt arbete enligt överenskommelse. En svenskspråkig webbplats innebär inte att konsulterna arbetar på svenska.",
     "trainingHeading": "Kompetensutveckling",
     "trainingText": "Studier i no-code och AI-stödd business intelligence via AWS och Udacity pågår. De anges inte som en slutförd certifiering.",
