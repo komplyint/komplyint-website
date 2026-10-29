@@ -1,5 +1,5 @@
 // F19/F20/C23: editable, original, source-controlled illustrations for
-// three explicitly illustrative work scenarios. No personal or client data.
+// six explicitly illustrative work scenarios. No personal or client data.
 export default function WorkExampleArt({index}:{index:number}){
   return <div className="qh-example-art" aria-hidden="true">
     <svg viewBox="0 0 420 152" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" fill="none">
@@ -44,6 +44,54 @@ export default function WorkExampleArt({index}:{index:number}){
         <rect x="203" y="82" width="121" height="6" rx="3" fill="#5E9574"/>
         <rect x="203" y="95" width="85" height="6" rx="3" fill="#5E9574"/>
         <rect x="302" y="105" width="49" height="15" rx="5" fill="#C74C57"/>
+      </>}
+      {index===3&&<>
+        {/* Maintain and extend an existing application: defective view becomes a reviewed change. */}
+        <rect x="27" y="26" width="151" height="107" rx="9" fill="#0B2220" stroke="#6A987D" />
+        <path d="M27 46H178" stroke="#5F9276"/><circle cx="42" cy="36" r="3" fill="#C74C57"/><circle cx="53" cy="36" r="3" fill="#507D60"/>
+        <rect x="43" y="62" width="77" height="5" rx="2" fill="#5F9472"/><rect x="43" y="74" width="107" height="4" rx="2" fill="#315D48"/>
+        <rect x="43" y="91" width="101" height="20" rx="4" fill="#572A36" stroke="#C74C57"/>
+        <path d="M79 97L87 105M87 97L79 105" stroke="#F6B3BA" strokeWidth="2" strokeLinecap="round"/>
+        <path d="M190 80H229M220 71L229 80L220 89" stroke="#9DD5AF" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"/>
+        <rect x="239" y="26" width="154" height="107" rx="9" fill="#0C3025" stroke="#9ED3AD"/>
+        <path d="M239 46H393" stroke="#70AA87"/><circle cx="254" cy="36" r="3" fill="#81C89B"/><circle cx="265" cy="36" r="3" fill="#507D60"/>
+        <rect x="255" y="62" width="82" height="5" rx="2" fill="#A9DDB8"/><rect x="255" y="75" width="120" height="4" rx="2" fill="#5B9474"/>
+        <rect x="255" y="91" width="116" height="20" rx="4" fill="#23533B" stroke="#7BC59A"/>
+        <path d="M275 101L282 107L294 94" stroke="#B6E8B9" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M305 101H352" stroke="#8CCFA5" strokeWidth="3" strokeLinecap="round"/>
+      </>}
+      {index===4&&<>
+        {/* More dependable API connection between two systems with explicit response handling. */}
+        <rect x="29" y="44" width="101" height="72" rx="10" fill="#E4F2E8" />
+        <path d="M48 59C48 51 112 51 112 59V99C112 111 48 111 48 99Z" fill="#2C7754" />
+        <ellipse cx="80" cy="59" rx="32" ry="10" fill="#84BF99"/>
+        <path d="M48 78C48 90 112 90 112 78M48 96C48 108 112 108 112 96" stroke="#B0DFBF" strokeWidth="2"/>
+        <path d="M130 80H165M251 80H286" stroke="#A5DAB3" strokeWidth="2.5" strokeLinecap="round"/>
+        <path d="M156 74L165 80L156 86M277 74L286 80L277 86" stroke="#A5DAB3" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+        <rect x="166" y="48" width="85" height="65" rx="11" fill="#153B2C" stroke="#7EBF97" strokeWidth="1.5"/>
+        <rect x="181" y="63" width="54" height="14" rx="4" fill="#2C6850"/>
+        <path d="M189 70H227" stroke="#B5E7BE" strokeWidth="3" strokeLinecap="round"/>
+        <path d="M194 93L205 101L222 84" stroke="#B6E8B9" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
+        <rect x="287" y="44" width="105" height="72" rx="10" fill="#E4F2E8"/>
+        <rect x="303" y="61" width="74" height="12" rx="3" fill="#2C7754"/>
+        <rect x="303" y="82" width="54" height="5" rx="2" fill="#73A98B"/>
+        <rect x="303" y="95" width="67" height="5" rx="2" fill="#A8CEB3"/>
+      </>}
+      {index===5&&<>
+        {/* Regression/functional testing: test plan -> checked results -> release. */}
+        <rect x="25" y="27" width="201" height="106" rx="11" fill="#0D3024" stroke="#83B995"/>
+        <rect x="25" y="27" width="201" height="24" rx="10" fill="#22513B"/>
+        <path d="M25 45H226" stroke="#4B8564"/>
+        <circle cx="43" cy="39" r="3" fill="#C74C57"/><circle cx="55" cy="39" r="3" fill="#7DBD94"/>
+        <rect x="43" y="61" width="166" height="16" rx="4" fill="#17422F"/>
+        <path d="M52 69L57 74L65 64" stroke="#B6E8B9" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/><path d="M78 69H197" stroke="#7AAA89" strokeWidth="3" strokeLinecap="round"/>
+        <rect x="43" y="82" width="166" height="16" rx="4" fill="#17422F"/>
+        <path d="M52 90L57 95L65 85" stroke="#B6E8B9" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/><path d="M78 90H171" stroke="#7AAA89" strokeWidth="3" strokeLinecap="round"/>
+        <rect x="43" y="103" width="166" height="16" rx="4" fill="#17422F"/>
+        <path d="M52 111L57 116L65 106" stroke="#B6E8B9" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/><path d="M78 111H182" stroke="#7AAA89" strokeWidth="3" strokeLinecap="round"/>
+        <path d="M235 80H261M252 73L261 80L252 87" stroke="#A1D9B5" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+        <rect x="271" y="41" width="120" height="82" rx="11" fill="#EAF0E9"/>
+        <path d="M291 80L313 100L365 58" stroke="#286D4C" strokeWidth="9" strokeLinecap="round" strokeLinejoin="round"/>
       </>}
       <path d="M18 16H29M18 16V27" stroke="#B6E8B9" strokeOpacity=".5" strokeWidth="1.5"/>
     </svg>
