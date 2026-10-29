@@ -83,7 +83,7 @@ export const svContent = {
       {num:'02',title:'Förenkla hanteringen av förfrågningar',before:'Förfrågningarna kommer via e-post och är svåra att hålla reda på.',after:'Ett formulär samlar förfrågningarna och meddelar den ansvariga personen.'},
       {num:'03',title:'Kontrollera att en webbplats fungerar',before:'Webbplatsen fungerar dåligt i mobilen och kontaktformuläret behöver kontrolleras.',after:'En tydlig lista över åtgärder, överenskomna ändringar och funktionskontroll.'}
     ],
-    softwareEyebrow:'PROGRAMUTVECKLING',
+    featuredSoftwareTitle:'När en befintlig applikation behöver förbättras.', featuredSoftwareText:'I det här fiktiva exemplet undersöks återkommande fel i en applikation. Därefter genomförs överenskomna rättelser och nya funktioner stegvis, med kodgranskning och testning.', dataAnchor:'Data och vardagliga arbetsflöden', softwareAnchor:'Exempel inom programutveckling', softwareLink:'Se exempel inom programutveckling', softwareEyebrow:'PROGRAMUTVECKLING',
     softwareTitle:'Exempel på uppdrag inom programutveckling.',
     softwareLead:'Fiktiva exempel på hur vi kan hjälpa till med vidareutveckling, systemintegrationer och testning inför publicering. Det här är inte genomförda kundprojekt.',
     softwareCases:[
