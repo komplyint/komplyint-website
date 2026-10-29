@@ -32,13 +32,20 @@ def main():
         for phrase in (expected['consulting'][key] for key in ['title','lead','projectHeading','projectText','consultantHeading','consultantText','languageHeading','languageLead','languageNote','trainingHeading','trainingText']):
             if isinstance(phrase,str) and normalized(phrase) not in text:
                 raise AssertionError(f'{lang}: consulting brochure text missing: {phrase}')
-        for key in ['fullstackTitle','fullstackSubtitle','fullstackDescription','fullstackLanguage','dataTitle','dataDescription','dataLanguage']:
-            phrase=expected['capabilities'][key]
+        featured=expected['capabilities']
+        for key in ['title','lead','fullstackTitle','fullstackSubtitle']:
+            phrase=featured[key]
             if normalized(phrase) not in text:
-                raise AssertionError(f'{lang}: featured engineer text missing from brochure: {key}')
-        for phrase in expected['capabilities']['stack']:
-            if normalized(phrase) not in text:
-                raise AssertionError(f'{lang}: technology skill missing from brochure: {phrase}')
+                raise AssertionError(f'{lang}: missing customer solution summary: {key}')
+        if len(featured['problems']) != 4:
+            raise AssertionError(f'{lang}: expected four research-grounded customer challenges')
+        for case in featured['problems']:
+            for key in ['title','problem','solution','outcome']:
+                phrase=case[key]
+                if normalized(phrase) not in text:
+                    raise AssertionError(f'{lang}: customer challenge {key} missing: {phrase}')
+        if any(phrase in text for phrase in ['Yli 5 vuotta','5+ years','Över 5 år']):
+            raise AssertionError(f'{lang}: removed numeric experience claim still shown')
         results.append({'locale':lang,'pages':8,'matched_phrases':len(phrases),'result':'PASS'})
     target=ROOT/'document-preview'
     target.mkdir(exist_ok=True)
