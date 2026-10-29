@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState, type FormEvent } from 'react'
-import { content, services, serviceSlugs, type Lang } from '@/lib/commercial'
+import { content, services, serviceSlugs, consultingCopy, type Lang } from '@/lib/commercial'
 import { pathFor } from '@/lib/site-route'
 import Arrow from '@/components/Arrow'
 import { ui } from '@/lib/i18n-ui'
@@ -11,6 +11,7 @@ export default function ContactForm({lang}:{lang:Lang}) {
   const t=content[lang].contactPage
   const [name,setName]=useState(''),[company,setCompany]=useState(''),[email,setEmail]=useState('')
   const [message,setMessage]=useState(''),[topic,setTopic]=useState(''),[trap,setTrap]=useState('')
+  const [engagementType,setEngagementType]=useState('project'),[workLanguage,setWorkLanguage]=useState('flexible')
   const [status,setStatus]=useState<SubmitState>('idle')
   const [fieldErrors,setFieldErrors]=useState<Record<string,string>>({})
   const requestKey=useRef<string|null>(null)
@@ -19,6 +20,8 @@ export default function ContactForm({lang}:{lang:Lang}) {
     const slug=new URLSearchParams(window.location.search).get('service')
     const i=serviceSlugs.indexOf(slug as typeof serviceSlugs[number])
     if(i>=0)setTopic(serviceSlugs[i])
+    const enquiry=new URLSearchParams(window.location.search).get('engagement')
+    if(enquiry&&['project','consultant','support','other'].includes(enquiry))setEngagementType(enquiry)
   },[])
   useEffect(()=>{if(status==='invalid')formRef.current?.querySelector<HTMLElement>('[aria-invalid="true"]')?.focus()},[status,fieldErrors])
   function resetStatus(){setStatus('idle');setFieldErrors({});requestKey.current=null}
@@ -31,7 +34,7 @@ export default function ContactForm({lang}:{lang:Lang}) {
     const controller=new AbortController()
     const timeout=setTimeout(()=>controller.abort(),28000)
     try{
-      const payload={name,company,email,service:topic||undefined,locale:lang,website:trap,message,idempotencyKey:requestKey.current}
+      const payload={name,company,email,service:topic||undefined,locale:lang,engagementType,workLanguage,website:trap,message,idempotencyKey:requestKey.current}
       const response=await fetch('/api/contact',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload),signal:controller.signal})
       const result=await response.json().catch(()=>null)
       if(response.status===422){
@@ -48,6 +51,7 @@ export default function ContactForm({lang}:{lang:Lang}) {
     }finally{clearTimeout(timeout)}
   }
   const f=ui[lang].form
+  const consulting=consultingCopy[lang]
   return (
     <form className="kc-form" ref={formRef} onSubmit={submit}>
       <div className="kc-form-two">
@@ -63,6 +67,10 @@ export default function ContactForm({lang}:{lang:Lang}) {
         </select>
         {fieldErrors.service&&<span id="kc-contact-service-error" className="kc-field-error">{f.serviceError}</span>}
       </label>
+      <div className="kc-contact-specialist-fields">
+        <label>{consulting.formEngagement}<select value={engagementType} onChange={e=>{setEngagementType(e.target.value);resetStatus()}}>{['project','consultant','support','other'].map((value,i)=><option key={value} value={value}>{consulting.options[i]}</option>)}</select></label>
+        <label>{consulting.formLanguage}<select value={workLanguage} onChange={e=>{setWorkLanguage(e.target.value);resetStatus()}}>{['fi','en','flexible','other'].map((value,i)=><option key={value} value={value}>{consulting.languageOptions[i]}</option>)}</select></label>
+      </div>
       <label>{t.formMessage}<textarea rows={6} maxLength={4500} minLength={10} required value={message} onChange={e=>{setMessage(e.target.value);resetStatus()}} placeholder={f.messageHint} aria-invalid={!!fieldErrors.message} aria-describedby={fieldErrors.message?'kc-contact-message-error':undefined}/>{fieldErrors.message&&<span id="kc-contact-message-error" className="kc-field-error">{f.messageError}</span>}</label>
       <label className="kc-honeypot" aria-hidden="true">Website <input tabIndex={-1} autoComplete="off" value={trap} onChange={e=>setTrap(e.target.value)}/></label>
       <p className="kc-form-privacy">{t.privacy} <a href={pathFor(lang,'privacy')}>{ui[lang].privacyLink}</a>.</p>
