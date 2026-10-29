@@ -22,7 +22,7 @@ test('FI/EN/SV routes and SEO are not implemented by client text replacement',()
   }
 })
 test('Swedish catalogue includes six translated services and privacy content',()=>{
-  for(const phrase of ['Excel, data och rapportering','Microsoft 365 och automatisering','Webbplatser och underhåll','Mindre programlösningar och integrationer','Programvarutestning och kvalitetssäkring','Dokument och kontorsstöd','Personuppgiftsansvarig']){
+  for(const phrase of ['Excel, data och rapportering','Microsoft 365 och automatisering','Webbplatser och underhåll','Programutveckling och integrationer','Programvarutestning och kvalitetssäkring','Dokument och kontorsstöd','Personuppgiftsansvarig']){
     assert.ok(sv.includes(phrase),'Swedish translation missing: '+phrase)
   }
   assert.ok(labels.includes('SIDAN HITTADES INTE'))
