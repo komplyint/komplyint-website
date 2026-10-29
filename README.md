@@ -31,6 +31,7 @@ For future AI agents and sales/website implementers, the owner's latest, **dated
 - [Consulting capabilities and specialist evidence](docs/consulting/CONSULTING_CAPABILITIES_AND_SPECIALISTS_2026-10-29.md) — sanitized developer CV record, owner's BI/QA scope, **Finnish/English vs English-only delivery**, Valentine's agreement to collaborate on suitable projects, potential additional staffing and AI-delivery safeguards.
 - [Service-pack redesign proposal (FI/EN/SV)](docs/consulting/WEBSITE_SERVICE_PACK_PROPOSAL_2026-10-29.md) — proposed broader software development, data, automation/AI-assisted work and expert consulting services; old route compatibility, brochures, translations and deployment acceptance.
 - [Outreach and delivery playbook](docs/consulting/OUTREACH_AND_DELIVERY_PLAYBOOK_2026-10-29.md) — partner/direct-client approaches, project matching, language requirements, B2B follow-up, staffing and AI permissions.
+- [29 Oct live project-lead snapshot](docs/consulting/PROJECT_LEADS_SNAPSHOT_2026-10-29.md) — dated, source-linked English-speaking full-stack opportunities and fit/gap assessment; **not an applications-sent report**.
 
 These are **strategy and implementation instructions, not proof of updated public website copy or deployed services**. Do not commit the unredacted Valentine CV or personal reference contacts to this public repository. For user-authored outreach emails, end at the closing greeting only (such as “Ystävällisin terveisin,”), as the mail client supplies the signature.
 
