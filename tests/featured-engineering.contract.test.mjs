@@ -27,6 +27,9 @@ test('the homepage provides direct downloadable PDF and ZIP files, not fake CTA 
  assert.ok(component.includes('download="Komplyint_Service_Documents.zip"'))
  assert.ok(page.includes('spotlightCopy[lang].pdfFile'))
  assert.ok(brochures.includes('Komplyint_Service_Documents.zip'))
+ const config=read('next.config.js')
+ assert.ok(config.includes("Content-Disposition"))
+ assert.ok(config.includes('application/zip'))
 })
 
 test('the existing approved charcoal / green / red token values are unchanged',()=>{
