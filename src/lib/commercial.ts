@@ -36,6 +36,10 @@ export const content = {
       { num: '01', title: 'Kuukausiraportin selkeyttäminen', before: 'Kuukausiraportti kootaan käsin useasta Excel-tiedostosta.', after: 'Yksi päivitettävä raporttipohja ja selkeät käyttöohjeet.' },
       { num: '02', title: 'Yhteydenottojen käsittelyn helpottaminen', before: 'Yhteydenotot tulevat sähköpostiin, ja niiden seuranta vie aikaa.', after: 'Lomake kokoaa pyynnöt yhteen ja ilmoittaa niistä vastuuhenkilölle.' },
       { num: '03', title: 'Verkkosivujen toimivuuden tarkistaminen', before: 'Sivusto toimii huonosti puhelimella, eikä lomakkeen toimivuudesta ole varmuutta.', after: 'Selkeä korjauslista, sovitut muutokset ja niiden testaus.' }
+    ], softwareEyebrow:'OHJELMISTOKEHITYS', softwareTitle:'Esimerkkejä ohjelmistokehityksen toimeksiannoista.', softwareLead:'Miten autamme, kun sovellusta pitää jatkokehittää, järjestelmiä yhdistää tai julkaisu varmistaa. Nämäkin esimerkit ovat kuvitteellisia.', softwareCases: [
+      { num:'04', title:'Sovelluksen korjaus ja jatkokehitys', before:'Nykyisen sovelluksen virheet toistuvat, ja uusien ominaisuuksien toteutus vie aikaa.', after:'Virheen syy selvitetään, sovittu ominaisuus toteutetaan ja muutokset testataan.' },
+      { num:'05', title:'Rajapinnan toimivuuden parantaminen', before:'Kahden järjestelmän tiedot eivät päivity luotettavasti, ja niitä siirretään käsin.', after:'Rajapinnan tiedonsiirtoa ja virhetilanteiden käsittelyä parannetaan ja testataan.' },
+      { num:'06', title:'Julkaisua edeltävä ohjelmistotestaus', before:'Ohjelmistomuutokset aiheuttavat uusia virheitä, eikä testauksen kattavuus ole selvä.', after:'Tärkeimmät käyttötapaukset testataan, virheet raportoidaan ja sovitut tarkistukset automatisoidaan.' }
     ] },
     process: { eyebrow: 'NÄIN TYÖ ETENEE', title: 'Selvitämme tarpeen ennen työn aloittamista.', steps: [
       {title:'Kartoitus',body:'Kerro, mikä työssä vie aikaa tai ei toimi toivotulla tavalla.'},
@@ -81,6 +85,10 @@ export const content = {
       {num:'01',title:'Make a monthly report easier to update',before:'Staff compile a monthly report manually from several Excel files.',after:'One reusable report template with clear instructions.'},
       {num:'02',title:'Make incoming enquiries easier to manage',before:'Enquiries arrive by email and take time to track.',after:'A form gathers requests in one place and notifies the person responsible.'},
       {num:'03',title:'Check how a business website works',before:'The site is difficult to use on a phone, and the contact form may not be working.',after:'A clear list of fixes, the agreed changes and a round of testing.'}
+    ],softwareEyebrow:'SOFTWARE ENGINEERING',softwareTitle:'Examples of software development assignments.',softwareLead:'How we could help with application enhancements, system integrations and release readiness. These scenarios are illustrative, not completed client projects.',softwareCases:[
+      {num:'04',title:'Fix and extend an existing application',before:'Recurring defects make the existing application hard to change and new features slow to deliver.',after:'Identify the cause, implement an agreed improvement and test the changes.'},
+      {num:'05',title:'Improve an unreliable API integration',before:'Two business systems fail to exchange updates reliably, leading to manual data entry.',after:'Improve API data transfer and error handling, then verify the integration.'},
+      {num:'06',title:'Test software before a release',before:'Application updates introduce regressions and it is unclear what has been tested.',after:'Test critical user journeys, report defects and automate agreed repeatable checks.'}
     ]},
     process:{eyebrow:'HOW WE WORK',title:'We agree on the work before we begin.',steps:[
       {title:'Discuss the task',body:'Tell us what takes too much time or is not working as it should.'},
