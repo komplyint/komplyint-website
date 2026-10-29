@@ -5,9 +5,9 @@ import { writeFile } from 'node:fs/promises'
 // These rendered-page checks are exercised against the real Next.js build in CI.
 // Mock fixtures alone cannot detect copy that has drifted from the website.
 export const REQUIRED_PAGES = [
-  ['/', ['Kun työkalut toimivat, työ sujuu.', 'Apua dataan, automaatioon ja ohjelmistoihin.', 'info@komplyint.fi']],
-  ['/en', ['Digital tools that make everyday work easier.', 'Explore services']],
-  ['/sv', ['Digitala verktyg som förenklar arbetsdagen.', 'Se våra tjänster']],
+  ['/', ['Ohjelmistokehitystä, dataa ja automaatiota yrityksille.', 'Ohjelmistokehitys, data ja digipalvelut samasta paikasta.', 'info@komplyint.fi']],
+  ['/en', ['Software, data and automation expertise for business.', 'Explore services']],
+  ['/sv', ['Programutveckling, data och automatisering för företag.', 'Se våra tjänster']],
   ['/sv/services', ['Hitta en tjänst som passar ert behov.']],
   ['/sv/services/data-reporting', ['Excel, data och rapportering', 'Vad som ingår']],
   ['/sv/work', ['Exempel på hur vi kan hjälpa till.']],
