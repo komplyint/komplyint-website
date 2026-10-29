@@ -1,4 +1,4 @@
-"""Reuse the six-page ReportLab portfolio with the website's FI/EN/SV copy.
+"""Reuse the seven-page ReportLab portfolio with the website's FI/EN/SV copy.
 
 First run: node scripts/export-public-portfolio.mjs
 The source fingerprints are checked before any public output is replaced.
@@ -22,10 +22,10 @@ from reportlab.platypus import Paragraph
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / 'public/downloads'
 W, H = 595.276, 841.89
-INK, DEEP = colors.HexColor('#122A1D'), colors.HexColor('#0D1E17')
-PAPER, MUTED = colors.HexColor('#F7F8F4'), colors.HexColor('#526458')
-GREEN, ACCENT = colors.HexColor('#124C35'), colors.HexColor('#9FCFA8')
-RULE, WHITE = colors.HexColor('#D5E3D9'), colors.HexColor('#F8FCF5')
+INK, DEEP = colors.HexColor('#171B1F'), colors.HexColor('#101418')
+PAPER, MUTED = colors.HexColor('#F7F6F2'), colors.HexColor('#536068')
+GREEN, ACCENT = colors.HexColor('#124C35'), colors.HexColor('#A4DDBA')
+RULE, WHITE = colors.HexColor('#D6DBD8'), colors.HexColor('#FFFFFF')
 NAMES = {'fi':'Komplyint_Palveluesite_FI.pdf', 'en':'Komplyint_Service_Portfolio_EN.pdf', 'sv':'Komplyint_Tjanstebroschyr_SV.pdf'}
 SOURCES = {'src/lib/commercial.ts','src/lib/i18n-sv.ts','src/lib/i18n-ui.ts','src/lib/i18n.ts'}
 for name, filename in [('KRegular','DejaVuSans.ttf'),('KBold','DejaVuSans-Bold.ttf'),('KSerif','DejaVuSerif.ttf')]:
@@ -72,7 +72,7 @@ def top(c, number, t):
     c.setFillColor(ACCENT); c.setFont('KRegular',8); c.drawRightString(W-51,H-46,t['strapline'])
     c.setStrokeColor(RULE); c.line(53,49,W-53,49)
     c.setFillColor(MUTED); c.setFont('KRegular',8); c.drawString(53,30,t['businessIdLine'])
-    c.drawRightString(W-53,30,f'{number:02d} / 06')
+    c.drawRightString(W-53,30,f'{number:02d} / 07')
     c.setFillColor(GREEN); c.setFont('KBold',9); c.drawString(54,H-126,t['kicker'])
 
 
@@ -152,8 +152,46 @@ def detailed(c, t, start, page):
     c.showPage()
 
 
-def finish(c, t):
+
+def consulting_page(c, t):
+    """Dedicated specialist/engagement page; all descriptions come from localized website content."""
     top(c,6,t)
+    e=t['consulting']
+    y=para(c,e['title'],54,H-151,W-108,26,INK,33,font='KSerif')
+    y=para(c,e['lead'],54,y-12,W-108,10,MUTED,16)
+    if y < H-265:
+        raise RuntimeError('Consulting page introduction exceeds its allotted region')
+    gap=18
+    card_width=(W-126)/2
+    top_y=H-275
+    for index,(heading,description) in enumerate([
+        (e['projectHeading'],e['projectText']),
+        (e['consultantHeading'],e['consultantText']),
+    ]):
+        x=54+index*(card_width+gap)
+        c.setFillColor(WHITE);c.setStrokeColor(RULE)
+        c.roundRect(x,top_y-168,card_width,168,10,fill=1,stroke=1)
+        c.setFillColor(GREEN);c.setFont('KBold',9)
+        c.drawString(x+16,top_y-25,f'{index+1:02d}')
+        card_y=para(c,heading,x+16,top_y-40,card_width-32,12.8,INK,18,True)
+        card_y=para(c,description,x+16,card_y-9,card_width-32,9,MUTED,14)
+        if card_y < top_y-158:
+            raise RuntimeError('Consulting engagement card overflows')
+    y=para(c,e['languageHeading'],54,H-490,W-108,16,INK,23,True)
+    y=para(c,e['languageLead'],54,y-12,W-108,10,MUTED,16)
+    y=para(c,e['languageNote'],54,y-10,W-108,8.6,MUTED,13)
+    if y < 160:
+        raise RuntimeError('Working-language description overlaps professional development')
+    c.setStrokeColor(RULE);c.line(54,155,W-54,155)
+    y=para(c,e['trainingHeading'],54,141,W-108,12,GREEN,18,True)
+    y=para(c,e['trainingText'],54,y-7,W-108,9,MUTED,14)
+    if y < 61:
+        raise RuntimeError('Professional development copy overlaps PDF footer')
+    c.showPage()
+
+
+def finish(c, t):
+    top(c,7,t)
     para(c,t['approach'],54,H-151,W-108,27,INK,33,font='KSerif')
     for i,(name,description) in enumerate(t['steps']):
         y = H-210-i*83
@@ -182,6 +220,7 @@ def build(lang, t, path):
     cover(cv,t); overview(cv,t)
     for page,start in [(3,0),(4,2),(5,4)]:
         detailed(cv,t,start,page)
+    consulting_page(cv,t)
     finish(cv,t); cv.save()
 
 
