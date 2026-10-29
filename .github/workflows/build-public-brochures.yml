@@ -34,14 +34,14 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Export canonical website copy and reuse the six-page renderer
+      - name: Export canonical website copy and reuse the seven-page renderer
         run: |
           set -euo pipefail
           npm install --no-audit --no-fund
           node scripts/export-public-portfolio.mjs
           python -m pip install --disable-pip-version-check --quiet reportlab pypdf pymupdf
           python scripts/generate_public_portfolio.py
-      - name: Verify PDF copy parity, ZIP bytes and all 18 rendered pages
+      - name: Verify PDF copy parity, ZIP bytes and all 21 rendered pages
         run: |
           set -euo pipefail
           python scripts/verify_public_brochures.py
@@ -66,7 +66,7 @@ jobs:
             git push origin HEAD:main
             echo "Verified brochures committed. Live-domain publication remains separately verified." >> "$GITHUB_STEP_SUMMARY"
           fi
-      - name: Upload generated PDFs, copy evidence and 18 page renders
+      - name: Upload generated PDFs, copy evidence and 21 page renders
         if: always()
         uses: actions/upload-artifact@v4
         with:
