@@ -245,3 +245,95 @@ export const consultingCopy = {
     ]
   }
 } as const;
+
+
+/** Public delivery capability, with the developer's professional experience
+ * attributed to the project-based specialist rather than the company owner.
+ * Keep locale selection distinct from the language used by the actual developer.
+ */
+export const spotlightCopy = {
+  fi: {
+    heroEyebrow: 'FULL-STACK-OHJELMISTOKEHITYS',
+    heroYears: 'Yli 5 vuotta',
+    heroExperience: 'ammatillista ohjelmistokehityskokemusta',
+    heroStack: 'React · Angular · Vue · Node.js',
+    eyebrow: 'OHJELMISTOKEHITYSOSAAMISEMME',
+    title: 'Kokenutta full-stack-kehitystä yrityksesi tarpeisiin.',
+    lead: 'Tarjoamme projektikohtaisesti ohjelmistokehitysosaamista modernien verkkosovellusten, rajapintojen ja nykyisten järjestelmien jatkokehitykseen. Mukana on yli viiden vuoden ammattikokemuksen omaava full-stack-asiantuntija.',
+    fullstackTitle: 'Full-stack-ohjelmistokehitys',
+    fullstackSubtitle: 'Yli 5 vuoden ammatillinen kokemus',
+    fullstackDescription: 'Käyttöliittymät, taustapalvelut, API-rajapinnat, integraatiot ja olemassa olevien ohjelmistojen kehitys. Osaaminen perustuu asiantuntijan aiempaan työkokemukseen, ei Komplyint Oy:n väitettyihin asiakasreferensseihin.',
+    stack: ['TypeScript', 'JavaScript', 'Node.js', 'React', 'Angular', 'Vue.js', 'C# / .NET', 'REST API:t', 'Next.js', 'Azure Functions', 'Kafka', 'Docker'],
+    fullstackLanguage: 'Tekninen työskentelykieli: englanti. Asiakasyhteydenpito onnistuu tarvittaessa suomeksi erikseen sovittaessa.',
+    dataTitle: 'Data, Microsoft 365 ja testaus',
+    dataSubtitle: 'Palvelut suomeksi ja englanniksi',
+    dataDescription: 'Power BI -raportointi, Excel, Power Query, SQL/Python, SharePoint, Power Automate, ohjelmistotestaus, Jira-projektiseuranta ja dokumentointi.',
+    dataStack: ['Power BI', 'Excel', 'Power Query', 'SQL', 'Python', 'SharePoint', 'Power Automate', 'QA', 'Jira'],
+    dataLanguage: 'Työskentelykielet: suomi ja englanti. Myös HTML-, CSS- ja pienet JavaScript-verkkosivutyöt onnistuvat suomeksi.',
+    caveat: 'Asiantuntijan saatavuus, tehtävän vaatimukset ja toteutustapa vahvistetaan ennen toimeksiantoa. Sivuston ruotsinkielisyys ei tarkoita ruotsinkielistä asiantuntijapalvelua.',
+    actionSoftware: 'Tutustu ohjelmistokehitykseen',
+    actionProject: 'Kysy kehitysprojektista',
+    actionDownload: 'Lataa palveluesite (PDF)',
+    actionPackage: 'Lataa kaikki esitteet (ZIP)',
+    portfolioHeading: 'Lataa uusi palveluvalikoimamme',
+    portfolioLead: 'Ohjelmistokehitys, TypeScript, Node.js, React, Angular, Vue, data, Microsoft 365 ja testaus. Esitteet suomeksi, englanniksi ja ruotsiksi.',
+    pdfFile: '/downloads/Komplyint_Palveluesite_FI.pdf',
+    pdfName: 'Komplyint_Palveluesite_FI.pdf'
+  },
+  en: {
+    heroEyebrow: 'FULL-STACK SOFTWARE ENGINEERING',
+    heroYears: '5+ years',
+    heroExperience: 'of professional software engineering',
+    heroStack: 'React · Angular · Vue · Node.js',
+    eyebrow: 'OUR SOFTWARE ENGINEERING CAPABILITIES',
+    title: 'Experienced full-stack engineering for your next project.',
+    lead: 'We can provide project-based expertise in modern web applications, APIs, integrations and existing-system development. Our collaborating full-stack engineer has more than five years of professional software experience.',
+    fullstackTitle: 'Full-stack software engineering',
+    fullstackSubtitle: '5+ years of professional experience',
+    fullstackDescription: 'Frontends, backends, APIs, integrations and improvements to production software. This experience belongs to the collaborating specialist and is not presented as Komplyint Oy client work.',
+    stack: ['TypeScript', 'JavaScript', 'Node.js', 'React', 'Angular', 'Vue.js', 'C# / .NET', 'REST APIs', 'Next.js', 'Azure Functions', 'Kafka', 'Docker'],
+    fullstackLanguage: 'Technical working language: English. Finnish-speaking client coordination is available by agreement.',
+    dataTitle: 'Data, Microsoft 365 & QA',
+    dataSubtitle: 'Available in Finnish and English',
+    dataDescription: 'Power BI reporting, Excel, Power Query, SQL/Python, SharePoint, Power Automate, functional QA, Jira project tracking and documentation.',
+    dataStack: ['Power BI', 'Excel', 'Power Query', 'SQL', 'Python', 'SharePoint', 'Power Automate', 'QA', 'Jira'],
+    dataLanguage: 'Working languages: Finnish and English. HTML, CSS and limited JavaScript website updates can also be delivered in Finnish.',
+    caveat: 'Specialist availability, technical requirements and engagement terms are confirmed before accepting an assignment. The Swedish website edition does not imply Swedish-speaking consultant availability.',
+    actionSoftware: 'Explore software engineering',
+    actionProject: 'Discuss a development project',
+    actionDownload: 'Download service portfolio (PDF)',
+    actionPackage: 'Download all brochures (ZIP)',
+    portfolioHeading: 'Download our expanded service portfolio',
+    portfolioLead: 'Software engineering, TypeScript, Node.js, React, Angular, Vue, data, Microsoft 365 and QA. Available as Finnish, English and Swedish brochures.',
+    pdfFile: '/downloads/Komplyint_Service_Portfolio_EN.pdf',
+    pdfName: 'Komplyint_Service_Portfolio_EN.pdf'
+  },
+  sv: {
+    heroEyebrow: 'FULLSTACKUTVECKLING',
+    heroYears: 'Över 5 år',
+    heroExperience: 'av yrkeserfarenhet inom programutveckling',
+    heroStack: 'React · Angular · Vue · Node.js',
+    eyebrow: 'VÅR KOMPETENS INOM PROGRAMUTVECKLING',
+    title: 'Erfaren fullstackutveckling för era projekt.',
+    lead: 'Vi kan erbjuda projektbaserad kompetens inom moderna webbapplikationer, API:er, integrationer och vidareutveckling. Vår samarbetande fullstackutvecklare har över fem års yrkeserfarenhet.',
+    fullstackTitle: 'Fullstackutveckling',
+    fullstackSubtitle: 'Över 5 års yrkeserfarenhet',
+    fullstackDescription: 'Användargränssnitt, bakgrundstjänster, API:er och vidareutveckling av befintlig programvara. Erfarenheten hör till den samarbetande specialisten, inte till kundprojekt som Komplyint Oy skulle ha levererat.',
+    stack: ['TypeScript', 'JavaScript', 'Node.js', 'React', 'Angular', 'Vue.js', 'C# / .NET', 'REST API:er', 'Next.js', 'Azure Functions', 'Kafka', 'Docker'],
+    fullstackLanguage: 'Arbetsspråket för den tekniska utvecklingen är engelska. Kundkontakten kan skötas på finska enligt överenskommelse.',
+    dataTitle: 'Data, Microsoft 365 och testning',
+    dataSubtitle: 'På finska och engelska',
+    dataDescription: 'Power BI-rapportering, Excel, Power Query, SQL/Python, SharePoint, Power Automate, funktionstestning, projektuppföljning i Jira och dokumentation.',
+    dataStack: ['Power BI', 'Excel', 'Power Query', 'SQL', 'Python', 'SharePoint', 'Power Automate', 'QA', 'Jira'],
+    dataLanguage: 'Arbetsspråk: finska och engelska. HTML-, CSS- och mindre JavaScript-ändringar på webbplatser kan också göras på finska.',
+    caveat: 'Tillgänglighet, krav och avtalsvillkor bekräftas före uppdraget. Den svenskspråkiga webbplatsen innebär inte att vi erbjuder svenskspråkiga konsulter.',
+    actionSoftware: 'Läs om programutveckling',
+    actionProject: 'Diskutera ett utvecklingsprojekt',
+    actionDownload: 'Ladda ner tjänstebroschyren (PDF)',
+    actionPackage: 'Ladda ner alla broschyrer (ZIP)',
+    portfolioHeading: 'Ladda ner vår uppdaterade tjänsteportfölj',
+    portfolioLead: 'Programutveckling, TypeScript, Node.js, React, Angular, Vue, data, Microsoft 365 och testning. Broschyrer på finska, engelska och svenska.',
+    pdfFile: '/downloads/Komplyint_Tjanstebroschyr_SV.pdf',
+    pdfName: 'Komplyint_Tjanstebroschyr_SV.pdf'
+  }
+} as const
