@@ -27,8 +27,8 @@ def inspect_portfolio(filename: str) -> dict:
     if not raw.startswith(b"%PDF-") or len(raw) < 10_000:
         raise AssertionError(f"Missing or implausibly small PDF: {filename}")
     with pymupdf.open(stream=raw, filetype="pdf") as document:
-        if document.needs_pass or len(document) != 7:
-            raise AssertionError(f"Expected unencrypted seven-page brochure: {filename}")
+        if document.needs_pass or len(document) != 8:
+            raise AssertionError(f"Expected unencrypted eight-page brochure: {filename}")
         page_records = []
         for index, page in enumerate(document, start=1):
             if page.rect.width < 200 or page.rect.height < 200:
