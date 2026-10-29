@@ -23,18 +23,18 @@ export const svServices = [
   {
     title:'Webbplatser och underhåll',
     intro:'Förbättra befintliga webbplatser, formulär och innehåll utan att börja om från början.',
-    examples:['Förbättring av innehåll, layout och användning i mobilen','Testning av kontaktformulär och webbplatsens viktigaste funktioner','Mindre ändringar på webbplatsen och uppdatering av innehåll'],
+    examples:['Förbättring av innehåll, layout och användning i mobilen','Testning av kontaktformulär och webbplatsens viktigaste funktioner','HTML-, CSS- och mindre JavaScript-ändringar på finska'],
     deliverable:'Överenskomna ändringar, funktionskontroll och skriftliga anvisningar.',
     boundaries:'Vi kommer separat överens om webbhotellet, säkerheten och eventuella driftavbrott. Jour dygnet runt ingår inte.',
     tools:'HTML · CSS · JavaScript · WordPress / lämpliga plattformar',
   },
   {
-    title:'Mindre programlösningar och integrationer',
-    intro:'Små program och integrationer för konkreta behov i företaget.',
-    examples:['Interna uppföljningsverktyg, formulär och räknare','Mindre webbapplikationer och förbättringar av användargränssnitt','Överföring av information mellan system via tillgängliga gränssnitt'],
+    title:'Programutveckling och integrationer',
+    intro:'Webbapplikationer, API:er och vidareutveckling av befintliga system.',
+    examples:['Interna uppföljningsverktyg, formulär och räknare','Gränssnitt i React, Angular och Vue samt förbättringar av befintliga applikationer','Överföring av information mellan system via tillgängliga gränssnitt'],
     deliverable:'De funktioner och tester vi kommit överens om samt anvisningar för eventuell källkod och driftsättning.',
     boundaries:'Stora system, kritiska integrationer och support dygnet runt bedöms separat.',
-    tools:'Webbappar · API:er · Python · JavaScript / TypeScript',
+    tools:'TypeScript · Node.js · React · Angular · Vue · C#/.NET · API:er',
   },
   {
     title:'Programvarutestning och kvalitetssäkring',
@@ -59,14 +59,14 @@ export const svContent = {
   tagline:'DIGITALA TJÄNSTER FRÅN FINLAND',
   contactButton:'Kontakta oss',explore:'Se våra tjänster',email:'E-post',
   hero:{
-    label:'DATA · AUTOMATISERING · PROGRAMVARA',
-    title:'Digitala verktyg som förenklar arbetsdagen.',
+    label:'PROGRAMUTVECKLING · DATA · AUTOMATISERING · IT-KONSULTER',
+    title:'Programutveckling, data och automatisering för företag.',
     text:'Vi hjälper företag att förbättra rapporteringen, automatisera återkommande arbetsuppgifter och utveckla mindre programlösningar. Vi går igenom behoven tillsammans och kommer överens om arbetets omfattning innan vi börjar.',
     point1:'Tydligt avgränsat uppdrag',point2:'Överenskommet resultat',point3:'Test före överlämning'
   },
   intro:{
     eyebrow:'VAD VI GÖR',
-    title:'Praktisk hjälp med data, automatisering och programvara.',
+    title:'Programutveckling, analys och digitala tjänster.',
     text:'Vi rättar till Excel-rapporter, förbättrar arbetsflöden i Microsoft 365 och utvecklar webbplatser och mindre applikationer. Vi hjälper också till med enskilda, tydligt avgränsade uppdrag.'
   },
   area:{
@@ -110,7 +110,7 @@ export const svContent = {
   },
   software:{
     eyebrow:'PROGRAMVARUUTVECKLING OCH UNDERHÅLL',
-    title:'Små programlösningar för företagets behov.',
+    title:'Programutveckling och integrationer för företag.',
     lead:'Vi utvecklar mindre digitala verktyg och förbättrar befintliga webbapplikationer. Vi kommer i förväg överens om vad som ska göras, hur lösningen tas i bruk och vem som ansvarar för underhållet.',
     items:[
       {title:'Interna verktyg',body:'Uppföljningsverktyg, formulär, räknare och enkla verktyg för informationshantering.'},
