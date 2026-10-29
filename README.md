@@ -23,6 +23,17 @@ Company: Komplyint Oy · Business ID 3588595-3 · D-U-N-S 369283279.
 
 The Zoho Mail Free admin screenshot dated 28 October 2026 shows one mailbox (`komplyint@komplyint.fi`) and 15 aliases. The complete record, channel ownership and still-pending delivery checks are in [docs/EMAIL_ADDRESSES_2026-10-28.md](docs/EMAIL_ADDRESSES_2026-10-28.md). The canonical application register is [src/lib/contact-addresses.ts](src/lib/contact-addresses.ts), and the contact page reuses the existing FI/EN/SV site and form to list relevant department addresses. Creation of an alias is **not** proof of live delivery.
 
+
+## Consulting services and project-based specialists — 29 October 2026
+
+For future AI agents and sales/website implementers, the owner's latest, **dated** company-positioning decisions are recorded in:
+
+- [Consulting capabilities and specialist evidence](docs/consulting/CONSULTING_CAPABILITIES_AND_SPECIALISTS_2026-10-29.md) — sanitized developer CV record, owner's BI/QA scope, **Finnish/English vs English-only delivery**, Valentine's agreement to collaborate on suitable projects, potential additional staffing and AI-delivery safeguards.
+- [Service-pack redesign proposal (FI/EN/SV)](docs/consulting/WEBSITE_SERVICE_PACK_PROPOSAL_2026-10-29.md) — proposed broader software development, data, automation/AI-assisted work and expert consulting services; old route compatibility, brochures, translations and deployment acceptance.
+- [Outreach and delivery playbook](docs/consulting/OUTREACH_AND_DELIVERY_PLAYBOOK_2026-10-29.md) — partner/direct-client approaches, project matching, language requirements, B2B follow-up, staffing and AI permissions.
+
+These are **strategy and implementation instructions, not proof of updated public website copy or deployed services**. Do not commit the unredacted Valentine CV or personal reference contacts to this public repository. For user-authored outreach emails, end at the closing greeting only (such as “Ystävällisin terveisin,”), as the mail client supplies the signature.
+
 ## Validation
 
 Run npm ci && npm run build. The build runs public-access and release-contract unit tests. The site-preview-check GitHub workflow runs browser, accessibility, motion and document checks. Lighthouse and visual brochure review are separate workflows.
