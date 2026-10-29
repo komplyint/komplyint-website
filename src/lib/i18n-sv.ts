@@ -71,7 +71,7 @@ export const svContent = {
   },
   area:{
     eyebrow:'VÅRA TJÄNSTER',title:'Hitta en tjänst som passar ert behov.',
-    text:'Vi hjälper till med vidareutveckling av programvara, systemintegrationer och testning samt data, rapportering och Microsoft 365. Välj en tjänst eller läs våra fiktiva uppdragsexempel.',
+    text:'Programutveckling, API:er, testning, Power BI och Microsoft 365. Läs om våra tjänster och hitta ett upplägg som passar.',
     examples:'Exempel på uppdrag',delivered:'Det här får ni',boundaries:'Det här kommer vi överens om',
     tools:'Verktyg vi använder',help:'Fråga oss om tjänsten'
   },
