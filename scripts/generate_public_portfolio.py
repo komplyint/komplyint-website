@@ -108,7 +108,7 @@ def service_card(c, service, index, x, y, width, height, url):
     c.roundRect(x,y-height,width,height,11,fill=1,stroke=1)
     c.setFillColor(GREEN); c.setFont('KBold',9); c.drawString(x+18,y-29,f'{index:02d}')
     bottom = para(c,title,x+18,y-45,width-35,12.4,INK,18,True)
-    bottom = para(c,intro,x+18,bottom-9,width-36,9,MUTED,15)
+    bottom = para(c,intro,x+18,bottom-9,width-36,8.8,MUTED,13.7)
     if bottom < y-height+10:
         raise RuntimeError(f'Service overview card {index} clips text')
     c.linkURL(url,(x,y-height,x+width,y),relative=0)
@@ -119,7 +119,7 @@ def overview(c, t):
     y = para(c,t['overview'],54,H-151,W-108,27,INK,33,font='KSerif')
     y = para(c,t['overviewLead'],54,y-12,W-110,10.5,MUTED,16)
     grid_top = min(H-252,y-24)
-    width, height, gap = (W-127)/2, 153, 18
+    width, height, gap = (W-127)/2, 163, 10
     for i,service in enumerate(t['services']):
         x = 54+(i%2)*(width+19)
         y = grid_top-(i//2)*(height+gap)
