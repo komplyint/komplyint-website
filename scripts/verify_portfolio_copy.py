@@ -18,8 +18,8 @@ def main():
         reader=PdfReader(ROOT/'public/downloads'/name)
         text=normalized(' '.join(page.extract_text() or '' for page in reader.pages))
         expected=source['locales'][lang]
-        if len(reader.pages)!=7:
-            raise AssertionError(f'{lang}: expected seven pages')
+        if len(reader.pages)!=8:
+            raise AssertionError(f'{lang}: expected eight pages')
         if reader.trailer['/Root'].get('/Lang') != expected['language']:
             raise AssertionError(f'{lang}: wrong PDF document language')
         phrases=[expected[key] for key in ['title','subtitle','lead','strapline','businessIdLine','overviewLead','contacts','contactcopy','note']]
@@ -32,7 +32,14 @@ def main():
         for phrase in (expected['consulting'][key] for key in ['title','lead','projectHeading','projectText','consultantHeading','consultantText','languageHeading','languageLead','languageNote','trainingHeading','trainingText']):
             if isinstance(phrase,str) and normalized(phrase) not in text:
                 raise AssertionError(f'{lang}: consulting brochure text missing: {phrase}')
-        results.append({'locale':lang,'pages':7,'matched_phrases':len(phrases),'result':'PASS'})
+        for key in ['fullstackTitle','fullstackSubtitle','fullstackDescription','fullstackLanguage','dataTitle','dataDescription','dataLanguage']:
+            phrase=expected['capabilities'][key]
+            if normalized(phrase) not in text:
+                raise AssertionError(f'{lang}: featured engineer text missing from brochure: {key}')
+        for phrase in expected['capabilities']['stack']:
+            if normalized(phrase) not in text:
+                raise AssertionError(f'{lang}: technology skill missing from brochure: {phrase}')
+        results.append({'locale':lang,'pages':8,'matched_phrases':len(phrases),'result':'PASS'})
     target=ROOT/'document-preview'
     target.mkdir(exist_ok=True)
     evidence={'schema':'komplyint-portfolio-copy-parity.v1','results':results,'sourceHashes':source['sourceHashes'],'independent_native_review':'NOT_RECORDED'}

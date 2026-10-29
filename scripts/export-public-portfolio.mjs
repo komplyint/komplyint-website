@@ -31,7 +31,7 @@ try {
   }
   assert.equal(program.emit().emitSkipped, false, 'Website dictionaries must compile')
   const require = createRequire(import.meta.url)
-  const {content, services, serviceSlugs, contactEmail, workingLanguages, consultingCopy} = require(join(temporary,'commercial.js'))
+  const {content, services, serviceSlugs, contactEmail, workingLanguages, consultingCopy, spotlightCopy} = require(join(temporary,'commercial.js'))
   const {ui} = require(join(temporary,'i18n-ui.js'))
   const locales = {}
   for (const lang of ['fi','en','sv']) {
@@ -47,7 +47,7 @@ try {
       approach:t.process.eyebrow,
       steps:t.process.steps.map((step,i)=>[String(i+1).padStart(2,'0')+' / '+step.title,step.body]),
       contacts:t.cta.title, contactcopy:t.cta.text, note:t.footerNote,
-      consulting:consultingCopy[lang], workingLanguages:workingLanguages[lang],
+      consulting:consultingCopy[lang], workingLanguages:workingLanguages[lang], capabilities:spotlightCopy[lang],
       deliveryLabel:u.serviceDetail.method, email:contactEmail,
       serviceUrls:serviceSlugs.map(slug=>'https://www.komplyint.fi'+(lang==='fi'?'':'/'+lang)+'/services/'+slug),
       services:services[lang].map(s=>[s.title,s.intro,s.examples,s.deliverable,s.boundaries]),

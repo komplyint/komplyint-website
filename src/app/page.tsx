@@ -10,6 +10,8 @@ import FeaturedWork from '@/components/FeaturedWork'
 import WorkExampleArt from '@/components/WorkExampleArt'
 import PublicBrochures from '@/components/PublicBrochures'
 import ConsultingEngagement from '@/components/ConsultingEngagement'
+import ExpertiseSpotlight from '@/components/ExpertiseSpotlight'
+import {spotlightCopy} from '@/lib/commercial'
 import ServiceCard from '@/components/ServiceCard'
 import SectionIntro from '@/components/SectionIntro'
 import ServiceExplorer from '@/components/ServiceExplorer'
@@ -161,15 +163,16 @@ function Home({lang}:{lang:Lang}) {
           <p className="kc-hero-tag">{t.hero.label}</p>
           <h1>{t.hero.title}</h1>
           <p className="kc-hero-lead">{t.hero.text}</p>
-          <div className="kc-hero-buttons"><a className="kc-button kc-button-primary" href={pathFor(lang,'contact')}>{t.contactButton}<Arrow /></a><a className="kc-button kc-button-ghost" href={pathFor(lang,'services')}>{t.explore}<span aria-hidden="true">↓</span></a></div>
+          <div className="kc-hero-buttons"><a className="kc-button kc-button-primary" href={pathFor(lang,'contact')}>{t.contactButton}<Arrow /></a><a className="kc-button kc-button-ghost" href={pathFor(lang,'services')}>{t.explore}<span aria-hidden="true">↓</span></a><a className="kc-button kc-button-ghost kc-hero-download" href={spotlightCopy[lang].pdfFile} download={spotlightCopy[lang].pdfName}>{spotlightCopy[lang].actionDownload}<span aria-hidden="true">↓</span></a></div>
         </div>
-        <div className="kc-hero-side"><div className="kc-side-marker">K / 01</div><div className="kc-hero-side-label">{ui[lang].heroPrinciples}</div><span>{t.hero.point1}</span><span>{t.hero.point2}</span><span>{t.hero.point3}</span></div>
+        <div className="kc-hero-side kc-hero-engineering"><p className="kc-hero-engineering-label">{spotlightCopy[lang].heroEyebrow}</p><strong className="kc-hero-engineering-years">{spotlightCopy[lang].heroYears}</strong><p className="kc-hero-engineering-experience">{spotlightCopy[lang].heroExperience}</p><p className="kc-hero-engineering-stack">{spotlightCopy[lang].heroStack}</p></div>
       </div>
       <VideoHero lang={lang}/>
       <div className="kc-hero-shade" />
       <div className="kc-hero-edge" />
     </section>
 
+    <ExpertiseSpotlight lang={lang}/>
     <section className="kc-section kc-section-intro"><div className="kc-shell">
       <SectionIntro {...t.intro} />
       <div className="kc-service-grid">{services[lang].map((service,i)=><ServiceCard key={service.title} lang={lang} service={service} index={i}/>)}</div>
@@ -197,6 +200,7 @@ function ServicesPage({lang}:{lang:Lang}) {
 function SoftwarePage({lang}:{lang:Lang}) {
   const t=content[lang].software
   return <><div className="kc-page-top"><div className="kc-shell"><p className="kc-eyebrow">{t.eyebrow}</p><h1>{t.title}</h1><p>{t.lead}</p><a className="kc-button kc-button-primary" href={pathFor(lang,'contact')}>{content[lang].contactButton}<Arrow /></a></div></div>
+    <ExpertiseSpotlight lang={lang}/>
     <section className="kc-section"><div className="kc-shell"><div className="kc-software-grid">{t.items.map((s,i)=><article key={s.title} className="kc-software-card"><span>{String(i+1).padStart(2,'0')}</span><h2>{s.title}</h2><p>{s.body}</p></article>)}</div><div className="kc-limit"><h3>{t.limitTitle}</h3><p>{t.limit}</p></div></div></section>
     <section className="kc-section kc-muted-section"><div className="kc-shell kc-product"><div><p className="kc-eyebrow">{ui[lang].productDevelopment}</p><h2>{t.productTitle}</h2><p>{t.productText}</p></div><a href="https://floently.com/learn" target="_blank" rel="noopener noreferrer" className="kc-text-link">{t.productLink}<Arrow /></a></div></section><ConsultingEngagement lang={lang}/><CTA lang={lang}/></>
 }
