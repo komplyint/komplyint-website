@@ -7,6 +7,7 @@ import { navPages, services, content, serviceSlugs, contactEmail, duns, type Pag
 import ServiceDetail from '@/components/ServiceDetail'
 import Arrow from '@/components/Arrow'
 import FeaturedWork from '@/components/FeaturedWork'
+import WorkExamplesBridge from '@/components/WorkExamplesBridge'
 import WorkExampleArt from '@/components/WorkExampleArt'
 import PublicBrochures from '@/components/PublicBrochures'
 import ConsultingEngagement from '@/components/ConsultingEngagement'
@@ -145,7 +146,7 @@ export default function KomplyintWebsite() {
       <footer className="kc-footer">
         <div className="kc-shell kc-footer-top">
           <div className="kc-footer-brand"><img src="/logo.svg" alt="Komplyint Oy" /><p>{t.footerDescription}</p></div>
-          <div className="kc-footer-links"><strong>{l.site}</strong>{[...navPages,'software' as Page,'privacy' as Page,'accessibility' as Page].map(item=><a key={item} href={pathFor(lang,item)}>{t.navigation[item]}</a>)}<a href="/downloads/Komplyint_Service_Documents.zip" download>{l.downloadBrochures}</a></div>
+          <div className="kc-footer-links"><strong>{l.site}</strong>{[...navPages,'privacy' as Page,'accessibility' as Page].map(item=><a key={item} href={pathFor(lang,item)}>{t.navigation[item]}</a>)}<a href="/downloads/Komplyint_Service_Documents.zip" download>{l.downloadBrochures}</a></div>
           <div className="kc-footer-links"><strong>{l.contact}</strong><a href="mailto:info@komplyint.fi">info@komplyint.fi</a><a href={pathFor(lang,'contact')}>{t.contactButton}</a><span>{l.locationName}</span><span>D‑U‑N‑S® {duns}</span><label className="qh-appearance"><span>{l.appearance}</span><select aria-label={l.appearance} value={appearance} onChange={e=>setTheme(e.target.value as 'dark'|'light'|'system')}><option value="dark">{l.dark}</option><option value="light">{l.light}</option><option value="system">{l.system}</option></select></label></div>
         </div>
         <div className="kc-shell kc-footer-bottom"><span>© {new Date().getFullYear()} {t.footer}</span><span>{t.footerNote}</span></div>
@@ -190,18 +191,41 @@ function Home({lang}:{lang:Lang}) {
 
 function Examples({lang}:{lang:Lang}) {
   const t=content[lang].impact
-  return <section className="kc-section kc-examples"><div className="kc-shell"><SectionIntro eyebrow={t.eyebrow} title={t.title} text={t.disclaimer}/><div className="kc-example-grid">{t.cases.map((c,i)=><article key={c.num} className="kc-example"><span className="kc-example-num">{c.num}</span><h3>{c.title}</h3><WorkExampleArt index={i}/><div className="kc-example-line"><span>{ui[lang].before}</span><p>{c.before}</p></div><div className="kc-example-line"><span>{ui[lang].after}</span><p>{c.after}</p></div></article>)}</div></div></section>
+  return <section className="kc-section kc-examples"><div className="kc-shell">
+    <nav className="kc-example-page-index" aria-label={ui[lang].workTitle}>
+      <a href="#data-examples">{t.dataAnchor}<span aria-hidden="true">↓</span></a>
+      <a href="#software-examples">{t.softwareAnchor}<span aria-hidden="true">↓</span></a>
+    </nav>
+    <div id="data-examples" className="kc-example-group">
+      <SectionIntro eyebrow={t.eyebrow} title={t.title} text={t.disclaimer}/>
+      <div className="kc-example-grid">{t.cases.map((c,i)=><article key={c.num} className="kc-example">
+        <span className="kc-example-num">{c.num}</span><h3>{c.title}</h3>
+        <WorkExampleArt index={i}/>
+        <div className="kc-example-line"><span>{ui[lang].before}</span><p>{c.before}</p></div>
+        <div className="kc-example-line"><span>{ui[lang].after}</span><p>{c.after}</p></div>
+      </article>)}</div>
+    </div>
+    <div id="software-examples" className="kc-example-group kc-example-group-software">
+      <SectionIntro eyebrow={t.softwareEyebrow} title={t.softwareTitle} text={t.softwareLead}/>
+      <div className="kc-example-grid">{t.softwareCases.map((c,i)=><article key={c.num} className="kc-example kc-example-software">
+        <span className="kc-example-num">{c.num}</span><h3>{c.title}</h3>
+        <WorkExampleArt index={i+3}/>
+        <div className="kc-example-line"><span>{ui[lang].before}</span><p>{c.before}</p></div>
+        <div className="kc-example-line"><span>{ui[lang].after}</span><p>{c.after}</p></div>
+      </article>)}</div>
+    </div>
+  </div></section>
 }
 function ServicesPage({lang}:{lang:Lang}) {
   const t=content[lang]
-  return <><div className="kc-page-top"><div className="kc-shell"><p className="kc-eyebrow">{t.area.eyebrow}</p><h1>{t.area.title}</h1><p>{t.area.text}</p></div></div><section className="kc-section kc-muted-section kc-services-detail" id="service-explorer"><div className="kc-shell"><ServiceExplorer lang={lang} showIntro={false}/></div></section><ConsultingEngagement lang={lang}/><Process lang={lang}/><Trust lang={lang}/><PublicBrochures lang={lang}/><CTA lang={lang}/></>
+  return <><div className="kc-page-top"><div className="kc-shell"><p className="kc-eyebrow">{t.area.eyebrow}</p><h1>{t.area.title}</h1><p>{t.area.text}</p></div></div><section className="kc-section kc-muted-section kc-services-detail" id="service-explorer"><div className="kc-shell"><ServiceExplorer lang={lang} showIntro={false}/></div></section><WorkExamplesBridge lang={lang}/><ConsultingEngagement lang={lang}/><Process lang={lang}/><Trust lang={lang}/><PublicBrochures lang={lang}/><CTA lang={lang}/></>
 }
 function SoftwarePage({lang}:{lang:Lang}) {
   const t=content[lang].software
   return <><div className="kc-page-top"><div className="kc-shell"><p className="kc-eyebrow">{t.eyebrow}</p><h1>{t.title}</h1><p>{t.lead}</p><a className="kc-button kc-button-primary" href={pathFor(lang,'contact')}>{content[lang].contactButton}<Arrow /></a></div></div>
     <ExpertiseSpotlight lang={lang}/>
     <section className="kc-section"><div className="kc-shell"><div className="kc-software-grid">{t.items.map((s,i)=><article key={s.title} className="kc-software-card"><span>{String(i+1).padStart(2,'0')}</span><h2>{s.title}</h2><p>{s.body}</p></article>)}</div><div className="kc-limit"><h3>{t.limitTitle}</h3><p>{t.limit}</p></div></div></section>
-    <section className="kc-section kc-muted-section"><div className="kc-shell kc-product"><div><p className="kc-eyebrow">{ui[lang].productDevelopment}</p><h2>{t.productTitle}</h2><p>{t.productText}</p></div><a href="https://floently.com/learn" target="_blank" rel="noopener noreferrer" className="kc-text-link">{t.productLink}<Arrow /></a></div></section><ConsultingEngagement lang={lang}/><CTA lang={lang}/></>
+    <section className="kc-section kc-muted-section"><div className="kc-shell kc-product"><div><p className="kc-eyebrow">{ui[lang].productDevelopment}</p><h2>{t.productTitle}</h2><p>{t.productText}</p></div><a href="https://floently.com/learn" target="_blank" rel="noopener noreferrer" className="kc-text-link">{t.productLink}<Arrow /></a></div></section><WorkExamplesBridge lang={lang}/><ConsultingEngagement lang={lang}/><CTA lang={lang}/></>
 }
 function ContactPage({lang}:{lang:Lang}) {
   const t=content[lang].contactPage

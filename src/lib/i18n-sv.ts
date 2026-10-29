@@ -71,17 +71,25 @@ export const svContent = {
   },
   area:{
     eyebrow:'VÅRA TJÄNSTER',title:'Hitta en tjänst som passar ert behov.',
-    text:'Läs vad vi kan hjälpa till med, vad som ingår och vad vi kommer överens om innan arbetet börjar.',
+    text:'Programutveckling, API:er, testning, Power BI och Microsoft 365. Läs om våra tjänster och hitta ett upplägg som passar.',
     examples:'Exempel på uppdrag',delivered:'Det här får ni',boundaries:'Det här kommer vi överens om',
     tools:'Verktyg vi använder',help:'Fråga oss om tjänsten'
   },
   impact:{
-    eyebrow:'EXEMPEL PÅ UPPDRAG',title:'Exempel på hur vi kan hjälpa till.',
+    eyebrow:'EXEMPEL PÅ UPPDRAG',title:'Exempel inom rapportering och andra digitala tjänster.',
     disclaimer:'Exemplen är fiktiva och bygger inte på utförda kunduppdrag.',
     cases:[
       {num:'01',title:'Göra en månadsrapport lättare att uppdatera',before:'Månadsrapporten sammanställs för hand från flera Excel-filer.',after:'En rapportmall som är lätt att uppdatera, med tydliga anvisningar.'},
       {num:'02',title:'Förenkla hanteringen av förfrågningar',before:'Förfrågningarna kommer via e-post och är svåra att hålla reda på.',after:'Ett formulär samlar förfrågningarna och meddelar den ansvariga personen.'},
       {num:'03',title:'Kontrollera att en webbplats fungerar',before:'Webbplatsen fungerar dåligt i mobilen och kontaktformuläret behöver kontrolleras.',after:'En tydlig lista över åtgärder, överenskomna ändringar och funktionskontroll.'}
+    ],
+    featuredSoftwareTitle:'När en befintlig applikation behöver förbättras.', featuredSoftwareText:'I det här fiktiva exemplet undersöks återkommande fel i en applikation. Därefter genomförs överenskomna rättelser och nya funktioner stegvis, med kodgranskning och testning.', dataAnchor:'Data och vardagliga arbetsflöden', softwareAnchor:'Exempel inom programutveckling', softwareLink:'Se exempel inom programutveckling', softwareEyebrow:'PROGRAMUTVECKLING',
+    softwareTitle:'Exempel på uppdrag inom programutveckling.',
+    softwareLead:'Fiktiva exempel på hur vi kan hjälpa till med vidareutveckling, systemintegrationer och testning inför publicering. Det här är inte genomförda kundprojekt.',
+    softwareCases:[
+      {num:'04',title:'Rätta fel och vidareutveckla en applikation',before:'Återkommande fel gör applikationen svår att ändra och nya funktioner tar lång tid att utveckla.',after:'Vi utreder orsaken, genomför en överenskommen förbättring och testar ändringarna.'},
+      {num:'05',title:'Få en systemintegration att fungera bättre',before:'Två system utbyter inte uppdateringar pålitligt och information måste matas in manuellt.',after:'Vi förbättrar dataöverföring och felhantering i API:et och testar integrationen.'},
+      {num:'06',title:'Testa programvaran före en ny version',before:'Ändringar orsakar återkommande fel och det är oklart vad som har testats.',after:'Vi testar viktiga användarflöden, rapporterar fel och automatiserar överenskomna kontroller.'}
     ]
   },
   process:{
@@ -126,7 +134,7 @@ export const svContent = {
   },
     contactPage:{
     eyebrow:'KONTAKT',title:'Hur kan vi hjälpa er?',
-    lead:'Berätta om ni behöver ett projekt genomfört, en specialist för ett uppdrag eller hjälp med en mindre uppgift.',
+    lead:'Beskriv problemen med en applikation, API-integration, testning eller rapportering. Vi kan diskutera ett avgränsat projekt, en specialist eller en mindre rättelse.',
     formName:'Namn (frivilligt)',formEmail:'E-postadress',formService:'Tjänst eller ärende',formMessage:'Beskriv uppdraget',
     send:'Skicka meddelande',sending:'Skickar ...',
     sent:'Tack! Vi har tagit emot din förfrågan.',
@@ -150,8 +158,8 @@ export const svContent = {
     ]
   },
   about:{
-    title:'Ett finländskt företag inom digitala tjänster',
-    text:'Komplyint Oy hjälper företag och IT-partner med programutveckling, data, Microsoft 365 och programvarutestning. Arbetsspråk och specialist avtalas per uppdrag. Vi ger inte juridisk rådgivning eller certifieringar.'
+    title:'Programutveckling, testning och datatjänster',
+    text:'Komplyint Oy hjälper företag med vidareutveckling av applikationer, API-integrationer, programvarutestning, rapportering och Microsoft 365. Vi genomför avgränsade projekt eller arbetar tillsammans med kundens utvecklingsteam. Den tekniska specialisten och arbetsspråket bekräftas före uppdraget. Vi ger inte juridisk rådgivning eller certifieringar.'
   },
   footerDescription:'Programutveckling, Power BI-rapportering, automatisering och kvalitetssäkring.',
   footer:'Komplyint Oy · FO-nummer 3588595-3',
