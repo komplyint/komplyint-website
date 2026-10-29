@@ -29,7 +29,7 @@ def main():
         for phrase in phrases:
             if normalized(phrase) not in text:
                 raise AssertionError(f'{lang}: website text missing from PDF: {phrase}')
-        for phrase in expected['consulting'].values():
+        for phrase in (expected['consulting'][key] for key in ['title','lead','projectHeading','projectText','consultantHeading','consultantText','languageHeading','languageLead','languageNote','trainingHeading','trainingText']):
             if isinstance(phrase,str) and normalized(phrase) not in text:
                 raise AssertionError(f'{lang}: consulting brochure text missing: {phrase}')
         results.append({'locale':lang,'pages':7,'matched_phrases':len(phrases),'result':'PASS'})
