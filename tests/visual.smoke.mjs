@@ -10,7 +10,7 @@ const desktop = await browser.newPage({viewport:{width:1440,height:900},deviceSc
 
 await desktop.goto(base+'/',{waitUntil:'domcontentloaded'})
 await desktop.locator('.kc-service-tile').first().waitFor()
-assert.match((await desktop.locator('h1').first().textContent())||'',/Kun työkalut toimivat/)
+assert.match((await desktop.locator('h1').first().textContent())||'',/Ohjelmistokehitystä, dataa/)
 assert.equal(await desktop.locator('.kc-logo').count(),1)
 assert.equal(await desktop.locator('.kc-footer-brand img').count(),1)
 assert.equal(await desktop.locator('.kc-hero-video').count(),1)
