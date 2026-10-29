@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { services, serviceSlugs, canonicalHost, contactEmail, type Lang } from '@/lib/commercial'
+import { services, serviceSlugs, workingLanguages, canonicalHost, contactEmail, type Lang } from '@/lib/commercial'
 import { localizedPath } from '@/lib/i18n'
 import { ui } from '@/lib/i18n-ui'
 
@@ -28,7 +28,7 @@ export default function ServiceDetail({lang,index}:{lang:Lang,index:number}) {
         <div><nav className="qh-breadcrumb" aria-label={l.breadcrumb}><Link href={home}>{l.home}</Link><span aria-hidden="true">/</span><Link href={catalogue}>{l.services}</Link><span aria-hidden="true">/</span><span aria-current="page">{service.title}</span></nav>
           <p className="kc-eyebrow">{l.service} {String(index+1).padStart(2,'0')} / 06</p>
           <h1>{service.title}</h1>
-          <p className="qh-inner-lead">{service.intro}</p>
+          <p className="qh-inner-lead">{service.intro}</p><p className="kc-detail-work-language">{workingLanguages[lang][index]}</p>
           <Link className="kc-button kc-button-primary" href={contact+'?service='+encodeURIComponent(slug)}>{l.touch} <span aria-hidden="true">↗</span></Link>
         </div>
         <div className="qh-art-panel"><FoldMotif id={index} label={l.graphic}/><span className="qh-art-caption">{l.artTitles[index]}</span></div>

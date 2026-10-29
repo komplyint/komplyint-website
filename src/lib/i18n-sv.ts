@@ -23,18 +23,18 @@ export const svServices = [
   {
     title:'Webbplatser och underhåll',
     intro:'Förbättra befintliga webbplatser, formulär och innehåll utan att börja om från början.',
-    examples:['Förbättring av innehåll, layout och användning i mobilen','Testning av kontaktformulär och webbplatsens viktigaste funktioner','Mindre ändringar på webbplatsen och uppdatering av innehåll'],
+    examples:['Förbättring av innehåll, layout och användning i mobilen','Testning av kontaktformulär och webbplatsens viktigaste funktioner','HTML-, CSS- och mindre JavaScript-ändringar på finska'],
     deliverable:'Överenskomna ändringar, funktionskontroll och skriftliga anvisningar.',
     boundaries:'Vi kommer separat överens om webbhotellet, säkerheten och eventuella driftavbrott. Jour dygnet runt ingår inte.',
     tools:'HTML · CSS · JavaScript · WordPress / lämpliga plattformar',
   },
   {
-    title:'Mindre programlösningar och integrationer',
-    intro:'Små program och integrationer för konkreta behov i företaget.',
-    examples:['Interna uppföljningsverktyg, formulär och räknare','Mindre webbapplikationer och förbättringar av användargränssnitt','Överföring av information mellan system via tillgängliga gränssnitt'],
+    title:'Programutveckling och integrationer',
+    intro:'Webbapplikationer, API:er och vidareutveckling av befintliga system.',
+    examples:['Interna uppföljningsverktyg, formulär och räknare','Gränssnitt i React, Angular och Vue samt förbättringar av befintliga applikationer','Överföring av information mellan system via tillgängliga gränssnitt'],
     deliverable:'De funktioner och tester vi kommit överens om samt anvisningar för eventuell källkod och driftsättning.',
-    boundaries:'Stora system, kritiska integrationer och support dygnet runt bedöms separat.',
-    tools:'Webbappar · API:er · Python · JavaScript / TypeScript',
+    boundaries:'Avancerad fullstackutveckling sker på engelska med en bekräftad specialist. Finskspråkig kundkontakt kan avtalas separat.',
+    tools:'TypeScript · Node.js · React · Angular · Vue · C#/.NET · API:er',
   },
   {
     title:'Programvarutestning och kvalitetssäkring',
@@ -59,15 +59,15 @@ export const svContent = {
   tagline:'DIGITALA TJÄNSTER FRÅN FINLAND',
   contactButton:'Kontakta oss',explore:'Se våra tjänster',email:'E-post',
   hero:{
-    label:'DATA · AUTOMATISERING · PROGRAMVARA',
-    title:'Digitala verktyg som förenklar arbetsdagen.',
-    text:'Vi hjälper företag att förbättra rapporteringen, automatisera återkommande arbetsuppgifter och utveckla mindre programlösningar. Vi går igenom behoven tillsammans och kommer överens om arbetets omfattning innan vi börjar.',
+    label:'PROGRAMUTVECKLING · DATA · AUTOMATISERING · IT-KONSULTER',
+    title:'Programutveckling, data och automatisering för företag.',
+    text:'Vi hjälper företag och IT-partner med programutveckling, Power BI-rapportering, automatisering och kvalitetssäkring. Vi tar emot avgränsade projekt och diskuterar längre konsultuppdrag.',
     point1:'Tydligt avgränsat uppdrag',point2:'Överenskommet resultat',point3:'Test före överlämning'
   },
   intro:{
     eyebrow:'VAD VI GÖR',
-    title:'Praktisk hjälp med data, automatisering och programvara.',
-    text:'Vi rättar till Excel-rapporter, förbättrar arbetsflöden i Microsoft 365 och utvecklar webbplatser och mindre applikationer. Vi hjälper också till med enskilda, tydligt avgränsade uppdrag.'
+    title:'Programutveckling, analys och digitala tjänster.',
+    text:'Från API:er och webbutveckling till Power BI, Microsoft 365 och programvarutestning. Även mindre uppdrag är välkomna.'
   },
   area:{
     eyebrow:'VÅRA TJÄNSTER',title:'Hitta en tjänst som passar ert behov.',
@@ -110,8 +110,8 @@ export const svContent = {
   },
   software:{
     eyebrow:'PROGRAMVARUUTVECKLING OCH UNDERHÅLL',
-    title:'Små programlösningar för företagets behov.',
-    lead:'Vi utvecklar mindre digitala verktyg och förbättrar befintliga webbapplikationer. Vi kommer i förväg överens om vad som ska göras, hur lösningen tas i bruk och vem som ansvarar för underhållet.',
+    title:'Programutveckling och integrationer för företag.',
+    lead:'Vi utvecklar webbapplikationer och API:er. HTML, CSS och mindre JavaScript-ändringar kan utföras på finska. Avancerad fullstackutveckling sker på engelska.',
     items:[
       {title:'Interna verktyg',body:'Uppföljningsverktyg, formulär, räknare och enkla verktyg för informationshantering.'},
       {title:'Rättelser och vidareutveckling',body:'Mindre funktioner, ändringar i användargränssnittet, felrättningar och testning.'},
@@ -125,7 +125,7 @@ export const svContent = {
   },
   contactPage:{
     eyebrow:'KONTAKT',title:'Hur kan vi hjälpa er?',
-    lead:'Berätta kort vad ni vill förbättra och vilka verktyg ni använder. Ni kan också fråga om ett mindre engångsuppdrag.',
+    lead:'Berätta om ni behöver ett projekt genomfört, en specialist för ett uppdrag eller hjälp med en mindre uppgift.',
     formName:'Namn (frivilligt)',formEmail:'E-postadress',formService:'Tjänst eller ärende',formMessage:'Beskriv uppdraget',
     send:'Skicka meddelande',sending:'Skickar ...',
     sent:'Tack! Vi har tagit emot din förfrågan.',
@@ -150,9 +150,9 @@ export const svContent = {
   },
   about:{
     title:'Ett finländskt företag inom digitala tjänster',
-    text:'Komplyint Oy hjälper företag med rapportering, automatisering och mindre programprojekt. Vi utvecklar också egna digitala produkter. Vi erbjuder för närvarande inte rådgivning om regelefterlevnad.'
+    text:'Komplyint Oy hjälper företag och IT-partner med programutveckling, data, Microsoft 365 och programvarutestning. Arbetsspråk och specialist avtalas per uppdrag. Vi ger inte juridisk rådgivning eller certifieringar.'
   },
-  footerDescription:'Praktisk hjälp med data, automatisering och mindre programprojekt.',
+  footerDescription:'Programutveckling, Power BI-rapportering, automatisering och kvalitetssäkring.',
   footer:'Komplyint Oy · FO-nummer 3588595-3',
   footerNote:'Vi kommer överens om varje uppdrags omfattning separat. Vi erbjuder inte juridisk rådgivning, certifiering eller myndighetsgodkännanden.'
 }

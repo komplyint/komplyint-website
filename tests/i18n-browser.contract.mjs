@@ -5,9 +5,9 @@ const browser=await chromium.launch({headless:true,args:['--no-sandbox']})
 try{
   const page=await browser.newPage({viewport:{width:1440,height:900},reducedMotion:'reduce'})
   const expected=[
-    {path:'/',locale:'fi',heading:'Kun työkalut toimivat'},
-    {path:'/en',locale:'en',heading:'Digital tools that make everyday work easier'},
-    {path:'/sv',locale:'sv',heading:'Digitala verktyg som förenklar arbetsdagen'},
+    {path:'/',locale:'fi',heading:'Ohjelmistokehitystä, dataa'},
+    {path:'/en',locale:'en',heading:'Software, data and automation expertise'},
+    {path:'/sv',locale:'sv',heading:'Programutveckling, data och automatisering'},
     {path:'/sv/services',locale:'sv',heading:'Hitta en tjänst som passar ert behov'},
     {path:'/sv/services/data-reporting',locale:'sv',heading:'Excel, data och rapportering'},
     {path:'/sv/privacy',locale:'sv',heading:'Dataskyddsbeskrivning'},

@@ -9,6 +9,7 @@ import Arrow from '@/components/Arrow'
 import FeaturedWork from '@/components/FeaturedWork'
 import WorkExampleArt from '@/components/WorkExampleArt'
 import PublicBrochures from '@/components/PublicBrochures'
+import ConsultingEngagement from '@/components/ConsultingEngagement'
 import ServiceCard from '@/components/ServiceCard'
 import SectionIntro from '@/components/SectionIntro'
 import ServiceExplorer from '@/components/ServiceExplorer'
@@ -175,10 +176,12 @@ function Home({lang}:{lang:Lang}) {
       <div className="kc-moreline"><span>{ui[lang].otherServices}</span><a href={pathFor(lang,'contact')}>{t.contactButton} <Arrow /></a></div>
     </div></section>
 
+    <ConsultingEngagement lang={lang}/>
     <FeaturedWork lang={lang}/>
     <Process lang={lang}/>
     <Trust lang={lang}/>
     <About lang={lang}/>
+    <PublicBrochures lang={lang}/>
     <CTA lang={lang}/>
   </>
 }
@@ -189,13 +192,13 @@ function Examples({lang}:{lang:Lang}) {
 }
 function ServicesPage({lang}:{lang:Lang}) {
   const t=content[lang]
-  return <><div className="kc-page-top"><div className="kc-shell"><p className="kc-eyebrow">{t.area.eyebrow}</p><h1>{t.area.title}</h1><p>{t.area.text}</p></div></div><section className="kc-section kc-muted-section kc-services-detail" id="service-explorer"><div className="kc-shell"><ServiceExplorer lang={lang} showIntro={false}/></div></section><Process lang={lang}/><Trust lang={lang}/><PublicBrochures lang={lang}/><CTA lang={lang}/></>
+  return <><div className="kc-page-top"><div className="kc-shell"><p className="kc-eyebrow">{t.area.eyebrow}</p><h1>{t.area.title}</h1><p>{t.area.text}</p></div></div><section className="kc-section kc-muted-section kc-services-detail" id="service-explorer"><div className="kc-shell"><ServiceExplorer lang={lang} showIntro={false}/></div></section><ConsultingEngagement lang={lang}/><Process lang={lang}/><Trust lang={lang}/><PublicBrochures lang={lang}/><CTA lang={lang}/></>
 }
 function SoftwarePage({lang}:{lang:Lang}) {
   const t=content[lang].software
   return <><div className="kc-page-top"><div className="kc-shell"><p className="kc-eyebrow">{t.eyebrow}</p><h1>{t.title}</h1><p>{t.lead}</p><a className="kc-button kc-button-primary" href={pathFor(lang,'contact')}>{content[lang].contactButton}<Arrow /></a></div></div>
     <section className="kc-section"><div className="kc-shell"><div className="kc-software-grid">{t.items.map((s,i)=><article key={s.title} className="kc-software-card"><span>{String(i+1).padStart(2,'0')}</span><h2>{s.title}</h2><p>{s.body}</p></article>)}</div><div className="kc-limit"><h3>{t.limitTitle}</h3><p>{t.limit}</p></div></div></section>
-    <section className="kc-section kc-muted-section"><div className="kc-shell kc-product"><div><p className="kc-eyebrow">{ui[lang].productDevelopment}</p><h2>{t.productTitle}</h2><p>{t.productText}</p></div><a href="https://floently.com/learn" target="_blank" rel="noopener noreferrer" className="kc-text-link">{t.productLink}<Arrow /></a></div></section><CTA lang={lang}/></>
+    <section className="kc-section kc-muted-section"><div className="kc-shell kc-product"><div><p className="kc-eyebrow">{ui[lang].productDevelopment}</p><h2>{t.productTitle}</h2><p>{t.productText}</p></div><a href="https://floently.com/learn" target="_blank" rel="noopener noreferrer" className="kc-text-link">{t.productLink}<Arrow /></a></div></section><ConsultingEngagement lang={lang}/><CTA lang={lang}/></>
 }
 function ContactPage({lang}:{lang:Lang}) {
   const t=content[lang].contactPage

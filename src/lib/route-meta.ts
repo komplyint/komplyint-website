@@ -5,7 +5,7 @@ import { localizedPath, languages } from './i18n'
 export type SiteSection='home'|'services'|'software'|'work'|'about'|'contact'|'privacy'|'accessibility'
 
 const titles:Record<SiteSection,Record<Lang,string>>={
- home:{fi:'Data, automaatio ja ohjelmistot',en:'Data, automation and software',sv:'Data, automatisering och programvara'},
+ home:{fi:'Ohjelmistokehitys, data ja automaatio',en:'Software engineering, data and automation',sv:'Programutveckling, data och automatisering'},
  services:{fi:'Palvelut',en:'Our services',sv:'Våra tjänster'},
  software:{fi:'Ohjelmistokehitys',en:'Software development',sv:'Programutveckling'},
  work:{fi:'Esimerkkejä mahdollisista ratkaisuista',en:'Example projects',sv:'Exempel på uppdrag'},
@@ -15,9 +15,9 @@ const titles:Record<SiteSection,Record<Lang,string>>={
  accessibility:{fi:'Saavutettavuustiedot',en:'Accessibility information',sv:'Tillgänglighetsinformation'},
 }
 const descriptions:Record<SiteSection,Record<Lang,string>>={
- home:{fi:'Käytännön apua Exceliin, raportointiin, Microsoft 365 -työnkulkuihin, verkkosivuihin ja pieniin ohjelmistoihin.',en:'Practical help with Excel, reporting, Microsoft 365 workflows, websites and small software projects.',sv:'Praktisk hjälp med Excel, rapportering, Microsoft 365-arbetsflöden, webbplatser och mindre programvaruprojekt.'},
+ home:{fi:'Ohjelmistokehitys, Power BI, Microsoft 365, automaatio ja testaus. Projekteja ja asiantuntijatyötä sopimuksen mukaan.',en:'Full-stack software engineering, Power BI, Microsoft 365 automation, QA and project-based IT consulting.',sv:'Programutveckling, Power BI, Microsoft 365-automatisering, testning och projektbaserade IT-konsulttjänster.'},
  services:{fi:'Tutustu palveluihimme ja katso, millaisissa tehtävissä voimme auttaa.',en:'See how we can help with data, reporting, automation and small software projects.',sv:'Läs om våra tjänster inom data, rapportering, automatisering och mindre programprojekt.'},
- software:{fi:'Pienet ohjelmistot, nykyisten sovellusten kehittäminen ja integraatiot yrityksille.',en:'Small software tools, improvements to existing apps and practical integrations.',sv:'Mindre programlösningar, vidareutveckling och integrationer för företag.'},
+ software:{fi:'Verkkosovellukset, TypeScript, Node.js, React, Angular, Vue ja API-rajapinnat.',en:'Full-stack development with TypeScript, Node.js, React, Angular, Vue and APIs.',sv:'Fullstackutveckling med TypeScript, Node.js, React, Angular, Vue och API:er.'},
  work:{fi:'Havainnollistavia esimerkkejä raportoinnista, automaatiosta ja verkkosivuista.',en:'Illustrative examples of reporting, workflows and website improvements.',sv:'Illustrativa exempel på rapportering, arbetsflöden och förbättringar av webbplatser.'},
  about:{fi:'Komplyint Oy:n toimintatapa, yhteystiedot ja yritystiedot.',en:'Company information, working principles and contact details of Komplyint Oy.',sv:'Information om Komplyint Oy, våra arbetsprinciper och kontaktuppgifter.'},
  contact:{fi:'Kerro, millaisessa digitehtävässä tarvitset apua. Myös pienet toimeksiannot ovat tervetulleita.',en:'Tell us which digital task you need help with, even if it is a small one-off job.',sv:'Berätta vilken digital uppgift ni behöver hjälp med. Även mindre uppdrag är välkomna.'},
