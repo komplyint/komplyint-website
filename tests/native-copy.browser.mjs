@@ -4,9 +4,9 @@ import {chromium} from 'playwright'
 
 const base=process.env.SITE_URL||'http://127.0.0.1:3000'
 const cases=[
- {locale:'fi',prefix:'',hero:'Ohjelmistokehitystä, dataa ja automaatiota yrityksille.',cta:'OTA YHTEYTTÄ',privacy:'Lue tietosuojaseloste',city:'Helsinki, Suomi',example:'Kuvitellussa esimerkissä'},
- {locale:'en',prefix:'/en',hero:'Software, data and automation expertise for business.',cta:'GET IN TOUCH',privacy:'Read our privacy notice',city:'Helsinki, Finland',example:'In this fictional example'},
- {locale:'sv',prefix:'/sv',hero:'Programutveckling, data och automatisering för företag.',cta:'KONTAKTA OSS',privacy:'Läs vår dataskyddsbeskrivning',city:'Helsingfors, Finland',example:'I det här fiktiva exemplet'}
+ {locale:'fi',prefix:'',hero:'Ohjelmistokehitystä, testausta ja toimivia integraatioita.',cta:'OTA YHTEYTTÄ',privacy:'Lue tietosuojaseloste',city:'Helsinki, Suomi',example:'Kuvitellussa esimerkissä'},
+ {locale:'en',prefix:'/en',hero:'Software development, testing and reliable integrations.',cta:'GET IN TOUCH',privacy:'Read our privacy notice',city:'Helsinki, Finland',example:'In this fictional example'},
+ {locale:'sv',prefix:'/sv',hero:'Programutveckling, testning och fungerande integrationer.',cta:'KONTAKTA OSS',privacy:'Läs vår dataskyddsbeskrivning',city:'Helsingfors, Finland',example:'I det här fiktiva exemplet'}
 ]
 const browser=await chromium.launch({headless:true,args:['--no-sandbox']})
 await mkdir('site-preview',{recursive:true})

@@ -5,7 +5,7 @@ import { localizedPath, languages } from './i18n'
 export type SiteSection='home'|'services'|'software'|'work'|'about'|'contact'|'privacy'|'accessibility'
 
 const titles:Record<SiteSection,Record<Lang,string>>={
- home:{fi:'Ohjelmistokehitys, data ja automaatio',en:'Software engineering, data and automation',sv:'Programutveckling, data och automatisering'},
+ home:{fi:'Ohjelmistokehitys, integraatiot ja testaus',en:'Software development, integrations and QA',sv:'Programutveckling, integrationer och testning'},
  services:{fi:'Palvelut',en:'Our services',sv:'Våra tjänster'},
  software:{fi:'Ohjelmistokehitys',en:'Software development',sv:'Programutveckling'},
  work:{fi:'Esimerkkejä mahdollisista ratkaisuista',en:'Example projects',sv:'Exempel på uppdrag'},

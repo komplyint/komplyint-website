@@ -3,47 +3,54 @@ import assert from 'node:assert/strict'
 import {readFileSync} from 'node:fs'
 const read=p=>readFileSync(p,'utf8')
 
-test('the project-based full-stack specialist and all core stack technologies are prominently present',()=>{
- const copy=read('src/lib/commercial.ts'),component=read('src/components/ExpertiseSpotlight.tsx'),page=read('src/app/page.tsx')
- for(const term of ['TypeScript','JavaScript','Node.js','React','Angular','Vue.js','C# / .NET','REST APIs','Azure Functions','Kafka','Docker'])assert.ok(copy.includes(term),'Missing '+term)
- assert.match(copy,/5\+ years/)
- assert.ok(page.includes('<ExpertiseSpotlight lang={lang}/>'))
- assert.ok(page.includes('kc-hero-engineering-years'))
- assert.ok(component.includes('c.stack.map('))
- assert.ok(component.includes('c.fullstackLanguage'))
- assert.ok(component.includes('c.dataLanguage'))
+test('the floating experience badge is removed from the hero',()=>{
+ const page=read('src/app/page.tsx'),hero=read('src/lib/commercial.ts')
+ assert.ok(!page.includes('kc-hero-engineering'))
+ assert.ok(!page.includes('spotlightCopy[lang].heroYears'))
+ for(const phrase of ['Yli 5 vuotta','5+ years','Över 5 år'])assert.ok(!hero.includes(phrase),phrase)
+ assert.ok(page.includes('<VideoHero lang={lang}/>'))
 })
 
-test('actual delivery language is not incorrectly inferred from the website translation',()=>{
- const copy=read('src/lib/commercial.ts')
- for(const phrase of ['Tekninen työskentelykieli: englanti','Technical working language: English','Arbetsspråket för den tekniska utvecklingen är engelska','suomeksi','Finnish and English'])assert.ok(copy.includes(phrase),phrase)
- assert.ok(copy.includes('Specialist availability'))
- assert.ok(!copy.includes('full-time employee'))
+test('customer challenges replace the technology skill wall',()=>{
+ const copy=read('src/lib/commercial.ts'),component=read('src/components/ExpertiseSpotlight.tsx')
+ for(const word of ['Vanhaa sovellusta on vaikea kehittää','Järjestelmien väliset tiedot eivät kulje','Testaus hidastaa julkaisua','Existing applications are hard to maintain','Testningen fördröjer publiceringen'])assert.ok(copy.includes(word),word)
+ assert.ok(component.includes('c.problems.map('))
+ assert.ok(component.includes('item.problem'))
+ assert.ok(component.includes('item.solution'))
+ assert.ok(component.includes('item.outcome'))
+ assert.ok(!component.includes('c.stack.map('),'technologies cannot lead the sales story')
 })
 
-test('the homepage provides direct downloadable PDF and ZIP files, not fake CTA buttons',()=>{
- const component=read('src/components/ExpertiseSpotlight.tsx'),page=read('src/app/page.tsx'),brochures=read('src/components/PublicBrochures.tsx')
+test('real iterative delivery and QA are explained without claiming Scrum certification or client projects',()=>{
+ const copy=read('src/lib/commercial.ts'),component=read('src/components/ExpertiseSpotlight.tsx')
+ for(const phrase of ['KETTERÄ YHTEISTYÖ','AGILE COLLABORATION','AGILT SAMARBETE','koodikatselmointeihin','acceptance criteria','testitapauksia'])assert.ok(copy.includes(phrase),phrase)
+ assert.ok(component.includes('c.deliverySteps.map('))
+ assert.ok(copy.includes('not claims that Komplyint Oy has delivered'))
+})
+
+test('languages do not misrepresent the business lead as an experienced web developer',()=>{
+ const copy=read('src/lib/commercial.ts'),sv=read('src/lib/i18n-sv.ts')
+ for(const phrase of ['Ohjelmistokehityksen tekninen työskentelykieli on englanti','Technical working language for software engineering: English','Arbetsspråk för programutveckling är engelska'])assert.ok(copy.includes(phrase))
+ assert.ok(sv.includes('Det tekniska arbetsspråket är engelska'))
+ assert.ok(!copy.includes('Finnish for HTML, CSS and limited JavaScript'))
+ assert.ok(!copy.includes('pienet JavaScript-verkkosivutyöt onnistuvat suomeksi'))
+})
+
+test('existing palette and real PDF and ZIP links stay intact',()=>{
+ const page=read('src/app/page.tsx'),component=read('src/components/ExpertiseSpotlight.tsx')
+ const colors=JSON.parse(read('src/design/tokens.json','utf8')).colors.dark
+ assert.equal(colors.page,'#101418');assert.equal(colors.red,'#C74C57');assert.equal(colors.action,'#A4DDBA')
  assert.ok(component.includes('download={c.pdfName}'))
  assert.ok(component.includes('download="Komplyint_Service_Documents.zip"'))
  assert.ok(page.includes('spotlightCopy[lang].pdfFile'))
- assert.ok(brochures.includes('Komplyint_Service_Documents.zip'))
- const config=read('next.config.js')
- assert.ok(config.includes("Content-Disposition"))
- assert.ok(config.includes('application/zip'))
+ assert.ok(read('next.config.js').includes('Content-Disposition'))
 })
 
-test('the existing approved charcoal / green / red token values are unchanged',()=>{
- const t=JSON.parse(read('src/design/tokens.json','utf8'))
- assert.equal(t.colors.dark.page,'#101418')
- assert.equal(t.colors.dark.red,'#C74C57')
- assert.equal(t.colors.dark.action,'#A4DDBA')
- assert.ok(read('src/app/handbook.css').includes('Full-stack capability showcase'))
-})
-
-test('PDF generation reuses website copy, includes the prominently featured skills and checks all 24 pages',()=>{
- const exporter=read('scripts/export-public-portfolio.mjs'),renderer=read('scripts/generate_public_portfolio.py'),verify=read('scripts/verify_public_brochures.py')
+test('all three brochures include four case stories rather than an experience badge',()=>{
+ const exporter=read('scripts/export-public-portfolio.mjs'),pdf=read('scripts/generate_public_portfolio.py'),verify=read('scripts/verify_public_brochures.py'),parity=read('scripts/verify_portfolio_copy.py')
  assert.ok(exporter.includes('capabilities:spotlightCopy[lang]'))
- assert.ok(renderer.includes('engineering_page(cv,t)'))
- assert.ok(renderer.includes("'pages':24"))
+ assert.ok(pdf.includes("for i,case in enumerate(v['problems'])"))
+ assert.ok(!pdf.includes("feature['heroYears']"))
+ assert.ok(parity.includes("expected four research-grounded customer challenges"))
  assert.ok(verify.includes('len(document) != 8'))
 })

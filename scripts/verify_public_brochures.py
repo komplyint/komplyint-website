@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""C24/Q11: inspect and render all three public seven-page portfolios.
+"""C24/Q11: inspect and render all three public eight-page portfolios.
 
 Uses isolated PyMuPDF in GitHub Actions; not imported by the Next.js runtime.
 Production publication and human image review remain separate gates.

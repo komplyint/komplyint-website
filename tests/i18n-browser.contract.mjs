@@ -5,9 +5,9 @@ const browser=await chromium.launch({headless:true,args:['--no-sandbox']})
 try{
   const page=await browser.newPage({viewport:{width:1440,height:900},reducedMotion:'reduce'})
   const expected=[
-    {path:'/',locale:'fi',heading:'Ohjelmistokehitystä, dataa'},
-    {path:'/en',locale:'en',heading:'Software, data and automation expertise'},
-    {path:'/sv',locale:'sv',heading:'Programutveckling, data och automatisering'},
+    {path:'/',locale:'fi',heading:'Ohjelmistokehitystä, testausta'},
+    {path:'/en',locale:'en',heading:'Software development, testing and reliable'},
+    {path:'/sv',locale:'sv',heading:'Programutveckling, testning och fungerande'},
     {path:'/sv/services',locale:'sv',heading:'Hitta en tjänst som passar ert behov'},
     {path:'/sv/services/data-reporting',locale:'sv',heading:'Excel, data och rapportering'},
     {path:'/sv/privacy',locale:'sv',heading:'Dataskyddsbeskrivning'},

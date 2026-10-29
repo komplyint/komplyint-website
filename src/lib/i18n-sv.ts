@@ -23,26 +23,26 @@ export const svServices = [
   {
     title:'Webbplatser och underhåll',
     intro:'Förbättra befintliga webbplatser, formulär och innehåll utan att börja om från början.',
-    examples:['Förbättring av innehåll, layout och användning i mobilen','Testning av kontaktformulär och webbplatsens viktigaste funktioner','HTML-, CSS- och mindre JavaScript-ändringar på finska'],
+    examples:['Förbättring av innehåll, layout och användning i mobilen','Testning av kontaktformulär och webbplatsens viktigaste funktioner','Webbändringar genomförs av överenskommen engelskspråkig utvecklare; kundkontakt på finska enligt avtal'],
     deliverable:'Överenskomna ändringar, funktionskontroll och skriftliga anvisningar.',
     boundaries:'Vi kommer separat överens om webbhotellet, säkerheten och eventuella driftavbrott. Jour dygnet runt ingår inte.',
     tools:'HTML · CSS · JavaScript · WordPress / lämpliga plattformar',
   },
   {
     title:'Programutveckling och integrationer',
-    intro:'Webbapplikationer, API:er och vidareutveckling av befintliga system.',
-    examples:['Interna uppföljningsverktyg, formulär och räknare','Gränssnitt i React, Angular och Vue samt förbättringar av befintliga applikationer','Överföring av information mellan system via tillgängliga gränssnitt'],
+    intro:'Rättelser, nya funktioner och bättre integrationer i befintliga system.',
+    examples:['Rätta återkommande fel och förbättra underhållbarheten','Utveckla gränssnitt och bakgrundstjänster enligt kundens agila arbetslista','Förbättra API:er, dataöverföring och felhantering'],
     deliverable:'De funktioner och tester vi kommit överens om samt anvisningar för eventuell källkod och driftsättning.',
     boundaries:'Avancerad fullstackutveckling sker på engelska med en bekräftad specialist. Finskspråkig kundkontakt kan avtalas separat.',
     tools:'TypeScript · Node.js · React · Angular · Vue · C#/.NET · API:er',
   },
   {
     title:'Programvarutestning och kvalitetssäkring',
-    intro:'Testning före publicering och efter ändringar.',
-    examples:['Funktionskontroll av webbplatser och formulär','Återskapande av fel, dokumentation och kontroll av åtgärder','Testning i överenskomna webbläsare och mobilvyer'],
+    intro:'Vi identifierar fel och tar fram tydligare underlag inför nya programversioner.',
+    examples:['Funktionstestning och testfall','Återskapa, prioritera och kontrollera åtgärdade fel','Regressions-, API- och webbläsartester enligt behov'],
     deliverable:'En testrapport med prioriterade fel och anvisningar för att återskapa dem.',
     boundaries:'Testningen ersätter inte en säkerhetsgranskning och garanterar inte att programvaran är helt felfri.',
-    tools:'Manuell testning · Playwright · Testfall · Felrapporter',
+    tools:'Manuell testning · Robot Framework · Playwright · API-tester',
   },
   {
     title:'Dokument och kontorsstöd',
@@ -60,8 +60,8 @@ export const svContent = {
   contactButton:'Kontakta oss',explore:'Se våra tjänster',email:'E-post',
   hero:{
     label:'PROGRAMUTVECKLING · DATA · AUTOMATISERING · IT-KONSULTER',
-    title:'Programutveckling, data och automatisering för företag.',
-    text:'Vi hjälper företag och IT-partner med programutveckling, Power BI-rapportering, automatisering och kvalitetssäkring. Vi tar emot avgränsade projekt och diskuterar längre konsultuppdrag.',
+    title:'Programutveckling, testning och fungerande integrationer.',
+    text:'Vi hjälper till att vidareutveckla applikationer, förbättra integrationer och testa ändringar före publicering. Vi erbjuder också avgränsade projekt samt Power BI-rapportering och Microsoft 365-lösningar.',
     point1:'Tydligt avgränsat uppdrag',point2:'Överenskommet resultat',point3:'Test före överlämning'
   },
   intro:{
@@ -109,21 +109,22 @@ export const svContent = {
     button:'Kontakta oss'
   },
   software:{
-    eyebrow:'PROGRAMVARUUTVECKLING OCH UNDERHÅLL',
-    title:'Programutveckling och integrationer för företag.',
-    lead:'Vi utvecklar webbapplikationer och API:er. HTML, CSS och mindre JavaScript-ändringar kan utföras på finska. Avancerad fullstackutveckling sker på engelska.',
+    eyebrow:'PROGRAMUTVECKLING · API:ER · TESTNING',
+    title:'Vidareutveckling och förbättring av befintliga applikationer.',
+    lead:'Vi hjälper när applikationer är svåra att ändra, integrationer orsakar problem eller utvecklingsuppgifter blir liggande. Vi kommer överens om målet och genomför ändringarna stegvis. Det tekniska arbetsspråket är engelska; kundkontakten kan skötas på finska enligt överenskommelse.',
     items:[
-      {title:'Interna verktyg',body:'Uppföljningsverktyg, formulär, räknare och enkla verktyg för informationshantering.'},
-      {title:'Rättelser och vidareutveckling',body:'Mindre funktioner, ändringar i användargränssnittet, felrättningar och testning.'},
-      {title:'Avgränsade integrationer',body:'Överföring av information mellan system via deras dokumenterade gränssnitt.'}
+      {title:'Mer lättskötta applikationer',body:'Vi går igenom befintlig kod, utreder återkommande fel och genomför avtalade förbättringar utan onödiga totalombyggnader.'},
+      {title:'API:er och systemintegrationer',body:'Vi utvecklar dataöverföring, bakgrundstjänster, felhantering och integrationstester.'},
+      {title:'Gränssnitt och nya funktioner',body:'Vi genomför avgränsade frontend- och backenduppgifter enligt kundens arbetslista och rutiner för kodgranskning.'},
+      {title:'Testning som del av utvecklingen',body:'Funktionstestning, testfall, API- och regressionstester samt lämplig testautomatisering inför publicering.'}
     ],
     productTitle:'Våra egna programvaruprodukter',
-    productText:'Vi utvecklar också egna digitala produkter. Vi håller produktutvecklingen åtskild från kunduppdragen så att ansvar och tidtabeller är tydliga.',
+    productText:'Vi utvecklar också egna digitala produkter och håller det arbetet åtskilt från kundprojekt så att ansvar och tidtabeller är tydliga.',
     productLink:'Utforska Floently',
-    limitTitle:'Det här ingår inte i ett vanligt uppdrag',
-    limit:'Löpande jour, underhåll av kritiska system och säkerhetscertifiering ingår inte i vanliga uppdrag. Sådana tjänster kräver en separat överenskommelse.'
+    limitTitle:'Vi avtalar om ansvar innan arbetet börjar',
+    limit:'Vi bekräftar specialist, arbetsspråk, omfattning, testning och underhållsansvar. Jour för kritiska system och säkerhetscertifiering ingår inte som standard.'
   },
-  contactPage:{
+    contactPage:{
     eyebrow:'KONTAKT',title:'Hur kan vi hjälpa er?',
     lead:'Berätta om ni behöver ett projekt genomfört, en specialist för ett uppdrag eller hjälp med en mindre uppgift.',
     formName:'Namn (frivilligt)',formEmail:'E-postadress',formService:'Tjänst eller ärende',formMessage:'Beskriv uppdraget',

@@ -10,7 +10,7 @@ const desktop = await browser.newPage({viewport:{width:1440,height:900},deviceSc
 
 await desktop.goto(base+'/',{waitUntil:'domcontentloaded'})
 await desktop.locator('.kc-service-tile').first().waitFor()
-assert.match((await desktop.locator('h1').first().textContent())||'',/Ohjelmistokehitystä, dataa/)
+assert.match((await desktop.locator('h1').first().textContent())||'',/Ohjelmistokehitystä, testausta/)
 assert.equal(await desktop.locator('.kc-logo').count(),1)
 assert.equal(await desktop.locator('.kc-footer-brand img').count(),1)
 assert.equal(await desktop.locator('.kc-hero-video').count(),1)
@@ -59,7 +59,7 @@ await mobile.locator('.qh-featured-work').screenshot({path:out+'/featured-work-m
 
 await desktop.goto(base+'/en',{waitUntil:'domcontentloaded'})
 assert.match((await desktop.locator('.qh-work-art-image').getAttribute('src'))||'',/featured-reporting-art\.svg$/,'English homepage must use English-language artwork')
-assert.match((await desktop.locator('h1').first().textContent())||'',/Software, data and automation expertise/)
+assert.match((await desktop.locator('h1').first().textContent())||'',/Software development, testing and reliable/)
 await desktop.screenshot({path:out+'/desktop-en.png',fullPage:true,animations:'disabled'})
 
 await desktop.goto(base+'/en/services?service=1#service-explorer',{waitUntil:'domcontentloaded'})
@@ -69,7 +69,7 @@ await desktop.screenshot({path:out+'/services-en.png',fullPage:true,animations:'
 await desktop.goto(base+'/en/services/m365-automation',{waitUntil:'domcontentloaded'})
 assert.match((await desktop.locator('h1').first().textContent())||'',/Microsoft 365/)
 await desktop.goto(base+'/sv',{waitUntil:'domcontentloaded'})
-assert.match((await desktop.locator('h1').first().textContent())||'',/Programutveckling, data och automatisering/)
+assert.match((await desktop.locator('h1').first().textContent())||'',/Programutveckling, testning och fungerande/)
 assert.match((await desktop.locator('.qh-work-art-image').getAttribute('src'))||'',/featured-reporting-art-sv\.svg$/)
 await desktop.screenshot({path:out+'/desktop-sv.png',fullPage:true,animations:'disabled'})
 await desktop.goto(base+'/contact',{waitUntil:'domcontentloaded'})
