@@ -71,12 +71,15 @@ export async function POST(request:NextRequest){
     if(data.company!==undefined&&typeof data.company!=='string')fields.company='Invalid company'
     const name=normalized(data.name),company=normalized(data.company),email=normalized(data.email)
     const message=normalized(data.message),service=normalized(data.service),locale=normalized(data.locale)||'fi'
+    const engagementType=normalized(data.engagementType)||'project',workLanguage=normalized(data.workLanguage)||'flexible'
     if(countCodePoints(name)>120)fields.name='Name is too long'
     if(countCodePoints(company)>140)fields.company='Company is too long'
     if(typeof data.email!=='string'||!validEmail(email))fields.email='Valid email is required'
     if(typeof data.message!=='string'||countCodePoints(message)<10||countCodePoints(message)>4500)fields.message='Message must contain 10 to 4500 characters'
     if(data.service!==undefined&&(typeof data.service!=='string'||(service!==''&&service!=='other'&&!serviceSlugs.some(slug=>slug===service))))fields.service='Unknown service'
     if(data.locale!==undefined&&(typeof data.locale!=='string'||!['fi','en','sv'].includes(locale)))fields.locale='Unknown language'
+    if(!['project','consultant','support','other'].includes(engagementType))fields.engagementType='Unknown engagement type'
+    if(!['fi','en','flexible','other'].includes(workLanguage))fields.workLanguage='Unknown working language'
     const requestKey=normalized(data.idempotencyKey)
     if(data.idempotencyKey!==undefined&&(typeof data.idempotencyKey!=='string'||!/^[0-9a-f-]{20,64}$/i.test(requestKey)))fields.idempotencyKey='Invalid request identifier'
     if(Object.keys(fields).length)return reply('Validation failed',422,fields)
@@ -94,13 +97,13 @@ export async function POST(request:NextRequest){
     const identity=service||'not specified'
     const subject='Komplyint website enquiry'+(name?': '+name.replace(/[\r\n]/g,' ').slice(0,70):'')
     const text=['Name: '+(name||'Not provided'),'Email: '+email,'Company: '+(company||'Not provided'),
-      'Service: '+identity,'Language: '+locale,'','Message:',message].join('\n')
+      'Service: '+identity,'Website language: '+locale,'Engagement: '+engagementType,'Technical work language: '+workLanguage,'','Message:',message].join('\n')
     const result=await smtp.sendMail({
       from:process.env.SMTP_USER,to:RECIPIENT,replyTo:email,subject,
       text,
       html:'<p><b>Name:</b> '+escapeHtml(name||'Not provided')+'</p><p><b>Email:</b> '+escapeHtml(email)+
         '</p><p><b>Company:</b> '+escapeHtml(company||'Not provided')+'</p><p><b>Service:</b> '+
-        escapeHtml(identity)+'</p><p><b>Message:</b></p><p>'+escapeHtml(message).replace(/\n/g,'<br>')+'</p>'
+        escapeHtml(identity)+'</p><p><b>Engagement:</b> '+escapeHtml(engagementType)+'</p><p><b>Technical work language:</b> '+escapeHtml(workLanguage)+'</p><p><b>Message:</b></p><p>'+escapeHtml(message).replace(/\n/g,'<br>')+'</p>'
     })
     if(!(result.accepted||[]).some(x=>(typeof x==='string'?x:x.address).toLowerCase()===RECIPIENT))return reply('Recipient not accepted by mail service',502)
     if(requestKey)accepted.set(requestKey,now)
