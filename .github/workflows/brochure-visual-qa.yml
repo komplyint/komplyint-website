@@ -36,4 +36,9 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: komplyint-brochure-visual-review
-          path: document-preview/
+          path: |
+            document-preview/
+            public/downloads/Komplyint_Palveluesite_FI.pdf
+            public/downloads/Komplyint_Service_Portfolio_EN.pdf
+            public/downloads/Komplyint_Tjanstebroschyr_SV.pdf
+            public/downloads/Komplyint_Service_Documents.zip
