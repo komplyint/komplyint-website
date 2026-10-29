@@ -8,8 +8,8 @@ test('six public service URLs retain explicit delivery-language notes across FI/
  for(const slug of ['data-reporting','m365-automation','websites-maintenance','software-integrations','testing-qa','document-support'])assert.ok(src.includes(slug))
  for(const value of ['workingLanguages','consultingCopy','Finnish and English','Suomi ja englanti','Finska och engelska','Englanti (tekninen kehitys)','English technical delivery'])assert.ok(src.includes(value),value)
  const sv=read('src/lib/i18n-sv.ts')
- assert.ok(sv.includes('HTML-, CSS- och mindre JavaScript-ändringar på finska'))
- assert.ok(sv.includes('fullstackutveckling sker på engelska'))
+ assert.ok(sv.includes('Program- och webbutveckling sker på engelska'))
+ assert.ok(sv.includes('Det tekniska arbetsspråket är engelska'))
 })
 
 test('engagement journeys reuse the website and retain Charcoal Precision tokens',()=>{
