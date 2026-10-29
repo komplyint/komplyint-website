@@ -71,7 +71,7 @@ export const svContent = {
   },
   area:{
     eyebrow:'VÅRA TJÄNSTER',title:'Hitta en tjänst som passar ert behov.',
-    text:'Läs vad vi kan hjälpa till med, vad som ingår och vad vi kommer överens om innan arbetet börjar.',
+    text:'Vi hjälper till med vidareutveckling av programvara, systemintegrationer och testning samt data, rapportering och Microsoft 365. Välj en tjänst eller läs våra fiktiva uppdragsexempel.',
     examples:'Exempel på uppdrag',delivered:'Det här får ni',boundaries:'Det här kommer vi överens om',
     tools:'Verktyg vi använder',help:'Fråga oss om tjänsten'
   },
@@ -134,7 +134,7 @@ export const svContent = {
   },
     contactPage:{
     eyebrow:'KONTAKT',title:'Hur kan vi hjälpa er?',
-    lead:'Berätta om ni behöver ett projekt genomfört, en specialist för ett uppdrag eller hjälp med en mindre uppgift.',
+    lead:'Beskriv problemen med en applikation, API-integration, testning eller rapportering. Vi kan diskutera ett avgränsat projekt, en specialist eller en mindre rättelse.',
     formName:'Namn (frivilligt)',formEmail:'E-postadress',formService:'Tjänst eller ärende',formMessage:'Beskriv uppdraget',
     send:'Skicka meddelande',sending:'Skickar ...',
     sent:'Tack! Vi har tagit emot din förfrågan.',
@@ -158,8 +158,8 @@ export const svContent = {
     ]
   },
   about:{
-    title:'Ett finländskt företag inom digitala tjänster',
-    text:'Komplyint Oy hjälper företag och IT-partner med programutveckling, data, Microsoft 365 och programvarutestning. Arbetsspråk och specialist avtalas per uppdrag. Vi ger inte juridisk rådgivning eller certifieringar.'
+    title:'Programutveckling, testning och datatjänster',
+    text:'Komplyint Oy hjälper företag med vidareutveckling av applikationer, API-integrationer, programvarutestning, rapportering och Microsoft 365. Vi genomför avgränsade projekt eller arbetar tillsammans med kundens utvecklingsteam. Den tekniska specialisten och arbetsspråket bekräftas före uppdraget. Vi ger inte juridisk rådgivning eller certifieringar.'
   },
   footerDescription:'Programutveckling, Power BI-rapportering, automatisering och kvalitetssäkring.',
   footer:'Komplyint Oy · FO-nummer 3588595-3',
