@@ -39,7 +39,7 @@ test('brochure copy is compiled from actual website dictionaries in all three la
   }finally{rmSync(folder,{recursive:true,force:true})}
 })
 
-test('the seven-page renderer rejects stale copy and has no parallel Swedish catalogue',()=>{
+test('the eight-page renderer rejects stale copy and has no parallel Swedish catalogue',()=>{
   assert.match(generator,/sourceHashes/)
   assert.match(generator,/Stale brochure source/)
   assert.doesNotMatch(generator,/portfolio_sv\.json/)
