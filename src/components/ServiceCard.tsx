@@ -1,5 +1,5 @@
 import type { Lang, Service } from '@/lib/commercial'
-import { serviceSlugs } from '@/lib/commercial'
+import { serviceSlugs, workingLanguages } from '@/lib/commercial'
 import { pathFor } from '@/lib/site-route'
 import Arrow from '@/components/Arrow'
 import { ui } from '@/lib/i18n-ui'
@@ -14,6 +14,7 @@ export default function ServiceCard({ lang, service, index }: { lang: Lang; serv
       <ServiceIcon index={index}/>
       <h3>{service.title}</h3>
       <p>{service.intro}</p>
+      <small className="kc-service-language">{workingLanguages[lang][index]}</small>
       <span className="kc-service-card-action">{ui[lang].serviceDetailLink}<Arrow /></span>
     </a>
   )
