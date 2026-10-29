@@ -336,7 +336,7 @@ export const spotlightCopy = {
       "Power Automate",
       "Jira"
     ],
-    "dataLanguage": "Testaus, data, dokumentointi ja projektiseuranta onnistuvat suomeksi ja englanniksi. Komplyint ei esitä omaa vastuuhenkilöään ammattimaisena full-stack-kehittäjänä.",
+    "dataLanguage": "Testaus, raportointi, dokumentointi ja projektiseuranta onnistuvat suomeksi ja englanniksi. Ohjelmistokehityksen tekninen toteutus tehdään erikseen sovitun asiantuntijan kanssa.",
     "technologyHeading": "Tekninen osaaminen työn tukena",
     "technologyLead": "Työkalut valitaan olemassa olevan sovelluksen ja asiakkaan tarpeen perusteella. Emme ehdota uutta teknologiaa vain sen vuoksi, että se löytyy osaamislistalta.",
     "caveat": "Kuvatut ongelmat ovat esimerkkejä palveluista, eivät Komplyint Oy:n asiakasreferenssejä. Asiantuntija, työn laajuus, käytettävät teknologiat ja kielet vahvistetaan ennen toimeksiantoa.",
@@ -431,7 +431,7 @@ export const spotlightCopy = {
       "Power Automate",
       "Jira"
     ],
-    "dataLanguage": "Testing, reporting, documentation and project tracking can be delivered in Finnish and English. The business lead is not presented as an experienced production full-stack developer.",
+    "dataLanguage": "Testing, reporting, documentation and project coordination are available in Finnish and English. Software engineering is delivered by an agreed specialist.",
     "technologyHeading": "The tools support the work",
     "technologyLead": "Technology choices depend on the existing system and the customer's needs. We do not recommend a new stack merely because it appears on a skills list.",
     "caveat": "These are examples of problems we can help evaluate, not claims that Komplyint Oy has delivered the featured external customer cases. We confirm availability, scope, technology and language before engagement.",
@@ -446,7 +446,7 @@ export const spotlightCopy = {
   },
   "sv": {
     "eyebrow": "PROGRAMUTVECKLING · INTEGRATIONER · TESTNING",
-    "title": "Vi hjälper er lösa problem i befintliga programvarusystem.",
+    "title": "Vi hjälper er att lösa problem i befintliga programvarusystem.",
     "lead": "När en applikation är svår att ändra, integrationer kräver manuellt arbete eller nya versioner orsakar fel hjälper vi till att utreda problemet och genomföra överenskomna förbättringar. Vi kan ta ansvar för ett avgränsat projekt eller samarbeta med ert utvecklingsteam.",
     "problemLabel": "UTMANINGEN",
     "solutionLabel": "SÅ HJÄLPER VI",
@@ -526,7 +526,7 @@ export const spotlightCopy = {
       "Power Automate",
       "Jira"
     ],
-    "dataLanguage": "Testning, rapportering, dokumentation och projektuppföljning kan utföras på finska och engelska. Företagets kundansvariga beskrivs inte som erfaren professionell fullstackutvecklare.",
+    "dataLanguage": "Testning, rapportering, dokumentation och projektuppföljning kan utföras på finska och engelska. Den tekniska programutvecklingen utförs av en separat överenskommen specialist.",
     "technologyHeading": "Tekniken väljs efter behovet",
     "technologyLead": "Vi väljer verktyg utifrån det befintliga systemet och kundens behov, inte för att ett visst ramverk finns på en kompetenslista.",
     "caveat": "Beskrivningarna är exempel på problem vi kan hjälpa till att bedöma, inte påståenden om kundprojekt som Komplyint Oy har genomfört. Vi bekräftar resurser, omfattning, teknik och språk före uppdraget.",
