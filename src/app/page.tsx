@@ -165,7 +165,6 @@ function Home({lang}:{lang:Lang}) {
           <p className="kc-hero-lead">{t.hero.text}</p>
           <div className="kc-hero-buttons"><a className="kc-button kc-button-primary" href={pathFor(lang,'contact')}>{t.contactButton}<Arrow /></a><a className="kc-button kc-button-ghost" href={pathFor(lang,'services')}>{t.explore}<span aria-hidden="true">↓</span></a><a className="kc-button kc-button-ghost kc-hero-download" href={spotlightCopy[lang].pdfFile} download={spotlightCopy[lang].pdfName}>{spotlightCopy[lang].actionDownload}<span aria-hidden="true">↓</span></a></div>
         </div>
-        <div className="kc-hero-side kc-hero-engineering"><p className="kc-hero-engineering-label">{spotlightCopy[lang].heroEyebrow}</p><strong className="kc-hero-engineering-years">{spotlightCopy[lang].heroYears}</strong><p className="kc-hero-engineering-experience">{spotlightCopy[lang].heroExperience}</p><p className="kc-hero-engineering-stack">{spotlightCopy[lang].heroStack}</p></div>
       </div>
       <VideoHero lang={lang}/>
       <div className="kc-hero-shade" />
