@@ -76,7 +76,7 @@ export const svContent = {
     tools:'Verktyg vi använder',help:'Fråga oss om tjänsten'
   },
   impact:{
-    eyebrow:'EXEMPEL PÅ UPPDRAG',title:'Exempel på hur vi kan hjälpa till.',
+    eyebrow:'EXEMPEL PÅ UPPDRAG',title:'Exempel inom rapportering och andra digitala tjänster.',
     disclaimer:'Exemplen är fiktiva och bygger inte på utförda kunduppdrag.',
     cases:[
       {num:'01',title:'Göra en månadsrapport lättare att uppdatera',before:'Månadsrapporten sammanställs för hand från flera Excel-filer.',after:'En rapportmall som är lätt att uppdatera, med tydliga anvisningar.'},
