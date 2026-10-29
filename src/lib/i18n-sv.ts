@@ -30,7 +30,7 @@ export const svServices = [
   },
   {
     title:'Programutveckling och integrationer',
-    intro:'Vi löser problem i befintliga applikationer, utvecklar nya funktioner och förbättrar systemintegrationer.',
+    intro:'Rättelser, nya funktioner och bättre integrationer i befintliga system.',
     examples:['Rätta återkommande fel och förbättra underhållbarheten','Utveckla gränssnitt och bakgrundstjänster enligt kundens agila arbetslista','Förbättra API:er, dataöverföring och felhantering'],
     deliverable:'De funktioner och tester vi kommit överens om samt anvisningar för eventuell källkod och driftsättning.',
     boundaries:'Avancerad fullstackutveckling sker på engelska med en bekräftad specialist. Finskspråkig kundkontakt kan avtalas separat.',
