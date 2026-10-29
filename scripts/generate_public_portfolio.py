@@ -88,7 +88,7 @@ def cover(c, t):
     if y < 305:
         raise RuntimeError('Cover copy exceeds reserved space for full-stack highlight')
     feature=t['capabilities']
-    para(c,feature['fullstackTitle']+'  /  '+feature['heroYears'],54,min(y-21,300),W-108,13,ACCENT,19,True)
+    para(c,feature['fullstackTitle']+'  /  '+feature['fullstackSubtitle'],54,min(y-21,300),W-108,13,ACCENT,19,True)
     c.setStrokeColor(colors.HexColor('#456957'))
     for i in range(4):
         x = 54+i*125
@@ -159,39 +159,39 @@ def detailed(c, t, start, page):
 
 
 def engineering_page(c, t):
-    """A dedicated bold technical capability page across FI, EN and SV."""
+    """Actual buyer problems and delivery approaches, not a skills billboard."""
     top(c,6,t)
     v=t['capabilities']
-    y=para(c,v['title'],54,H-155,W-108,27,INK,33,font='KSerif')
-    y=para(c,v['lead'],54,y-12,W-108,9.7,MUTED,15)
-    panel_top=min(y-20,H-284)
-    panel_height=294
-    bottom=panel_top-panel_height
-    if bottom < 215:
-        raise RuntimeError('Engineer summary is too long for an eight-page portfolio')
-    c.setFillColor(DEEP);c.roundRect(54,bottom,W-108,panel_height,12,fill=1,stroke=0)
-    c.setFillColor(colors.HexColor('#C74C57'));c.roundRect(54,panel_top-5,59,5,2,fill=1,stroke=0)
-    text_y=para(c,v['fullstackTitle'],74,panel_top-27,W-148,19,WHITE,26,True)
-    text_y=para(c,v['fullstackSubtitle'],74,text_y-5,W-148,11,ACCENT,17,True)
-    text_y=para(c,v['fullstackDescription'],74,text_y-10,W-148,8.5,WHITE,13)
-    if text_y < panel_top-167:
-        raise RuntimeError('Engineering overview is too long for its panel')
-    columns=4
-    width=(W-108-40-3*7)/columns
-    for n,tag in enumerate(v['stack']):
-        col=n%columns;row=n//columns
-        x=74+col*(width+7)
-        top_y=panel_top-168-row*36
-        c.setFillColor(colors.HexColor('#26362F'))
-        c.setStrokeColor(colors.HexColor('#507C64'))
-        c.roundRect(x,top_y-29,width,29,5,fill=1,stroke=1)
-        para(c,tag,x+8,top_y-7,width-15,8.5,WHITE,11,True)
-    y=para(c,v['fullstackLanguage'],54,bottom-19,W-108,9.8,GREEN,15,True)
-    y=para(c,v['dataTitle']+'  /  '+v['dataSubtitle'],54,y-17,W-108,12.2,INK,18,True)
-    y=para(c,v['dataDescription'],54,y-9,W-108,9,MUTED,14)
-    y=para(c,v['dataLanguage'],54,y-9,W-108,8.5,MUTED,13)
-    if y < 61:
-        raise RuntimeError('Technical skills page overruns its footer')
+    y=para(c,v['title'],54,H-152,W-108,26,INK,31,font='KSerif')
+    y=para(c,v['lead'],54,y-10,W-108,9.2,MUTED,14)
+    grid_top=min(y-20,H-284)
+    width=(W-126)/2
+    height=219
+    gap=14
+    if grid_top-(height*2+gap) < 90:
+        raise RuntimeError('Buyer problem page introduction is too long')
+    for i,case in enumerate(v['problems']):
+        col,row=i%2,i//2
+        x=54+col*(width+18)
+        top_y=grid_top-row*(height+gap)
+        bottom=top_y-height
+        dark=i==0
+        c.setFillColor(DEEP if dark else WHITE)
+        c.setStrokeColor(colors.HexColor('#43534C') if dark else RULE)
+        c.roundRect(x,bottom,width,height,9,fill=1,stroke=1)
+        ink=WHITE if dark else INK
+        body=colors.HexColor('#DBE2DD') if dark else MUTED
+        accent=ACCENT if dark else GREEN
+        c.setFillColor(accent);c.setFont('KBold',8)
+        c.drawString(x+14,top_y-19,f'{i+1:02d}')
+        yy=para(c,case['title'],x+14,top_y-29,width-28,11.3,ink,15,True)-7
+        yy=para(c,case['problem'],x+14,yy,width-28,8.2,body,11.4)-10
+        c.setStrokeColor(colors.HexColor('#40514A') if dark else RULE)
+        c.line(x+14,yy+4,x+width-14,yy+4)
+        yy=para(c,case['solution'],x+14,yy-8,width-28,8.35,ink,11.6)-8
+        yy=para(c,case['outcome'],x+14,yy,width-28,8.1,accent,11.1,True)
+        if yy < bottom+9:
+            raise RuntimeError(f'Buyer problem card {t["language"]}/{i+1} overflows by {round(bottom+9-yy,1)} pt')
     c.showPage()
 
 
