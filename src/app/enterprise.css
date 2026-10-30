@@ -282,3 +282,9 @@
  .kc-root .qh-feature-software-art{padding:9px;border-radius:15px}
  .kc-root .qh-feature-software-art .ev-console-body{padding:14px}
 }
+
+/* Audit fixes: accessible foreground contrast without weakening the palette.
+ * Existing .kc-root a specificity was overriding primary/download CTA text. */
+.kc-root .kc-expertise-primary,
+.kc-root .kc-expertise-download:not(.kc-expertise-download-all){color:#101418}
+html.dark .kc-root .kc-solutions-case:not(:first-child) .kc-solutions-number{color:#F08D9A}
