@@ -31,7 +31,7 @@
   width:min(1360px,calc(100% - 84px));
   max-width:1360px;
   display:grid;
-  grid-template-columns:minmax(0,.89fr) minmax(0,1.11fr);
+  grid-template-columns:minmax(0,.89fr) minmax(0,1.11fr)!important;
   align-items:center;
   gap:clamp(22px,3.4vw,54px);
   padding:86px 0 104px;
@@ -187,7 +187,7 @@
 .ev-people-compact .ev-people-intro h2{font-size:clamp(33px,3.2vw,46px)}
 /* Layout safety at intermediate and narrow widths. */
 @media(max-width:1199px){
- .kc-root .kc-hero>.kc-hero-layout{width:min(1160px,calc(100% - 54px));grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:19px}
+ .kc-root .kc-hero>.kc-hero-layout{width:min(1160px,calc(100% - 54px));grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;gap:19px}
  .kc-root .kc-hero .kc-hero-copy{padding:29px 25px 35px}
  .kc-root .kc-hero h1{font-size:clamp(38px,4.2vw,56px)}
  .ev-flow-node{min-height:122px;padding:11px 6px}
@@ -289,4 +289,14 @@
  .ev-software-story>div:first-child h2{font-size:34px}
  .ev-work-demo-grid{gap:22px}
  .ev-work-demo-grid .ev-report-main{padding:17px}
+}
+
+/* Override the legacy 29 October single-column !important grid rule.
+   Otherwise the hero image demo slips beneath the copy on wide screens. */
+@media(min-width:901px){
+ .kc-root .kc-hero>.qh-video-controls{top:auto!important;bottom:18px!important;right:max(35px,calc((100vw - 1280px)/2))!important}
+}
+@media(min-width:1200px){
+ .kc-root .kc-hero .kc-hero-copy{max-width:none}
+ .kc-root .kc-hero-layout .ev-hero-visual{align-self:center}
 }
