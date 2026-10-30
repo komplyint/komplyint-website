@@ -4,7 +4,7 @@ import Arrow from '@/components/Arrow'
 
 /**
  * First names only, by owner choice. These are areas of responsibility, not
- * claims of headcount, family relationship, formal titles or client delivery.
+ * claims of headcount, personal relationships, formal titles or client delivery.
  */
 const copy={
   fi:{
