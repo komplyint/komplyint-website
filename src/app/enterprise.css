@@ -23,7 +23,7 @@
 .kc-root .kc-page-top h1{font-size:clamp(40px,4.3vw,64px);line-height:1.10;}
 .kc-root .kc-hero-tag,.kc-root .kc-eyebrow {letter-spacing:.09em;}
 .kc-root .kc-solutions-label {color:var(--ki-color-muted);}
-.kc-root .kc-header-row{min-height:87px}
+.kc-root .kc-header-row{min-height:120px}
 .kc-root .kc-header-cta{border-radius:11px}
 .kc-root .kc-button{border-radius:11px;transition:transform .2s,background-color .2s,box-shadow .2s}
 .kc-root .kc-button-primary {box-shadow:0 10px 28px rgba(2,10,9,.24);}
@@ -169,6 +169,7 @@
 .ev-engineering-caption{margin:0;padding:13px 18px 18px;color:#ABBDB1;font-size:10px;line-height:1.5}
 /* Layout safety at intermediate and narrow widths. */
 @media(max-width:1199px){
+ .kc-root .kc-header-row{min-height:100px}
  .kc-root .kc-hero>.kc-hero-layout{width:min(1160px,calc(100% - 54px));grid-template-columns:minmax(0,1fr)!important;gap:0}
  .kc-root .kc-hero .kc-hero-copy{padding:29px 29px 33px;max-width:535px}
  .kc-root .kc-hero h1{font-size:clamp(38px,4vw,47px)}
@@ -184,6 +185,7 @@
  .ev-hero-visual{margin:0 auto;max-width:670px}
 }
 @media(max-width:767px){
+ .kc-root .kc-header-row{min-height:92px}
  .kc-root .kc-hero{min-height:0}
  .kc-root .kc-hero>.kc-hero-layout{width:calc(100% - 40px);display:flex;flex-direction:column;gap:0;padding:0 0 30px}
  .kc-root .kc-hero .kc-hero-copy{padding:43px 0 30px;background:#151B1F;border:0;box-shadow:none;border-radius:0}
