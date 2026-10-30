@@ -9,6 +9,7 @@ import Arrow from '@/components/Arrow'
 const copy={
   fi:{
     eyebrow:'TEKIJÄT',heading:'Osaamista oikeaan tehtävään.',
+    dataIndex:'01 / DATA JA TESTAUS',softwareIndex:'02 / OHJELMISTOT',
     intro:'Komplyintin työssä yhdistyvät raportointi, laadunvarmistus ja ohjelmistokehitys. Sovimme projektikohtaisesti, kuka vastaa mistäkin ja miten yhteistyö toteutetaan.',
     dataLabel:'DATA · RAPORTOINTI · TESTAUS',
     dataDescription:'Tietojen jäsentäminen, Excel- ja Power BI -raportointi, ohjelmistotestaus sekä työn etenemisen seuranta.',
@@ -21,6 +22,7 @@ const copy={
   },
   en:{
     eyebrow:'PEOPLE BEHIND THE WORK',heading:'The right skills for the work.',
+    dataIndex:'01 / DATA & QA',softwareIndex:'02 / SOFTWARE',
     intro:'Komplyint brings together reporting, quality assurance and software engineering. We agree who is responsible for each part of an assignment and how the work will be delivered.',
     dataLabel:'DATA · REPORTING · QA',
     dataDescription:'Organising data, Excel and Power BI reporting, software testing and keeping project delivery on track.',
@@ -33,6 +35,7 @@ const copy={
   },
   sv:{
     eyebrow:'PERSONERNA BAKOM ARBETET',heading:'Rätt kompetens för uppdraget.',
+    dataIndex:'01 / DATA OCH TESTNING',softwareIndex:'02 / PROGRAMUTVECKLING',
     intro:'Komplyint arbetar med rapportering, kvalitetssäkring och programutveckling. Inför varje uppdrag kommer vi överens om ansvarsfördelning och hur arbetet ska genomföras.',
     dataLabel:'DATA · RAPPORTERING · TESTNING',
     dataDescription:'Strukturering av data, rapportering i Excel och Power BI, programtestning och projektuppföljning.',
@@ -70,14 +73,14 @@ export default function PeopleAtKomplyint({lang}:{lang:Lang}){
       </div>
       <div className="kp-grid">
         <article className="kp-person kp-person-data">
-          <div className="kp-person-top"><ServiceMark variant="data"/><span className="kp-number">01 / DATA &amp; QA</span></div>
+          <div className="kp-person-top"><ServiceMark variant="data"/><span className="kp-number">{t.dataIndex}</span></div>
           <h3>Vitus</h3>
           <p className="kp-person-role">{t.dataLabel}</p>
           <p className="kp-person-description">{t.dataDescription}</p>
           <div className="kp-person-language"><span className="kp-language-dot" aria-hidden="true"/>{t.dataLanguages}</div>
         </article>
         <article className="kp-person kp-person-software">
-          <div className="kp-person-top"><ServiceMark variant="software"/><span className="kp-number">02 / ENGINEERING</span></div>
+          <div className="kp-person-top"><ServiceMark variant="software"/><span className="kp-number">{t.softwareIndex}</span></div>
           <h3>Valentine</h3>
           <p className="kp-person-role">{t.softwareLabel}</p>
           <p className="kp-person-description">{t.softwareDescription}</p>
