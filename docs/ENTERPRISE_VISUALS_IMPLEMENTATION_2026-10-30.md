@@ -19,14 +19,14 @@ REA_NOT_APPLICABLE to this increment: no authorized external executable, website
 
 ## New original assets
 - src/components/EnterpriseVisuals.tsx: localized HTML/SVG integration console, reporting dashboard and QA illustration. Buttons run a deterministic local simulated request including timeout retry; period selection recomputes chart, totals and mean using synthetic arrays. Not a production HTTP backend or actual client performance.
-- src/components/DeliveryProfiles.tsx: named Valentine Idi / Vitus Idi roles, working language and scope in FI/EN/SV, without false staff imagery or a five-year badge.
+- Company-level services only: the previously proposed named specialist profiles were withdrawn from all public routes and removed from current source pending explicit approval.
 - src/app/enterprise.css: bespoke layered compositions, responsive charts, refined typography and service priorities, all using original CSS and SVG rather than stock photos.
 - src/app/page.tsx: new visual structure on Home, Software, Work and Company, using existing route infrastructure.
 - src/app/layout.tsx: local font imports and first-paint dark default while keeping light and system controls.
 - tests/enterprise-visuals.contract.test.mjs: check visual wiring and transparent demonstration labels.
 
 ## Truth and scope limits
-Synthetic request REQ-104, dashboard counts and source-code snippets are strictly demonstrations; not claims of clients or deployed integrations. Monograms are design placeholders rather than invented portraits. The current three eight-page service PDFs and ZIP remain; a shorter sales brochure and approved real photographs are a later work item. No new analytics or trackers are added.
+Synthetic request REQ-104, dashboard counts and source-code snippets are strictly demonstrations; not claims of clients or deployed integrations. Personal names, individual biographies and portraits are not presented as marketing material. The current three eight-page service PDFs and ZIP remain; a shorter sales brochure and approved real photographs are a later work item. No new analytics or trackers are added.
 
 ## Verification gates
 1. npm run build, including source contract tests.
@@ -37,7 +37,10 @@ Synthetic request REQ-104, dashboard counts and source-code snippets are strictl
 6. Human signoff on translated commercial copy.
 
 ## Status at source handover
-DONE IN SOURCE: core visual components, integration wiring, localized roles, design layer, contract tests, reused existing routes and controls.
+DONE IN SOURCE: core visual components, integration wiring, privacy-first company presentation, design layer, contract tests, reused existing routes and controls.
 IN PROGRESS: browser verification, CI and deployment proof.
-NOT STARTED: new two-page brochure, real staff photography.
+DEFERRED UNTIL APPROVED: personal specialist introductions and photography; new two-page brochure not started.
 BLOCKED: claiming production success without Vercel release evidence.
+
+## 30 October owner revision
+Personal details and individual biographies are withheld from the marketing website until specifically authorized. Named specialist cards are absent from Home, Software and About. Compact film-first hero and EB Garamond normal-weight editorial headings are the current typography direction. The software simulator remains in a separate section, not on top of video.
