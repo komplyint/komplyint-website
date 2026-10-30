@@ -21,6 +21,7 @@ import ContactAddressLinks from '@/components/ContactAddressLinks'
 import VideoHero from '@/components/VideoHero'
 import {EnterpriseHeroVisual, EnterpriseEngineeringVisual, EnterpriseReportingVisual} from '@/components/EnterpriseVisuals'
 import DeliveryProfiles from '@/components/DeliveryProfiles'
+import DeliveryLab from '@/components/DeliveryLab'
 import LanguageSwitcher from '@/components/LanguageSwitcher'
 import { ui } from '@/lib/i18n-ui'
 import { Process, Trust, About, CTA } from '@/components/MarketingSections'
@@ -181,6 +182,7 @@ function Home({lang}:{lang:Lang}) {
       <div className="kc-moreline"><span>{ui[lang].otherServices}</span><a href={pathFor(lang,'contact')}>{t.contactButton} <Arrow /></a></div>
     </div></section>
 
+    <DeliveryLab lang={lang}/>
     <FeaturedWork lang={lang}/>
     <ExpertiseSpotlight lang={lang}/>
     <ConsultingEngagement lang={lang}/>
@@ -245,7 +247,7 @@ function PrivacyPage({lang}:{lang:Lang}) {
 
 function WorkPage({lang}:{lang:Lang}){
   const t=content[lang].impact
-  return <><section className="kc-page-top qh-inner-landing"><div className="kc-shell"><p className="kc-eyebrow">{t.eyebrow}</p><h1>{ui[lang].workTitle}</h1><p>{ui[lang].workLead}</p></div></section><section className="kc-section ev-work-demonstration"><div className="kc-shell ev-work-demo-grid"><EnterpriseHeroVisual lang={lang}/><EnterpriseReportingVisual lang={lang}/></div></section><Examples lang={lang}/><CTA lang={lang}/></>
+  return <><section className="kc-page-top qh-inner-landing"><div className="kc-shell"><p className="kc-eyebrow">{t.eyebrow}</p><h1>{ui[lang].workTitle}</h1><p>{ui[lang].workLead}</p></div></section><DeliveryLab lang={lang}/><section className="kc-section ev-work-demonstration"><div className="kc-shell ev-work-demo-grid"><EnterpriseHeroVisual lang={lang}/><EnterpriseReportingVisual lang={lang}/></div></section><Examples lang={lang}/><CTA lang={lang}/></>
 }
 function AboutPage({lang}:{lang:Lang}){
   const a=content[lang].about
