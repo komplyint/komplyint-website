@@ -20,7 +20,6 @@ import ContactForm from '@/components/ContactForm'
 import ContactAddressLinks from '@/components/ContactAddressLinks'
 import VideoHero from '@/components/VideoHero'
 import {EnterpriseHeroVisual, EnterpriseEngineeringVisual, EnterpriseReportingVisual} from '@/components/EnterpriseVisuals'
-import DeliveryProfiles from '@/components/DeliveryProfiles'
 import DeliveryLab from '@/components/DeliveryLab'
 import LanguageSwitcher from '@/components/LanguageSwitcher'
 import { ui } from '@/lib/i18n-ui'
@@ -185,7 +184,6 @@ function Home({lang}:{lang:Lang}) {
     <FeaturedWork lang={lang}/>
     <ExpertiseSpotlight lang={lang}/>
     <ConsultingEngagement lang={lang}/>
-    <DeliveryProfiles lang={lang} compact/>
     <Process lang={lang}/>
     <PublicBrochures lang={lang}/>
     <CTA lang={lang}/>
@@ -229,7 +227,7 @@ function SoftwarePage({lang}:{lang:Lang}) {
     <section className="kc-section ev-software-demonstration"><div className="kc-shell ev-software-story"><div><p className="kc-eyebrow">{content[lang].impact.softwareEyebrow}</p><h2>{content[lang].impact.featuredSoftwareTitle}</h2><p>{content[lang].impact.featuredSoftwareText}</p><p className="qh-truth-note">{content[lang].impact.disclaimer}</p></div><EnterpriseEngineeringVisual lang={lang}/></div></section>
     <ExpertiseSpotlight lang={lang}/>
     <section className="kc-section"><div className="kc-shell"><div className="kc-software-grid">{t.items.map((s,i)=><article key={s.title} className="kc-software-card"><span>{String(i+1).padStart(2,'0')}</span><h2>{s.title}</h2><p>{s.body}</p></article>)}</div><div className="kc-limit"><h3>{t.limitTitle}</h3><p>{t.limit}</p></div></div></section>
-    <section className="kc-section kc-muted-section"><div className="kc-shell kc-product"><div><p className="kc-eyebrow">{ui[lang].productDevelopment}</p><h2>{t.productTitle}</h2><p>{t.productText}</p></div><a href="https://floently.com/learn" target="_blank" rel="noopener noreferrer" className="kc-text-link">{t.productLink}<Arrow /></a></div></section><WorkExamplesBridge lang={lang}/><ConsultingEngagement lang={lang}/><DeliveryProfiles lang={lang} compact/><CTA lang={lang}/></>
+    <section className="kc-section kc-muted-section"><div className="kc-shell kc-product"><div><p className="kc-eyebrow">{ui[lang].productDevelopment}</p><h2>{t.productTitle}</h2><p>{t.productText}</p></div><a href="https://floently.com/learn" target="_blank" rel="noopener noreferrer" className="kc-text-link">{t.productLink}<Arrow /></a></div></section><WorkExamplesBridge lang={lang}/><ConsultingEngagement lang={lang}/><CTA lang={lang}/></>
 }
 function ContactPage({lang}:{lang:Lang}) {
   const t=content[lang].contactPage
@@ -254,7 +252,7 @@ function AboutPage({lang}:{lang:Lang}){
   return <><section className="kc-page-top qh-inner-landing"><div className="kc-shell"><p className="kc-eyebrow">{l.aboutPageLabel}</p><h1>{l.aboutPageTitle}</h1><p>{a.text}</p></div></section>
     <section className="kc-section"><div className="kc-shell qh-about-detail"><div><p className="kc-eyebrow">{l.whyUs}</p><h2>{a.title}</h2><p>{l.whyText}</p></div>
     <div className="qh-company-facts"><h3>Komplyint Oy</h3><dl><div><dt>{l.businessId}</dt><dd>3588595-3</dd></div><div><dt>D‑U‑N‑S®</dt><dd>{duns}</dd></div><div><dt>{l.location}</dt><dd>{l.locationValue}</dd></div><div><dt>{l.contactLabel}</dt><dd><a href={'mailto:'+contactEmail}>{contactEmail}</a></dd></div></dl></div>
-    </div></section><DeliveryProfiles lang={lang}/><Process lang={lang}/><CTA lang={lang}/></>
+    </div></section><Process lang={lang}/><CTA lang={lang}/></>
 }
 
 function AccessibilityPage({lang}:{lang:Lang}){
