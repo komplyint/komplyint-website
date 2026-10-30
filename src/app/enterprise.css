@@ -58,8 +58,8 @@
 .kc-root .kc-hero-brochure-link span{font-size:17px}
 .kc-root .kc-hero .kc-hero-shade{
   z-index:2;
-  background:linear-gradient(90deg,rgba(7,10,13,.68),rgba(8,12,15,.43) 60%,rgba(8,12,15,.57)),
-             linear-gradient(0deg,rgba(8,10,13,.50),transparent 43%);
+  background:linear-gradient(90deg,rgba(7,10,13,.26),rgba(8,12,15,.09) 60%,rgba(8,12,15,.17)),
+             linear-gradient(0deg,rgba(8,10,13,.19),transparent 43%);
 }
 .ev-hero-visual{position:relative;color:#EDF5F0;min-width:0;max-width:710px;width:100%;margin-left:auto;z-index:4}
 .ev-surface-glow{position:absolute;inset:-28px -15px 2px;border-radius:32px;background:radial-gradient(ellipse at 58% 12%,rgba(153,217,179,.18),transparent 56%),radial-gradient(ellipse at 11% 100%,rgba(199,76,87,.10),transparent 48%);pointer-events:none}
