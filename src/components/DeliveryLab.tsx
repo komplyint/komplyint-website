@@ -5,7 +5,7 @@ import type {Lang} from '@/lib/commercial'
 import {pathFor} from '@/lib/site-route'
 import {deliveryLabCopy} from '@/lib/delivery-lab-copy'
 import {
-  LAB_MONTHS,LAB_REGIONS,LAB_SOURCES,labReport,runLabPipeline,
+  LAB_REGIONS,LAB_SOURCES,labReport,runLabPipeline,
   type LabFilter,type LabMonth,type LabRegion,type LabScenario,type LabSource,
   type LabGate
 } from '@/lib/delivery-lab-engine'
@@ -103,7 +103,7 @@ export default function DeliveryLab({lang}:{lang:Lang}){
             </select></label>
           </div>
         </div>
-        <div className="dl-kpis" aria-label={t.subtitle}>
+        <div className="dl-kpis" role="group" aria-label={t.subtitle}>
           <div className="dl-kpi"><span>{t.metricReceived}</span><strong>{view.received}</strong><small>{t.requests}</small></div>
           <div className="dl-kpi"><span>{t.metricClosed}</span><strong>{view.closed}</strong><small>{t.requests}</small></div>
           <div className="dl-kpi"><span>{t.metricSla}</span><strong>{view.rate}%</strong><small>{view.onTime} / {view.closed}</small></div>
@@ -117,7 +117,7 @@ export default function DeliveryLab({lang}:{lang:Lang}){
               <span className="dl-panel-icon" aria-hidden="true">▥</span>
             </div>
             <div className="dl-chart-heading"><strong>{t.chart}</strong><span>01—06 / 2026</span></div>
-            <div className="dl-chart" aria-label={t.chart}>
+            <div className="dl-chart" role="group" aria-label={t.chart}>
               {monthly.map(item=><button type="button" key={item.month}
                 className={'dl-chart-bar'+(month===item.month?' is-selected':'')}
                 aria-pressed={month===item.month}
@@ -182,7 +182,7 @@ export default function DeliveryLab({lang}:{lang:Lang}){
             <h3>{t.testing}</h3><p>{t.tip}</p></div>
             <span className="dl-run-number" aria-hidden="true">RUN {String(runNumber).padStart(2,'0')}</span>
           </div>
-          <div className="dl-test-grid" aria-label={t.qaTitle}>{pipeline.gates.map((gate,index)=>
+          <div className="dl-test-grid" role="group" aria-label={t.qaTitle}>{pipeline.gates.map((gate,index)=>
             <div className={'dl-test-card'+(tested?(gate.pass?' is-pass':' is-fail'):'')} key={gate.id}>
               <span>{String(index+1).padStart(2,'0')} / {t[gateKeys[gate.id]]}</span>
               <strong>{gateStatus(gate)}</strong>
