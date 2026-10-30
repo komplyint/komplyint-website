@@ -1,6 +1,6 @@
 import { content, type Lang } from '@/lib/commercial'
 import Arrow from '@/components/Arrow'
-import {EnterpriseEngineeringVisual, EnterpriseReportingVisual} from '@/components/EnterpriseVisuals'
+import {EnterpriseHeroVisual, EnterpriseReportingVisual} from '@/components/EnterpriseVisuals'
 import { pathFor } from '@/lib/site-route'
 import { ui } from '@/lib/i18n-ui'
 
@@ -25,7 +25,7 @@ export default function FeaturedWork({lang}:{lang:Lang}){
     </div>
     <div className="qh-feature-grid qh-feature-software">
       <div className="qh-feature-software-art">
-        <EnterpriseEngineeringVisual lang={lang}/>
+        <EnterpriseHeroVisual lang={lang}/>
       </div>
       <div><p className="kc-eyebrow">{t.softwareEyebrow}</p>
         <h2>{t.featuredSoftwareTitle}</h2>
