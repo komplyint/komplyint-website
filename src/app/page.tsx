@@ -21,6 +21,7 @@ import ContactAddressLinks from '@/components/ContactAddressLinks'
 import VideoHero from '@/components/VideoHero'
 import {EnterpriseHeroVisual, EnterpriseEngineeringVisual, EnterpriseReportingVisual} from '@/components/EnterpriseVisuals'
 import DeliveryLab from '@/components/DeliveryLab'
+import PeopleAtKomplyint from '@/components/PeopleAtKomplyint'
 import LanguageSwitcher from '@/components/LanguageSwitcher'
 import { ui } from '@/lib/i18n-ui'
 import { Process, Trust, About, CTA } from '@/components/MarketingSections'
@@ -252,7 +253,7 @@ function AboutPage({lang}:{lang:Lang}){
   return <><section className="kc-page-top qh-inner-landing"><div className="kc-shell"><p className="kc-eyebrow">{l.aboutPageLabel}</p><h1>{l.aboutPageTitle}</h1><p>{a.text}</p></div></section>
     <section className="kc-section"><div className="kc-shell qh-about-detail"><div><p className="kc-eyebrow">{l.whyUs}</p><h2>{a.title}</h2><p>{l.whyText}</p></div>
     <div className="qh-company-facts"><h3>Komplyint Oy</h3><dl><div><dt>{l.businessId}</dt><dd>3588595-3</dd></div><div><dt>D‑U‑N‑S®</dt><dd>{duns}</dd></div><div><dt>{l.location}</dt><dd>{l.locationValue}</dd></div><div><dt>{l.contactLabel}</dt><dd><a href={'mailto:'+contactEmail}>{contactEmail}</a></dd></div></dl></div>
-    </div></section><Process lang={lang}/><CTA lang={lang}/></>
+    </div></section><PeopleAtKomplyint lang={lang}/><Process lang={lang}/><CTA lang={lang}/></>
 }
 
 function AccessibilityPage({lang}:{lang:Lang}){
