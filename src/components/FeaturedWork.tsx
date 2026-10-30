@@ -1,6 +1,6 @@
 import { content, type Lang } from '@/lib/commercial'
 import Arrow from '@/components/Arrow'
-import WorkExampleArt from '@/components/WorkExampleArt'
+import {EnterpriseEngineeringVisual, EnterpriseReportingVisual} from '@/components/EnterpriseVisuals'
 import { pathFor } from '@/lib/site-route'
 import { ui } from '@/lib/i18n-ui'
 
@@ -18,13 +18,14 @@ export default function FeaturedWork({lang}:{lang:Lang}){
         <p className="qh-truth-note">{t.disclaimer}</p>
         <a className="kc-text-link" href={pathFor(lang,'work')+'#data-examples'}>{f.link} <Arrow/></a>
       </div>
-      <div className="qh-work-art" role="img" aria-label={f.alt}>
-        <img src={lang==='fi'?'/media/featured-reporting-art-fi.svg':lang==='sv'?'/media/featured-reporting-art-sv.svg':'/media/featured-reporting-art.svg'} width={960} height={600} loading="lazy" decoding="async" className="qh-work-art-image" alt=""/>
+      <div className="qh-work-art" role="group" aria-label={f.alt}>
+        <img src={lang==='fi'?'/media/featured-reporting-art-fi.svg':lang==='sv'?'/media/featured-reporting-art-sv.svg':'/media/featured-reporting-art.svg'} width={960} height={600} loading="lazy" decoding="async" className="qh-work-art-image" alt="" aria-hidden="true"/>
+        <EnterpriseReportingVisual lang={lang}/>
       </div>
     </div>
     <div className="qh-feature-grid qh-feature-software">
       <div className="qh-feature-software-art">
-        <WorkExampleArt index={3}/>
+        <EnterpriseEngineeringVisual lang={lang}/>
       </div>
       <div><p className="kc-eyebrow">{t.softwareEyebrow}</p>
         <h2>{t.featuredSoftwareTitle}</h2>

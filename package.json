@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "npm run test:public-access && next build",
     "start": "next start",
-    "test:public-access": "node --test tests/work-software-examples.contract.test.mjs tests/featured-engineering.contract.test.mjs tests/consulting-language.contract.test.mjs tests/public-access-boundary.test.mjs tests/release-contract.test.mjs tests/source-architecture.contract.test.mjs tests/handbook-register.contract.test.mjs tests/css-boundary.contract.test.mjs tests/design-tokens.contract.test.mjs tests/component-acceptance.contract.test.mjs tests/i18n-coverage.contract.test.mjs tests/brochure-i18n.contract.test.mjs tests/handbook-font-provenance.contract.test.mjs tests/native-copy.contract.test.mjs tests/contact-addresses.contract.test.mjs",
+    "test:public-access": "node --test tests/work-software-examples.contract.test.mjs tests/featured-engineering.contract.test.mjs tests/consulting-language.contract.test.mjs tests/public-access-boundary.test.mjs tests/release-contract.test.mjs tests/source-architecture.contract.test.mjs tests/handbook-register.contract.test.mjs tests/css-boundary.contract.test.mjs tests/design-tokens.contract.test.mjs tests/component-acceptance.contract.test.mjs tests/i18n-coverage.contract.test.mjs tests/brochure-i18n.contract.test.mjs tests/handbook-font-provenance.contract.test.mjs tests/native-copy.contract.test.mjs tests/enterprise-visuals.contract.test.mjs tests/contact-addresses.contract.test.mjs",
     "report:handbook": "node scripts/handbook-progress.mjs"
   },
   "dependencies": {
@@ -15,7 +15,8 @@
     "react-dom": "^18.0.0",
     "nodemailer": "^6.9.0",
     "@fontsource/lato": "5.3.0",
-    "@fontsource/eb-garamond": "5.3.0"
+    "@fontsource/eb-garamond": "5.3.0",
+    "@fontsource/manrope": "5.3.0"
   },
   "devDependencies": {
     "@types/node": "^20.0.0",

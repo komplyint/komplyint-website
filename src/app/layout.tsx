@@ -2,6 +2,10 @@ import type { Metadata } from 'next'
 import { headers } from 'next/headers'
 import '@fontsource/eb-garamond/latin-400.css'
 import '@fontsource/eb-garamond/latin-ext-400.css'
+import '@fontsource/manrope/latin-400.css'
+import '@fontsource/manrope/latin-ext-400.css'
+import '@fontsource/manrope/latin-700.css'
+import '@fontsource/manrope/latin-ext-700.css'
 import '@fontsource/lato/latin-400.css'
 import '@fontsource/lato/latin-ext-400.css'
 import '@fontsource/lato/latin-700.css'
@@ -10,6 +14,7 @@ import './globals.css'
 import './commercial.css'
 import './handbook.css'
 import './i18n.css'
+import './enterprise.css'
 import { isLocale, defaultLocale } from '@/lib/i18n'
 import { pageMetadata } from '@/lib/route-meta'
 import LangSetter from './LangSetter'
@@ -38,7 +43,7 @@ export default function RootLayout({
   const locale = isLocale(headerLocale) ? headerLocale : defaultLocale
   return (
     <html lang={locale} className="dark" suppressHydrationWarning>
-      <head><script dangerouslySetInnerHTML={{__html:`(function(){try{var v=localStorage.getItem('komplyint-theme')||'system';var d=v==='dark'||(v==='system'&&matchMedia('(prefers-color-scheme: dark)').matches);document.documentElement.classList.toggle('dark',d);document.documentElement.style.colorScheme=d?'dark':'light'}catch(e){}})();`}}/></head>
+      <head><script dangerouslySetInnerHTML={{__html:`(function(){try{var v=localStorage.getItem('komplyint-theme')||'dark';var d=v==='dark'||(v==='system'&&matchMedia('(prefers-color-scheme: dark)').matches);document.documentElement.classList.toggle('dark',d);document.documentElement.style.colorScheme=d?'dark':'light'}catch(e){}})();`}}/></head>
       <body>
         <LangSetter />
         {children}
