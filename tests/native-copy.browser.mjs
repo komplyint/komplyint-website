@@ -17,7 +17,7 @@ try{
   assert.equal(home?.status(),200)
   assert.equal((await page.locator('main h1').textContent())?.trim(),f.hero)
   assert.equal((await page.locator('.kc-cta .kc-eyebrow').textContent())?.trim(),f.cta)
-  assert.ok((await page.locator('.qh-featured-work .kc-lead').textContent()||'').includes(f.example))
+  assert.ok((await page.locator('.qh-featured-work .kc-lead').first().textContent()||'').includes(f.example))
   const footer=await page.locator('.kc-footer-brand p').textContent()||''
   assert.ok(footer.length>20&&footer.length<180,f.locale+' concise footer')
   assert.equal(await page.locator('.kc-service-grid .kc-service-tile').count(),6)
