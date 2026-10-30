@@ -167,9 +167,8 @@ function Home({lang}:{lang:Lang}) {
           <p className="kc-hero-tag">{t.hero.label}</p>
           <h1>{t.hero.title}</h1>
           <p className="kc-hero-lead">{t.hero.text}</p>
-          <div className="kc-hero-buttons"><a className="kc-button kc-button-primary" href={pathFor(lang,'contact')}>{t.contactButton}<Arrow /></a><a className="kc-button kc-button-ghost" href={pathFor(lang,'services')}>{t.explore}<span aria-hidden="true">↓</span></a><a className="kc-button kc-button-ghost kc-hero-download" href={spotlightCopy[lang].pdfFile} download={spotlightCopy[lang].pdfName}>{spotlightCopy[lang].actionDownload}<span aria-hidden="true">↓</span></a></div>
+          <div className="kc-hero-buttons"><a className="kc-button kc-button-primary" href={pathFor(lang,'contact')}>{t.contactButton}<Arrow /></a><a className="kc-button kc-button-ghost" href={pathFor(lang,'services')}>{t.explore}<span aria-hidden="true">↓</span></a></div><a className="kc-hero-brochure-link" href={spotlightCopy[lang].pdfFile} download={spotlightCopy[lang].pdfName}>{spotlightCopy[lang].actionDownload}<span aria-hidden="true">↓</span></a>
         </div>
-        <EnterpriseHeroVisual lang={lang}/>
       </div>
       <VideoHero lang={lang}/>
       <div className="kc-hero-shade" />
