@@ -22,6 +22,7 @@ import VideoHero from '@/components/VideoHero'
 import {EnterpriseHeroVisual, EnterpriseEngineeringVisual, EnterpriseReportingVisual} from '@/components/EnterpriseVisuals'
 import DeliveryProfiles from '@/components/DeliveryProfiles'
 import DeliveryLab from '@/components/DeliveryLab'
+import IntegrationShowcase from '@/components/IntegrationShowcase'
 import LanguageSwitcher from '@/components/LanguageSwitcher'
 import { ui } from '@/lib/i18n-ui'
 import { Process, Trust, About, CTA } from '@/components/MarketingSections'
@@ -169,7 +170,6 @@ function Home({lang}:{lang:Lang}) {
           <p className="kc-hero-lead">{t.hero.text}</p>
           <div className="kc-hero-buttons"><a className="kc-button kc-button-primary" href={pathFor(lang,'contact')}>{t.contactButton}<Arrow /></a><a className="kc-button kc-button-ghost" href={pathFor(lang,'services')}>{t.explore}<span aria-hidden="true">↓</span></a><a className="kc-button kc-button-ghost kc-hero-download" href={spotlightCopy[lang].pdfFile} download={spotlightCopy[lang].pdfName}>{spotlightCopy[lang].actionDownload}<span aria-hidden="true">↓</span></a></div>
         </div>
-        <EnterpriseHeroVisual lang={lang}/>
       </div>
       <VideoHero lang={lang}/>
       <div className="kc-hero-shade" />
@@ -184,6 +184,7 @@ function Home({lang}:{lang:Lang}) {
 
     <DeliveryLab lang={lang}/>
     <FeaturedWork lang={lang}/>
+    <IntegrationShowcase lang={lang}/>
     <ExpertiseSpotlight lang={lang}/>
     <ConsultingEngagement lang={lang}/>
     <DeliveryProfiles lang={lang} compact/>
