@@ -264,3 +264,29 @@
 @media(prefers-reduced-motion:reduce){
  .kc-root .kc-button,.ev-hero-visual *, .ev-report *, .ev-engineering *{animation:none!important;transition:none!important}
 }
+
+/* Dedicated service and work routes use the same original visual system. */
+.ev-software-demonstration{background:#151D21;color:#F7F6F2}
+.ev-software-story{display:grid;grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr);gap:clamp(25px,4vw,66px);align-items:center}
+.ev-software-story>div:first-child{min-width:0}
+.ev-software-story>div:first-child h2{font:700 clamp(33px,3.3vw,49px)/1.14 var(--font-enterprise);letter-spacing:-.048em;max-width:19ch;margin:12px 0 19px}
+.ev-software-story>div:first-child p:not(.kc-eyebrow){font-size:17px;line-height:1.68;color:#CFDDD4;max-width:57ch}
+.ev-software-story>div:first-child .qh-truth-note{font-size:12px;color:#ADC0B4;margin-top:23px}
+.ev-software-story .ev-engineering{border:1px solid #486053;box-shadow:0 24px 55px rgba(0,0,0,.25)}
+.ev-work-demonstration{background:var(--ki-color-panel)}
+.ev-work-demo-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px;align-items:stretch}
+.ev-work-demo-grid .ev-hero-visual{max-width:none;margin:0;display:flex;flex-direction:column;justify-content:center}
+.ev-work-demo-grid .ev-hero-footnote{position:static;margin:9px 0 0;color:var(--ki-color-muted)}
+.ev-work-demo-grid .ev-floating-note{display:none}
+.ev-work-demo-grid .ev-console,.ev-work-demo-grid .ev-report{box-shadow:var(--ki-shadow-e3);border:1px solid #456354}
+.ev-work-demo-grid .ev-report{height:100%}
+.ev-work-demo-grid .ev-report-main{padding:24px}
+@media(max-width:1020px){
+ .ev-software-story{grid-template-columns:1fr}
+ .ev-work-demo-grid{grid-template-columns:1fr;max-width:720px;margin:0 auto}
+}
+@media(max-width:767px){
+ .ev-software-story>div:first-child h2{font-size:34px}
+ .ev-work-demo-grid{gap:22px}
+ .ev-work-demo-grid .ev-report-main{padding:17px}
+}
