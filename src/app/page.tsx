@@ -43,9 +43,9 @@ export default function KomplyintWebsite() {
   const [menuOpen, setMenuOpen] = useState(false)
   const menuRef=useRef<HTMLElement>(null)
   const menuTrigger=useRef<HTMLButtonElement>(null)
-  const [appearance, setAppearance] = useState<'dark'|'light'|'system'>('system')
+  const [appearance, setAppearance] = useState<'dark'|'light'|'system'>('dark')
   useEffect(() => {
-    let next:'dark'|'light'|'system'='system'
+    let next:'dark'|'light'|'system'='dark'
     try { const saved=window.localStorage.getItem('komplyint-theme');if(saved==='dark'||saved==='light'||saved==='system')next=saved } catch {}
     setAppearance(next)
   }, [])
