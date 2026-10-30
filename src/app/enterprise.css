@@ -196,7 +196,7 @@
  .kc-root .kc-section-intro .kc-service-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media(max-width:900px){
- .kc-root .kc-hero>.kc-hero-layout{grid-template-columns:1fr;max-width:720px;padding:75px 0 90px}
+ .kc-root .kc-hero>.kc-hero-layout{grid-template-columns:minmax(0,1fr)!important;max-width:720px;padding:75px 0 90px}
  .kc-root .kc-hero .kc-hero-copy{max-width:100%}
  .kc-root .kc-hero h1{max-width:20ch}
  .ev-hero-visual{margin:0 auto;max-width:670px}
