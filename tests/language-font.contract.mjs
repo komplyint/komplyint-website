@@ -27,14 +27,14 @@ try {
         const remoteFontRequests=performance.getEntriesByType('resource').filter(r => /fonts\.(?:googleapis|gstatic)\.com/.test(r.name)).map(r=>r.name)
         return { title, body, faces, remoteFontRequests }
       })
-      assert.match(proof.title, /Manrope/, route + ': enterprise heading font')
+      assert.match(proof.title, /EB Garamond/, route + ': approved handbook heading font')
       assert.match(proof.body, /Lato/, route + ': approved Lato body font')
-      assert.ok(proof.faces.some(f => /Manrope/.test(f.family) && f.status === 'loaded'), route + ': enterprise heading face loaded locally')
+      assert.ok(proof.faces.some(f => /EB Garamond/.test(f.family) && f.status === 'loaded'), route + ': self-hosted handbook heading face loaded locally')
       assert.ok(proof.faces.some(f => /Lato/.test(f.family) && f.status === 'loaded'), route + ': approved body face loaded locally')
       assert.deepEqual(proof.remoteFontRequests,[],route + ': public page must not require a remote font request')
     }
   }
-  console.log('FI/EN/SV initial HTML locales, Manrope display and Lato body font loading PASS')
+  console.log('FI/EN/SV initial HTML locales, EB Garamond headings and Lato body font loading PASS')
 } finally {
   await browser.close()
 }
