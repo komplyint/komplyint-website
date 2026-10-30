@@ -19,6 +19,8 @@ import ServiceExplorer from '@/components/ServiceExplorer'
 import ContactForm from '@/components/ContactForm'
 import ContactAddressLinks from '@/components/ContactAddressLinks'
 import VideoHero from '@/components/VideoHero'
+import {EnterpriseHeroVisual, EnterpriseEngineeringVisual, EnterpriseReportingVisual} from '@/components/EnterpriseVisuals'
+import DeliveryProfiles from '@/components/DeliveryProfiles'
 import LanguageSwitcher from '@/components/LanguageSwitcher'
 import { ui } from '@/lib/i18n-ui'
 import { Process, Trust, About, CTA } from '@/components/MarketingSections'
@@ -166,24 +168,24 @@ function Home({lang}:{lang:Lang}) {
           <p className="kc-hero-lead">{t.hero.text}</p>
           <div className="kc-hero-buttons"><a className="kc-button kc-button-primary" href={pathFor(lang,'contact')}>{t.contactButton}<Arrow /></a><a className="kc-button kc-button-ghost" href={pathFor(lang,'services')}>{t.explore}<span aria-hidden="true">↓</span></a><a className="kc-button kc-button-ghost kc-hero-download" href={spotlightCopy[lang].pdfFile} download={spotlightCopy[lang].pdfName}>{spotlightCopy[lang].actionDownload}<span aria-hidden="true">↓</span></a></div>
         </div>
+        <EnterpriseHeroVisual lang={lang}/>
       </div>
       <VideoHero lang={lang}/>
       <div className="kc-hero-shade" />
       <div className="kc-hero-edge" />
     </section>
 
-    <ExpertiseSpotlight lang={lang}/>
     <section className="kc-section kc-section-intro"><div className="kc-shell">
       <SectionIntro {...t.intro} />
-      <div className="kc-service-grid">{services[lang].map((service,i)=><ServiceCard key={service.title} lang={lang} service={service} index={i}/>)}</div>
+      <div className="kc-service-grid">{([3,4,0,1,2,5] as const).map(i=><ServiceCard key={serviceSlugs[i]} lang={lang} service={services[lang][i]} index={i}/>)}</div>
       <div className="kc-moreline"><span>{ui[lang].otherServices}</span><a href={pathFor(lang,'contact')}>{t.contactButton} <Arrow /></a></div>
     </div></section>
 
-    <ConsultingEngagement lang={lang}/>
     <FeaturedWork lang={lang}/>
+    <ExpertiseSpotlight lang={lang}/>
+    <ConsultingEngagement lang={lang}/>
+    <DeliveryProfiles lang={lang} compact/>
     <Process lang={lang}/>
-    <Trust lang={lang}/>
-    <About lang={lang}/>
     <PublicBrochures lang={lang}/>
     <CTA lang={lang}/>
   </>
@@ -223,9 +225,10 @@ function ServicesPage({lang}:{lang:Lang}) {
 function SoftwarePage({lang}:{lang:Lang}) {
   const t=content[lang].software
   return <><div className="kc-page-top"><div className="kc-shell"><p className="kc-eyebrow">{t.eyebrow}</p><h1>{t.title}</h1><p>{t.lead}</p><a className="kc-button kc-button-primary" href={pathFor(lang,'contact')}>{content[lang].contactButton}<Arrow /></a></div></div>
+    <section className="kc-section ev-software-demonstration"><div className="kc-shell ev-software-story"><div><p className="kc-eyebrow">{content[lang].impact.softwareEyebrow}</p><h2>{content[lang].impact.featuredSoftwareTitle}</h2><p>{content[lang].impact.featuredSoftwareText}</p><p className="qh-truth-note">{content[lang].impact.disclaimer}</p></div><EnterpriseEngineeringVisual lang={lang}/></div></section>
     <ExpertiseSpotlight lang={lang}/>
     <section className="kc-section"><div className="kc-shell"><div className="kc-software-grid">{t.items.map((s,i)=><article key={s.title} className="kc-software-card"><span>{String(i+1).padStart(2,'0')}</span><h2>{s.title}</h2><p>{s.body}</p></article>)}</div><div className="kc-limit"><h3>{t.limitTitle}</h3><p>{t.limit}</p></div></div></section>
-    <section className="kc-section kc-muted-section"><div className="kc-shell kc-product"><div><p className="kc-eyebrow">{ui[lang].productDevelopment}</p><h2>{t.productTitle}</h2><p>{t.productText}</p></div><a href="https://floently.com/learn" target="_blank" rel="noopener noreferrer" className="kc-text-link">{t.productLink}<Arrow /></a></div></section><WorkExamplesBridge lang={lang}/><ConsultingEngagement lang={lang}/><CTA lang={lang}/></>
+    <section className="kc-section kc-muted-section"><div className="kc-shell kc-product"><div><p className="kc-eyebrow">{ui[lang].productDevelopment}</p><h2>{t.productTitle}</h2><p>{t.productText}</p></div><a href="https://floently.com/learn" target="_blank" rel="noopener noreferrer" className="kc-text-link">{t.productLink}<Arrow /></a></div></section><WorkExamplesBridge lang={lang}/><ConsultingEngagement lang={lang}/><DeliveryProfiles lang={lang} compact/><CTA lang={lang}/></>
 }
 function ContactPage({lang}:{lang:Lang}) {
   const t=content[lang].contactPage
@@ -242,7 +245,7 @@ function PrivacyPage({lang}:{lang:Lang}) {
 
 function WorkPage({lang}:{lang:Lang}){
   const t=content[lang].impact
-  return <><section className="kc-page-top qh-inner-landing"><div className="kc-shell"><p className="kc-eyebrow">{t.eyebrow}</p><h1>{ui[lang].workTitle}</h1><p>{ui[lang].workLead}</p></div></section><Examples lang={lang}/><CTA lang={lang}/></>
+  return <><section className="kc-page-top qh-inner-landing"><div className="kc-shell"><p className="kc-eyebrow">{t.eyebrow}</p><h1>{ui[lang].workTitle}</h1><p>{ui[lang].workLead}</p></div></section><section className="kc-section ev-work-demonstration"><div className="kc-shell ev-work-demo-grid"><EnterpriseHeroVisual lang={lang}/><EnterpriseReportingVisual lang={lang}/></div></section><Examples lang={lang}/><CTA lang={lang}/></>
 }
 function AboutPage({lang}:{lang:Lang}){
   const a=content[lang].about
@@ -250,7 +253,7 @@ function AboutPage({lang}:{lang:Lang}){
   return <><section className="kc-page-top qh-inner-landing"><div className="kc-shell"><p className="kc-eyebrow">{l.aboutPageLabel}</p><h1>{l.aboutPageTitle}</h1><p>{a.text}</p></div></section>
     <section className="kc-section"><div className="kc-shell qh-about-detail"><div><p className="kc-eyebrow">{l.whyUs}</p><h2>{a.title}</h2><p>{l.whyText}</p></div>
     <div className="qh-company-facts"><h3>Komplyint Oy</h3><dl><div><dt>{l.businessId}</dt><dd>3588595-3</dd></div><div><dt>D‑U‑N‑S®</dt><dd>{duns}</dd></div><div><dt>{l.location}</dt><dd>{l.locationValue}</dd></div><div><dt>{l.contactLabel}</dt><dd><a href={'mailto:'+contactEmail}>{contactEmail}</a></dd></div></dl></div>
-    </div></section><Process lang={lang}/><CTA lang={lang}/></>
+    </div></section><DeliveryProfiles lang={lang}/><Process lang={lang}/><CTA lang={lang}/></>
 }
 
 function AccessibilityPage({lang}:{lang:Lang}){
