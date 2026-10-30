@@ -294,7 +294,7 @@
 /* Override the legacy 29 October single-column !important grid rule.
    Otherwise the hero image demo slips beneath the copy on wide screens. */
 @media(min-width:901px){
- .kc-root .kc-hero>.qh-video-controls{top:auto!important;bottom:18px!important;right:max(35px,calc((100vw - 1280px)/2))!important}
+ .kc-root .kc-hero>.qh-video-controls{top:18px!important;bottom:auto!important;right:max(35px,calc((100vw - 1280px)/2))!important}
 }
 @media(min-width:1200px){
  .kc-root .kc-hero .kc-hero-copy{max-width:none}
