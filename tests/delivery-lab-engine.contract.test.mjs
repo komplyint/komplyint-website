@@ -75,7 +75,7 @@ test('original client-facing demo has trilingual copy, live controls and no real
  const css=readFileSync('src/app/delivery-lab.css','utf8')
  const page=readFileSync('src/app/page.tsx','utf8')
  const layout=readFileSync('src/app/layout.tsx','utf8')
- for(const phrase of ['Paikallinen demo','LOCAL DEMO','LOKAL DEMO','Power BI','synteettinen','synthetic','syntetiska']){
+ for(const phrase of ['Paikallinen demo','LOCAL DEMO','LOKAL DEMO','Power BI','synteettis','synthetic','syntetiska']){
   assert.ok(copy.toLowerCase().includes(phrase.toLowerCase()),'Missing demo disclosure: '+phrase)
  }
  for(const phrase of ['setScenario(next)','setRegion(event.target.value as LabRegion)','setSource(event.target.value as LabSource)','setMonth(selected=>','runLabPipeline(scenario,repaired,retry)','onClick={run}','onClick={repair}']){
