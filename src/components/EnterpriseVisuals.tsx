@@ -174,14 +174,14 @@ export function EnterpriseEngineeringVisual({lang}:{lang:Lang}) {
       <div className="ev-engineering-code">
         <div className="ev-code-head"><span>{t.before}</span><span>src / integration.ts</span></div>
         <div className="ev-code-line"><span>01</span><code>fetch(request.url)</code></div>
-        <div className="ev-code-line ev-code-delete"><span>02</span><code>throw Error("timeout")</code></div>
-        <div className="ev-code-line"><span>03</span><code>// {t.error}</code></div>
+        <div className="ev-code-line ev-code-delete"><span>02</span><code>{'throw Error("timeout")'}</code></div>
+        <div className="ev-code-line"><span>03</span><code>{`// ${t.error}`}</code></div>
       </div>
       <div className="ev-engineering-code">
         <div className="ev-code-head"><span>{t.after}</span><span>src / integration.ts</span></div>
         <div className="ev-code-line"><span>01</span><code>const response = await retry()</code></div>
         <div className="ev-code-line ev-code-add"><span>02</span><code>if (!response.ok) report()</code></div>
-        <div className="ev-code-line"><span>03</span><code>// {t.success}</code></div>
+        <div className="ev-code-line"><span>03</span><code>{`// ${t.success}`}</code></div>
       </div>
     </div>
     <div className="ev-engineering-checks">
