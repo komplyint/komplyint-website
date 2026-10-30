@@ -27,7 +27,8 @@ test('all six examples receive distinct editable SVG compositions',()=>{
 
 test('homepage, services and software pages link to the new examples',()=>{
  const page=read('src/app/page.tsx'),featured=read('src/components/FeaturedWork.tsx'),bridge=read('src/components/WorkExamplesBridge.tsx'),copy=read('src/lib/commercial.ts')
- assert.ok(featured.includes('<EnterpriseEngineeringVisual lang={lang}/>'),'Homepage should use the richer explanatory engineering visual')
+ assert.ok(featured.includes('<EnterpriseHeroVisual lang={lang}/>'),'Homepage integration demo now belongs in the software feature below the hero')
+ assert.ok(page.includes('<EnterpriseEngineeringVisual lang={lang}/>'),'The engineering visual remains on the software service page')
  assert.ok(featured.includes("'#software-examples'"))
  assert.ok(featured.includes("'#data-examples'"))
  assert.ok(page.includes("import WorkExamplesBridge"))

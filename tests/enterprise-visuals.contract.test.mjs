@@ -1,11 +1,10 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
-import {readFileSync} from 'node:fs'
+import {readFileSync, existsSync} from 'node:fs'
 
 const read=path=>readFileSync(path,'utf8')
 const home=read('src/app/page.tsx')
 const visuals=read('src/components/EnterpriseVisuals.tsx')
-const roles=read('src/components/DeliveryProfiles.tsx')
 const features=read('src/components/FeaturedWork.tsx')
 const css=read('src/app/enterprise.css')
 
@@ -29,18 +28,22 @@ test('each meaningful visual is localized and transparently labels synthetic evi
 })
 
 test('homepage preserves original video and buyer routes while prioritising engineering, QA and data',()=>{
-  for(const fragment of ['<EnterpriseHeroVisual lang={lang}/>','<VideoHero lang={lang}/>','([3,4,0,1,2,5] as const).map','<ExpertiseSpotlight lang={lang}/>','<DeliveryProfiles lang={lang} compact/>'])assert.ok(home.includes(fragment),fragment)
+  for(const fragment of ['<VideoHero lang={lang}/>','([3,4,0,1,2,5] as const).map','<ExpertiseSpotlight lang={lang}/>'])assert.ok(home.includes(fragment),fragment)
+  const homepage=home.slice(home.indexOf('function Home('),home.indexOf('function Examples('))
+  assert.ok(!homepage.includes('<EnterpriseHeroVisual lang={lang}/>'),'No interactive console may obscure the cinematic homepage hero')
+  assert.match(features,/<EnterpriseHeroVisual lang=\{lang\}\/>/,'The same interactive component must be placed inside the software case study')
   assert.match(features,/<EnterpriseReportingVisual lang=\{lang\}\/>/)
-  assert.match(features,/<EnterpriseEngineeringVisual lang=\{lang\}\/>/)
+  assert.match(home,/<EnterpriseEngineeringVisual lang=\{lang\}\/>/,'Engineering illustration remains on the dedicated software page')
   assert.match(home,/ev-work-demo-grid/)
   assert.match(home,/ev-software-story/)
 })
 
-test('the named delivery roles are factual, distinct and translated',()=>{
-  for(const phrase of ['Valentine Idi','Vitus Idi','Tekninen työ englanniksi','Technical delivery in English','Tekniskt arbete på engelska'])assert.ok(roles.includes(phrase),phrase)
-  assert.match(roles,/availability is confirmed before contract/)
-  assert.ok(!roles.includes('5+'))
-  assert.ok(!roles.includes('Yli 5v'))
+test('owner-approved privacy: no named staff cards or individual biographies in website source',()=>{
+  assert.ok(!home.includes('DeliveryProfiles'),'Public routes must not mount the personal profiles')
+  assert.equal(existsSync('src/components/DeliveryProfiles.tsx'),false,'Former named-profile module must not ship in source')
+  for(const file of ['src/app/page.tsx','src/lib/commercial.ts','src/lib/i18n-sv.ts','src/lib/i18n-ui.ts','src/components/FeaturedWork.tsx']){
+    assert.doesNotMatch(read(file),/Valentine Idi|Vitus Idi|Valentine osallistuu|Vitus auttaa|Valentine contributes|Vitus supports/i,file+' must remain company-facing')
+  }
 })
 
 test('new typography is locally licensed and the site opens dark without overriding an explicit light choice',()=>{
@@ -54,6 +57,10 @@ test('new typography is locally licensed and the site opens dark without overrid
   assert.match(css,/prefers-reduced-motion:reduce/)
   assert.match(css,/grid-template-columns:repeat\(3,minmax\(0,1fr\)\)/)
   assert.match(css,/font-enterprise/)
+  assert.match(css,/--font-editorial:"EB Garamond"/)
+  assert.match(css,/\.kc-root \.kc-hero h1 \{font-size:clamp\(38px,3\.4vw,48px\)/)
+  assert.match(css,/\.kc-root \.qh-feature-software-art \.ev-hero-visual/)
+  assert.match(read('src/app/delivery-lab.css'),/font:400 clamp\(34px,3\.4vw,48px\)\/1\.15 var\(--font-editorial\)/)
   const palettes=JSON.parse(read('src/design/tokens.json'))
   assert.equal(palettes.colors.dark.page,'#101418')
   assert.equal(palettes.colors.light.page,'#F7F6F2')
