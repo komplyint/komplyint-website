@@ -104,7 +104,7 @@
 .kc-root .kc-section-intro .kc-service-tile:nth-child(-n+3){min-height:345px;padding:32px;border-top:3px solid #7FAD93}
 .kc-root .kc-section-intro .kc-service-tile:nth-child(1){border-top-color:#C74C57}
 .kc-root .kc-section-intro .kc-service-tile:nth-child(-n+3) .qh-service-icon{width:84px;height:84px}
-.kc-root .kc-section-intro .kc-service-tile:nth-child(n+4){min-height:235px}
+.kc-root .kc-section-intro .kc-service-tile:nth-child(n+4){min-height:300px}
 .kc-root .kc-section-intro .kc-service-tile:nth-child(4):before{background:transparent}
 .kc-root .kc-service-card-action{margin-top:auto}
 .kc-root .kc-intro h2{font-family:var(--font-enterprise);font-size:clamp(34px,3.5vw,51px);font-weight:700;letter-spacing:-.048em;max-width:21ch;line-height:1.16}
@@ -231,9 +231,9 @@
  .kc-root .kc-hero>.qh-film-layer{order:1;position:relative;inset:auto;width:100%;aspect-ratio:16/10}
  .kc-root .kc-hero>.kc-hero-edge{order:2}
  .kc-root .kc-section-intro .kc-service-grid{grid-template-columns:1fr;gap:14px}
- .kc-root .kc-section-intro .kc-service-tile:nth-child(-n+3){min-height:0;padding:24px}
+ .kc-root .kc-section-intro .kc-service-tile:nth-child(-n+3){min-height:300px;padding:24px}
  .kc-root .kc-section-intro .kc-service-tile:nth-child(-n+3) .qh-service-icon{width:68px;height:68px}
- .kc-root .kc-section-intro .kc-service-tile:nth-child(n+4){min-height:0}
+ .kc-root .kc-section-intro .kc-service-tile:nth-child(n+4){min-height:300px}
  .ev-people-grid{grid-template-columns:1fr}
  .ev-people-tail{flex-direction:column;align-items:flex-start}
  .ev-person{padding:25px}
