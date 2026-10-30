@@ -38,11 +38,20 @@ test('homepage preserves original video and buyer routes while prioritising engi
   assert.match(home,/ev-software-story/)
 })
 
-test('owner-approved privacy: no named staff cards or individual biographies in website source',()=>{
-  assert.ok(!home.includes('DeliveryProfiles'),'Public routes must not mount the personal profiles')
-  assert.equal(existsSync('src/components/DeliveryProfiles.tsx'),false,'Former named-profile module must not ship in source')
+test('owner-approved first names only on About: no surnames, family relationship or staff claims',()=>{
+  const profiles=read('src/components/PeopleAtKomplyint.tsx')
+  const about=home.slice(home.indexOf('function AboutPage('),home.indexOf('function AccessibilityPage('))
+  const homepage=home.slice(home.indexOf('function Home('),home.indexOf('function Examples('))
+  assert.match(about,/<PeopleAtKomplyint lang=\{lang\}\/>/,'Profiles belong on About page')
+  assert.ok(!homepage.includes('<PeopleAtKomplyint'),'Homepage must remain company-first')
+  assert.ok(!home.includes('DeliveryProfiles'),'Removed full-name cards must not be restored')
+  assert.equal(existsSync('src/components/DeliveryProfiles.tsx'),false,'Former named-profile module must not ship')
+  assert.equal((profiles.match(/<h3>Vitus<\/h3>/g)||[]).length,1)
+  assert.equal((profiles.match(/<h3>Valentine<\/h3>/g)||[]).length,1)
+  assert.doesNotMatch(profiles,/\b(?:Idi|brother|sibling|sister|family|veljekset|veli|sisarukset|bröder|syskon)\b/i)
+  for(const language of ['fi:','en:','sv:']) assert.ok(profiles.includes(language),'missing locale '+language)
   for(const file of ['src/app/page.tsx','src/lib/commercial.ts','src/lib/i18n-sv.ts','src/lib/i18n-ui.ts','src/components/FeaturedWork.tsx']){
-    assert.doesNotMatch(read(file),/Valentine Idi|Vitus Idi|Valentine osallistuu|Vitus auttaa|Valentine contributes|Vitus supports/i,file+' must remain company-facing')
+    assert.doesNotMatch(read(file),/Valentine Idi|Vitus Idi/i,file+' must not display full names')
   }
 })
 
