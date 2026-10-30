@@ -288,3 +288,45 @@
 .kc-root .kc-expertise-primary,
 .kc-root .kc-expertise-download:not(.kc-expertise-download-all){color:#101418}
 html.dark .kc-root .kc-solutions-case:not(:first-child) .kc-solutions-number{color:#F08D9A}
+
+
+/* ABOUT: discreet first-name introductions, no individual surnames or family claims.
+   Charcoal Precision brand, EB Garamond headlines and Lato body. */
+.kp-people{background:var(--ki-color-panel);border-top:1px solid var(--ki-color-border)}
+.kp-intro{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.88fr);align-items:end;gap:clamp(24px,4vw,64px);margin-bottom:32px}
+.kc-root .kp-intro h2{font:400 clamp(36px,3.7vw,54px)/1.11 var(--font-editorial);letter-spacing:-.012em;text-wrap:balance;margin:12px 0 0;max-width:21ch}
+.kp-intro>p{font:400 17px/1.66 "Lato",Arial,sans-serif;color:var(--ki-color-muted);max-width:66ch;margin:0 0 5px}
+.kp-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.kp-person{position:relative;display:flex;flex-direction:column;align-items:flex-start;min-width:0;min-height:340px;padding:clamp(24px,2.7vw,36px);border:1px solid var(--ki-color-border);border-radius:18px;background:var(--ki-color-surface);box-shadow:var(--ki-shadow-e1);overflow:hidden}
+.kp-person:before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#80B59B,transparent 71%)}
+.kp-person-software:before{background:linear-gradient(90deg,#C74C57,transparent 71%)}
+.kp-person-top{display:flex;justify-content:space-between;align-items:start;width:100%;gap:16px;margin-bottom:20px}
+.kp-mark{display:grid;place-items:center;width:58px;height:58px;padding:8px;border:1px solid var(--ki-color-border);background:var(--ki-color-panel);color:var(--ki-color-action);border-radius:14px;flex-shrink:0}
+.kp-person-software .kp-mark{color:var(--ki-color-ink)}
+.kp-mark svg{display:block;width:100%;height:100%}
+.kp-number{font:700 10px/1.4 "Lato",Arial,sans-serif;letter-spacing:.08em;color:var(--ki-color-muted);text-align:right}
+.kc-root .kp-person h3{font:400 clamp(37px,3.2vw,49px)/1.1 var(--font-editorial);letter-spacing:-.012em;color:var(--ki-color-ink);margin:0 0 8px}
+.kp-person-role{font:700 11px/1.55 "Lato",Arial,sans-serif;letter-spacing:.08em;color:var(--ki-color-action);margin:0 0 17px}
+.kp-person-description{font:400 16px/1.69 "Lato",Arial,sans-serif;color:var(--ki-color-ink);max-width:57ch;margin:0 0 28px}
+.kp-person-language{display:flex;align-items:center;gap:10px;width:100%;padding-top:14px;margin-top:auto;border-top:1px solid var(--ki-color-border);color:var(--ki-color-muted);font:700 12px/1.45 "Lato",Arial,sans-serif}
+.kp-language-dot{width:8px;height:8px;border-radius:50%;background:#80B59B;flex-shrink:0}
+.kp-person-software .kp-language-dot{background:#C74C57}
+.kp-footer{display:flex;justify-content:space-between;align-items:start;gap:28px;margin-top:22px}
+.kp-footer>p{font:400 13px/1.55 "Lato",Arial,sans-serif;color:var(--ki-color-muted);margin:0;max-width:75ch}
+.kp-footer>a{flex-shrink:0;font-size:14px}
+@media(max-width:880px){
+ .kp-intro{grid-template-columns:1fr;gap:14px}
+ .kp-grid{gap:12px}
+ .kp-person{padding:24px;min-height:350px}
+}
+@media(max-width:620px){
+ .kp-grid{grid-template-columns:1fr}
+ .kp-person{min-height:0}
+ .kp-footer{flex-direction:column;align-items:flex-start;gap:13px}
+ .kp-intro>p{font-size:16px}
+}
+@media(max-width:380px){
+ .kp-person{padding:20px}
+ .kp-person-top{margin-bottom:16px}
+ .kp-person-description{font-size:15px}
+}
