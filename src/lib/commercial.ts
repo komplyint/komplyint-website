@@ -30,8 +30,8 @@ export const content = {
     tagline: 'SUOMALAINEN DIGIPALVELUYRITYS',
     contactButton: 'Ota yhteyttä', explore: 'Tutustu palveluihin', email: 'Sähköposti',
     hero: { label: 'OHJELMISTOKEHITYS · DATA · AUTOMAATIO · IT-ASIANTUNTIJAT', title: 'Ohjelmistokehitystä, testausta ja toimivia integraatioita.', text: 'Autamme jatkokehittämään sovelluksia, korjaamaan rajapintoja ja varmistamaan muutosten toimivuuden. Toteutamme sovittuja projekteja ja tarjoamme myös Power BI -raportointia sekä Microsoft 365 -ratkaisuja.', point1: 'Sovittu työn sisältö', point2: 'Selkeät lopputulokset', point3: 'Toimivuuden tarkistus' },
-    intro: { eyebrow: 'MITÄ TEEMME', title: 'Ohjelmistokehitys, data ja digipalvelut samasta paikasta.', text: 'Autamme ohjelmistokehityksessä, Power BI -raportoinnissa, Microsoft 365 -ratkaisuissa ja testauksessa. Myös pienet, rajatut tehtävät ovat tervetulleita.' },
-    area: { eyebrow: 'PALVELUMME', title: 'Valitse palvelu tarpeesi mukaan.', text: 'Ohjelmistokehitys, rajapinnat, testaus, Power BI ja Microsoft 365. Katso palvelumme ja sovitaan toteutustapa.', examples: 'Esimerkkejä tehtävistä', delivered: 'Mitä saat', boundaries: 'Mistä sovitaan etukäteen', tools: 'Käytettävät työkalut', help: 'Kysy lisää palvelusta' },
+    intro: { eyebrow: 'MITÄ TEEMME', title: 'Ohjelmistokehitys, data ja digipalvelut samasta paikasta.', text: 'Autamme ohjelmistokehityksessä, datan ja Power BI -raportoinnissa, intranetin ja työprosessien kehittämisessä sekä automaatiossa ja testauksessa. Myös pienet, rajatut tehtävät ovat tervetulleita.' },
+    area: { eyebrow: 'PALVELUMME', title: 'Valitse palvelu tarpeesi mukaan.', text: 'Ohjelmistokehitys, data, Power BI, SharePoint, prosessikuvaukset, työnkulut ja testaus. Kerro ongelmasta, niin arvioimme tarkoituksenmukaisen toteutuksen.', examples: 'Esimerkkejä tehtävistä', delivered: 'Mitä saat', boundaries: 'Mistä sovitaan etukäteen', tools: 'Käytettävät työkalut', help: 'Kysy lisää palvelusta' },
     impact: { eyebrow: 'ESIMERKKEJÄ', title: 'Esimerkkejä raportoinnista ja muista digipalveluista.', disclaimer: 'Esimerkit ovat kuvitteellisia, eivät toteutettuja asiakastöitä.', cases: [
       { num: '01', title: 'Kuukausiraportin selkeyttäminen', before: 'Kuukausiraportti kootaan käsin useasta Excel-tiedostosta.', after: 'Yksi päivitettävä raporttipohja ja selkeät käyttöohjeet.' },
       { num: '02', title: 'Yhteydenottojen käsittelyn helpottaminen', before: 'Yhteydenotot tulevat sähköpostiin, ja niiden seuranta vie aikaa.', after: 'Lomake kokoaa pyynnöt yhteen ja ilmoittaa niistä vastuuhenkilölle.' },
@@ -71,7 +71,7 @@ export const content = {
       {title:'Muut tuotteet',body:'Muilla ohjelmistotuotteillamme voi olla omat tietosuojaselosteensa.'}
     ]},
     about:{title:'Ohjelmistokehitystä, testausta ja datapalveluja',text:'Komplyint Oy tukee yrityksiä nykyisten ohjelmistojen kehittämisessä, rajapintojen parantamisessa, testauksessa ja raportoinnissa. Työ toteutetaan sovittuina projekteina tai osana asiakkaan kehitystiimiä. Ohjelmistokehityksen asiantuntija ja tekninen työskentelykieli vahvistetaan toimeksiantokohtaisesti. Emme tarjoa oikeudellista neuvontaa tai sertifiointeja.'},
-    footerDescription:'Ohjelmistokehitystä, Power BI -raportointia, automaatiota ja laadunvarmistusta.',
+    footerDescription:'Ohjelmistokehitystä, datan analytiikkaa, prosessien kehittämistä, automaatiota ja laadunvarmistusta.',
     footer:'Komplyint Oy · Y-tunnus 3588595-3', footerNote:'Sovimme jokaisen toimeksiannon sisällöstä erikseen. Emme tarjoa oikeudellista neuvontaa, sertifiointia tai viranomaishyväksyntöjä.'
   },
   en: {
@@ -79,8 +79,8 @@ export const content = {
     tagline: 'DIGITAL SERVICES FROM FINLAND',
     contactButton: 'Contact us', explore: 'Explore services', email: 'Email',
     hero: {label:'SOFTWARE ENGINEERING · DATA · AUTOMATION · IT CONSULTING',title:'Software development, testing and reliable integrations.',text:'We help teams improve existing applications, repair integrations and test changes before release. Defined projects, agreed specialist assignments, Power BI and Microsoft 365 support are available.',point1:'Agreed scope',point2:'Clear deliverables',point3:'Checked before handover'},
-    intro:{eyebrow:'WHAT WE DO',title:'Software delivery, analytics and digital services.',text:'From application development and APIs to Power BI, Microsoft 365 workflows and QA. Small, well-defined tasks are welcome too.'},
-    area:{eyebrow:'SERVICE AREAS',title:'Find the service you need.',text:'Software development, APIs, testing, Power BI and Microsoft 365. Explore our services and agree a suitable delivery approach.',examples:'Examples of tasks',delivered:'What you get',boundaries:'What we agree in advance',tools:'Tools we use',help:'Ask us about this service'},
+    intro:{eyebrow:'WHAT WE DO',title:'Software delivery, analytics and digital services.',text:'From application development and QA to reliable reporting, SharePoint intranets, process mapping and automation. Small, well-defined tasks are welcome too.'},
+    area:{eyebrow:'SERVICE AREAS',title:'Find the service you need.',text:'Software, Power BI, SharePoint, process documentation, workflows, integrations and QA. Describe the problem and we can discuss a suitable delivery approach.',examples:'Examples of tasks',delivered:'What you get',boundaries:'What we agree in advance',tools:'Tools we use',help:'Ask us about this service'},
     impact:{eyebrow:'EXAMPLE PROJECTS',title:'Reporting and digital service examples.',disclaimer:'These examples are fictional and do not represent completed client projects.',cases:[
       {num:'01',title:'Make a monthly report easier to update',before:'Staff compile a monthly report manually from several Excel files.',after:'One reusable report template with clear instructions.'},
       {num:'02',title:'Make incoming enquiries easier to manage',before:'Enquiries arrive by email and take time to track.',after:'A form gathers requests in one place and notifies the person responsible.'},
@@ -120,7 +120,7 @@ export const content = {
       {title:'Other products',body:'Our other software products may have separate privacy notices.'}
     ]},
     about:{title:'Software engineering, testing and data services',text:'Komplyint Oy supports companies with application maintenance, API integrations, software testing, reporting and Microsoft 365 workflows. We can deliver defined projects or contribute to an existing development team. Technical software delivery is assigned to an agreed specialist with an agreed working language. We do not provide legal advice or certification.'},
-    footerDescription:'Software engineering, Power BI reporting, automation and quality assurance.',
+    footerDescription:'Software engineering, analytics, process improvement, automation and quality assurance.',
     footer:'Komplyint Oy · Business ID 3588595-3',footerNote:'Every project has an agreed scope. We do not provide legal advice, certification or regulatory approval.'
   },
   sv: svContent
