@@ -12,6 +12,8 @@ concurrency:
   cancel-in-progress: false
 jobs:
   credential-preflight:
+    # PRs validate the website elsewhere; production credentials are checked only for actual release attempts.
+    if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     outputs:
       ready: ${{ steps.readiness.outputs.ready }}
