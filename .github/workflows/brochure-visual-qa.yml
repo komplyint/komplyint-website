@@ -28,7 +28,7 @@ jobs:
           node scripts/export-public-portfolio.mjs
           /tmp/komplyint-pdf-qa/bin/python scripts/generate_public_portfolio.py
           /tmp/komplyint-pdf-qa/bin/python scripts/verify_portfolio_copy.py
-      - name: Validate PDF and ZIP bytes and render all 24 pages
+      - name: Validate PDF and ZIP bytes and render all 30 pages
         shell: bash
         run: |
           /tmp/komplyint-pdf-qa/bin/python scripts/verify_public_brochures.py
