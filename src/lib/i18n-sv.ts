@@ -67,11 +67,11 @@ export const svContent = {
   intro:{
     eyebrow:'VAD VI GÖR',
     title:'Programutveckling, analys och digitala tjänster.',
-    text:'Från API:er och webbutveckling till Power BI, Microsoft 365 och programvarutestning. Även mindre uppdrag är välkomna.'
+    text:'Från programutveckling och testning till rapportering, SharePoint-intranät, processbeskrivningar och automatisering. Även mindre uppdrag är välkomna.'
   },
   area:{
     eyebrow:'VÅRA TJÄNSTER',title:'Hitta en tjänst som passar ert behov.',
-    text:'Programutveckling, API:er, testning, Power BI och Microsoft 365. Läs om våra tjänster och hitta ett upplägg som passar.',
+    text:'Programutveckling, Power BI, SharePoint, processdokumentation, arbetsflöden och testning. Beskriv behovet så diskuterar vi en lämplig lösning.',
     examples:'Exempel på uppdrag',delivered:'Det här får ni',boundaries:'Det här kommer vi överens om',
     tools:'Verktyg vi använder',help:'Fråga oss om tjänsten'
   },
