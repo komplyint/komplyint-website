@@ -106,3 +106,8 @@
 @media(max-width:1040px){.bs-packages{grid-template-columns:repeat(2,minmax(0,1fr))}.bs-package-heading{align-items:flex-start;flex-direction:column;gap:10px}}
 @media(max-width:720px){.bs-catalogue,.bs-demos{padding-block:67px}.bs-intro{margin-bottom:28px}.bs-packages,.bs-service-list,.bs-tool-columns{grid-template-columns:1fr}.bs-library{margin-top:75px}.bs-toolbox{margin-top:68px}.bs-areas{min-width:100%}.bs-demo-tabs button{padding:14px 10px;min-height:62px;font-size:11px;flex-direction:column;align-items:flex-start}.bs-demo-panel{padding:20px 15px;min-height:0}.bs-kpis{grid-template-columns:1fr}.bs-intranet{grid-template-columns:1fr}.bs-demo-top{flex-direction:column;gap:11px}.bs-demo-footer{padding:16px}.bs-package{padding:24px 21px}}
 @media(prefers-reduced-motion:reduce){.bs-package,.bs-bar-fill{transition:none}}
+
+.bs-expand-row{display:flex;justify-content:center;margin-top:24px}
+.bs-expand-row button{border:1px solid var(--kc-border);border-radius:10px;padding:12px 18px;min-height:48px;color:var(--kc-ink);background:var(--kc-surface);font-size:13px;font-weight:800;display:inline-flex;align-items:center;gap:20px}
+.bs-expand-row button:hover{border-color:var(--kc-teal)}
+.bs-expand-row button span{font-size:18px;color:var(--kc-teal)}
