@@ -9,6 +9,7 @@ export default function BusinessServiceCatalogue({ lang }: { lang: Lang }) {
   const t = expansionText[lang]
   const [area, setArea] = useState<BusinessArea | 'all'>('all')
   const [query, setQuery] = useState('')
+  const [expanded, setExpanded] = useState(false)
   const filtered = useMemo(() => {
     const term = query.toLocaleLowerCase().trim()
     return businessServices.filter(item =>
@@ -16,6 +17,7 @@ export default function BusinessServiceCatalogue({ lang }: { lang: Lang }) {
       (!term || [item.name[lang], item.tools, areaNames[item.area][lang]].join(' ').toLocaleLowerCase().includes(term))
     )
   }, [area, query, lang])
+  const shown = area === 'all' && !query.trim() && !expanded ? filtered.slice(0, 8) : filtered
   const areas = Object.keys(areaNames) as BusinessArea[]
   return <section className="kc-section bs-catalogue" aria-labelledby="bs-catalogue-title">
     <div className="kc-shell">
@@ -52,12 +54,13 @@ export default function BusinessServiceCatalogue({ lang }: { lang: Lang }) {
         </div>
         <p className="bs-result-count" role="status">{filtered.length} {t.showing}</p>
         {filtered.length ? <div className="bs-service-list">
-          {filtered.map(item => <article key={item.id} className="bs-task">
+          {shown.map(item => <article key={item.id} className="bs-task">
             <div className="bs-task-heading"><h4>{item.name[lang]}</h4><span>{areaNames[item.area][lang]}</span></div>
             <p>{item.tools}</p>
             <a href={pathFor(lang,'contact') + '?service=' + encodeURIComponent(item.route)} aria-label={t.enquire + ': ' + item.name[lang]}>{t.enquire} <span aria-hidden="true">↗</span></a>
           </article>)}
         </div> : <p className="bs-no-results">{t.empty}</p>}
+        {area === 'all' && !query.trim() && <div className="bs-expand-row"><button type="button" aria-expanded={expanded} onClick={() => setExpanded(v => !v)}>{expanded ? t.showFewer : t.browseAll}<span aria-hidden="true">{expanded ? '−' : '+'}</span></button></div>}
       </div>
 
       <div className="bs-toolbox">
