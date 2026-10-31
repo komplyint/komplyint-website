@@ -1,6 +1,6 @@
 'use client'
 
-import { useMemo, useState } from 'react'
+import { useMemo, useState, type KeyboardEvent } from 'react'
 import type { Lang } from '@/lib/commercial'
 import { pathFor } from '@/lib/site-route'
 
@@ -97,6 +97,15 @@ export default function BusinessDemos({lang}:{lang:Lang}){
   const activeDoc=visibleDocs.find(item=>item.id===documentId)||visibleDocs[0]
   function decide(id:number,status:Decision){setRequests(items=>items.map(item=>item.id===id?{...item,status}:item))}
   function addRequest(){setRequests(items=>[...items,{id:items.reduce((m,item)=>Math.max(m,item.id),1000)+1,kind:newKind,status:'pending'}])}
+  function onDemoTabKeyDown(event:KeyboardEvent<HTMLButtonElement>, current:Demo){
+    if(!['ArrowRight','ArrowLeft','Home','End'].includes(event.key))return
+    event.preventDefault()
+    const choices:Demo[]=['funding','intranet','workflow']
+    const index=choices.indexOf(current)
+    const next=event.key==='Home'?0:event.key==='End'?choices.length-1:event.key==='ArrowRight'?(index+1)%choices.length:(index+choices.length-1)%choices.length
+    setDemo(choices[next])
+    event.currentTarget.parentElement?.querySelectorAll<HTMLButtonElement>('[role="tab"]')[next]?.focus()
+  }
   const pendingCount=requests.filter(r=>r.status==='pending').length
   const route=demo==='funding'?'data-reporting': 'm365-automation'
   return <section className="kc-section bs-demos" aria-labelledby="bs-demo-title">
@@ -107,7 +116,7 @@ export default function BusinessDemos({lang}:{lang:Lang}){
       </div>
       <div className="bs-demo-shell">
         <nav className="bs-demo-tabs" role="tablist" aria-label={t.inspect}>
-          {(['funding','intranet','workflow'] as Demo[]).map((key,i)=><button key={key} type="button" role="tab" id={'bs-tab-'+key} aria-selected={demo===key} aria-controls="bs-demo-panel" tabIndex={demo===key?0:-1} onClick={()=>setDemo(key)}>
+          {(['funding','intranet','workflow'] as Demo[]).map((key,i)=><button key={key} type="button" role="tab" id={'bs-tab-'+key} aria-selected={demo===key} aria-controls="bs-demo-panel" tabIndex={demo===key?0:-1} onKeyDown={event=>onDemoTabKeyDown(event,key)} onClick={()=>setDemo(key)}>
             <span>{String(i+1).padStart(2,'0')}</span>{names[key][lang]}
           </button>)}
         </nav>
