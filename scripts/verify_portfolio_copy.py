@@ -18,8 +18,8 @@ def main():
         reader=PdfReader(ROOT/'public/downloads'/name)
         text=normalized(' '.join(page.extract_text() or '' for page in reader.pages))
         expected=source['locales'][lang]
-        if len(reader.pages)!=8:
-            raise AssertionError(f'{lang}: expected eight pages')
+        if len(reader.pages)!=10:
+            raise AssertionError(f'{lang}: expected ten pages')
         if reader.trailer['/Root'].get('/Lang') != expected['language']:
             raise AssertionError(f'{lang}: wrong PDF document language')
         phrases=[expected[key] for key in ['title','subtitle','lead','strapline','businessIdLine','overviewLead','contacts','contactcopy','note']]
@@ -44,9 +44,22 @@ def main():
                 phrase=case[key]
                 if normalized(phrase) not in text:
                     raise AssertionError(f'{lang}: customer challenge {key} missing: {phrase}')
+        business=expected['business']
+        if len(business['packages'])!=6 or len(business['services'])!=27:
+            raise AssertionError(f'{lang}: incomplete business operations catalogue')
+        for package in business['packages']:
+            for phrase in [package['name'],package['description']]:
+                if normalized(phrase) not in text:
+                    raise AssertionError(f'{lang}: missing business package copy: {phrase}')
+        for service in business['services']:
+            if normalized(service['name']) not in text:
+                raise AssertionError(f'{lang}: missing business offering: {service["id"]}')
+        for phrase in ['packageTitle','packageIntro','tasksTitle','tasksIntro','toolsIntro']:
+            if normalized(business[phrase]) not in text:
+                raise AssertionError(f'{lang}: missing business catalogue label: {phrase}')
         if any(phrase in text for phrase in ['Yli 5 vuotta','5+ years','Över 5 år']):
             raise AssertionError(f'{lang}: removed numeric experience claim still shown')
-        results.append({'locale':lang,'pages':8,'matched_phrases':len(phrases),'result':'PASS'})
+        results.append({'locale':lang,'pages':10,'matched_phrases':len(phrases),'result':'PASS'})
     target=ROOT/'document-preview'
     target.mkdir(exist_ok=True)
     evidence={'schema':'komplyint-portfolio-copy-parity.v1','results':results,'sourceHashes':source['sourceHashes'],'independent_native_review':'NOT_RECORDED'}

@@ -121,11 +121,11 @@ export default function DeliveryLab({lang}:{lang:Lang}){
               {monthly.map(item=><button type="button" key={item.month}
                 className={'dl-chart-bar'+(month===item.month?' is-selected':'')}
                 aria-pressed={month===item.month}
-                aria-label={String(item.closed)+' '+String(item.month).padStart(2,'0')+' · '+t.month+' '+item.month+': '+item.closed+' '+t.requests}
                 onClick={()=>setMonth(selected=>selected===item.month?'all':item.month as LabMonth)}>
                 <span className="dl-bar-count">{item.closed}</span>
                 <span className="dl-bar-track"><span className="dl-bar-fill" style={{height:String(Math.max(4,100*item.closed/highest))+'%'}}/></span>
                 <span className="dl-bar-month">{String(item.month).padStart(2,'0')}</span>
+                <span className="sr-only">{t.month} {item.month}: {item.closed} {t.requests}</span>
               </button>)}
             </div>
             <div className="dl-chart-footer"><span><i aria-hidden="true"/>{t.chartSource}</span>

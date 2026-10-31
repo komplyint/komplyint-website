@@ -52,5 +52,5 @@ test('all three brochures include four case stories rather than an experience ba
  assert.ok(pdf.includes("for i,case in enumerate(v['problems'])"))
  assert.ok(!pdf.includes("feature['heroYears']"))
  assert.ok(parity.includes("expected four research-grounded customer challenges"))
- assert.ok(verify.includes('len(document) != 8'))
+ assert.ok(verify.includes('len(document) != 10'))
 })

@@ -21,6 +21,8 @@ import ContactAddressLinks from '@/components/ContactAddressLinks'
 import VideoHero from '@/components/VideoHero'
 import {EnterpriseHeroVisual, EnterpriseEngineeringVisual, EnterpriseReportingVisual} from '@/components/EnterpriseVisuals'
 import DeliveryLab from '@/components/DeliveryLab'
+import BusinessServiceCatalogue from '@/components/BusinessServiceCatalogue'
+import BusinessDemos from '@/components/BusinessDemos'
 import PeopleAtKomplyint from '@/components/PeopleAtKomplyint'
 import LanguageSwitcher from '@/components/LanguageSwitcher'
 import { ui } from '@/lib/i18n-ui'
@@ -220,7 +222,7 @@ function Examples({lang}:{lang:Lang}) {
 }
 function ServicesPage({lang}:{lang:Lang}) {
   const t=content[lang]
-  return <><div className="kc-page-top"><div className="kc-shell"><p className="kc-eyebrow">{t.area.eyebrow}</p><h1>{t.area.title}</h1><p>{t.area.text}</p></div></div><section className="kc-section kc-muted-section kc-services-detail" id="service-explorer"><div className="kc-shell"><ServiceExplorer lang={lang} showIntro={false}/></div></section><WorkExamplesBridge lang={lang}/><ConsultingEngagement lang={lang}/><Process lang={lang}/><Trust lang={lang}/><PublicBrochures lang={lang}/><CTA lang={lang}/></>
+  return <><div className="kc-page-top"><div className="kc-shell"><p className="kc-eyebrow">{t.area.eyebrow}</p><h1>{t.area.title}</h1><p>{t.area.text}</p></div></div><section className="kc-section kc-muted-section kc-services-detail" id="service-explorer"><div className="kc-shell"><ServiceExplorer lang={lang} showIntro={false}/></div></section><BusinessServiceCatalogue lang={lang}/><WorkExamplesBridge lang={lang}/><ConsultingEngagement lang={lang}/><Process lang={lang}/><Trust lang={lang}/><PublicBrochures lang={lang}/><CTA lang={lang}/></>
 }
 function SoftwarePage({lang}:{lang:Lang}) {
   const t=content[lang].software
@@ -245,7 +247,7 @@ function PrivacyPage({lang}:{lang:Lang}) {
 
 function WorkPage({lang}:{lang:Lang}){
   const t=content[lang].impact
-  return <><section className="kc-page-top qh-inner-landing"><div className="kc-shell"><p className="kc-eyebrow">{t.eyebrow}</p><h1>{ui[lang].workTitle}</h1><p>{ui[lang].workLead}</p></div></section><DeliveryLab lang={lang}/><section className="kc-section ev-work-demonstration"><div className="kc-shell ev-work-demo-grid"><EnterpriseHeroVisual lang={lang}/><EnterpriseReportingVisual lang={lang}/></div></section><Examples lang={lang}/><CTA lang={lang}/></>
+  return <><section className="kc-page-top qh-inner-landing"><div className="kc-shell"><p className="kc-eyebrow">{t.eyebrow}</p><h1>{ui[lang].workTitle}</h1><p>{ui[lang].workLead}</p></div></section><DeliveryLab lang={lang}/><BusinessDemos lang={lang}/><section className="kc-section ev-work-demonstration"><div className="kc-shell ev-work-demo-grid"><EnterpriseHeroVisual lang={lang}/><EnterpriseReportingVisual lang={lang}/></div></section><Examples lang={lang}/><CTA lang={lang}/></>
 }
 function AboutPage({lang}:{lang:Lang}){
   const a=content[lang].about

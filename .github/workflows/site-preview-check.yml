@@ -73,6 +73,7 @@ jobs:
           for i in $(seq 1 40); do if curl -fsS http://127.0.0.1:3000/ > /dev/null; then break; fi; sleep 2; done
           node tests/public-release-copy.contract.mjs
           node tests/work-software-examples.browser.mjs
+          node tests/business-demos.browser.mjs
           node tests/featured-engineering.browser.mjs
           node tests/visual.smoke.mjs
           node tests/language-font.contract.mjs

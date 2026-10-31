@@ -1,4 +1,4 @@
-"""Reuse the eight-page ReportLab portfolio with the website's FI/EN/SV copy.
+"""Reuse the ReportLab portfolio with the website's FI/EN/SV copy.
 
 First run: node scripts/export-public-portfolio.mjs
 The source fingerprints are checked before any public output is replaced.
@@ -27,7 +27,7 @@ PAPER, MUTED = colors.HexColor('#F7F6F2'), colors.HexColor('#536068')
 GREEN, ACCENT = colors.HexColor('#124C35'), colors.HexColor('#A4DDBA')
 RULE, WHITE = colors.HexColor('#D6DBD8'), colors.HexColor('#FFFFFF')
 NAMES = {'fi':'Komplyint_Palveluesite_FI.pdf', 'en':'Komplyint_Service_Portfolio_EN.pdf', 'sv':'Komplyint_Tjanstebroschyr_SV.pdf'}
-SOURCES = {'src/lib/commercial.ts','src/lib/i18n-sv.ts','src/lib/i18n-ui.ts','src/lib/i18n.ts'}
+SOURCES = {'src/lib/commercial.ts','src/lib/i18n-sv.ts','src/lib/i18n-ui.ts','src/lib/i18n.ts','src/lib/business-offers.ts'}
 for name, filename in [('KRegular','DejaVuSans.ttf'),('KBold','DejaVuSans-Bold.ttf'),('KSerif','DejaVuSerif.ttf')]:
     path = Path('/usr/share/fonts/truetype/dejavu') / filename
     if not path.is_file():
@@ -37,7 +37,7 @@ for name, filename in [('KRegular','DejaVuSans.ttf'),('KBold','DejaVuSans-Bold.t
 
 def load_copy(path: Path) -> dict:
     payload = json.loads(path.read_text(encoding='utf-8'))
-    if payload.get('schema') != 'komplyint-public-portfolio.v2':
+    if payload.get('schema') != 'komplyint-public-portfolio.v3':
         raise ValueError('Run the canonical website copy exporter first')
     if set(payload.get('sourceHashes', {})) != SOURCES:
         raise ValueError('Missing canonical source fingerprints')
@@ -51,6 +51,8 @@ def load_copy(path: Path) -> dict:
     for lang, value in data.items():
         if len(value['services']) != 6 or len(value['steps']) != 4:
             raise ValueError('Incomplete service catalogue: ' + lang)
+        if len(value.get('business',{}).get('packages',[])) != 6 or len(value['business'].get('services',[])) != 27:
+            raise ValueError('Missing expanded trilingual business catalogue: '+lang)
         if len(value.get('capabilities',{}).get('stack',[])) != 12:
             raise ValueError('Missing featured full-stack engineer skills: '+lang)
         for key in ['title','kicker','overview','serviceLabel','strapline','businessIdLine','subject','deliveryLabel','email']:
@@ -74,7 +76,7 @@ def top(c, number, t):
     c.setFillColor(ACCENT); c.setFont('KRegular',8); c.drawRightString(W-51,H-46,t['strapline'])
     c.setStrokeColor(RULE); c.line(53,49,W-53,49)
     c.setFillColor(MUTED); c.setFont('KRegular',8); c.drawString(53,30,t['businessIdLine'])
-    c.drawRightString(W-53,30,f'{number:02d} / 08')
+    c.drawRightString(W-53,30,f'{number:02d} / 10')
     c.setFillColor(GREEN); c.setFont('KBold',9); c.drawString(54,H-126,t['kicker'])
 
 
@@ -232,8 +234,79 @@ def consulting_page(c, t):
     c.showPage()
 
 
+
+def business_packages_page(c, t):
+    """Six outcome-led buyer packages, generated from the same site dictionary."""
+    top(c, 8, t)
+    v=t['business']
+    y=para(c,v['packageTitle'],54,H-151,W-108,25,INK,32,font='KSerif')
+    y=para(c,v['packageIntro'],54,y-9,W-108,9.6,MUTED,15)
+    grid_top=min(H-249,y-22)
+    width=(W-126)/2
+    height,gap=139,11
+    for i,offer in enumerate(v['packages']):
+        col,row=i%2,i//2
+        x=54+col*(width+18)
+        top_y=grid_top-row*(height+gap)
+        bottom=top_y-height
+        if bottom<109:
+            raise RuntimeError(f'Business package {t["language"]}/{i+1}: footer overlap {bottom:.1f}')
+        c.setFillColor(WHITE if i%2 else colors.HexColor('#EEF3EF'))
+        c.setStrokeColor(RULE)
+        c.roundRect(x,bottom,width,height,10,fill=1,stroke=1)
+        c.setFillColor(GREEN)
+        c.setFont('KBold',8)
+        c.drawString(x+14,top_y-19,f'{i+1:02d}')
+        yy=para(c,offer['name'],x+14,top_y-31,width-27,11.3,INK,16,True)-8
+        yy=para(c,offer['description'],x+14,yy,width-27,9.1,MUTED,13.7)
+        if yy<bottom+11:
+            raise RuntimeError(f'Business package {t["language"]}/{i+1} clips by {bottom+11-yy:.1f}pt')
+        c.linkURL('https://www.komplyint.fi'+('' if t['language']=='fi' else '/'+t['language'][:2])+'/services/'+offer['route'],(x,bottom,x+width,top_y),relative=0)
+    para(c,v['toolsIntro'],54,100,W-108,8.2,MUTED,12.5)
+    c.showPage()
+
+
+def business_services_page(c, t):
+    """Four customer-process areas with 27 selectable service examples."""
+    top(c, 9, t)
+    v=t['business']
+    y=para(c,v['tasksTitle'],54,H-149,W-108,25,INK,31,font='KSerif')
+    y=para(c,v['tasksIntro'],54,y-9,W-108,9.3,MUTED,14)
+    grid_top=min(H-241,y-19)
+    width=(W-126)/2
+    panels=[('analytics',0,0),('processes',1,0),('operations',0,1),('workplace',1,1)]
+    upper_height=298
+    lower_height=168
+    gap=13
+    for area,col,row in panels:
+        x=54+col*(width+18)
+        top_y=grid_top if row==0 else grid_top-upper_height-gap
+        height=upper_height if row==0 else lower_height
+        bottom=top_y-height
+        if bottom<81:
+            raise RuntimeError('Service groups exceed page height: '+t['language']+'/'+area)
+        c.setFillColor(WHITE)
+        c.setStrokeColor(RULE)
+        c.roundRect(x,bottom,width,height,9,fill=1,stroke=1)
+        yy=para(c,v['areas'][area],x+12,top_y-13,width-24,11.2,GREEN,15,True)-10
+        offers=[item for item in v['services'] if item['area']==area]
+        for item in offers:
+            c.setFillColor(GREEN)
+            c.circle(x+16,yy-5,1.6,fill=1,stroke=0)
+            yy=para(c,item['name'],x+25,yy,width-37,8.25,INK,11.4)-4.5
+        if yy < bottom+9:
+            raise RuntimeError(f'Service group {t["language"]}/{area} clipped by {bottom+9-yy:.1f}pt')
+    # Platform breadth is already searchable in the website; brochure points there
+    # rather than promising immediate proficiency in every named tool.
+    c.setFillColor(GREEN)
+    c.setFont('KBold',8.3)
+    c.drawString(54,80,'www.komplyint.fi/services')
+    c.linkURL('https://www.komplyint.fi/services',(54,73,254,91),relative=0)
+    c.showPage()
+
+
 def finish(c, t):
-    top(c,8,t)
+    top(c,10,t)
     para(c,t['approach'],54,H-151,W-108,27,INK,33,font='KSerif')
     for i,(name,description) in enumerate(t['steps']):
         y = H-210-i*83
@@ -264,6 +337,8 @@ def build(lang, t, path):
         detailed(cv,t,start,page)
     engineering_page(cv,t)
     consulting_page(cv,t)
+    business_packages_page(cv,t)
+    business_services_page(cv,t)
     finish(cv,t); cv.save()
 
 
@@ -282,7 +357,7 @@ def main():
     with ZipFile(archive_path) as archive:
         assert archive.testzip() is None
         assert len([name for name in archive.namelist() if name.endswith('.pdf')]) == 3
-    print(json.dumps({'result':'PASS','languages':list(NAMES),'pages':24,'copy':'canonical website dictionaries'},ensure_ascii=False))
+    print(json.dumps({'result':'PASS','languages':list(NAMES),'pages':30,'copy':'canonical website dictionaries'},ensure_ascii=False))
 
 
 if __name__ == '__main__':

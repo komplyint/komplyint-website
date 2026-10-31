@@ -11,7 +11,7 @@ import ts from 'typescript'
 const root = fileURLToPath(new URL('..', import.meta.url))
 const output = resolve(process.argv[2] || join(root, '.cache/public-portfolio.json'))
 const temporary = mkdtempSync(join(tmpdir(), 'komplyint-copy-'))
-const sourceFiles = ['src/lib/commercial.ts', 'src/lib/i18n-sv.ts', 'src/lib/i18n-ui.ts', 'src/lib/i18n.ts']
+const sourceFiles = ['src/lib/commercial.ts', 'src/lib/i18n-sv.ts', 'src/lib/i18n-ui.ts', 'src/lib/i18n.ts', 'src/lib/business-offers.ts']
 const labels = {
   fi: {title:'Ohjelmistokehitys, data ja IT-palvelut', kicker:'PALVELUESITE / SUOMI', overview:'Palvelumme', serviceLabel:'PALVELU'},
   en: {title:'Software engineering, data and IT services', kicker:'SERVICE BROCHURE / ENGLISH', overview:'Our services', serviceLabel:'SERVICE'},
@@ -33,6 +33,9 @@ try {
   const require = createRequire(import.meta.url)
   const {content, services, serviceSlugs, contactEmail, workingLanguages, consultingCopy, spotlightCopy} = require(join(temporary,'commercial.js'))
   const {ui} = require(join(temporary,'i18n-ui.js'))
+  const {businessServices,businessPackages,areaNames,platformGroups,expansionText} = require(join(temporary,'business-offers.js'))
+  assert.equal(businessServices.length,27,'Business-service catalogue must have 27 offerings')
+  assert.equal(businessPackages.length,6,'Business package catalogue must have six packages')
   const locales = {}
   for (const lang of ['fi','en','sv']) {
     const t=content[lang], u=ui[lang]
@@ -49,6 +52,21 @@ try {
       contacts:t.cta.title, contactcopy:t.cta.text, note:t.footerNote,
       consulting:consultingCopy[lang], workingLanguages:workingLanguages[lang], capabilities:spotlightCopy[lang],
       deliveryLabel:u.serviceDetail.method, email:contactEmail,
+      business: {
+        headline:expansionText[lang].headline,
+        intro:expansionText[lang].intro,
+        packageTitle:expansionText[lang].packageTitle,
+        packageIntro:expansionText[lang].packageIntro,
+        tasksTitle:expansionText[lang].tasksTitle,
+        tasksIntro:expansionText[lang].tasksIntro,
+        toolsTitle:expansionText[lang].toolsTitle,
+        toolsIntro:expansionText[lang].toolsIntro,
+        scope:expansionText[lang].scope,
+        packages:businessPackages.map(p=>({id:p.id,name:p.name[lang],description:p.description[lang],route:p.route})),
+        services:businessServices.map(item=>({id:item.id,area:item.area,name:item.name[lang],tools:item.tools,route:item.route})),
+        areas:Object.fromEntries(Object.entries(areaNames).map(([key,value])=>[key,value[lang]])),
+        platforms:platformGroups.map(group=>({name:group.name[lang],tools:group.tools})),
+      },
       serviceUrls:serviceSlugs.map(slug=>'https://www.komplyint.fi'+(lang==='fi'?'':'/'+lang)+'/services/'+slug),
       services:services[lang].map(s=>[s.title,s.intro,s.examples,s.deliverable,s.boundaries]),
     }
@@ -57,10 +75,10 @@ try {
     }
   }
   const sourceHashes=Object.fromEntries(sourceFiles.map(path=>[path,createHash('sha256').update(readFileSync(join(root,path))).digest('hex')]))
-  const snapshot={schema:'komplyint-public-portfolio.v2',sourceHashes,locales}
+  const snapshot={schema:'komplyint-public-portfolio.v3',sourceHashes,locales}
   mkdirSync(dirname(output),{recursive:true})
   writeFileSync(output,JSON.stringify(snapshot,null,2)+'\n','utf8')
-  console.log(JSON.stringify({result:'PASS',locales:Object.keys(locales),services:18,processSteps:12,output,sourceHashes}))
+  console.log(JSON.stringify({result:'PASS',locales:Object.keys(locales),services:18,businessServices:81,businessPackages:18,processSteps:12,output,sourceHashes}))
 } finally {
   rmSync(temporary,{recursive:true,force:true})
 }
