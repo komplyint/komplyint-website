@@ -28,12 +28,14 @@ test('contact records type of engagement and individual technical work language'
  for(const phrase of ['Technical work language','engagementType','workLanguage'])assert.ok(api.includes(phrase),phrase)
 })
 
-test('all three PDFs include consulting, skills and languages in eight pages',()=>{
+test('all three PDFs include consulting, skills and languages in ten pages',()=>{
  const exp=read('scripts/export-public-portfolio.mjs'),pdf=read('scripts/generate_public_portfolio.py'),verify=read('scripts/verify_public_brochures.py')
  assert.ok(exp.includes('consulting:consultingCopy[lang]'))
  assert.ok(exp.includes('workingLanguages:workingLanguages[lang]'))
  assert.ok(pdf.includes('consulting_page(cv,t)'))
- assert.ok(pdf.includes('top(c,8,t)'))
+ assert.ok(pdf.includes('top(c,7,t)'))
+ assert.ok(pdf.includes('business_packages_page(cv,t)'))
+ assert.ok(pdf.includes('business_services_page(cv,t)'))
  assert.ok(pdf.includes('engineering_page(cv,t)'))
- assert.ok(verify.includes('len(document) != 8'))
+ assert.ok(verify.includes('len(document) != 10'))
 })
