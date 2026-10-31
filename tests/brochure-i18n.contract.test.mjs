@@ -18,11 +18,14 @@ test('brochure copy is compiled from actual website dictionaries in all three la
     const result=spawnSync(process.execPath,['scripts/export-public-portfolio.mjs',path],{encoding:'utf8',timeout:60000})
     assert.equal(result.status,0,result.stderr || result.stdout)
     const data=JSON.parse(readFileSync(path,'utf8'))
-    assert.equal(data.schema,'komplyint-public-portfolio.v2')
+    assert.equal(data.schema,'komplyint-public-portfolio.v3')
     assert.deepEqual(Object.keys(data.locales),['fi','en','sv'])
-    assert.equal(Object.keys(data.sourceHashes).length,4)
+    assert.equal(Object.keys(data.sourceHashes).length,5)
     for(const [lang,copy] of Object.entries(data.locales)){
       assert.equal(copy.services.length,6,lang)
+      assert.equal(copy.business.packages.length,6,lang)
+      assert.equal(copy.business.services.length,27,lang)
+      assert.equal(Object.keys(copy.business.areas).length,4,lang)
       assert.equal(copy.steps.length,4,lang)
       assert.equal(copy.serviceUrls.length,6,lang)
       assert.ok(copy.businessIdLine.includes('3588595-3'))
@@ -39,7 +42,7 @@ test('brochure copy is compiled from actual website dictionaries in all three la
   }finally{rmSync(folder,{recursive:true,force:true})}
 })
 
-test('the eight-page renderer rejects stale copy and has no parallel Swedish catalogue',()=>{
+test('the ten-page renderer rejects stale copy and has no parallel Swedish catalogue',()=>{
   assert.match(generator,/sourceHashes/)
   assert.match(generator,/Stale brochure source/)
   assert.doesNotMatch(generator,/portfolio_sv\.json/)
@@ -56,7 +59,7 @@ test('website always links all three PDF formats and a shared ZIP',()=>{
 })
 
 test('copy edits rebuild and verify brochures before publishing to main',()=>{
-  for(const path of ['src/lib/commercial.ts','src/lib/i18n-sv.ts','src/lib/i18n-ui.ts','scripts/export-public-portfolio.mjs','scripts/verify_portfolio_copy.py'])assert.ok(workflow.includes(path),path)
+  for(const path of ['src/lib/business-offers.ts','src/lib/commercial.ts','src/lib/i18n-sv.ts','src/lib/i18n-ui.ts','scripts/export-public-portfolio.mjs','scripts/verify_portfolio_copy.py'])assert.ok(workflow.includes(path),path)
   assert.match(workflow,/branches: \[main\]/)
   assert.match(workflow,/git push origin HEAD:main/)
   assert.match(workflow,/verify_public_brochures\.py/)
