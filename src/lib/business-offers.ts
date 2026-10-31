@@ -61,7 +61,7 @@ export const platformGroups = [
 export const expansionText: Record<Lang, {
   eyebrow: string; headline: string; intro: string; packageTitle: string; packageIntro: string;
   tasksTitle: string; tasksIntro: string; all: string; search: string; empty: string;
-  toolsTitle: string; toolsIntro: string; scope: string; enquire: string; showing: string;
+  toolsTitle: string; toolsIntro: string; scope: string; enquire: string; showing: string; browseAll: string; showFewer: string;
 }> = {
   fi: {
     eyebrow: 'RATKAISUT YRITYSTEN ARKEEN', headline: 'Tietoa, prosesseja ja toimivampia työpäiviä.',
@@ -71,7 +71,7 @@ export const expansionText: Record<Lang, {
     all: 'Kaikki', search: 'Hae tehtävää tai työkalua', empty: 'Hakuehdoilla ei löytynyt tehtäviä.',
     toolsTitle: 'Työkalut valitaan tarpeen mukaan', toolsIntro: 'Hyödynnämme ensisijaisesti asiakkaan jo käytössä olevia järjestelmiä.',
     scope: 'Työkalut, osaaminen, käyttöoikeudet, tietosuoja, lisenssit ja ylläpitovastuut varmistetaan toimeksiantokohtaisesti. Kaikki luetellut alustat eivät tarkoita valmista erityisasiantuntijuutta tai välitöntä saatavuutta.',
-    enquire: 'Kysy toteutuksesta', showing: 'tehtävää',
+    enquire: 'Kysy toteutuksesta', showing: 'tehtävää', browseAll: 'Näytä kaikki 27 palveluesimerkkiä', showFewer: 'Näytä vähemmän',
   },
   en: {
     eyebrow: 'BUSINESS SOLUTIONS', headline: 'Better information. Clearer processes. More effective operations.',
@@ -81,7 +81,7 @@ export const expansionText: Record<Lang, {
     all: 'All', search: 'Search tasks or tools', empty: 'No matching tasks.',
     toolsTitle: 'Tools chosen for the job', toolsIntro: 'We first consider the systems already in use at your organisation.',
     scope: 'Tool fit, specialist availability, access, data protection, licensing, acceptance tests and support ownership are agreed before delivery. A platform listed here is not a claim of established expertise or immediate capacity in every feature.',
-    enquire: 'Discuss this project', showing: 'service areas',
+    enquire: 'Discuss this project', showing: 'service areas', browseAll: 'Explore all 27 service examples', showFewer: 'Show fewer examples',
   },
   sv: {
     eyebrow: 'LÖSNINGAR FÖR VERKSAMHETEN', headline: 'Bättre information. Tydligare processer. Smidigare arbete.',
@@ -91,6 +91,6 @@ export const expansionText: Record<Lang, {
     all: 'Alla', search: 'Sök uppdrag eller verktyg', empty: 'Inga träffar.',
     toolsTitle: 'Rätt verktyg för uppgiften', toolsIntro: 'Vi utgår i första hand från system som kunden redan använder.',
     scope: 'Verktyg, kompetens, åtkomsträttigheter, dataskydd, licenser, tester och underhållsansvar avtalas för varje uppdrag. Listade plattformar innebär inte specialistkompetens eller omedelbar tillgänglighet inom alla funktioner.',
-    enquire: 'Diskutera ett uppdrag', showing: 'tjänster',
+    enquire: 'Diskutera ett uppdrag', showing: 'tjänster', browseAll: 'Visa alla 27 tjänsteexempel', showFewer: 'Visa färre exempel',
   },
 }
