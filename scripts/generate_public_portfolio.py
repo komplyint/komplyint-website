@@ -275,8 +275,8 @@ def business_services_page(c, t):
     grid_top=min(H-241,y-19)
     width=(W-126)/2
     panels=[('analytics',0,0),('processes',1,0),('operations',0,1),('workplace',1,1)]
-    upper_height=272
-    lower_height=185
+    upper_height=298
+    lower_height=168
     gap=13
     for area,col,row in panels:
         x=54+col*(width+18)
@@ -293,7 +293,7 @@ def business_services_page(c, t):
         for item in offers:
             c.setFillColor(GREEN)
             c.circle(x+16,yy-5,1.6,fill=1,stroke=0)
-            yy=para(c,item['name'],x+25,yy,width-37,8.55,INK,12)-6
+            yy=para(c,item['name'],x+25,yy,width-37,8.25,INK,11.4)-4.5
         if yy < bottom+9:
             raise RuntimeError(f'Service group {t["language"]}/{area} clipped by {bottom+9-yy:.1f}pt')
     # Platform breadth is already searchable in the website; brochure points there
