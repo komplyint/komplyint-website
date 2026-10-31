@@ -51,5 +51,16 @@ if(!report.video.playbackAdvanced)blocking++
 await film.close()
 await browser.close()
 await writeFile('site-preview/award-review-evidence.json',JSON.stringify({...report,failures:blocking},null,2))
+const failures=report.automated.filter(row=>row.result!=='PASS')
+const grouped=new Map()
+for(const row of failures){
+  const key=(row.violations||[]).map(v=>v.id).join(',')||row.message||['status='+row.status,'headings='+row.h1,'nav='+row.navLinks,'overflow='+row.horizontalOverflow].join(',')
+  const group=grouped.get(key)||{reason:key,count:0,routes:[],examples:[]}
+  group.count++
+  group.routes.push(row.theme+' '+row.route)
+  for(const v of row.violations||[])if(group.examples.length<5)group.examples.push({id:v.id,impact:v.impact,help:v.help,examples:v.examples})
+  grouped.set(key,group)
+}
+console.log('AWARD_AUDIT_FAILURE_DIAGNOSTICS',JSON.stringify([...grouped.values()].map(g=>({...g,routes:g.routes.slice(0,20)}))))
 console.log(JSON.stringify({result:blocking?'FAIL':'PASS',checks:report.automated.length,blocking,video:report.video,mobile:report.mobile}))
 if(blocking)process.exitCode=1
