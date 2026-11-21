@@ -1,6 +1,7 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
 import { createSign, generateKeyPairSync } from 'node:crypto'
+import { readFileSync } from 'node:fs'
 import { readAdminConfig, verifyKomplyintAdmin, komplyintAdminTools } from '../src/lib/admin-access.mjs'
 
 const { publicKey, privateKey } = generateKeyPairSync('rsa', { modulusLength: 2048 })
@@ -64,4 +65,14 @@ test('only emits explicitly allowlisted HTTPS tool destinations, never tokenized
   assert.equal(komplyintAdminTools({ ...env, KOMPLYINT_ADMIN_BUSINESS_OS_URL: 'https://ops.komplyint.fi/?token=abc' })[0].href, null)
   assert.equal(komplyintAdminTools({ ...env, KOMPLYINT_ADMIN_BUSINESS_OS_URL: 'https://attacker.invalid/' })[0].href, null)
   assert.equal(komplyintAdminTools({ ...env, KOMPLYINT_ADMIN_BUSINESS_OS_URL: 'http://ops.komplyint.fi/' })[0].href, null)
+})
+
+test('the private /admin page performs server-side verification before rendering any tools', () => {
+  const page = readFileSync(new URL('../src/app/admin/page.tsx', import.meta.url), 'utf8')
+  const home = readFileSync(new URL('../src/app/page.tsx', import.meta.url), 'utf8')
+  assert.match(page, /verifyKomplyintAdmin\(headers\(\)\.get\('cf-access-jwt-assertion'\)/)
+  assert.match(page, /if \(!principal\) notFound\(\)/)
+  assert.match(page, /dynamic = 'force-dynamic'/)
+  assert.match(page, /robots: \{ index: false, follow: false/)
+  assert.doesNotMatch(home, /\/admin(?:\/|['"])/)
 })
