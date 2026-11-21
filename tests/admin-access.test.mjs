@@ -75,4 +75,8 @@ test('the private /admin page performs server-side verification before rendering
   assert.match(page, /dynamic = 'force-dynamic'/)
   assert.match(page, /robots: \{ index: false, follow: false/)
   assert.doesNotMatch(home, /\/admin(?:\/|['"])/)
+  const middleware = readFileSync(new URL('../src/middleware.ts', import.meta.url), 'utf8')
+  assert.match(middleware, /pathname === '\/admin' \|\| pathname\.startsWith\('\/admin\/'\)/)
+  assert.match(middleware, /Cache-Control.*no-store/)
+  assert.match(middleware, /X-Robots-Tag.*noindex/)
 })
