@@ -8,7 +8,12 @@ export function middleware(request: NextRequest) {
   const locale = getLocaleFromPath(pathname)
   const forwardedHeaders = new Headers(request.headers)
   forwardedHeaders.set('x-komplyint-locale', locale)
-  return NextResponse.next({ request: { headers: forwardedHeaders } })
+  const response = NextResponse.next({ request: { headers: forwardedHeaders } })
+  if (pathname === '/admin' || pathname.startsWith('/admin/')) {
+    response.headers.set('Cache-Control', 'private, no-store, max-age=0, must-revalidate')
+    response.headers.set('X-Robots-Tag', 'noindex, nofollow, noarchive')
+  }
+  return response
 }
 
 // Do not make static assets, documents, API endpoints or framework resources dynamic.
