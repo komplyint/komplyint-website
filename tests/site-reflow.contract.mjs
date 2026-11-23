@@ -66,6 +66,14 @@ try{
   const first=await page.evaluate(()=>({selector:document.activeElement?.className||'',href:document.activeElement?.getAttribute('href'),height:document.activeElement?.getBoundingClientRect().height}))
   check(String(first.selector).includes('kc-skip')&&first.href==='#main-content','First Tab must expose skip-to-content: '+locale+': '+JSON.stringify(first))
   await page.keyboard.press('Enter')
+  // The native same-document anchor updates focus and the URL fragment in
+  // browser tasks that can settle after Playwright's keyboard.press resolves.
+  // Wait for the *full original requirement*, never just focus or scrolling.
+  // On timeout the unchanged assertion below records the real browser state.
+  await page.waitForFunction(()=>
+    document.activeElement?.id==='main-content'&&location.hash==='#main-content',
+    null,{timeout:2500},
+  ).catch(()=>{})
   const target=await page.evaluate(()=>({focus:document.activeElement?.id,hash:location.hash,top:document.getElementById('main-content')?.getBoundingClientRect().top}))
   check(target.focus==='main-content'&&target.hash==='#main-content','Skip link must focus main region: '+locale+': '+JSON.stringify(target))
   report.focus.push({locale,first,target})
