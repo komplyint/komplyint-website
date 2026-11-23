@@ -1,0 +1,27 @@
+/* Private Komplyint operations, deliberately separate from public homepage styles. */
+.kc-admin{min-height:100vh;background:var(--ki-color-page);color:var(--ki-color-ink);font-family:"Lato",Arial,sans-serif}
+.kc-admin-shell{max-width:1190px;margin:auto;padding:27px clamp(18px,4vw,62px) 70px}
+.kc-admin-header{display:flex;align-items:center;justify-content:space-between;gap:15px;padding-bottom:28px;border-bottom:1px solid var(--ki-color-border)}
+.kc-admin-header img{width:86px;height:62px;object-fit:contain}
+.kc-admin-tag{display:inline-flex;align-items:center;border:1px solid var(--ki-color-border);border-radius:100px;padding:9px 14px;color:var(--ki-color-muted);background:var(--ki-color-surface);font-size:12px;font-weight:700;letter-spacing:.02em}
+.kc-admin-intro{padding:68px 0 36px;max-width:850px}
+.kc-admin-eyebrow{color:var(--ki-color-action);font-size:13px;font-weight:700;letter-spacing:.09em;text-transform:uppercase}
+.kc-admin-intro h1{font-family:"EB Garamond",Georgia,serif;font-weight:400;font-size:clamp(40px,5vw,67px);letter-spacing:-.025em;line-height:1.1;margin:12px 0 20px}
+.kc-admin-intro>p:not(.kc-admin-eyebrow){max-width:730px;color:var(--ki-color-muted);line-height:1.65;font-size:17px}
+.kc-admin-intro .kc-admin-identity{font-size:13px!important;margin-top:23px}
+.kc-admin-identity strong{color:var(--ki-color-ink);overflow-wrap:anywhere}
+.kc-admin-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:17px}
+.kc-admin-card{background:var(--ki-color-surface);border:1px solid var(--ki-color-border);border-radius:18px;padding:26px;min-height:218px;display:flex;flex-direction:column;gap:14px;box-shadow:var(--ki-shadow-e1)}
+.kc-admin-card-top{display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.kc-admin-name{font-size:19px;font-weight:700;line-height:1.25}
+.kc-admin-status{font-size:11px;letter-spacing:.02em;font-weight:700;color:var(--ki-color-muted);background:var(--ki-color-panel);border-radius:90px;padding:6px 9px;white-space:nowrap}
+.kc-admin-status-configured{color:var(--ki-color-action)}
+.kc-admin-card p{font-size:15px;color:var(--ki-color-muted);line-height:1.58}
+.kc-admin-open,.kc-admin-unavailable{margin-top:auto;min-height:44px;display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:700}
+.kc-admin-open{color:var(--ki-color-action);text-decoration:underline;text-underline-offset:4px}
+.kc-admin-unavailable{color:var(--ki-color-muted)}
+.kc-admin-note{margin-top:30px;font-size:13px;line-height:1.6;max-width:850px;color:var(--ki-color-muted)}
+.kc-admin a:focus-visible{outline:3px solid var(--ki-color-focus);outline-offset:4px}
+@media(max-width:920px){.kc-admin-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){.kc-admin-grid{grid-template-columns:1fr}.kc-admin-intro{padding-top:45px}.kc-admin-card{min-height:178px}}
+@media(prefers-reduced-motion:reduce){.kc-admin *, .kc-admin *::before, .kc-admin *::after{scroll-behavior:auto;transition:none!important}}

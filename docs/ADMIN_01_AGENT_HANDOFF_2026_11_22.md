@@ -1,0 +1,51 @@
+# ADMIN-01 — Transfer to the existing Komplyint website implementation agent
+
+**Date:** 2026-11-22. **Nature:** final implementation handoff from the chat engineer to the already-authorized **Komplyint website developer/agent**, **not** an instruction to create another agent or separate deployment stack. The agent owns website ADMIN-01 and **coordinates** private BIZ-01 FounderOS integration only if authorized to access the second repository. The owner has requested a real usable private operations hub, not an extra roadmap.
+
+## Immediate start — read these exact sources
+
+- This repo: AGENTS.md, README.md, docs/PRIVATE_ADMIN_WORKSPACE.md, docs/VERCEL_PRODUCTION_HANDOFF.md and docs/consulting/OUTREACH_AND_DELIVERY_PLAYBOOK_2026-10-29.md. Work from current approved branch, its diff and existing tests.
+- Work ticket: https://github.com/komplyint/komplyint-website/issues/24 ; current draft https://github.com/komplyint/komplyint-website/pull/23 ; existing production publish blocker https://github.com/komplyint/komplyint-website/issues/7 .
+- Private FounderOS: https://github.com/galapoto/FounderOS-Adaptation/issues/2 ; draft https://github.com/galapoto/FounderOS-Adaptation/pull/1 ; **canonical detailed cross-product handoff** https://github.com/galapoto/FounderOS-Adaptation/blob/feature/import-founderos-pinned-20261121/docs/BIZ_01_ADMIN_01_IMPLEMENTATION_HANDOFF_2026_11_22.md . This private document also gives the actual original donor SHA, copied source paths, native CI and the next business-user workflow. If the receiving agent cannot open it, report missing private-repository permissions; do not request organization-wide credentials.
+- Tinyerg operator interface has its own developer/authority: https://github.com/galapoto/tinyerg/issues/2 ; only link it after its own private protection and actual order tests. Do not copy its Stripe/R2 customer data into this website or FounderOS.
+
+## Approved user experience (first useful release)
+
+Public www.komplyint.fi continues serving the existing FI/EN/SV public pages, contact and brochures **without login**. A Komplyint admin enters /admin, proves identity through approved Cloudflare Access with exact email allow policy and the server's cryptographically validated JWT, sees a clear operations hub, and opens the independently protected private Business OS. In Business OS the admin can create a lead, qualify it, draft an editable FI/EN proposal, explicitly approve before any send, and track persisted status. The first private link must not be enabled until the target independently authenticates and works. Other optional tools initially display Not connected unless independently verified.
+
+## Source already implemented and current CI
+
+- Source baseline on main: 16add65d01189619aaada1ae99d4187c2ae3b52b; working branch feature/admin-verified-workspace-20261122, PR #23, exact last tested source SHA b0124a11a7e4165e08a68e44c2edbd1e7cc5e4eb. Refresh branch head before committing.
+- NEW src/lib/admin-access.mjs: validates Cloudflare Access RS256 signature against team JWKS, issuer, audience, expiry, issued/not-before time, explicit email allowlist; rejects forged/unconfigured/unknown people, validates exact destination HTTPS hosts. Do not accept client-supplied email headers as proof of identity. Review provider's actual Access JWT keys before live.
+- NEW src/app/admin/page.tsx, src/app/admin/admin.css: server-verified admin workspace. NEW tests/admin-access.test.mjs: real RSA signed/forged/expired/wrong AUD/nonadmin negative tests and source route checks.
+- ADAPTED src/middleware.ts for /admin no-store/noindex and package.json to run tests in original build. NEW docs/PRIVATE_ADMIN_WORKSPACE.md for environment and acceptance.
+- At SHA b0124a11... workflow run 44956056915: **original public/admin tests PASS and Next.js production build PASS**. Independent cross-browser matrix 44956056920 SUCCESS; brochure visual CI 44956056840 SUCCESS. But the **overall handbook CI failed**, job 137004352144 at a REAL existing browser-reflow check, because the Swedish skip link did not correctly focus main-content (test site-reflow.contract.mjs; failure included focus main-content, empty hash, top 110). Fix the source accessibility behavior, do NOT weaken/remove original regression tests. Require full native CI PASS at fresh SHA after any fix.
+- Production: website has historically served an older deployment; issue #7 tracks main→existing Vercel project verification and may still block publication. Never create another Vercel project; never assume an open PR or 200 response is live.
+
+## Required execution queue — small deployable pieces
+
+1. **Native quality first:** inspect latest source/PR, reproduce Swedish skip-link failure, fix without changing public marketing navigation/contact/media or relaxing CI; confirm real keyboard/skip-link behavior across FI/EN/SV and supported browsers. Run original npm run test:public-access, npm run build and full screenshot/keyboard workflows. Record exact SHA.
+2. **Private auth review:** verify signed JWT and exact team/AUD, email-only admin allowlist, expiry/revocation, team JWKS failure, forged token, invalid host, direct Vercel origin bypass, public CDN caching and noindex. Add real request/response and authorized/unauthorized browser tests; no demo pass as live Access proof.
+3. **Account setup through existing owner controls only:** Cloudflare Access protects www.komplyint.fi/admin and all nested paths with *exact* approved administrator addresses and MFA/OTP policy. Vercel project's private settings get KOMPLYINT_ACCESS_TEAM_DOMAIN, KOMPLYINT_ACCESS_AUD, KOMPLYINT_ADMIN_EMAILS, KOMPLYINT_ADMIN_ALLOWED_HOSTS. Never commit actual values or ask for signing secrets in issues. Validate actual DNS/proxy/origin attachment. Report owner-only blockers precisely.
+4. **Business OS qualification via private linked issue:** coordinate original app Node 22 / SQLite code, signed-in UI and independently authenticated APIs, manual lead → FI/EN proposal → approval → durable status. No real customer sends, payment or paid agent calls without explicit review. Product app must be separately protected and backed up; preserve original demo/real distinction and source licenses. Do not duplicate CRM or copy it into this public repository.
+5. **Turn on real links, progressively:** set KOMPLYINT_ADMIN_BUSINESS_OS_URL and an explicitly allowed HTTPS host only after real destination and denial testing; Tinyerg operator destination only after its own Auth + operator token + Stripe/R2 retention QA. Data, automation, Studio and security links only after separate original agents return verified admin endpoints. Merely enabling a link is not a healthy deployment.
+6. **Release only with proof:** current website's existing Vercel Git integration to main (or its approved fallback), exact release SHA, GET /api/release contract and main commit, original public routes/brochure/download/hero/contact tests, admin verified login and refusal from anonymous/different identity, real private business flow, rollback and signed-in browser artifacts. Never bypass local release approvals, branch protection, role or privacy requirements.
+
+## Security, dependencies and separation
+
+- The hub is a **link launcher only**: no customer PII, provider keys, operator tokens, business records, videos or report contents appear in public Next.js HTML, logs or client bundles.
+- Each destination retains its own HTTPS, identity/session/role/tenant/CSRF/consent enforcement. Do not rely only on Cloudflare gateway URL hiding, public robots.txt, dashboard links, GitHub repo private visibility or a shared bearer token.
+- Do not share Komplyint clients with ObumAI/Conductor unless a separate approved tenant-safe business contract and data processing basis exists. The ObumAI specialist donor work is already handed off in its own original issues and is NOT in scope to rebuild.
+- Preserve native website stack, existing public design and genuine brand assets, roles and language. Keep user experience accessible, mobile-friendly, reduced-motion and plain. Do not claim application features live merely because attractive cards are shown.
+- Reuse existing first-party components, inspect donor source licenses/actual paths before copying, preserve exact MIT/OFL notices. Report COPIED/PORTED/SANITIZED/ADAPTED/INTEGRATED/NEW honestly, or "Copied: none". Track actual REA and skills used; no fictitious invocation, no measured savings without evidence.
+- Root AGENTS.md, the product's approved specifications, user owner changes, privacy/security and existing release gates remain authoritative. Independent code peer review is optional; self-review, functional/negative/auth checks and release verification are not.
+
+## Proof and handoff acceptance
+
+- A working browser login to /admin with the exact allowed account, wrong-account + anonymous rejection, external direct-origin denial, no cache leakage or admin link in public navigation.
+- Through the approved link the signed-in admin accesses independent Business OS, creates a synthetic lead, saves and approves an editable proposal, reloads and sees persisted correct state; wrong-role denied.
+- Current original CI green at exact source SHA; secure separate staging/production deployment and verified rollback; genuine customer-facing public website still works.
+- Each run reports: approved task and baseline SHA, changed files, donor licenses, source tests, exact native CI URL and outcome, deployed artifact/URL and live role/user evidence or NOT_VERIFIED, remaining owner-only blockers.
+- **Receiving agent must acknowledge** in website issue #24 and private FounderOS issue #2 its actual working repository and role, current head/CI, next executable task and permission gaps. GitHub issue instructions do **not** themselves start unattended execution or authorize cross-repo mutations.
+
+**Current state:** handoff documented and website PR #23 source-ready; tests/build individually PASS, full quality CI FAIL; Cloudflare Access and live authenticated admin USER_VERIFIED=NO; FounderOS import CI PASS on its prior verified exact SHA but real business workflow/user acceptance NOT_VERIFIED. This document is a transfer receipt, not production acceptance.
